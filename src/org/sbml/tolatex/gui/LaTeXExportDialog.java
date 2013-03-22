@@ -1,11 +1,11 @@
 /*
- * $Id: LaTeXExportDialog.java 249 2013-03-13 09:23:31Z draeger $
- * $URL: https://rarepos.cs.uni-tuebingen.de/svn/SBML2LaTeX/trunk/src/org/sbml/tolatex/gui/LaTeXExportDialog.java $
+ * $Id: LaTeXExportDialog.java 72 2011-11-17 10:57:18Z draeger $
+ * $URL: https://rarepos.cs.uni-tuebingen.de/svn/SBML2LaTeX/tags/version0.9.9/src/org/sbml/tolatex/gui/LaTeXExportDialog.java $
  * ---------------------------------------------------------------------
  * This file is part of SBML2LaTeX, a program that creates 
  * human-readable reports for given SBML files.
  * 
- * Copyright (C) 2008-2013 by the University of Tuebingen, Germany.
+ * Copyright (C) 2008-2011 by the University of Tuebingen, Germany.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,8 +29,6 @@ import java.awt.Window;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 import java.util.prefs.BackingStoreException;
 
 import javax.swing.ImageIcon;
@@ -48,15 +46,14 @@ import de.zbit.gui.GUIOptions;
 import de.zbit.gui.GUITools;
 import de.zbit.gui.prefs.PreferencesPanel;
 import de.zbit.gui.prefs.PreferencesPanelForKeyProviders;
-import de.zbit.io.filefilter.SBFileFilter;
-import de.zbit.util.ResourceManager;
+import de.zbit.io.SBFileFilter;
 import de.zbit.util.StringUtil;
 import de.zbit.util.prefs.SBPreferences;
 
 /**
  * @author Andreas Dr&auml;ger
  * @date 2010-10-20
- * @version $Rev: 249 $
+ * @version $Rev: 72 $
  */
 public class LaTeXExportDialog extends JDialog {
 	
@@ -66,9 +63,13 @@ public class LaTeXExportDialog extends JDialog {
 	private static final long serialVersionUID = -408657221271532557L;
 	
 	/**
-	 * Support for localization.
+	 * 
 	 */
-	private static final transient ResourceBundle bundle = ResourceManager.getBundle("org.sbml.tolatex.locales.UI");
+	public static void initGUI() {
+		GUITools.initLaF("SBML2LaTeX");
+		// ImageTools.initImages(LaTeXExportDialog.class.getResource("img"));
+		initImages();
+	}
 	
 	/**
 	 * Loads the required icons for SBML2LaTeX into the {@link UIManager}.
@@ -76,11 +77,18 @@ public class LaTeXExportDialog extends JDialog {
 	public static void initImages() {
 		String iconPaths[] = { "ICON_LATEX_16.png", "ICON_LATEX_64.png" };
 		for (String path : iconPaths) {
-			URL u = LaTeXExportDialog.class.getResource("img/" + path);
-		      if (u!=null) {
-		        UIManager.put(path.substring(0, path.lastIndexOf('.')), new ImageIcon(u));
-		      }
+			UIManager.put(path.substring(0, path.lastIndexOf('.')), new ImageIcon(
+				LaTeXExportDialog.class.getResource("img/" + path)));
 		}
+	}
+	
+	/**
+	 * 
+	 * @param args
+	 */
+	public static void main(String args[]) {
+		new LaTeXExportDialog();
+		System.exit(0);
 	}
 	
 	/**
@@ -158,7 +166,6 @@ public class LaTeXExportDialog extends JDialog {
 		throws IOException {
     exportPanel = new PreferencesPanelForKeyProviders(LaTeXOptionsIO.class,
       LaTeXOptions.class);
-    // TODO: Localize
 		String title = "LaTeX export";
 		if (sbase != null) {
 			if (sbase instanceof NamedSBase) {
@@ -211,21 +218,20 @@ public class LaTeXExportDialog extends JDialog {
 				try {
 					PreferencesPanel expPanel = dialog.exportPanel;
 					expPanel.persist();
-					SBPreferences prefsIO = SBPreferences.getPreferencesFor(LaTeXOptionsIO.class);
+          SBPreferences prefsIO = SBPreferences.getPreferencesFor(LaTeXOptionsIO.class);
 					if (sbase == null) {
-						SBPreferences prefsGUI = SBPreferences.getPreferencesFor(GUIOptions.class);
-						prefsGUI.put(GUIOptions.OPEN_DIR, (new File(prefsIO
-								.get(LaTeXOptionsIO.SBML_INPUT_FILE)).getParent()));
-						prefsGUI.flush();
+					  SBPreferences prefsGUI = SBPreferences.getPreferencesFor(GUIOptions.class);
+            prefsGUI.put(GUIOptions.OPEN_DIR, (new File(prefsIO
+                .get(LaTeXOptionsIO.SBML_INPUT_FILE)).getParent()));
+				    prefsGUI.flush();
 					}
 					if (((targetFile != null) && (SBFileFilter.isPDFFile(targetFile)))
 							|| SBFileFilter.isPDFFile(new File(prefsIO.get(LaTeXOptionsIO.REPORT_OUTPUT_FILE)))) {
-						SBPreferences prefs = SBPreferences.getPreferencesFor(LaTeXOptions.class);
-						File compiler = new File(prefs.get(LaTeXOptions.LOAD_LATEX_COMPILER));
+						File compiler = new File(prefsIO.get(LaTeXOptions.LOAD_LATEX_COMPILER));
 						if (!compiler.exists() || !compiler.canExecute()) { 
 						  throw new FileNotFoundException(StringUtil.toHTML(
-										bundle.getString("PDFLATEX_LOCATION_UNKNOWN"),
-										StringUtil.TOOLTIP_LINE_LENGTH)); 
+										"It is not possible to create a PDF report without knowing the path to the LaTeX compiler on your system. Please specify where this program is located.",
+										60)); 
 						}
 					}
 				} catch (FileNotFoundException exc) {

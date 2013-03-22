@@ -1,11 +1,11 @@
 /*
- * $Id: SBML2LaTeXTest.java 206 2013-01-04 09:50:34Z draeger $
- * $URL: https://rarepos.cs.uni-tuebingen.de/svn/SBML2LaTeX/trunk/test/org/sbml/tolatex/gui/SBML2LaTeXTest.java $
+ * $Id: SBML2LaTeXTest.java 82 2011-12-13 11:43:28Z draeger $
+ * $URL: https://rarepos.cs.uni-tuebingen.de/svn/SBML2LaTeX/tags/version0.9.9/test/org/sbml/tolatex/gui/SBML2LaTeXTest.java $
  * ---------------------------------------------------------------------
  * This file is part of SBML2LaTeX, a program that creates 
  * human-readable reports for given SBML files.
  * 
- * Copyright (C) 2007-2013 by the University of Tuebingen, Germany.
+ * Copyright (C) 2007-2011 by the University of Tuebingen, Germany.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -34,7 +34,7 @@ import org.sbml.jsbml.xml.stax.SBMLReader;
 import org.sbml.tolatex.SBML2LaTeX;
 import org.sbml.tolatex.io.LaTeXOptionsIO;
 
-import de.zbit.io.filefilter.SBFileFilter;
+import de.zbit.io.SBFileFilter;
 import de.zbit.util.prefs.SBPreferences;
 
 /**
@@ -42,7 +42,7 @@ import de.zbit.util.prefs.SBPreferences;
  * 
  * @author Andreas Dr&auml;ger
  * @date 2010-11-11
- * @version $Rev: 206 $
+ * @version $Rev: 82 $
  */
 public class SBML2LaTeXTest {
   

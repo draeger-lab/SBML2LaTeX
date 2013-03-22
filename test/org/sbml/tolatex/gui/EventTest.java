@@ -1,11 +1,11 @@
 /*
- * $Id: EventTest.java 206 2013-01-04 09:50:34Z draeger $
- * $URL: https://rarepos.cs.uni-tuebingen.de/svn/SBML2LaTeX/trunk/test/org/sbml/tolatex/gui/EventTest.java $
+ * $Id: EventTest.java 58 2011-03-07 17:08:58Z draeger $
+ * $URL: https://rarepos.cs.uni-tuebingen.de/svn/SBML2LaTeX/tags/version0.9.9/test/org/sbml/tolatex/gui/EventTest.java $
  * ---------------------------------------------------------------------
  * This file is part of SBML2LaTeX, a program that creates 
  * human-readable reports for given SBML files.
  * 
- * Copyright (C) 2007-2013 by the University of Tuebingen, Germany.
+ * Copyright (C) 2007-2011 by the University of Tuebingen, Germany.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -39,7 +39,7 @@ import org.sbml.tolatex.SBML2LaTeX;
 
 /**
  * @author Andreas Dr&auml;ger
- * @version $Rev: 206 $
+ * @version $Rev: 58 $
  */
 public class EventTest {
 

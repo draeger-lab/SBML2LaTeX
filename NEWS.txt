@@ -1,33 +1,7 @@
 	       SBML2LaTeX NEWS -- History of user-visible changes
 
 ======================================================================
-Version 1.0 (2013-xx-xx)
-======================================================================
-
-New Features:
-
-- Cleanup also removes the SBML2LaTeX.pdf logo file if this has been
-  created by the program.
-
-TODO: set latex directory option invisible!
-
-- Better adaptation to Mac OS X.
-
-Bug Fixes:
-
-- NaN values of (local) parameters caused exceptions (thanks to 
-  Jong Lenneke for detecting this bug).
-
-- Some SBML files could not be opened due to a mistake in a file filter.
-
-- Added forgotten option to be able to exclude species types as well.
-
-- The month in dates in History objects were not written correctly 
-  (neither creation date nor modification date). Thanks to Nicolas
-  Rodriguez for reporting this problem.
-
-======================================================================
-Version 0.9.9 (2011-12-15)
+Version 1.0 (2011-12-16)
 ======================================================================
 
 New Features:

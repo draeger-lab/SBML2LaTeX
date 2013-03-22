@@ -2,36 +2,14 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
   <comment>
-    $Id: UI.xml 250 2013-03-13 10:04:46Z draeger $
-    $URL: https://rarepos.cs.uni-tuebingen.de/svn/SBML2LaTeX/trunk/resources/org/sbml/tolatex/locales/UI.xml $
-    ---------------------------------------------------------------------
-    This file is part of SBML2LaTeX, a program that creates 
-    human-readable reports for given SBML files.
-    
-    Copyright (C) 2008-2013 by the University of Tuebingen, Germany.
-    
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-    
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-    GNU General Public License for more details.
-    
-    You should have received a copy of the GNU General Public License
-    along with this program. If not, see http://www.gnu.org/licenses/.
-    ---------------------------------------------------------------------
-    
     This configuration provides locale-dependent names for labels in
-	a (graphical) user interface.
-	
-	Version: $Rev: 250 $
+	   a (graphical) user interface.
   </comment>
   
   <!-- IO options -->
 
+  <entry key="LATEX_DIR">LaTeX directory</entry>
+  <entry key="LATEX_DIR_TOOLTIP">Standard directory where LaTeX files can be stored</entry>
   <entry key="LOAD_LATEX_COMPILER">LaTeX compiler</entry>
   <entry key="LOAD_LATEX_COMPILER_TOOLTIP">The path to the LaTeX compiler to generate PDF, DVI or other files from the created LaTeX report file.</entry>
 
@@ -48,8 +26,6 @@
     
   <!-- LaTeX options -->
   
-  <entry key="LaTeXOptions">LaTeX Options</entry>
-  
   <entry key="CHECK_CONSISTENCY">Check consistency</entry>
   <entry key="CHECK_CONSISTENCY_TOOLTIP">If true, the automatic model consistency check is performed and the results are written in the appendix of the model report file.</entry>
   <entry key="CLEAN_WORKSPACE">Clean workspace</entry>
@@ -64,30 +40,28 @@
   <entry key="FONT_TYPEWRITER">Typewriter font</entry>
   <entry key="FONT_TYPEWRITER_TOOLTIP">Select a typewriter font that can be used for identifiers if option '%s' is selected. URLs and other resources are also marked with this font.</entry>
 
-  <entry key="INCLUDE_SECTION_COMPARTMENT_TYPES">Compartment types section</entry>
-  <entry key="INCLUDE_SECTION_COMPARTMENT_TYPES_TOOLTIP">This option decides whether or not a section about compartment types should be included in the resulting model report. Note that this option only causes an effect if the model contains compartment type declarations.</entry>
-  <entry key="INCLUDE_SECTION_COMPARTMENTS">Compartments section</entry>
-  <entry key="INCLUDE_SECTION_COMPARTMENTS_TOOLTIP">This option decides whether or not a section about compartments should be included in the resulting model report. Note that this option only causes an effect if the model contains compartment declarations.</entry>
-  <entry key="INCLUDE_SECTION_CONSTRAINTS">Constraints section</entry>
-  <entry key="INCLUDE_SECTION_CONSTRAINTS_TOOLTIP">This option decides whether or not a section about constraints should be included in the resulting model report. Note that this option only causes an effect if the model contains constraint declarations.</entry>
-  <entry key="INCLUDE_SECTION_EVENTS">Events section</entry>
-  <entry key="INCLUDE_SECTION_EVENTS_TOOLTIP">This option decides whether or not a section about events should be included in the resulting model report. Note that this option only causes an effect if the model contains event declarations.</entry>
-  <entry key="INCLUDE_SECTION_INITIAL_ASSIGNMENTS">Initial assignments section</entry>
-  <entry key="INCLUDE_SECTION_INITIAL_ASSIGNMENTS_TOOLTIP">This option decides whether or not a section about initial assignments should be included in the resulting model report. Note that this option only causes an effect if the model declares any initial assignments.</entry>
-  <entry key="INCLUDE_SECTION_FUNCTION_DEFINITIONS">Function definitions section</entry>
-  <entry key="INCLUDE_SECTION_FUNCTION_DEFINITIONS_TOOLTIP">This option decides whether or not a section about function definitions should be included in the resulting model report. Note that this option only causes an effect if the model declares any function definitions.</entry>
-  <entry key="INCLUDE_SECTION_REACTIONS">Reactions section</entry>
-  <entry key="INCLUDE_SECTION_REACTIONS_TOOLTIP">This option decides whether or not a section about reactions should be included in the resulting model report. Note that this option only causes an effect if the model declares any reactions. Furthermore, this option also decides if a summary of the differential equation system that is implied by the given model should be generated. Again, this will only cause an effect if the model contains any species.</entry>
-  <entry key="INCLUDE_SECTION_PARAMETERS">Parameters section</entry>
-  <entry key="INCLUDE_SECTION_PARAMETERS_TOOLTIP">This option decides whether or not a section about parameters should be included in the resulting model report. Note that this option only causes an effect if the model declares any parameters.</entry>
-  <entry key="INCLUDE_SECTION_RULES">Rules section</entry>
-  <entry key="INCLUDE_SECTION_RULES_TOOLTIP">This option decides whether or not a section about rules should be included in the resulting model report. Note that this option only causes an effect if the model declares any rules, no matter if these are of algebraic, assignment or rate rule type.</entry>
-  <entry key="INCLUDE_SECTION_SPECIES">Species section</entry>
-  <entry key="INCLUDE_SECTION_SPECIES_TOOLTIP">This option decides whether or not a section about the species in the given model should be included in the resulting model report. Note that this option only causes an effect if the model declares any species.</entry>
-  <entry key="INCLUDE_SECTION_SPECIES_TYPES">Species types section</entry>
-  <entry key="INCLUDE_SECTION_SPECIES_TYPES_TOOLTIP">If this option is selected, a section about species types will occur in the model report. Otherwise, this section will be excluded from the report.</entry>
-  <entry key="INCLUDE_SECTION_UNIT_DEFINITIONS">Unit definitions section</entry>
-  <entry key="INCLUDE_SECTION_UNIT_DEFINITIONS_TOOLTIP">This option decides whether or not a section about the unit definitions of the given model should be included in the resulting model report. Note that this option only causes an effect if the model declares any unit definitions. However, in some level/version combinations SBML models contain predefined unit definitions which might be included in the model report if this option is active.</entry>  
+  <entry key="INCLUDE_COMPARTMENT_TYPES_SECTION">Compartment types section</entry>
+  <entry key="INCLUDE_COMPARTMENT_TYPES_SECTION_TOOLTIP">This option decides whether or not a section about compartment types should be included in the resulting model report. Note that this option only causes an effect if the model contains compartment type declarations.</entry>
+  <entry key="INCLUDE_COMPARTMENTS_SECTION">Compartments section</entry>
+  <entry key="INCLUDE_COMPARTMENTS_SECTION_TOOLTIP">This option decides whether or not a section about compartments should be included in the resulting model report. Note that this option only causes an effect if the model contains compartment declarations.</entry>
+  <entry key="INCLUDE_CONSTRAINTS_SECTION">Constraints section</entry>
+  <entry key="INCLUDE_CONSTRAINTS_SECTION_TOOLTIP">This option decides whether or not a section about constraints should be included in the resulting model report. Note that this option only causes an effect if the model contains constraint declarations.</entry>
+  <entry key="INCLUDE_EVENTS_SECTION">Events section</entry>
+  <entry key="INCLUDE_EVENTS_SECTION_TOOLTIP">This option decides whether or not a section about events should be included in the resulting model report. Note that this option only causes an effect if the model contains event declarations.</entry>
+  <entry key="INCLUDE_INITIAL_ASSIGNMENTS_SECTION">Initial assignments section</entry>
+  <entry key="INCLUDE_INITIAL_ASSIGNMENTS_SECTION_TOOLTIP">This option decides whether or not a section about initial assignments should be included in the resulting model report. Note that this option only causes an effect if the model declares any initial assignments.</entry>
+  <entry key="INCLUDE_FUNCTION_DEFINITIONS_SECTION">Function definitions section</entry>
+  <entry key="INCLUDE_FUNCTION_DEFINITIONS_SECTION_TOOLTIP">This option decides whether or not a section about function definitions should be included in the resulting model report. Note that this option only causes an effect if the model declares any function definitions.</entry>
+  <entry key="INCLUDE_REACTIONS_SECTION">Reactions section</entry>
+  <entry key="INCLUDE_REACTIONS_SECTION_TOOLTIP">This option decides whether or not a section about reactions should be included in the resulting model report. Note that this option only causes an effect if the model declares any reactions. Furthermore, this option also decides if a summary of the differential equation system that is implied by the given model should be generated. Again, this will only cause an effect if the model contains any species.</entry>
+  <entry key="INCLUDE_PARAMETERS_SECTION">Parameters section</entry>
+  <entry key="INCLUDE_PARAMETERS_SECTION_TOOLTIP">This option decides whether or not a section about parameters should be included in the resulting model report. Note that this option only causes an effect if the model declares any parameters.</entry>
+  <entry key="INCLUDE_RULES_SECTION">Rules section</entry>
+  <entry key="INCLUDE_RULES_SECTION_TOOLTIP">This option decides whether or not a section about rules should be included in the resulting model report. Note that this option only causes an effect if the model declares any rules, no matter if these are of algebraic, assignment or rate rule type.</entry>
+  <entry key="INCLUDE_SPECIES_SECTION">Species section</entry>
+  <entry key="INCLUDE_SPECIES_SECTION_TOOLTIP">This option decides whether or not a section about the species in the given model should be included in the resulting model report. Note that this option only causes an effect if the model declares any species.</entry>
+  <entry key="INCLUDE_UNIT_DEFINITIONS_SECTION">Unit definitions section</entry>
+  <entry key="INCLUDE_UNIT_DEFINITIONS_SECTION_TOOLTIP">This option decides whether or not a section about the unit definitions of the given model should be included in the resulting model report. Note that this option only causes an effect if the model declares any unit definitions. However, in some level/version combinations SBML models contain predefined unit definitions which might be included in the model report if this option is active.</entry>
 
   <entry key="LANDSCAPE">Landscape</entry>
   <entry key="LANDSCAPE_TOOLTIP">This option decides whether to set the LaTeX document in landscape or portrait mode. By default most pages are in portrait format.</entry>
@@ -113,11 +87,6 @@
   <entry key="TYPEWRITER">Typewriter</entry>
   <entry key="TYPEWRITER_TOOLTIP">This option decides whether a typewriter font should be applied to highlight SBML identifiers. This is particularly important when these occur in mathematical equations.</entry>
   
-  <!-- Extension package options -->
-  
-  <entry key="INCLUDE_SECTION_LAYOUTS">Layouts section</entry>
-  <entry key="INCLUDE_SECTION_LAYOUTS_TOOLTIP">Include a section with images of model layouts if these are available.</entry>
-
   <!-- LaTeX option groups -->
   
   <entry key="CONFIGURATION_FILES">LaTeX compiler location</entry>
@@ -129,30 +98,24 @@
   <entry key="REPORT_OPTIONS">Report options</entry>
   <entry key="REPORT_OPTIONS_TOOLTIP">Configure the layout of the LaTeX reports, what to be included, and if to remove temporary files afterwards.</entry>  
   <entry key="TYPOGRAPHICAL_OPTIONS">Typographical options</entry>
-  <entry key="TYPOGRAPHICAL_OPTIONS_TOOLTIP">Here you can specify general properties such as paper size and font styles.</entry>
-  
-  <!-- LaTeXExportDialog -->
-  
-  <entry key="PDFLATEX_LOCATION_UNKNOWN">It is not possible to create a PDF report without knowing the path to the LaTeX compiler on your system. Please specify where this program is located.</entry> 
-  
-  <!-- LaTeXReportGenerator -->
-  
-  <entry key="UNSUPPORTED_FONT">Unsupported font {0}. Using {1}.</entry>
-  
+  <entry key="TYPOGRAPHICAL_OPTIONS_TOOLTIP">Here you can specify general properties such as paper size and font styles.</entry> 
+      
   <!-- SBML2LaTeX -->
   
-  <entry key="CANNOT_WRITE_TO_FILE">Cannot write to file {0}.</entry>
-  <entry key="CONVERTING_SBML_FILE_TO_REPORT">Converting file {0} to {1}.</entry>
-  <entry key="COULD_NOT_COMPILE_FILE">Could not compile {0}.</entry>
+  <entry key="CANNOT_WRITE_TO_FILE">Cannot write to file %s.</entry>
+  <entry key="CONVERTING_SBML_FILE_TO_REPORT">Converting file %s to %s.</entry>
+  <entry key="COMPILATION_ERROR">Failed executing the LaTeX compiler</entry>
+  <entry key="COMPILATION_SUCCESSFULL">Document compiled successfully.</entry>
   <entry key="COULD_NOT_COMPILE_LATEX_FILE">Could not compile the LaTeX document. Please compile it manually.</entry>
-  <entry key="DELETING_TEMP_FILE">Deleting temporary file {0}.</entry>
-  <entry key="DOCUMENT_SUCCESSFULLY_COMPILED">Document successfully compiled. See the result in {0}.</entry>
+  <entry key="DELETING_TEMP_FILE">Deleting temporary file %s.</entry>
   <entry key="ENTER_PATH_TO_PDFLATEX">Please enter a valid path to PDFLaTeX on your system.</entry>
-  <entry key="INVALID_SBML_FILE">File {0} is no valid SBML file.</entry>
-  <entry key="INVALID_LATEX_FILE">File {0} is no valid LaTeX file.</entry>
-  <entry key="INVALID_SBASE">Only instances of SBMLDocument, Model, or Reaction are acceptable. Received {0}.</entry>
-  <entry key="LATEX_COMPILATION_PROBLEMS">In some cases even correct TeX files may not be compiled to PDF due to several reasons and problems in LaTeX. If you encounter such a problem, please try manually compiling the TeX file generated by this program.</entry>
-  <entry key="SEARCHING_FOR_LATEX_COMPILER">Searching for the latex compiler on your system</entry>
-  <entry key="TIME_IN_SECONDS">Time: {0,number} s</entry>
+  <entry key="INVALID_SBML_FILE">File %s is no valid SBML file.</entry>
+  <entry key="INVALID_LATEX_FILE">File %s is no valid LaTeX file.</entry>
+  <entry key="INVALID_SBASE">Only instances of SBMLDocument, Model, or Reaction are acceptable. Received %s.</entry>
+  <entry key="LIMITATIONS">Limitations</entry>
+  <entry key="MISSING_PDFLATEX">Missing path to LaTeX compiler</entry>
+  <entry key="NO_INPUT_GIVEN">No input file given. Program will exit.</entry>
+  <entry key="NO_OUTPUT_GIVEN">No output file given. Program will exit.</entry>
+  <entry key="TIME_IN_SECONDS">Time: %s s</entry>
   
 </properties>

@@ -14,14 +14,11 @@
          Andreas Zell, University of Tuebingen, Germany
          
          -- Alumni --
-
-         Mirjam Gutekunst, University of Tuebingen, Germany
-         Meike Aichele, University of Tuebingen, Germany
-         Sebastian Nagel, University of Tuebingen, Germany
+         
          Lukas Endler, European Bioinformatics Institute, United Kingdom
          Martin Golebiewski, HITS gGmbH, Heidelberg, Germany
          Michael Hucka, California Institute of Technology, United States
          Wolfgang Müller, HITS gGmbH, Heidelberg, Germany
-         Hannes Planatscher, NMI Reutlingen, Germany
-         Adrian Schröder, Germany
-         Dieudonné Motsou Wouamba, Germany
+         Hannes Planatscher, University of Tuebingen, Germany
+         Adrian Schröder, University of Tuebingen, Germany
+         Dieudonné Motsou Wouamba, University of Tuebingen, Germany
