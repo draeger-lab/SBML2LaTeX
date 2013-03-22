@@ -1,25 +1,20 @@
 /*
- * $Id: TextExport.java 206 2013-01-04 09:50:34Z draeger $
- * $URL: https://rarepos.cs.uni-tuebingen.de/svn/SBML2LaTeX/trunk/src/org/sbml/tolatex/io/TextExport.java $
- * ---------------------------------------------------------------------
- * This file is part of SBML2LaTeX, a program that creates 
- * human-readable reports for given SBML files.
- * 
- * Copyright (C) 2008-2013 by the University of Tuebingen, Germany.
- * 
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- * 
- * You should have received a copy of the GNU General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
- * ---------------------------------------------------------------------
+ *  SBMLsqueezer creates rate equations for reactions in SBML files
+ *  (http://sbml.org).
+ *  Copyright (C) 2009 ZBIT, University of Tübingen, Andreas Dräger
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package org.sbml.tolatex.io;
 
@@ -34,23 +29,22 @@ import org.sbml.jsbml.ListOf;
 import org.sbml.jsbml.Model;
 import org.sbml.jsbml.Reaction;
 import org.sbml.jsbml.SBMLDocument;
-import org.sbml.jsbml.SBMLException;
-import org.sbml.jsbml.SBase;
 import org.sbml.jsbml.Species;
 import org.sbml.jsbml.SpeciesReference;
 
-import de.zbit.io.filefilter.SBFileFilter;
+import de.zbit.io.SBFileFilter;
 
 /**
- * This class writes the differential equations to a plain text file.
+ * This class writes the differential equations given by the {@see
+ * KineticLawGenerator} to a plain text file.
  * 
- * @since This was part of SBMLsqueezer 1.0
- * @version $Rev: 206 $
+ * @since 1.0
+ * @version
  * @author Andreas Dr&auml;ger
  * @author Nadine Hassis
  * @date Aug 1, 2007
  */
-public class TextExport implements SBMLReportGenerator {
+public class TextExport implements DisplaySBML {
 
 	/**
 	 * <p>
@@ -58,7 +52,6 @@ public class TextExport implements SBMLReportGenerator {
 	 * </p>
 	 */
 	public TextExport() {
-		super();
 	}
 
 	/**
@@ -73,15 +66,14 @@ public class TextExport implements SBMLReportGenerator {
 	 * @param model
 	 * @param file
 	 * @throws IOException
-	 * @throws SBMLException 
 	 */
 	public TextExport(Model model, File file)
-			throws IOException, SBMLException {
+			throws IOException {
 		if ((new SBFileFilter(SBFileFilter.FileType.TEXT_FILES)).accept(file)) {
 			writeTextFile(model, file);
 		} else if ((new SBFileFilter(SBFileFilter.FileType.TeX_FILES))
 				.accept(file)) {
-			LaTeXReportGenerator export = new LaTeXReportGenerator();
+			LaTeXExport export = new LaTeXExport();
 			export.toLaTeX(model, file);
 		} else
 			throw new IllegalArgumentException("file type of " + file.getName()
@@ -101,7 +93,11 @@ public class TextExport implements SBMLReportGenerator {
 		writer.newLine();
 	}
 
-	
+	public void format(ListOf<?> list, BufferedWriter buffer, boolean section)
+			throws IOException {
+		// TODO Auto-generated method stub
+
+	}
 
 	public void format(ListOf<Event> events, BufferedWriter buffer)
 			throws IOException {
@@ -111,21 +107,24 @@ public class TextExport implements SBMLReportGenerator {
 
 	public void format(Model model, BufferedWriter buffer) throws IOException {
 		// TODO Auto-generated method stub
+
 	}
 
 	public void format(SBMLDocument doc, BufferedWriter buffer)
 			throws IOException {
 		// TODO Auto-generated method stub
+
 	}
-  
-  /**
-   * This method writes the ordinary differential equation system into a plain
-   * text file. Note that the file extension does not matter.
-   * 
-   * @param file
-   * @param klg
-   * @throws IOException
-   */
+
+	/**
+	 * This method writes the ordinary differential equation system given by the
+	 * {@see KineticLawGenerator} into a plain text file. Note that the file
+	 * extension does not matter.
+	 * 
+	 * @param file
+	 * @param klg
+	 * @throws IOException
+	 */
 	@SuppressWarnings("deprecation")
 	public final void writeTextFile(Model model, File file) throws IOException {
 		int i;
@@ -133,7 +132,7 @@ public class TextExport implements SBMLReportGenerator {
 				new FileOutputStream(file.getPath())));
 		append("SBMLsqueezer generated model report file", out);
 		append("----------------------------------------", out);
-		for (i = 0; i < model.getReactionCount(); i++) {
+		for (i = 0; i < model.getNumReactions(); i++) {
 			Reaction r = model.getReaction(i);
 			out.append("Reaction: ");
 			out.append(r.getId());
@@ -152,7 +151,7 @@ public class TextExport implements SBMLReportGenerator {
 			out.newLine();
 		}
 		out.newLine();
-		for (i = 0; i < model.getSpeciesCount(); i++) {
+		for (i = 0; i < model.getNumSpecies(); i++) {
 			Species s = model.getSpecies(i);
 			StringBuffer ode = new StringBuffer();
 			for (Reaction r : model.getListOfReactions()) {
@@ -206,42 +205,6 @@ public class TextExport implements SBMLReportGenerator {
 			append(" ", out);
 		}
 		out.close();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see org.sbml.tolatex.io.SBMLReportGenerator#format(org.sbml.jsbml.ListOf, java.io.BufferedWriter, boolean)
-	 */
-	public void format(ListOf<? extends SBase> list, BufferedWriter buffer,
-	    boolean section) throws IOException, SBMLException {
-	    // TODO Auto-generated method stub
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see org.sbml.tolatex.io.SBMLReportGenerator#section(java.lang.String, boolean)
-	 */
-	public StringBuffer section(String title, boolean numbering) {
-	    // TODO Auto-generated method stub
-	    return null;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see org.sbml.tolatex.io.SBMLReportGenerator#subsection(java.lang.String, boolean)
-	 */
-	public StringBuffer subsection(String title, boolean numbering) {
-	    // TODO Auto-generated method stub
-	    return null;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see org.sbml.tolatex.io.SBMLReportGenerator#subsubsection(java.lang.String, boolean)
-	 */
-	public StringBuffer subsubsection(String title, boolean numbering) {
-	    // TODO Auto-generated method stub
-	    return null;
 	}
 
 }
