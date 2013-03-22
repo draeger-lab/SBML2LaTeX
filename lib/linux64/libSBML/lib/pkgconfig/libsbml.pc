@@ -1,0 +1,13 @@
+Name: libSBML
+Description: An API library for reading/writing/manipulating SBML
+URL: http://sbml.org/software/libsbml
+Version: 3.2.0
+
+prefix=/rahome/draeger/lib/linux64/libSBML
+exec_prefix=/rahome/draeger/lib/linux64/libSBML
+libdir=/rahome/draeger/lib/linux64/libSBML/lib
+includedir=/rahome/draeger/lib/linux64/libSBML/include
+
+Libs: -L${libdir} -L/rahome/draeger/lib/linux64/xerces/lib   -L/rahome/draeger/lib/linux64/xerces/lib -L/rahome/draeger/lib/linux64/xerces/lib -lxerces-c   -lz -lbz2 -lsbml -lstdc++ -lm
+Cflags: -I${includedir}  
+Conflicts: xerces-c = 2.6.0

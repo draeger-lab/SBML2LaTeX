@@ -1,0 +1,13 @@
+Name: libSBML
+Description: An API library for reading/writing/manipulating SBML
+URL: http://sbml.org/software/libsbml
+Version: 3.2.0
+
+prefix=/local/draeger/workspace/JCell2/lib/linux/libSBML
+exec_prefix=/local/draeger/workspace/JCell2/lib/linux/libSBML
+libdir=/local/draeger/workspace/JCell2/lib/linux/libSBML/lib
+includedir=/local/draeger/workspace/JCell2/lib/linux/libSBML/include
+
+Libs: -L${libdir} -L/local/draeger/workspace/JCell2/lib/linux/xerces/lib   -L/local/draeger/workspace/JCell2/lib/linux/xerces/lib -L/local/draeger/workspace/JCell2/lib/linux/xerces/lib -lxerces-c   -lz -lbz2 -lsbml -lstdc++ -lm
+Cflags: -I${includedir}  
+Conflicts: xerces-c = 2.6.0
