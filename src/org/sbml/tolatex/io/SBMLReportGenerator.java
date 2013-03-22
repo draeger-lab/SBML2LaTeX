@@ -1,11 +1,11 @@
 /*
- * $Id: SBMLReportGenerator.java 206 2013-01-04 09:50:34Z draeger $
- * $URL: https://rarepos.cs.uni-tuebingen.de/svn/SBML2LaTeX/trunk/src/org/sbml/tolatex/io/SBMLReportGenerator.java $
+ * $Id: SBMLReportGenerator.java 60 2011-03-07 17:20:39Z draeger $
+ * $URL: https://rarepos.cs.uni-tuebingen.de/svn/SBML2LaTeX/tags/version0.9.8/src/org/sbml/tolatex/io/SBMLReportGenerator.java $
  * ---------------------------------------------------------------------
  * This file is part of SBML2LaTeX, a program that creates 
  * human-readable reports for given SBML files.
  * 
- * Copyright (C) 2008-2013 by the University of Tuebingen, Germany.
+ * Copyright (C) 2008-2011 by the University of Tuebingen, Germany.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -33,9 +33,9 @@ import org.sbml.jsbml.SBMLException;
 import org.sbml.jsbml.SBase;
 
 /**
- * @author Dieudonn&eacute; Motsou Wouamba
+ * @author Dieudonn&eacute; Wouamba
  * @author Andreas Dr&auml;ger
- * @version $Rev: 206 $
+ * @version $Rev: 60 $
  */
 public interface SBMLReportGenerator {
 
@@ -91,5 +91,4 @@ public interface SBMLReportGenerator {
 	 * @return
 	 */
 	public StringBuffer section(String title, boolean numbering);
-
 }

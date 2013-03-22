@@ -1,11 +1,11 @@
 /*
- * $Id: TextExport.java 206 2013-01-04 09:50:34Z draeger $
- * $URL: https://rarepos.cs.uni-tuebingen.de/svn/SBML2LaTeX/trunk/src/org/sbml/tolatex/io/TextExport.java $
+ * $Id: TextExport.java 60 2011-03-07 17:20:39Z draeger $
+ * $URL: https://rarepos.cs.uni-tuebingen.de/svn/SBML2LaTeX/tags/version0.9.8/src/org/sbml/tolatex/io/TextExport.java $
  * ---------------------------------------------------------------------
  * This file is part of SBML2LaTeX, a program that creates 
  * human-readable reports for given SBML files.
  * 
- * Copyright (C) 2008-2013 by the University of Tuebingen, Germany.
+ * Copyright (C) 2008-2011 by the University of Tuebingen, Germany.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -39,13 +39,14 @@ import org.sbml.jsbml.SBase;
 import org.sbml.jsbml.Species;
 import org.sbml.jsbml.SpeciesReference;
 
-import de.zbit.io.filefilter.SBFileFilter;
+import de.zbit.io.SBFileFilter;
 
 /**
- * This class writes the differential equations to a plain text file.
+ * This class writes the differential equations given by the {@see
+ * KineticLawGenerator} to a plain text file.
  * 
  * @since This was part of SBMLsqueezer 1.0
- * @version $Rev: 206 $
+ * @version $Rev: 60 $
  * @author Andreas Dr&auml;ger
  * @author Nadine Hassis
  * @date Aug 1, 2007
@@ -58,7 +59,6 @@ public class TextExport implements SBMLReportGenerator {
 	 * </p>
 	 */
 	public TextExport() {
-		super();
 	}
 
 	/**
@@ -111,21 +111,24 @@ public class TextExport implements SBMLReportGenerator {
 
 	public void format(Model model, BufferedWriter buffer) throws IOException {
 		// TODO Auto-generated method stub
+
 	}
 
 	public void format(SBMLDocument doc, BufferedWriter buffer)
 			throws IOException {
 		// TODO Auto-generated method stub
+
 	}
-  
-  /**
-   * This method writes the ordinary differential equation system into a plain
-   * text file. Note that the file extension does not matter.
-   * 
-   * @param file
-   * @param klg
-   * @throws IOException
-   */
+
+	/**
+	 * This method writes the ordinary differential equation system given by the
+	 * {@see KineticLawGenerator} into a plain text file. Note that the file
+	 * extension does not matter.
+	 * 
+	 * @param file
+	 * @param klg
+	 * @throws IOException
+	 */
 	@SuppressWarnings("deprecation")
 	public final void writeTextFile(Model model, File file) throws IOException {
 		int i;
@@ -133,7 +136,7 @@ public class TextExport implements SBMLReportGenerator {
 				new FileOutputStream(file.getPath())));
 		append("SBMLsqueezer generated model report file", out);
 		append("----------------------------------------", out);
-		for (i = 0; i < model.getReactionCount(); i++) {
+		for (i = 0; i < model.getNumReactions(); i++) {
 			Reaction r = model.getReaction(i);
 			out.append("Reaction: ");
 			out.append(r.getId());
@@ -152,7 +155,7 @@ public class TextExport implements SBMLReportGenerator {
 			out.newLine();
 		}
 		out.newLine();
-		for (i = 0; i < model.getSpeciesCount(); i++) {
+		for (i = 0; i < model.getNumSpecies(); i++) {
 			Species s = model.getSpecies(i);
 			StringBuffer ode = new StringBuffer();
 			for (Reaction r : model.getListOfReactions()) {
@@ -215,6 +218,7 @@ public class TextExport implements SBMLReportGenerator {
 	public void format(ListOf<? extends SBase> list, BufferedWriter buffer,
 	    boolean section) throws IOException, SBMLException {
 	    // TODO Auto-generated method stub
+	    
 	}
 
 	/*

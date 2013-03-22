@@ -1,11 +1,11 @@
 /*
- * $Id: LaTeX.java 250 2013-03-13 10:04:46Z draeger $
- * $URL: https://rarepos.cs.uni-tuebingen.de/svn/SBML2LaTeX/trunk/src/org/sbml/tolatex/util/LaTeX.java $
+ * $Id: LaTeX.java 60 2011-03-07 17:20:39Z draeger $
+ * $URL: https://rarepos.cs.uni-tuebingen.de/svn/SBML2LaTeX/tags/version0.9.8/src/org/sbml/tolatex/util/LaTeX.java $
  * ---------------------------------------------------------------------
  * This file is part of SBML2LaTeX, a program that creates 
  * human-readable reports for given SBML files.
  * 
- * Copyright (C) 2008-2013 by the University of Tuebingen, Germany.
+ * Copyright (C) 2008-2011 by the University of Tuebingen, Germany.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,13 +29,13 @@ import de.zbit.util.StringUtil;
  * 
  * @author Andreas Dr&auml;ger
  * @date 2009-01-03
- * @version $Rev: 250 $
+ * @version $Rev: 60 $
  */
 public class LaTeX extends StringUtil {
 	
 	/**
 	 * Requires LaTeX package booktabs. Produces a fancy line at the bottom of a
-	 * table. This variable also includes the <code>\end{longtable}</code> command
+	 * table. This variable also includes the <code>end{longtable}</code> command
 	 * and a new line.
 	 */
 	public static final String bottomrule = "\\bottomrule\\end{longtable}"
@@ -526,15 +526,9 @@ public class LaTeX extends StringUtil {
 	 * @return
 	 */
 	public StringBuffer longtableHead(String columnDef, String caption,
-		String... headLine) {
+		String headLine) {
 		StringBuffer buffer = new StringBuffer("\\begin{longtable}[h!]{");
-		if (!columnDef.startsWith("@{}")) {
-			buffer.append("@{}");
-		}
 		buffer.append(columnDef);
-		if (!columnDef.endsWith("@{}")) {
-			buffer.append("@{}");
-		}
 		buffer.append('}');
 		buffer.append(newLine());
 		buffer.append("\\caption{");
@@ -542,14 +536,7 @@ public class LaTeX extends StringUtil {
 		buffer.append('}');
 		buffer.append("\\\\");
 		StringBuffer head = new StringBuffer(toprule);
-		if (headLine != null) {
-			for (int i = 0; i < headLine.length; i++) {
-				head.append(headLine[i]);
-				if (i < headLine.length - 1) {
-					head.append('&');
-				}
-			}
-		}
+		head.append(headLine);
 		head.append("\\\\");
 		head.append(midrule);
 		buffer.append(head);
@@ -572,16 +559,10 @@ public class LaTeX extends StringUtil {
 	public StringBuffer math(Object formula) {
 		StringBuffer math = new StringBuffer();
 		String f = String.valueOf(formula);
-		if (f.length() == 0) {
-			return math;
-		}
-		if (f.charAt(0) != '$') {
-			math.append('$');
-		}
+		if (f.length() == 0) return math;
+		if (f.charAt(0) != '$') math.append('$');
 		math.append(f);
-		if (f.charAt(f.length() - 1) != '$') {
-			math.append('$');
-		}
+		if (f.charAt(f.length() - 1) != '$') math.append('$');
 		return math;
 	}
 	
@@ -639,85 +620,4 @@ public class LaTeX extends StringUtil {
 	public StringBuffer texttt(String id) {
 		return command("texttt", new StringBuffer(id));
 	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	public static String endDocument() {
-		return "\\end{document}\n\n";
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	public static String endCenter() {
-		return "\\end{center}\n";
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	public static String beginCenter() {
-		return "\\begin{center}\n";
-	}
-
-	/**
-	 * 
-	 * @param scale
-	 * @return
-	 */
-	public static String scaleFont(double scale) {
-		return "\\scalefont{" + scale + "}\n";
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	public static String beginDocument() {
-		return "\\begin{document}\n";
-	}
-
-	/**
-	 * 
-	 * @param style
-	 * @return
-	 */
-	public static String pageStyle(String style) {
-		return "\\pagestyle{" + style + "}\n";
-	}
-
-	/**
-	 * 
-	 * @param colorName
-	 * @param r
-	 * @param g
-	 * @param b
-	 * @return
-	 */
-	public static String defineColor(String colorName, double r, double g, double b) {
-		return "\\definecolor{" + colorName + "}{RGB}{" + r + ", " + g + ", " + b + "}\n";
-	}
-
-	/**
-	 * 
-	 * @param docType
-	 * @param fontSize
-	 * @return
-	 */
-	public static String dcoumentClass(String docType, int fontSize) {
-		return "\\documentclass[" + fontSize + "pt]{" + docType + "}\n";
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	public static String makeTitle() {
-		return "\\maketitle";
-	}
-
 }

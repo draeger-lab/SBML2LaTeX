@@ -1,11 +1,11 @@
 /*
- * $Id: SBML2LaTeXTest.java 206 2013-01-04 09:50:34Z draeger $
- * $URL: https://rarepos.cs.uni-tuebingen.de/svn/SBML2LaTeX/trunk/test/org/sbml/tolatex/gui/SBML2LaTeXTest.java $
+ * $Id: SBML2LaTeXTest.java 60 2011-03-07 17:20:39Z draeger $
+ * $URL: https://rarepos.cs.uni-tuebingen.de/svn/SBML2LaTeX/tags/version0.9.8/test/org/sbml/tolatex/gui/SBML2LaTeXTest.java $
  * ---------------------------------------------------------------------
  * This file is part of SBML2LaTeX, a program that creates 
  * human-readable reports for given SBML files.
  * 
- * Copyright (C) 2007-2013 by the University of Tuebingen, Germany.
+ * Copyright (C) 2007-2011 by the University of Tuebingen, Germany.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -34,7 +34,7 @@ import org.sbml.jsbml.xml.stax.SBMLReader;
 import org.sbml.tolatex.SBML2LaTeX;
 import org.sbml.tolatex.io.LaTeXOptionsIO;
 
-import de.zbit.io.filefilter.SBFileFilter;
+import de.zbit.io.SBFileFilter;
 import de.zbit.util.prefs.SBPreferences;
 
 /**
@@ -42,39 +42,40 @@ import de.zbit.util.prefs.SBPreferences;
  * 
  * @author Andreas Dr&auml;ger
  * @date 2010-11-11
- * @version $Rev: 206 $
+ * @version $Rev: 60 $
  */
 public class SBML2LaTeXTest {
-  
-  /**
-   * @param args
-   *        one argument: the path to the folder containing all case* folders
-   *        with the SBML test suit. Pass this without prefixes.
-   * @throws XMLStreamException
-   * @throws SBMLException
-   * @throws IOException
-   */
-  public static void main(String[] args) throws XMLStreamException,
-    IOException, SBMLException {
-    File folder = new File(args[0]);
-    File cases[] = folder.listFiles(SBFileFilter.createDirectoryFilter());
-    File sbmlFiles[];
-    SBMLDocument doc;
-    SBPreferences prefsIO;
-    SBMLReader reader = new SBMLReader();
-    int i, j, bound = 5;
-    for (i = 0; i < Math.min(cases.length, bound); i++) {
-      sbmlFiles = cases[i].listFiles(SBFileFilter.createSBMLFileFilter());
-      for (j = 0; j < sbmlFiles.length; j++) {
-        doc = reader.readSBML(sbmlFiles[j]);
-        if (LaTeXExportDialog.showDialog(doc)) {
-          prefsIO = SBPreferences.getPreferencesFor(LaTeXOptionsIO.class);
-          SBML2LaTeX.convert(doc, prefsIO
-              .get(LaTeXOptionsIO.REPORT_OUTPUT_FILE));
-        }
-      }
+
+    /**
+     * @param args
+     *        one argument: the path to the folder containing all case* folders
+     *        with the SBML test suit. Pass this without prefixes.
+     * @throws XMLStreamException
+     * @throws SBMLException
+     * @throws IOException
+     */
+    public static void main(String[] args) throws XMLStreamException,
+	IOException, SBMLException {
+	File folder = new File(args[0]);
+	File cases[] = folder.listFiles(SBFileFilter.createDirectoryFilter());
+	File sbmlFiles[];
+	SBMLDocument doc;
+	SBPreferences prefsIO;
+	SBMLReader reader = new SBMLReader();
+	int i, j, bound = 5;
+	for (i = 0; i < Math.min(cases.length, bound); i++) {
+	    sbmlFiles = cases[i].listFiles(SBFileFilter.createSBMLFileFilter());
+	    for (j = 0; j < sbmlFiles.length; j++) {
+		doc = reader.readSBML(sbmlFiles[j]);
+		if (LaTeXExportDialog.showDialog(doc)) {
+		    prefsIO = SBPreferences
+			    .getPreferencesFor(LaTeXOptionsIO.class);
+		    SBML2LaTeX.convert(doc, prefsIO
+			    .get(LaTeXOptionsIO.REPORT_OUTPUT_FILE));
+		}
+	    }
+	}
+	System.exit(0);
     }
-    System.exit(0);
-  }
 
 }
