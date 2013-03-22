@@ -1,27 +1,20 @@
-			      ------------------
-			      SBML2LaTeX Authors
-			      ------------------
 
-         -- Core developers --
+Core Developer :
 
-         Andreas Dräger, University of Tuebingen, Germany
-         
+Andreas Dräger, University of Tübingen
+Andreas Zell, University of Tübingen
 
-  			    -- Contributors --
 
-         Johannes Eichner, University of Tuebingen, Germany
-         Clemens Wrzodek, University of Tuebingen, Germany
-         Andreas Zell, University of Tuebingen, Germany
-         
-         -- Alumni --
+Contributors :
 
-         Mirjam Gutekunst, University of Tuebingen, Germany
-         Meike Aichele, University of Tuebingen, Germany
-         Sebastian Nagel, University of Tuebingen, Germany
-         Lukas Endler, European Bioinformatics Institute, United Kingdom
-         Martin Golebiewski, HITS gGmbH, Heidelberg, Germany
-         Michael Hucka, California Institute of Technology, United States
-         Wolfgang Müller, HITS gGmbH, Heidelberg, Germany
-         Hannes Planatscher, NMI Reutlingen, Germany
-         Adrian Schröder, Germany
-         Dieudonné Motsou Wouamba, Germany
+
+Alumni :
+
+Hannes Planatscher, University of Tübingen
+Dieudonné Motsou Wouamba, University of Tübingen
+Adrian Schröder, University of Tübingen
+Michael Hucka, California Institute of Technology
+Lukas Endler, European Bioinformatics Institute
+Martin Golebiewski, HITS gGmbH 
+Wolfgang Müller, HITS gGmbH
+
