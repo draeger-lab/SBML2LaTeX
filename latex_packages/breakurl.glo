@@ -1,0 +1,11 @@
+\glossaryentry{v1.23> =General:>\hypersetupcan now be used anywhere}{1}
+\glossaryentry{v1.22> =General:>Corrected a misuse of \leavevmodewhich generated blank lines inside tables}{1}
+\glossaryentry{v1.21> =General:>\burlaltand \urlaltnow work under pdflatex; also bug fixes from Heiko Oberdiek}{1}
+\glossaryentry{v1.20> =General:>Changes to reflect update of hyperref package}{1}
+\glossaryentry{v1.10> =General:>Added the command \urlalt, allowing one to specify different values for displayed and actual link}{1}
+\glossaryentry{v1.01> =General:>Fixed a bug when a page break occurs in the middle of a link}{1}
+\glossaryentry{v1.00> =General:>Support for \UrlLeftand \UrlRightmacros}{1}
+\glossaryentry{v0.04> =General:>hyperref's `colorlinks' and `urlcolor' options are now working}{1}
+\glossaryentry{v0.03> =General:>New `vertfit' option; compatibility with pdfeTeX engine}{1}
+\glossaryentry{v0.02> =General:>Smarter (not segmented) links, optionally allows breaks after hyphens}{1}
+\glossaryentry{v0.01> =General:>Initial version (first draft)}{1}

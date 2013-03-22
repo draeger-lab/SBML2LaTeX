@@ -1,0 +1,10 @@
+\glossaryentry{v1.0a> =General:>First public release.}{1}
+\glossaryentry{v1.1a> =General:>Minor corrections. Better support for different decimal signs.}{1}
+\glossaryentry{v1.2b> =General:>Some fixes, development freeze.}{1}
+\glossaryentry{v1.2c> =General:>Small fix for decimal sign input/output.}{1}
+\glossaryentry{v1.1b> =General:>Added ngerman, austrian and naustrian package options.}{6}
+\glossaryentry{v1.1a>rc@digits=\verb!*+\rc@digits+:>Read all digits into one register, no more separation of pre- and afterpoint digits.}{6}
+\glossaryentry{v1.1b>rc@preothertoks=\verb!*+\rc@preothertoks+:>Separation of other tokens inserted^^A before and after the number, now saved in "\rc@preothertoks "^^A and "\rc@postothertoks ".}{6}
+\glossaryentry{v1.1a>ifrcRounding=\verb!*+\ifrcRounding+:>Rounding switch prefixed with `rc'.}{6}
+\glossaryentry{v1.1a> =General:>Optional parameters for the column specifier.}{7}
+\glossaryentry{v1.1b>rcDecimalSign=\verb!*+\rcDecimalSign+:>Use "\def " instead of "\let ".}{11}

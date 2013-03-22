@@ -1,0 +1,38 @@
+% Introduce automatic line breaks in function calls
+\\makeatletter
+\\edef\\breqn@identify@comma{\\number\\symletters3B}% fingers crossed!
+\\let\\m@@Pun\\m@Pun
+\\def\\d@@Pun#1#2#3{\\edef\\breqn@stored@args{\\number#1#2#3}
+\\futurelet\\@let@token\\d@@Punaux}
+\\def\\d@@Punaux{%
+  \\expandafter\\m@@Pun\\breqn@stored@args
+  \\ifx\\@let@token\\@sptoken
+    \\ifx\\breqn@stored@args\\breqn@identify@comma
+			%\\penalty\\breqn@comma@penalty\\relax
+      \\penalty\\breqn@comma@penalty\\relax
+      \\EQ@prebin@space
+    \\fi
+  \\fi
+}
+\\def\\display@setup{%
+  \\medmuskip\\Dmedmuskip \\thickmuskip\\Dthickmuskip
+  \\let\\m@Bin\\d@@Bin \\let\\m@Rel\\d@@Rel
+  \\let\\m@Pun\\d@@Pun %% new for punctuation
+  \\let\\@symRel\\d@@symRel \\let\\@symBin\\d@@symBin
+  \\let\\m@DeL\\d@@DeL \\let\\m@DeR\\d@@DeR \\let\\m@DeB\\d@@DeB
+  \\let\\m@DeA\\d@@DeA
+  \\let\\@symDeL\\d@@symDeL \\let\\@symDeR\\d@@symDeR
+  \\let\\@symDeB\\d@@symDeB \\let\\@symDeA\\d@@symDeA
+  \\let\\left\\eq@left \\let\\right\\eq@right \\global\\lr@level\\z@
+  \\global\\eq@wdCond\\z@          %BRM: new
+  \\everyhbox{\\everyhbox\\@emptytoks
+    \\let\\display@setup\\relax \\textmath@setup \\let\\textmath@setup\\relax
+  }%
+  \\everyvbox{\\everyvbox\\@emptytoks
+    \\let\\display@setup\\relax \\textmath@setup \\let\\textmath@setup\\relax
+  }%
+}
+\\define@key{breqn}{comma-penalty}{\\def\\breqn@comma@penalty{#1}}
+\\setkeys{breqn}{comma-penalty=5000}% break is the default
+\\makeatother
+% End line break definition

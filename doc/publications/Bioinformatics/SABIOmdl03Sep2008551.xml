@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbml xmlns="http://www.sbml.org/sbml/level2" level="2" version="1">
+  <model name="SABIOmdl03Sep2008551.xml">
+    <notes>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+<p>
+This model has been created with the help of the SABIO-RK Database
+(http://sabio.villa-bosch.de/SABIORK)
+</p>
+</body>
+    </notes>
+    <listOfFunctionDefinitions>
+      <functionDefinition id="kl_0">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar>
+              <ci> A </ci>
+            </bvar>
+            <bvar>
+              <ci> E </ci>
+            </bvar>
+            <bvar>
+              <ci> kcat_Km </ci>
+            </bvar>
+            <bvar>
+              <ci> Km </ci>
+            </bvar>
+            <bvar>
+              <ci> kcat </ci>
+            </bvar>
+            <apply>
+              <divide/>
+              <apply>
+                <times/>
+                <ci> E </ci>
+                <ci> kcat </ci>
+                <ci> A </ci>
+              </apply>
+              <apply>
+                <plus/>
+                <ci> Km </ci>
+                <ci> A </ci>
+              </apply>
+            </apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+    </listOfFunctionDefinitions>
+    <listOfUnitDefinitions>
+      <unitDefinition id="onedivsec" name="onedivsec">
+        <listOfUnits>
+          <unit kind="second" exponent="-1" multiplier="1" offset="0"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="mM" name="mM">
+        <listOfUnits>
+          <unit kind="litre" exponent="-1" multiplier="1" offset="0"/>
+          <unit kind="mole" scale="-3" multiplier="1" offset="0"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="onedivMsec" name="onedivMsec">
+        <listOfUnits>
+          <unit kind="second" exponent="-1" multiplier="1" offset="0"/>
+          <unit kind="litre" multiplier="1" offset="0"/>
+          <unit kind="mole" exponent="-1" multiplier="1" offset="0"/>
+        </listOfUnits>
+      </unitDefinition>
+    </listOfUnitDefinitions>
+    <listOfCompartments>
+      <compartment id="compart_1" name="Cell" size="1"/>
+    </listOfCompartments>
+    <listOfSpecies>
+      <species metaid="meta_spc_1" id="spc_1" name="alpha-D-Glucose" compartment="compart_1">
+        <annotation>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+<rdf:Description rdf:about="#meta_spc_1"
+><bqbiol:is> 
+<rdf:Bag> 
+<rdf:li rdf:resource="http://www.ebi.ac.uk/chebi/#CHEBI:10242"/>
+<rdf:li rdf:resource="http://www.ebi.ac.uk/chebi/#CHEBI:17925"/>
+<rdf:li rdf:resource="http://www.ebi.ac.uk/chebi/#CHEBI:40557"/>
+<rdf:li rdf:resource="http://www.ebi.ac.uk/chebi/#CHEBI:12318"/>
+<rdf:li rdf:resource="http://www.genome.jp/kegg/compound/#C00267"/>
+</rdf:Bag>
+ </bqbiol:is>
+</rdf:Description>
+</rdf:RDF> 
+</annotation>
+      </species>
+      <species metaid="meta_spc_2" id="spc_2" name="D-Fructose" compartment="compart_1">
+        <annotation>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+<rdf:Description rdf:about="#meta_spc_2"
+><bqbiol:is> 
+<rdf:Bag> 
+<rdf:li rdf:resource="http://www.ebi.ac.uk/chebi/#CHEBI:4118"/>
+<rdf:li rdf:resource="http://www.ebi.ac.uk/chebi/#CHEBI:4119"/>
+<rdf:li rdf:resource="http://www.ebi.ac.uk/chebi/#CHEBI:12923"/>
+<rdf:li rdf:resource="http://www.ebi.ac.uk/chebi/#CHEBI:15824"/>
+<rdf:li rdf:resource="http://www.ebi.ac.uk/chebi/#CHEBI:37721"/>
+<rdf:li rdf:resource="http://www.genome.jp/kegg/compound/#C00095"/>
+<rdf:li rdf:resource="http://www.genome.jp/kegg/compound/#C10906"/>
+</rdf:Bag>
+ </bqbiol:is>
+</rdf:Description>
+</rdf:RDF> 
+</annotation>
+      </species>
+      <species metaid="meta_enz_1" id="enz_1" name="Xylose isomerase(Enzyme)" compartment="compart_1"/>
+      <species metaid="meta_spc_3" id="spc_3" name="Mg2+" compartment="compart_1">
+        <annotation>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+<rdf:Description rdf:about="#meta_spc_3"
+><bqbiol:is> 
+<rdf:Bag> 
+<rdf:li rdf:resource="http://www.ebi.ac.uk/chebi/#CHEBI:6635"/>
+<rdf:li rdf:resource="http://www.genome.jp/kegg/compound/#C00305"/>
+</rdf:Bag>
+ </bqbiol:is>
+</rdf:Description>
+</rdf:RDF> 
+</annotation>
+      </species>
+    </listOfSpecies>
+    <listOfReactions>
+      <reaction metaid="meta_reac_0" id="reac_0">
+        <annotation>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+<rdf:Description rdf:about="#meta_reac_0"
+><bqbiol:isVersionOf> 
+<rdf:Bag> 
+<rdf:li rdf:resource="http://www.ec-code.org/#5.3.1.5"/>
+</rdf:Bag>
+ </bqbiol:isVersionOf>
+<bqbiol:is>
+<rdf:Bag>
+<rdf:li rdf:resource="http://www.genome.jp/kegg/reaction/#R00878"/>
+</rdf:Bag>
+ </bqbiol:is>
+</rdf:Description>
+</rdf:RDF> 
+</annotation>
+        <listOfReactants>
+          <speciesReference species="spc_1"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="spc_2"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="enz_1"/>
+          <modifierSpeciesReference species="spc_3"/>
+        </listOfModifiers>
+        <kineticLaw metaid="meta_kl_0">
+          <annotation>
+<rdf:RDF xmlns:bqbiol="http://biomodels.net/biology-qualifiers/"
+xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#/">
+<rdf:Description rdf:about="#meta_kl_0"
+><bqbiol:isDescribedBy>
+<rdf:Bag>
+<rdf:li rdf:resource="http://www.pubmed.gov/#1831974"/>
+</rdf:Bag>
+ </bqbiol:isDescribedBy>
+</rdf:Description>
+</rdf:RDF> 
+</annotation>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <ci> kl_0 </ci>
+              <ci> spc_1 </ci>
+              <ci> enz_1 </ci>
+              <ci> kcat_Km_spc_1 </ci>
+              <ci> Km_spc_1 </ci>
+              <ci> kcat </ci>
+            </apply>
+          </math>
+          <listOfParameters>
+            <parameter id="kcat_Km_spc_1" value="37" units="onedivMsec"/>
+            <parameter id="Km_spc_1" value="64" units="mM"/>
+            <parameter id="kcat" value="2.35" units="onedivsec"/>
+          </listOfParameters>
+        </kineticLaw>
+      </reaction>
+    </listOfReactions>
+  </model>
+</sbml>
+
+
+
+
+
+

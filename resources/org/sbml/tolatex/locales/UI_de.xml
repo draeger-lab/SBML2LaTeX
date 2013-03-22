@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+  <comment>
+    $Id: UI_de.xml 249 2013-03-13 09:23:31Z draeger $
+    $URL: https://rarepos.cs.uni-tuebingen.de/svn/SBML2LaTeX/trunk/resources/org/sbml/tolatex/locales/UI_de.xml $
+    ---------------------------------------------------------------------
+    This file is part of SBML2LaTeX, a program that creates 
+    human-readable reports for given SBML files.
+    
+    Copyright (C) 2008-2013 by the University of Tuebingen, Germany.
+    
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+    
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+    
+    You should have received a copy of the GNU General Public License
+    along with this program. If not, see http://www.gnu.org/licenses/.
+    ---------------------------------------------------------------------
+    
+    This configuration provides locale-dependent names for labels in
+	a (graphical) user interface.
+  </comment>
+  
+  <!-- IO options -->
+
+  <entry key="LOAD_LATEX_COMPILER">LaTeX-Kompilierer</entry>
+  <entry key="LOAD_LATEX_COMPILER_TOOLTIP">Der Pfad zum LaTeX-Kompilierer, der auf Ihrem Betriebssystem installiert ist. Dieses Programm wird benötigt, um PDF-, DVI- oder weitere Dateien aus der zunächst erstellen LaTeX-Datei, die den Modellbericht enthält, zu generieren.</entry>
+
+  <entry key="REPORT_OUTPUT_FILE">Berichtsdatei</entry>
+  <entry key="REPORT_OUTPUT_FILE_TOOLTIP">Die Datei, in die der Modellbericht geschrieben werden soll. Standardmäßig wird SBML2LaTeX eine TeX-Datei erstellen, welche Sie anschließend in ein anders Format konvertieren können, oder aus der Sie leicht einige Teile für Ihre wissenschaftliche Arbeit entnehmen können. Außerdem kann SBML2LaTeX genutzt werden, um direkt eine PDF-Datei zu erstellen, falls Sie einen LaTeX-Kompilierer spezifiziert haben.</entry>
+
+  <entry key="SBML_INPUT_FILE">SBML-Datei</entry>
+  <entry key="SBML_INPUT_FILE_TOOLTIP">Die SBML-Quelldatei, für die ein Modellbericht erstellt werden soll.</entry> 
+
+  <!-- IO option groups -->
+  
+  <entry key="INPUT_AND_OUTPUT_FILES">Festlegung der Eingabe- und Ausgabedateien</entry>
+  <entry key="INPUT_AND_OUTPUT_FILES_TOOLTIP">An dieser Stelle können Sie angeben, wo sich Eingabedateien befinden und wohin und Ausgabedateien geschrieben werden sollen.</entry> 
+  
+  <!-- LaTeX options -->
+  
+  <entry key="LaTeXOptions">LaTeX-Einstellungen</entry>
+  
+  <entry key="CHECK_CONSISTENCY">Konsistenzprüfung</entry>
+  <entry key="CHECK_CONSISTENCY_TOOLTIP">Ist diese Einstellung aktiviert, so wird eine automatische Konsistenzüberprüfung des gegebenen Models durchgeführt und das Ergebnis in den Anhang des Modellberichts geschrieben.</entry>
+  <entry key="CLEAN_WORKSPACE">Arbeitsplatz aufräumen</entry>
+  <entry key="CLEAN_WORKSPACE_TOOLTIP">Wenn diese Option aktiv ist, so werden alle temporären Dateien nach der Ausführung von SBML2LaTeX automatisch gelöscht. Falls beispielsweise ein PDF erstellt wird, so wird selbst die zuvor erstellte TeX-Datei entfernt. Allerdings ist diese Einstellung sinnvoll, um alle durch den LaTeX-Kompilierer Ihres Systems erstellten temporären Dateien zu entsorgen.</entry>
+
+  <entry key="FONT_HEADINGS">Schriftart der Überschriften</entry>
+  <entry key="FONT_HEADINGS_TOOLTIP">Diese Einstellung erlaubt Ihnen, die Schriftart für sämtliche Überschriften und weitere Textabschnitte, die standardmäßig in einer serifenlosen Schriftart gesetzt werden.</entry>
+  <entry key="FONT_SIZE">Schriftgröße</entry>
+  <entry key="FONT_SIZE_TOOLTIP">Mit dieser Option können Sie die Größe des Standardtextes festlegen. Überschriften werden jedoch in einer größeren Schrift gesetzt.</entry>
+  <entry key="FONT_TEXT">Schriftart des Haupttextes</entry>
+  <entry key="FONT_TEXT_TOOLTIP">Hiermit können Sie die Schriftart für den Fließtext festlegen. Es sei davon abgeraten, 'times' auszuwählen, weil in einigen Fällen Gleichungen nicht genau zum restlichen Text passen. Wählen Sie daher 'mathptmx', wenn Sie eine Times-Schriftart haben möchten. Dies entspricht bereits der Voreinstellung.</entry>
+  <entry key="FONT_TYPEWRITER">Schreibmaschinenschriftart</entry>
+  <entry key="FONT_TYPEWRITER_TOOLTIP">Wählen Sie hiermit eine Schreibmaschinenschriftart, die für Identifikatoren genutzt werden kann, sofern die Option '%s' ausgewählt ist. URLs und weitere Resourcen werden dann ebenfalls in dieser Schriftart gesetzt.</entry>
+
+  <entry key="INCLUDE_SECTION_COMPARTMENT_TYPES">Abschnitt über Kompartimentarten</entry>
+  <entry key="INCLUDE_SECTION_COMPARTMENT_TYPES_TOOLTIP">Diese Option entscheidet darüber, ob ein Abschnitt über Kompartimentarten in den Modellbericht aufgenommen werden soll. Beachten Sie, dass diese Option nur dann einen Effekt auslöst, wenn das gegebene Modell auch tatsächlich Kompartimentarten deklariert.</entry>
+  <entry key="INCLUDE_SECTION_COMPARTMENTS">Abschnitt über Kompartimente</entry>
+  <entry key="INCLUDE_SECTION_COMPARTMENTS_TOOLTIP">Diese Option entscheidet darüber, ob ein Abschnitt über Kompartimente in den Modellbericht aufgenommen werden soll. Beachten Sie, dass diese Option nur dann einen Effekt auslöst, wenn das gegebene Modell auch tatsächlich Kompartimente deklariert.</entry>
+  <entry key="INCLUDE_SECTION_CONSTRAINTS">Abschnitt über Randbedingungen</entry>
+  <entry key="INCLUDE_SECTION_CONSTRAINTS_TOOLTIP">Diese Option entscheidet darüber, ob ein Abschnitt über Randbedingungen in den Modellbericht aufgenommen werden soll. Beachten Sie, dass diese Option nur dann einen Effekt auslöst, wenn das gegebene Modell auch tatsächlich Randbedingungen deklariert.</entry>
+  <entry key="INCLUDE_SECTION_EVENTS">Abschnitt über Ereignisse</entry>
+  <entry key="INCLUDE_SECTION_EVENTS_TOOLTIP">Diese Option entscheidet darüber, ob ein Abschnitt über Ereignisse in den Modellbericht aufgenommen werden soll. Beachten Sie, dass diese Option nur dann einen Effekt auslöst, wenn das gegebene Modell auch tatsächlich Ereignisse deklariert.</entry>
+  <entry key="INCLUDE_SECTION_INITIAL_ASSIGNMENTS">Abschnitt über initiale Zuweisungen</entry>
+  <entry key="INCLUDE_SECTION_INITIAL_ASSIGNMENTS_TOOLTIP">Diese Option entscheidet darüber, ob ein Abschnitt über initiale Zuweisungen in den Modellbericht aufgenommen werden soll. Beachten Sie, dass diese Option nur dann einen Effekt auslöst, wenn das gegebene Modell auch tatsächlich initiale Zuweisungen deklariert.</entry>
+  <entry key="INCLUDE_SECTION_FUNCTION_DEFINITIONS">Abschnitt über Funktionsdefinitionen</entry>
+  <entry key="INCLUDE_SECTION_FUNCTION_DEFINITIONS_TOOLTIP">Diese Option entscheidet darüber, ob ein Abschnitt über Funktionsdefinitionen in den Modellbericht aufgenommen werden soll. Beachten Sie, dass diese Option nur dann einen Effekt auslöst, wenn das gegebene Modell auch tatsächlich Funktionsdefinitionen deklariert.</entry>
+  <entry key="INCLUDE_SECTION_REACTIONS">Abschnitt über Reaktionen</entry>
+  <entry key="INCLUDE_SECTION_REACTIONS_TOOLTIP">Diese Option entscheidet darüber, ob ein Abschnitt über Reaktionen in den Modellbericht aufgenommen werden soll. Beachten Sie, dass diese Option nur dann einen Effekt auslöst, wenn das gegebene Modell auch tatsächlich Reaktionen deklariert. Außerdem entscheidet diese Option auch darüber, ob eine Zusammenfassung des durch das Modell implizierten Differentialgleichungssystems erstellt werden soll. Dies hängt wiederum davon ab, ob das Modell überhaupt reaktive Spezies enthält.</entry>
+  <entry key="INCLUDE_SECTION_PARAMETERS">Abschnitt über Parameter</entry>
+  <entry key="INCLUDE_SECTION_PARAMETERS_TOOLTIP">Diese Option entscheidet darüber, ob ein Abschnitt über Parameter in den Modellbericht aufgenommen werden soll. Beachten Sie, dass diese Option nur dann einen Effekt auslöst, wenn das gegebene Modell auch tatsächlich Parameter deklariert.</entry>
+  <entry key="INCLUDE_SECTION_RULES">Abschnitt über Regeln</entry>
+  <entry key="INCLUDE_SECTION_RULES_TOOLTIP">Diese Option entscheidet darüber, ob ein Abschnitt über Regeln in den Modellbericht aufgenommen werden soll. Beachten Sie, dass diese Option nur dann einen Effekt auslöst, wenn das gegebene Modell auch tatsächlich Regeln deklariert. Dabei spielt es keine Rolle, ob diese algebraische Regeln, Zuweisungs- oder Ratenregeln sind.</entry>
+  <entry key="INCLUDE_SECTION_SPECIES">Abschnitt über Spezies</entry>
+  <entry key="INCLUDE_SECTION_SPECIES_TOOLTIP">Diese Option entscheidet darüber, ob ein Abschnitt über Spezies in den Modellbericht aufgenommen werden soll. Beachten Sie, dass diese Option nur dann einen Effekt auslöst, wenn das gegebene Modell auch tatsächlich reaktive Spezies deklariert.</entry>
+  <entry key="INCLUDE_SECTION_SPECIES_TYPES">Abschnitt über Speciesarten</entry>
+  <entry key="INCLUDE_SECTION_SPECIES_TYPES_TOOLTIP">Wird diese Option ausgewählt, so wird ein Abschnitt über Speciesarten in den Modellbericht aufgenommen. Andernfalls wird diese Information aus dem Bericht ausgeschlossen.</entry>
+  <entry key="INCLUDE_SECTION_UNIT_DEFINITIONS">Abschnitt über Einheitendefinitionen</entry>
+  <entry key="INCLUDE_SECTION_UNIT_DEFINITIONS_TOOLTIP">Diese Option entscheidet darüber, ob ein Abschnitt über Einheiten in den Modellbericht aufgenommen werden soll. Beachten Sie, dass diese Option nur dann einen Effekt auslöst, wenn das gegebene Modell auch tatsächlich Einheiten deklariert. In einigen Versionen enthalten SBML-Modelle jedoch Vordefinierte Einheitendefinitionen, welche in den Modellbericht aufgenommen werden können, sofern diese Option aktiv ist.</entry>
+
+  <entry key="LANDSCAPE">Querformat</entry>
+  <entry key="LANDSCAPE_TOOLTIP">Hiermit können Sie festlegen, ob der Modellbericht hochkant oder im Querformat erstellt werden soll. Standardmäßig werden die meisten Seiten hochkant erzeugt.</entry>
+
+  <entry key="MIRIAM_ANNOTATION">MIRIAM-Annotation</entry>
+  <entry key="MIRIAM_ANNOTATION_TOOLTIP">Ist diese Option aktiviert (Standard), so werden MIRIAM-Annotationein in den Modellbericht einbezogen, falls vorhanden. In diesem Fall erzeugt SBML2LaTeX Verweise auf die Resourcen für jedes annotatierte Element.</entry>
+
+  <entry key="PAPER_SIZE">Papierformat</entry>
+  <entry key="PAPER_SIZE_TOOLTIP">Festlegung des Papierformates für LaTeX-Dokumente. Mit dieser Einstellung kann die Größe des Papieres beeinflusst werden. Standardmäßig werden Berichte in DIN A4 gesetzt. Alle europäischen DIN-Größen a?, b?, c? und d? sowie die US-amerikanischen Größen letter, legal und executive stehen zur Verfügung.</entry>
+  <entry key="PRINT_FULL_ODE_SYSTEM">Vollständiges DGl-System angeben</entry>
+  <entry key="PRINT_FULL_ODE_SYSTEM_TOOLTIP">Falls aktiviert, wird für jede reaktive Spezies die komplette Ratenänderung als Summe aller Reaktionsraten, an denen diese Spezies beteiligt ist, angegeben. Standardmäßig erzeugt SBML2LaTeX lediglich die Summe der einzelnen Reaktionsraten als Verweis auf die Reaktionen. Zwar sind diese dadurch zugänglich, werden jedoch an einer anderen Stelle im Bericht aufgelistet. Beachten Sie, dass diese Option nur dann verfügbar ist, wenn die Option '%s' aktiviert wurde.</entry>
+  <entry key="PRINT_NAMES_IF_AVAILABLE">Namen angeben, wenn verfügbar</entry>
+  <entry key="PRINT_NAMES_IF_AVAILABLE_TOOLTIP">Ist diese Einstellung aktiviert, dann werden die Namen der SBML-Elemente (also benannte elemente) anstelle ihres Identifikators im Bericht angezeigt. Dies kann jedoch nur dann erfolgen, wenn Namen für die Elemente im Modell festgelegt wurden.</entry>
+
+  <entry key="REACTANTS_OVERVIEW_TABLE">Reaktionsteilnehmer in gemeinsamer Übersichtstabelle</entry>
+  <entry key="REACTANTS_OVERVIEW_TABLE_TOOLTIP">Falls aktiviert, werden Details (also Identifikator und Name) aller Edukte, Modifikatoren und Produkte, die an einer Reaktion beteiligt sind, jeweils gemeinsam in einer Tabelle aufgeführt. Standardmäßig werden getrennte Tabellen für jede dieser drei Gruppen angelegt, die dann jedoch auch den SBO-Ausdruck beinhalten. Beachten Sie, dass diese Option nur anwendbar ist, falls '%s' aktiv ist.</entry>
+
+  <entry key="SHOW_PREDEFINED_UNITS">Vordefinierte Einheiten anzeigen</entry>
+  <entry key="SHOW_PREDEFINED_UNITS_TOOLTIP">Falls diese Einstellung aktiviert wird (Standard), werden alle Vordefinierten Einheitendeklarationen in SBML explizit im Modellbericht aufgeführt wie diese durch die zugrundeliegende SBML-Version festgelegt sind. Andernfalls werden lediglich Einheitendefinitionen, die direkt im Modell festgelegt sind, einbezogen. Beachten Sie, dass diese Option nur zur Verfügung steht, falls die Option '%s' aktiviert ist.</entry>
+
+  <entry key="TITLE_PAGE">Separate Titelseite</entry>
+  <entry key="TITLE_PAGE_TOOLTIP">Wenn diese Option aktiviert wird, so wird eine separate Titelseite für den Modellbericht erstellt. Standardmäßig wird nur eine Überschrift zu Beginn der ersten Seite gesetzt.</entry>
+  <entry key="TYPEWRITER">Schreibmaschinenschrift für Identifikatoren</entry>
+  <entry key="TYPEWRITER_TOOLTIP">Diese Option entscheidet darüber, ob eine Schreibmaschinenschriftart benutzt werden soll, um SBML-Identifikatoren hervorzuheben. Besonders, falls diese Identifikatoren in mathematischen Ausdrücken vorkommen, wird diese Einstellungsmöglichkeit besonders wichtig.</entry>
+  
+  <!-- LaTeX option groups -->
+  
+  <entry key="CONFIGURATION_FILES">Ort des LaTeX-Kompilierers</entry>
+  <entry key="CONFIGURATION_FILES_TOOLTIP">An dieser Stelle können Sie angeben, wo sich der LaTeX-Kompilierer Ihres Betriebssystems befindet.</entry>
+  <entry key="CONTENT_OPTIONS">Inhalt des Modellberichts</entry>
+  <entry key="CONTENT_OPTIONS_TOOLTIP">Legen Sie an dieser Stelle fest, welche Abschnitte in den Modellbericht aufgenommen werden sollen.</entry>
+  <entry key="LAYOUT_OPTIONS">Layout-Optionen</entry>
+  <entry key="LAYOUT_OPTIONS_TOOLTIP">Diese Einstellungen ermöglichen Ihnen das Layout und den Stil des Modellberichts zu beeinflussen.</entry> 
+  <entry key="REPORT_OPTIONS">Optionen zum Bericht</entry>
+  <entry key="REPORT_OPTIONS_TOOLTIP">Legen Sie das Layout  des Modellberichts fest, welche Informationen einbezogen werden sollen sowie ob temporäre Dateien anschließend gelöcht werden sollen.</entry>  
+  <entry key="TYPOGRAPHICAL_OPTIONS">Typographische Einstellungen</entry>
+  <entry key="TYPOGRAPHICAL_OPTIONS_TOOLTIP">Hiermit können Sie generelle Eigenschaften wie Papiergröße und verschiedene Schriftarten festlegen.</entry> 
+  
+  <!-- LaTeXExportDialog -->
+  
+  <entry key="PDFLATEX_LOCATION_UNKNOWN">Leider kann kein PDF-Bericht erstellt werden, ohne dass der Pfad zum LaTeX-Kompilierer Ihres Rechners bekannt ist. Geben Sie daher bitte an, wo sich dieses Programm befindet.</entry> 
+  
+      
+  <!-- SBML2LaTeX -->
+
+  <entry key="CANNOT_WRITE_TO_FILE">Konnte nicht in Datei {0} schreiben.</entry>
+  <entry key="CONVERTING_SBML_FILE_TO_REPORT">Konvertiere Datei {0} zu {1}.</entry>
+  <entry key="COULD_NOT_COMPILE_FILE">Konnte {0} nicht kompilieren.</entry>
+  <entry key="COULD_NOT_COMPILE_LATEX_FILE">Konnte das LaTeX-Document nicht kompilieren. Versuchen Sie bitte, dieses manuell zu kompilieren.</entry>
+  <entry key="DELETING_TEMP_FILE">Lösche temporäre Datei {0}.</entry>
+  <entry key="DOCUMENT_SUCCESSFULLY_COMPILED">Dokument erfolgreich kompiliert. Das Resultat befindet sich in Datei {0}.</entry>
+  <entry key="ENTER_PATH_TO_PDFLATEX">Geben Sie bitte einen gültigen Pfad zu PDFLaTeX in Ihrem System an.</entry>
+  <entry key="INVALID_SBML_FILE">Datei {0} ist keine gültige SBML-Datei.</entry>
+  <entry key="INVALID_LATEX_FILE">Datei {0} ist keine gültige LaTeX-Datei.</entry>
+  <entry key="INVALID_SBASE">Nur Instanzen von SBMLDocument, Model oder Reaction werden akzeptiert. Gegeben wurde jedoch {0}.</entry>
+  <entry key="LATEX_COMPILATION_PROBLEMS">In einigen Fällen können selbst korrekte TeX-Dateien nicht zu PDF-Dateien kompiliert werden, was vielfältige Gründe und Probleme in LaTeX zur Ursache haben kann. Falls Sie einem solchen Problem begegnen, versuchen Sie bitte, die von diesem Programm erstellte TeX-Datei manuell zu kompilieren.</entry>
+  <entry key="SEARCHING_FOR_LATEX_COMPILER">Suche nach einem LaTeX-Kompilierer auf Ihrem System</entry>
+  <entry key="TIME_IN_SECONDS">Zeit: {0,number} s</entry>
+
+</properties>
