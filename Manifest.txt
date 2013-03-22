@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Main-Class: org.sbml.displaysbml.SBMLconverter
+Class-Path: lib/ant.jar lib/jdom.jar lib/xalan.jar lib/jaxen-core.jar lib/xerces.jar lib/jaxen-jdom.jar lib/saxpath.jar lib/xml-apis.jar
