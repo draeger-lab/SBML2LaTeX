@@ -1,54 +1,114 @@
 /*
- * $Id: HTML2LaTeX.java 249 2013-03-13 09:23:31Z draeger $
- * $URL: https://rarepos.cs.uni-tuebingen.de/svn/SBML2LaTeX/trunk/src/cz/kebrt/html2latex/HTML2LaTeX.java $
- * ---------------------------------------------------------------------
- * This file is part of SBML2LaTeX, a program that creates 
- * human-readable reports for given SBML files.
- * 
- * Copyright (C) 2008-2013 by the University of Tuebingen, Germany.
- * 
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- * 
- * You should have received a copy of the GNU General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
- * ---------------------------------------------------------------------
+ * Main.java
  */
+
 package cz.kebrt.html2latex;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
-
-import de.zbit.io.OpenFile;
 
 /**
  * Program main class.
- * @version $Rev: 249 $
- * @since 0.9.3
  */
 public class HTML2LaTeX {
 
+	private static final String fileSeparator = System
+			.getProperty("file.separator");
+	/** Input HTML file. */
+	private static String _inputFile = "";
+	/** Output LaTeX file. */
+	private static String _outputFile = "";
 	/** Configuration file. */
-	private static String _configFile = "config.xml";
+	private static String _configFile = System.getProperty("user.dir")
+			+ fileSeparator + "resources" + fileSeparator + "config.xml";
 	/** File with CSS. */
 	private static String _cssFile = "";
 
-	public HTML2LaTeX(BufferedReader br, BufferedWriter bw) throws IOException {
+	/**
+	 * Creates {@link Parser Parser} instance and runs its
+	 * {@link Parser#parse(File, ParserHandler) parse()} method.
+	 * 
+	 * @param args
+	 *            command line arguments
+	 */
+	public static void main(String[] args) {
 		try {
+			processCmdLineArgs(args);
+
+			if (_inputFile.equals("") || _outputFile.equals("")) {
+				System.err.println("Input or (and) output file not specified.");
+				return;
+			}
+
 			Parser parser = new Parser();
-			parser.parse(br, new ParserHandler(bw));
-		} catch (FatalErrorException exc) {
-			throw new IOException(exc);
+			parser.parse(new File(_inputFile), new ParserHandler(new File(
+					_outputFile)));
+
+		} catch (FatalErrorException e) {
+			System.err.println(e.getMessage());
+			System.exit(-1);
+		} catch (Exception e) {
+			e.getMessage();
+			e.printStackTrace();
+		}
+	}
+
+	public static void convert(BufferedReader br, BufferedWriter bw)
+			throws FatalErrorException {
+		convert(br, bw, "", _configFile);
+	}
+
+	public static void convert(BufferedReader br, BufferedWriter bw,
+			String pathToCSSFile, String pathToConfigFile)
+			throws FatalErrorException {
+		_cssFile = pathToCSSFile;
+		_configFile = pathToConfigFile;
+		Parser parser = new Parser();
+		parser.parse(br, new ParserHandler(bw));
+	}
+
+	/**
+	 * Processes command line arguments.
+	 * <ul>
+	 * <li>-input &lt;fileName&gt;</li>
+	 * <li>-output &lt;fileName&gt;</li>
+	 * <li>-config &lt;fileName&gt;</li>
+	 * <li>-css &lt;fileName&gt;</li>
+	 * </ul>
+	 * 
+	 * @param args
+	 *            command line arguments
+	 */
+	private static void processCmdLineArgs(String[] args) {
+		for (int i = 0; i < args.length; ++i) {
+			if (args[i].equals("-input")) {
+				if (i < (args.length - 1)) {
+					_inputFile = args[i + 1];
+					++i;
+				}
+			}
+
+			if (args[i].equals("-output")) {
+				if (i < (args.length - 1)) {
+					_outputFile = args[i + 1];
+					++i;
+				}
+			}
+
+			if (args[i].equals("-config")) {
+				if (i < (args.length - 1)) {
+					_configFile = args[i + 1];
+					++i;
+				}
+			}
+
+			if (args[i].equals("-css")) {
+				if (i < (args.length - 1)) {
+					_cssFile = args[i + 1];
+					++i;
+				}
+			}
 		}
 	}
 
@@ -56,28 +116,27 @@ public class HTML2LaTeX {
 	 * Returns name of the file with CSS.
 	 * 
 	 * @return name of the file with CSS
-	 * @throws URISyntaxException 
 	 */
-	public static File getCSSFile() throws URISyntaxException {
-		return OpenFile.searchFile(_cssFile);
+	public static String getCSSFile() {
+		return _cssFile;
 	}
 
 	/**
 	 * Returns name of the file with configuration.
 	 * 
 	 * @return name of the file with configuration
-	 * @throws URISyntaxException 
 	 */
-	public static File getConfigFile() throws URISyntaxException {
-		return OpenFile.searchFile(_configFile);
+	public static String getConfigFile() {
+		return _configFile;
 	}
 
 	/**
+	 * Set the configuration file to the given path.
 	 * 
-	 * @return
+	 * @param path
 	 */
-	public static boolean isSetCSSFile() {
-		return (_cssFile != null) && !_cssFile.equals("");
+	public static void setConfigFile(String path) {
+		_configFile = path;
 	}
 
 }
