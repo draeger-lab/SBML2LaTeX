@@ -1,0 +1,16 @@
+The reduced minimal Gr\"obner basis for $I^q_3$ consists of
+\begin{dgroup*}
+\begin{dmath*}
+H_1^3 = x_1 + x_2 + x_3
+\end{dmath*},
+\begin{dmath*}
+H_2^2 = x_1^2 + x_1 x_2 + x_2^2 - q_1 - q_2
+\end{dmath*},
+\begin{dsuspend}
+and
+\end{dsuspend}
+\begin{dmath*}
+H_3^1 = x_1^3 - 2x_1 q_1 - x_2 q_1
+\end{dmath*}.
+\end{dgroup*}
+

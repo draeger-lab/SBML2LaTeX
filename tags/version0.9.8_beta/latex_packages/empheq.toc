@@ -1,0 +1,25 @@
+\contentsline {part}{I\hspace {1em}Basic user's guide}{3}{part.1}
+\contentsline {section}{\numberline {1}Basic use of the package}{3}{section.1}
+\contentsline {subsection}{\numberline {1.1}Using the \texttt {empheq} environment}{3}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}Markup instructions}{4}{subsection.1.2}
+\contentsline {subsection}{\numberline {1.3}What won't work in the \texttt {empheq} environment}{7}{subsection.1.3}
+\contentsline {subsection}{\numberline {1.4}Special delimiters}{7}{subsection.1.4}
+\contentsline {section}{\numberline {2}Taking things a little further}{7}{section.2}
+\contentsline {subsection}{\numberline {2.1}Loading the package}{8}{subsection.2.1}
+\contentsline {subsubsection}{\numberline {2.1.1}Compatibility with the old version}{8}{subsubsection.2.1.1}
+\contentsline {subsection}{\numberline {2.2}Package options}{8}{subsection.2.2}
+\contentsline {subsubsection}{\numberline {2.2.1}Using \texttt {multline}}{9}{subsubsection.2.2.1}
+\contentsline {subsubsection}{\numberline {2.2.2}The \texttt {overload} option}{11}{subsubsection.2.2.2}
+\contentsline {subsection}{\numberline {2.3}A note on boxed displays}{12}{subsection.2.3}
+\contentsline {section}{\numberline {3}Support for other packages}{13}{section.3}
+\contentsline {subsection}{\numberline {3.1}Support for \textsf {fancybox}}{14}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Support for \textsf {ntheorem}}{15}{subsection.3.2}
+\contentsline {part}{II\hspace {1em}Advanced user's guide}{17}{part.2}
+\contentsline {section}{\numberline {4}Delimiters revisited}{17}{section.4}
+\contentsline {subsection}{\numberline {4.1}Creating your own delimiters}{17}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Fine-tuning of delimiters}{17}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}Scaling material yourself}{18}{subsection.4.3}
+\contentsline {section}{\numberline {5}Creating something new}{19}{section.5}
+\contentsline {subsection}{\numberline {5.1}New \texttt {empheq}-like environments}{19}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}Creating fancy boxes}{20}{subsection.5.2}
+\contentsline {section}{\numberline {6}Contact information}{22}{section.6}

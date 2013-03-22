@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbml xmlns="http://www.sbml.org/sbml/level2/version3" level="2" version="3">
+  <model name="S">
+    <notes>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+        <p>
+This model has been created with the help of the SABIO-RK Database
+(http://sabio.villa-bosch.de/SABIORK)
+</p>
+      </body>
+    </notes>
+    <listOfFunctionDefinitions>
+      <functionDefinition id="KL_5046" sboTerm="SBO:0000260">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar>
+              <ci> kcat </ci>
+            </bvar>
+            <bvar>
+              <ci> Km_A </ci>
+            </bvar>
+            <bvar>
+              <ci> E </ci>
+            </bvar>
+            <bvar>
+              <ci> B </ci>
+            </bvar>
+            <bvar>
+              <ci> kcatKm_A </ci>
+            </bvar>
+            <bvar>
+              <ci> Ki </ci>
+            </bvar>
+            <bvar>
+              <ci> I </ci>
+            </bvar>
+            <bvar>
+              <ci> A </ci>
+            </bvar>
+            <apply>
+              <divide/>
+              <apply>
+                <times/>
+                <ci> E </ci>
+                <ci> kcat </ci>
+                <ci> A </ci>
+              </apply>
+              <apply>
+                <plus/>
+                <apply>
+                  <times/>
+                  <ci> Km_A </ci>
+                  <apply>
+                    <plus/>
+                    <cn type="integer"> 1 </cn>
+                    <apply>
+                      <divide/>
+                      <ci> I </ci>
+                      <ci> Ki </ci>
+                    </apply>
+                  </apply>
+                </apply>
+                <ci> A </ci>
+              </apply>
+            </apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+    </listOfFunctionDefinitions>
+    <listOfUnitDefinitions>
+      <unitDefinition id="onedivsec" name="onedivsec">
+        <listOfUnits>
+          <unit kind="second" exponent="-1"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="microM" name="microM">
+        <listOfUnits>
+          <unit kind="mole" scale="-6"/>
+          <unit kind="litre" exponent="-1"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="onedivMsec" name="onedivMsec">
+        <listOfUnits>
+          <unit kind="second" exponent="-1"/>
+          <unit kind="litre"/>
+          <unit kind="mole" exponent="-1"/>
+        </listOfUnits>
+      </unitDefinition>
+    </listOfUnitDefinitions>
+    <listOfCompartments>
+      <compartment id="compart_1" name="Cell" size="1"/>
+    </listOfCompartments>
+    <listOfSpecies>
+      <species metaid="META_SPC_1334" id="SPC_1334" name="dUMP" compartment="compart_1">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#META_SPC_1334">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:obo.chebi:17622"/>
+                  <rdf:li rdf:resource="urn:miriam:kegg.compound:C00365"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species metaid="META_SPC_1308" id="SPC_1308" name="5,10-Methylenetetrahydrofolate" compartment="compart_1">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#META_SPC_1308">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:obo.chebi:15636"/>
+                  <rdf:li rdf:resource="urn:miriam:obo.chebi:1989"/>
+                  <rdf:li rdf:resource="urn:miriam:obo.chebi:12071"/>
+                  <rdf:li rdf:resource="urn:miriam:kegg.compound:C00143"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species metaid="META_SPC_1336" id="SPC_1336" name="Dihydrofolate" compartment="compart_1">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#META_SPC_1336">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:obo.chebi:15633"/>
+                  <rdf:li rdf:resource="urn:miriam:kegg.compound:C00415"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species metaid="META_SPC_65" id="SPC_65" name="dTMP" compartment="compart_1">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#META_SPC_65">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:obo.chebi:50300"/>
+                  <rdf:li rdf:resource="urn:miriam:obo.chebi:17013"/>
+                  <rdf:li rdf:resource="urn:miriam:obo.chebi:15245"/>
+                  <rdf:li rdf:resource="urn:miriam:obo.chebi:26999"/>
+                  <rdf:li rdf:resource="urn:miriam:kegg.compound:C00364"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species metaid="META_SPC_21324" id="SPC_21324" name="E-5-(2-Bromovinyl)-2&apos;-deoxyuridine monophosphate" compartment="compart_1"/>
+      <species metaid="META_ENZ_26405" id="ENZ_26405" name="Thymidylate synthase(Enzyme) wildtype" compartment="compart_1"/>
+    </listOfSpecies>
+    <listOfReactions>
+      <reaction metaid="META_REAC_0" id="REAC_0">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#META_REAC_0">
+              <bqbiol:isVersionOf>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:ec-code:2.1.1.45"/>
+                </rdf:Bag>
+              </bqbiol:isVersionOf>
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:kegg.reaction:R02101"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:sabiork.reaction:88"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+        <listOfReactants>
+          <speciesReference species="SPC_1334"/>
+          <speciesReference species="SPC_1308"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="SPC_1336"/>
+          <speciesReference species="SPC_65"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="SPC_21324"/>
+          <modifierSpeciesReference species="ENZ_26405"/>
+        </listOfModifiers>
+        <kineticLaw metaid="META_KL_5046" sboTerm="SBO:0000260">
+          <annotation>
+            <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+              <rdf:Description rdf:about="#META_KL_5046">
+                <bqbiol:isDescribedBy>
+                  <rdf:Bag>
+                    <rdf:li rdf:resource="urn:miriam:pubmed:12859954"/>
+                  </rdf:Bag>
+                </bqbiol:isDescribedBy>
+              </rdf:Description>
+            </rdf:RDF>
+          </annotation>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <ci> KL_5046 </ci>
+              <ci> kcat </ci>
+              <ci> Km_A_SPC_1334 </ci>
+              <ci> ENZ_26405 </ci>
+              <ci> SPC_1308 </ci>
+              <ci> kcatKm_A_SPC_1334 </ci>
+              <ci> Ki_SPC_21324 </ci>
+              <ci> SPC_21324 </ci>
+              <ci> SPC_1334 </ci>
+            </apply>
+          </math>
+          <listOfParameters>
+            <parameter id="kcat" value="0.213" units="onedivsec" sboTerm="SBO:0000025"/>
+            <parameter id="Km_A_SPC_1334" value="2.7" units="microM" sboTerm="SBO:0000027"/>
+            <parameter id="kcatKm_A_SPC_1334" value="79000" units="onedivMsec" sboTerm="SBO:0000302"/>
+            <parameter id="Ki_SPC_21324" value="4.17" units="microM" sboTerm="SBO:0000261"/>
+          </listOfParameters>
+        </kineticLaw>
+      </reaction>
+    </listOfReactions>
+  </model>
+</sbml>

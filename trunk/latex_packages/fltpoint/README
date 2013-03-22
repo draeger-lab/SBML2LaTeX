@@ -1,0 +1,11 @@
+The fltpoint package for use with TeX / LaTeX
+Current Version: 1.1b, dated 2004/11/12
+Copyright 2000-2004
+License: LPPL, see fltpoint.dtx for more details
+Eckhart Guthoehrlein
+e-mail <e_w_g@web.de>
+
+This package provides commands for simple floating point
+arithmetic with TeX. At the moment, there is support for the basic
+operations addition, subtraction, multiplication and division as
+well as for rounding numbers to a given precision.

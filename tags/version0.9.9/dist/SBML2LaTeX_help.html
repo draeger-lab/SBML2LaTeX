@@ -1,0 +1,355 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <style type="text/css">
+      <!--
+        .typewriter {
+           font-family:'courier new',courier,monospace;
+        }
+        .typewriter-blue {
+           font-family:'courier new',courier,monospace;
+           color:#0000C0;
+        }
+      -->
+    </style>
+    <title> SBML2LaTeX command line arguments </title>
+  </head>
+  <body>
+    <h1> SBML2L<sup>A</sup>T<sub>E</sub>X command line arguments </h1>
+
+    <h2> Input and Output Options </h2>
+
+    <h3> Configure input and output files </h3>
+      <p>Here you can specify the SBML input file and the location of the LaTeX
+      file for output.</p>
+      <table cellspacing="1" cellpadding="1" border="0">
+        <tr>
+          <td colspan="2" class="typewriter-blue">--sbml-input-file[ |=]&#60;File&#62;</td>
+        </tr>
+        <tr><td width="6%"> </td>
+        <td>
+          The SBML source file to be converted to LaTeX. Accepts sbml files
+          (*.sbml, *.xml).<br>
+          Default value: <span class=typewriter>&#60;working directory&#62;/SBML2LaTeX/</span>
+        </td>
+      </tr>
+        <tr>
+          <td colspan="2" class="typewriter-blue">--report-output-file[ |=]&#60;File&#62;</td>
+        </tr>
+        <tr><td width="6%"> </td>
+        <td>
+          The file where to save the generated LaTeX report. The standard
+          way is to let SBML2LaTeX generate a TeX file, which the user
+          can then compile to a different format, or from which parts
+          can be easily extracted to support scientific writing. Additionally,
+          SBML2LaTeX may be used to directly generate a PDF file if the
+          LaTeX compiler pdfLaTeX is specified. Accepts report files (*.tex,
+          *.pdf).<br>
+          Default value: <span class=typewriter>&#60;working directory&#62;/SBML2LaTeX/</span>
+        </td>
+      </tr>
+        <tr>
+          <td colspan="2" class="typewriter-blue">--latex-dir[ |=]&#60;File&#62;</td>
+        </tr>
+        <tr><td width="6%"> </td>
+        <td>
+          Standard directory where LaTeX files can be stored Accepts directories
+          only.<br>
+          Default value: <span class=typewriter>&#60;user home&#62;</span>
+        </td>
+      </tr>
+    </table>
+
+    <h2> L<sup>A</sup>T<sub>E</sub>X Options </h2>
+
+    <h3> Typographical options </h3>
+      <p>Here you can specify general properties such as paper size and font styles.</p>
+      <table cellspacing="1" cellpadding="1" border="0">
+        <tr>
+          <td colspan="2" class="typewriter-blue">--font-headings[ |=]&#60;String&#62;</td>
+        </tr>
+        <tr><td width="6%"> </td>
+        <td>
+          Allows to select the font of captions and other (by default sans
+          serif) text.<br>
+          All possible values for type <span class=typewriter>&#60;String&#62;</span> are:
+          <span class=typewriter>avant</span>, <span class=typewriter>cmss</span>,
+          and <span class=typewriter>helvetica</span>.<br>
+          Default value: <span class=typewriter> helvetica </span>
+        </td>
+      </tr>
+        <tr>
+          <td colspan="2" class="typewriter-blue">--font-size[ |=]&#60;Short&#62;</td>
+        </tr>
+        <tr><td width="6%"> </td>
+        <td>
+          This option allows you to select the size of the standard text
+          font. Headings appear with a larger font.<br>
+          All possible values for type <span class=typewriter>&#60;Short&#62;</span> are:
+          <span class=typewriter>8</span>, <span class=typewriter>9</span>,
+          <span class=typewriter>10</span>, <span class=typewriter>11</span>,
+          <span class=typewriter>12</span>, <span class=typewriter>14</span>,
+          and <span class=typewriter>17</span>.<br>
+          Default value: <span class=typewriter> 11 </span>
+        </td>
+      </tr>
+        <tr>
+          <td colspan="2" class="typewriter-blue">--font-text[ |=]&#60;String&#62;</td>
+        </tr>
+        <tr><td width="6%"> </td>
+        <td>
+          Allows to select the font of continuous text. Choosing 'times'
+          is actually not recommended because in some cases equations
+          might not look as nicely as they do when using 'mathptmx'. Default:
+          Times font mathptmx.<br>
+          All possible values for type <span class=typewriter>&#60;String&#62;</span> are:
+          <span class=typewriter>chancery</span>, <span class=typewriter>charter</span>,
+          <span class=typewriter>cmr</span>, <span class=typewriter>mathptmx</span>,
+          <span class=typewriter>palatino</span>, <span class=typewriter>times</span>,
+          and <span class=typewriter>utopia</span>.<br>
+          Default value: <span class=typewriter> mathptmx </span>
+        </td>
+      </tr>
+        <tr>
+          <td colspan="2" class="typewriter-blue">--font-typewriter[ |=]&#60;String&#62;</td>
+        </tr>
+        <tr><td width="6%"> </td>
+        <td>
+          Select a typewriter font that can be used for identifiers if
+          option 'TYPEWRITER' is selected. URLs and other resources are
+          also marked with this font.<br>
+          All possible values for type <span class=typewriter>&#60;String&#62;</span> are:
+          <span class=typewriter>cmt</span>and <span class=typewriter>courier</span>.<br>
+          Default value: <span class=typewriter> cmt </span>
+        </td>
+      </tr>
+        <tr>
+          <td colspan="2" class="typewriter-blue">--paper-size[ |=]&#60;String&#62;</td>
+        </tr>
+        <tr><td width="6%"> </td>
+        <td>
+          The paper size for LaTeX documents. With this option the paper
+          format can be influenced. Default paper size: DIN A4. All sizes
+          a?, b?, c? and d? are European DIN sizes. Letter, legal and
+          executive are US paper formats.<br>
+          All possible values for type <span class=typewriter>&#60;String&#62;</span> are:
+          <span class=typewriter>letter</span>, <span class=typewriter>legal</span>,
+          <span class=typewriter>executive</span>, <span class=typewriter>a0</span>,
+          <span class=typewriter>a1</span>, <span class=typewriter>a2</span>,
+          <span class=typewriter>a3</span>, <span class=typewriter>a4</span>,
+          <span class=typewriter>a5</span>, <span class=typewriter>a6</span>,
+          <span class=typewriter>a7</span>, <span class=typewriter>a8</span>,
+          <span class=typewriter>a9</span>, <span class=typewriter>b0</span>,
+          <span class=typewriter>b1</span>, <span class=typewriter>b2</span>,
+          <span class=typewriter>b3</span>, <span class=typewriter>b4</span>,
+          <span class=typewriter>b5</span>, <span class=typewriter>b6</span>,
+          <span class=typewriter>b7</span>, <span class=typewriter>b8</span>,
+          <span class=typewriter>b9</span>, <span class=typewriter>c0</span>,
+          <span class=typewriter>c1</span>, <span class=typewriter>c2</span>,
+          <span class=typewriter>c3</span>, <span class=typewriter>c4</span>,
+          <span class=typewriter>c5</span>, <span class=typewriter>c6</span>,
+          <span class=typewriter>c7</span>, <span class=typewriter>c8</span>,
+          <span class=typewriter>c9</span>, <span class=typewriter>d0</span>,
+          <span class=typewriter>d1</span>, <span class=typewriter>d2</span>,
+          <span class=typewriter>d3</span>, <span class=typewriter>d4</span>,
+          <span class=typewriter>d5</span>, <span class=typewriter>d6</span>,
+          <span class=typewriter>d7</span>, <span class=typewriter>d8</span>,
+          and <span class=typewriter>d9</span>.<br>
+          Default value: <span class=typewriter> a4 </span>
+        </td>
+      </tr>
+    </table>
+    <h3> Specify the location of configuration files </h3>
+      <p>Here you can specify the location of the SBML2LaTeX logo file and also
+      the location of the LaTeX compiler on your operating system.</p>
+      <table cellspacing="1" cellpadding="1" border="0">
+        <tr>
+          <td colspan="2" class="typewriter-blue">--logo-input-file[ |=]&#60;File&#62;</td>
+        </tr>
+        <tr><td width="6%"> </td>
+        <td>
+          The SBML logo to be displayed at the beginning of the model report.
+          Accepts image file (*.pdf, *.png, *.jpg).<br>
+          Default value: <span class=typewriter>&#60;working directory&#62;/SBML2LaTeX/resources/SBML2LaTeX.pdf </span>
+        </td>
+      </tr>
+        <tr>
+          <td colspan="2" class="typewriter-blue">--load-latex-compiler[ |=]&#60;File&#62;</td>
+        </tr>
+        <tr><td width="6%"> </td>
+        <td>
+          The path to the LaTeX compiler to generate PDF, DVI or other
+          files from the created LaTeX report file. Accepts alle dateien.<br>
+          Default value: <span class=typewriter>&#60;working directory&#62;/SBML2LaTeX/</span>
+        </td>
+      </tr>
+    </table>
+    <h3> Layout options </h3>
+      <p>These options allow you to influence layout and style of the LaTeX report.</p>
+      <table cellspacing="1" cellpadding="1" border="0">
+        <tr>
+          <td colspan="2" class="typewriter-blue">--landscape[ |=]&#60;Boolean&#62;</td>
+        </tr>
+        <tr><td width="6%"> </td>
+        <td>
+          This option decides whether to set the LaTeX document in landscape
+          or portrait mode. By default most pages are in portrait format.<br>
+          Default value: <span class=typewriter> false </span>
+        </td>
+      </tr>
+        <tr>
+          <td colspan="2" class="typewriter-blue">--print-names-if-available[ |=]&#60;Boolean&#62;</td>
+        </tr>
+        <tr><td width="6%"> </td>
+        <td>
+          If selected, the names of SBML elements (NamedSBase) are displayed
+          instead of their identifiers. This can only be done if the element
+          has a name.<br>
+          Default value: <span class=typewriter> false </span>
+        </td>
+      </tr>
+        <tr>
+          <td colspan="2" class="typewriter-blue">--title-page[ |=]&#60;Boolean&#62;</td>
+        </tr>
+        <tr><td width="6%"> </td>
+        <td>
+          If true, a separate title page will be created. By default the
+          title is written as a simple heading on the first page.<br>
+          Default value: <span class=typewriter> false </span>
+        </td>
+      </tr>
+        <tr>
+          <td colspan="2" class="typewriter-blue">--typewriter[ |=]&#60;Boolean&#62;</td>
+        </tr>
+        <tr><td width="6%"> </td>
+        <td>
+          This option decides whether a typewriter font should be applied
+          to highlight SBML identifiers. This is particularly important
+          when these occur in mathematical equations.<br>
+          Default value: <span class=typewriter> true </span>
+        </td>
+      </tr>
+        <tr>
+          <td colspan="2" class="typewriter-blue">--reactants-overview-table[ |=]&#60;Boolean&#62;</td>
+        </tr>
+        <tr><td width="6%"> </td>
+        <td>
+          If true, the details (identifier and name) of all reactants,
+          modifiers and products participating in a reaction are listed
+          in one table. By default a separate table is created for each
+          one of the three participant groups including its SBO term.<br>
+          Default value: <span class=typewriter> false </span>
+        </td>
+      </tr>
+    </table>
+    <h3> Report options </h3>
+      <p>Configure the layout of the LaTeX reports, what to be included, and if
+      to remove temporary files afterwards.</p>
+      <table cellspacing="1" cellpadding="1" border="0">
+        <tr>
+          <td colspan="2" class="typewriter-blue">--check-consistency[ |=]&#60;Boolean&#62;</td>
+        </tr>
+        <tr><td width="6%"> </td>
+        <td>
+          If true, the automatic model consistency check is performed and
+          the results are written in the appendix of the model report
+          file.<br>
+          Default value: <span class=typewriter> false </span>
+        </td>
+      </tr>
+        <tr>
+          <td colspan="2" class="typewriter-blue">--miriam-annotation[ |=]&#60;Boolean&#62;</td>
+        </tr>
+        <tr><td width="6%"> </td>
+        <td>
+          If true (default), MIRIAM annotations are included into the model
+          report if there are any. In this case, SBML2LaTeX generates
+          links to the resources for each annotated element. This option
+          may require the path to the MIRIAM translation file to be specified.<br>
+          Default value: <span class=typewriter> true </span>
+        </td>
+      </tr>
+        <tr>
+          <td colspan="2" class="typewriter-blue">--show-predefined-units[ |=]&#60;Boolean&#62;</td>
+        </tr>
+        <tr><td width="6%"> </td>
+        <td>
+          If true (default), all predefined unit declarations of the SBML
+          are made explicit in the report file as these are defined by
+          the corresponding SBML Level and Version. Otherwise only unit
+          definitions from the model are included.<br>
+          Default value: <span class=typewriter> true </span>
+        </td>
+      </tr>
+        <tr>
+          <td colspan="2" class="typewriter-blue">--print-full-ode-system[ |=]&#60;Boolean&#62;</td>
+        </tr>
+        <tr><td width="6%"> </td>
+        <td>
+          If set to true, the entire rate of change will be written for
+          each species. By default, SBML2LaTeX only prints the sum of
+          the individual reaction rates, which are hyperlinked but displayed
+          at a different position of the report.<br>
+          Default value: <span class=typewriter> false </span>
+        </td>
+      </tr>
+        <tr>
+          <td colspan="2" class="typewriter-blue">--clean-workspace[ |=]&#60;Boolean&#62;</td>
+        </tr>
+        <tr><td width="6%"> </td>
+        <td>
+          If this option is set to true, all temporary files will be deleted
+          after running SBML2LaTeX. In case of PDF creation, for instance,
+          this will cause even the TeX file to be deleted. However, this
+          option can be meaningful to remove all the temporary files created
+          by your system's LaTeX compiler.<br>
+          Default value: <span class=typewriter> false </span>
+        </td>
+      </tr>
+    </table>
+
+    <h2> GUI Options </h2>
+
+    <h3> Default directories </h3>
+      <p>Define the default directories to open and save files. These directories
+      will be used as the first search target when selecting files in this graphical
+      user interface.</p>
+      <table cellspacing="1" cellpadding="1" border="0">
+        <tr>
+          <td colspan="2" class="typewriter-blue">--open-dir[ |=]&#60;File&#62;</td>
+        </tr>
+        <tr><td width="6%"> </td>
+        <td>
+          Standard directory where user files can be found. Accepts directories
+          only.<br>
+          Default value: <span class=typewriter>&#60;working directory&#62;/SBML2LaTeX/</span>
+        </td>
+      </tr>
+        <tr>
+          <td colspan="2" class="typewriter-blue">--save-dir[ |=]&#60;File&#62;</td>
+        </tr>
+        <tr><td width="6%"> </td>
+        <td>
+          Standard directory where the user may save some files. Accepts
+          directories only.<br>
+          Default value: <span class=typewriter>&#60;working directory&#62;/SBML2LaTeX/</span>
+        </td>
+      </tr>
+    </table>
+    <h3> Additional options </h3>
+      <table cellspacing="1" cellpadding="1" border="0">
+        <tr>
+          <td colspan="2" class="typewriter-blue">--gui[ |=]&#60;Boolean&#62;</td>
+        </tr>
+        <tr><td width="6%"> </td>
+        <td>
+          Can be used in combination with = true or = false or just --gui.
+          Specifies whether or not a program should display its graphical
+          user interface.<br>
+          Default value: <span class=typewriter> true </span>
+        </td>
+      </tr>
+    </table>
+
+  </body>
+</html>

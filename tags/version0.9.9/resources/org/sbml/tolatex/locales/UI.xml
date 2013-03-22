@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+  <comment>
+    This configuration provides locale-dependent names for labels in
+	   a (graphical) user interface.
+  </comment>
+  
+  <!-- IO options -->
+
+  <entry key="LATEX_DIR">LaTeX directory</entry>
+  <entry key="LATEX_DIR_TOOLTIP">Standard directory where LaTeX files can be stored</entry>
+  <entry key="LOAD_LATEX_COMPILER">LaTeX compiler</entry>
+  <entry key="LOAD_LATEX_COMPILER_TOOLTIP">The path to the LaTeX compiler to generate PDF, DVI or other files from the created LaTeX report file.</entry>
+
+  <entry key="REPORT_OUTPUT_FILE">Report file</entry>
+  <entry key="REPORT_OUTPUT_FILE_TOOLTIP">The file where to save the generated LaTeX report. The standard way is to let SBML2LaTeX generate a TeX file, which the user can then compile to a different format, or from which parts can be easily extracted to support scientific writing. Additionally, SBML2LaTeX may be used to directly generate a PDF file if the LaTeX compiler pdfLaTeX is specified.</entry>
+
+  <entry key="SBML_INPUT_FILE">SBML file</entry>
+  <entry key="SBML_INPUT_FILE_TOOLTIP">The SBML source file to be converted to LaTeX.</entry> 
+
+  <!-- IO option groups -->
+  
+  <entry key="INPUT_AND_OUTPUT_FILES">Configure input and output files</entry>
+  <entry key="INPUT_AND_OUTPUT_FILES_TOOLTIP">Here you can specify the SBML input file and the location of the LaTeX file for output.</entry>
+    
+  <!-- LaTeX options -->
+  
+  <entry key="CHECK_CONSISTENCY">Check consistency</entry>
+  <entry key="CHECK_CONSISTENCY_TOOLTIP">If true, the automatic model consistency check is performed and the results are written in the appendix of the model report file.</entry>
+  <entry key="CLEAN_WORKSPACE">Clean workspace</entry>
+  <entry key="CLEAN_WORKSPACE_TOOLTIP">If this option is set to true, all temporary files will be deleted after running SBML2LaTeX. In case of PDF creation, for instance, this will cause even the TeX file to be deleted. However, this option can be meaningful to remove all the temporary files created by your system's LaTeX compiler.</entry>
+
+  <entry key="FONT_HEADINGS">Font headings</entry>
+  <entry key="FONT_HEADINGS_TOOLTIP">Allows to select the font of captions and other (by default sans serif) text.</entry>
+  <entry key="FONT_SIZE">Font size</entry>
+  <entry key="FONT_SIZE_TOOLTIP">This option allows you to select the size of the standard text font. Headings appear with a larger font.</entry>
+  <entry key="FONT_TEXT">Main text font</entry>
+  <entry key="FONT_TEXT_TOOLTIP">Allows to select the font of continuous text. Choosing 'times' is actually not recommended because in some cases equations might not look as nicely as they do when using 'mathptmx'. Default: Times font mathptmx.</entry>
+  <entry key="FONT_TYPEWRITER">Typewriter font</entry>
+  <entry key="FONT_TYPEWRITER_TOOLTIP">Select a typewriter font that can be used for identifiers if option '%s' is selected. URLs and other resources are also marked with this font.</entry>
+
+  <entry key="INCLUDE_COMPARTMENT_TYPES_SECTION">Compartment types section</entry>
+  <entry key="INCLUDE_COMPARTMENT_TYPES_SECTION_TOOLTIP">This option decides whether or not a section about compartment types should be included in the resulting model report. Note that this option only causes an effect if the model contains compartment type declarations.</entry>
+  <entry key="INCLUDE_COMPARTMENTS_SECTION">Compartments section</entry>
+  <entry key="INCLUDE_COMPARTMENTS_SECTION_TOOLTIP">This option decides whether or not a section about compartments should be included in the resulting model report. Note that this option only causes an effect if the model contains compartment declarations.</entry>
+  <entry key="INCLUDE_CONSTRAINTS_SECTION">Constraints section</entry>
+  <entry key="INCLUDE_CONSTRAINTS_SECTION_TOOLTIP">This option decides whether or not a section about constraints should be included in the resulting model report. Note that this option only causes an effect if the model contains constraint declarations.</entry>
+  <entry key="INCLUDE_EVENTS_SECTION">Events section</entry>
+  <entry key="INCLUDE_EVENTS_SECTION_TOOLTIP">This option decides whether or not a section about events should be included in the resulting model report. Note that this option only causes an effect if the model contains event declarations.</entry>
+  <entry key="INCLUDE_INITIAL_ASSIGNMENTS_SECTION">Initial assignments section</entry>
+  <entry key="INCLUDE_INITIAL_ASSIGNMENTS_SECTION_TOOLTIP">This option decides whether or not a section about initial assignments should be included in the resulting model report. Note that this option only causes an effect if the model declares any initial assignments.</entry>
+  <entry key="INCLUDE_FUNCTION_DEFINITIONS_SECTION">Function definitions section</entry>
+  <entry key="INCLUDE_FUNCTION_DEFINITIONS_SECTION_TOOLTIP">This option decides whether or not a section about function definitions should be included in the resulting model report. Note that this option only causes an effect if the model declares any function definitions.</entry>
+  <entry key="INCLUDE_REACTIONS_SECTION">Reactions section</entry>
+  <entry key="INCLUDE_REACTIONS_SECTION_TOOLTIP">This option decides whether or not a section about reactions should be included in the resulting model report. Note that this option only causes an effect if the model declares any reactions. Furthermore, this option also decides if a summary of the differential equation system that is implied by the given model should be generated. Again, this will only cause an effect if the model contains any species.</entry>
+  <entry key="INCLUDE_PARAMETERS_SECTION">Parameters section</entry>
+  <entry key="INCLUDE_PARAMETERS_SECTION_TOOLTIP">This option decides whether or not a section about parameters should be included in the resulting model report. Note that this option only causes an effect if the model declares any parameters.</entry>
+  <entry key="INCLUDE_RULES_SECTION">Rules section</entry>
+  <entry key="INCLUDE_RULES_SECTION_TOOLTIP">This option decides whether or not a section about rules should be included in the resulting model report. Note that this option only causes an effect if the model declares any rules, no matter if these are of algebraic, assignment or rate rule type.</entry>
+  <entry key="INCLUDE_SPECIES_SECTION">Species section</entry>
+  <entry key="INCLUDE_SPECIES_SECTION_TOOLTIP">This option decides whether or not a section about the species in the given model should be included in the resulting model report. Note that this option only causes an effect if the model declares any species.</entry>
+  <entry key="INCLUDE_UNIT_DEFINITIONS_SECTION">Unit definitions section</entry>
+  <entry key="INCLUDE_UNIT_DEFINITIONS_SECTION_TOOLTIP">This option decides whether or not a section about the unit definitions of the given model should be included in the resulting model report. Note that this option only causes an effect if the model declares any unit definitions. However, in some level/version combinations SBML models contain predefined unit definitions which might be included in the model report if this option is active.</entry>
+
+  <entry key="LANDSCAPE">Landscape</entry>
+  <entry key="LANDSCAPE_TOOLTIP">This option decides whether to set the LaTeX document in landscape or portrait mode. By default most pages are in portrait format.</entry>
+
+  <entry key="MIRIAM_ANNOTATION">MIRIAM annotation</entry>
+  <entry key="MIRIAM_ANNOTATION_TOOLTIP">If true (default), MIRIAM annotations are included into the model report if there are any. In this case, SBML2LaTeX generates links to the resources for each annotated element.</entry>
+
+  <entry key="PAPER_SIZE">Paper size</entry>
+  <entry key="PAPER_SIZE_TOOLTIP">The paper size for LaTeX documents. With this option the paper format can be influenced. Default paper size: DIN A4. All sizes a?, b?, c? and d? are European DIN sizes. Letter, legal and executive are US paper formats.</entry>
+  <entry key="PRINT_FULL_ODE_SYSTEM">Print full ODE system</entry>
+  <entry key="PRINT_FULL_ODE_SYSTEM_TOOLTIP">If set to true, the entire rate of change will be written for each species. By default, SBML2LaTeX only prints the sum of the individual reaction rates, which are hyper-linked but displayed at a different position of the report. Note that this option is only available if the option '%s' is active.</entry>
+  <entry key="PRINT_NAMES_IF_AVAILABLE">Print names if available</entry>
+  <entry key="PRINT_NAMES_IF_AVAILABLE_TOOLTIP">If selected, the names of SBML elements (NamedSBase) are displayed instead of their identifiers. This can only be done if the element has a name.</entry>
+
+  <entry key="REACTANTS_OVERVIEW_TABLE">Reactants overview table</entry>
+  <entry key="REACTANTS_OVERVIEW_TABLE_TOOLTIP">If true, the details (identifier and name) of all reactants, modifiers and products participating in a reaction are listed in one table. By default a separate table is created for each one of the three participant groups including its SBO term. Note that this option is only available if the option '%s' is active.</entry>
+
+  <entry key="SHOW_PREDEFINED_UNITS">Show predefined units</entry>
+  <entry key="SHOW_PREDEFINED_UNITS_TOOLTIP">If true (default), all predefined unit declarations of the SBML are made explicit in the report file as these are defined by the corresponding SBML Level and Version. Otherwise only unit definitions from the model are included. Note that this option is only available if the option '%s' is active.</entry>
+
+  <entry key="TITLE_PAGE">Title page</entry>
+  <entry key="TITLE_PAGE_TOOLTIP">If true, a separate title page will be created. By default the title is written as a simple heading on the first page.</entry>
+  <entry key="TYPEWRITER">Typewriter</entry>
+  <entry key="TYPEWRITER_TOOLTIP">This option decides whether a typewriter font should be applied to highlight SBML identifiers. This is particularly important when these occur in mathematical equations.</entry>
+  
+  <!-- LaTeX option groups -->
+  
+  <entry key="CONFIGURATION_FILES">LaTeX compiler location</entry>
+  <entry key="CONFIGURATION_FILES_TOOLTIP">Here you can specify the location of the LaTeX compiler on your operating system.</entry>
+  <entry key="CONTENT_OPTIONS">Content of the report</entry>
+  <entry key="CONTENT_OPTIONS_TOOLTIP">Select sections to be included in the report.</entry>
+  <entry key="LAYOUT_OPTIONS">Layout options</entry>
+  <entry key="LAYOUT_OPTIONS_TOOLTIP">These options allow you to influence layout and style of the LaTeX report.</entry> 
+  <entry key="REPORT_OPTIONS">Report options</entry>
+  <entry key="REPORT_OPTIONS_TOOLTIP">Configure the layout of the LaTeX reports, what to be included, and if to remove temporary files afterwards.</entry>  
+  <entry key="TYPOGRAPHICAL_OPTIONS">Typographical options</entry>
+  <entry key="TYPOGRAPHICAL_OPTIONS_TOOLTIP">Here you can specify general properties such as paper size and font styles.</entry> 
+      
+  <!-- SBML2LaTeX -->
+  
+  <entry key="CANNOT_WRITE_TO_FILE">Cannot write to file %s.</entry>
+  <entry key="CONVERTING_SBML_FILE_TO_REPORT">Converting file %s to %s.</entry>
+  <entry key="COMPILATION_ERROR">Failed executing the LaTeX compiler</entry>
+  <entry key="COMPILATION_SUCCESSFULL">Document compiled successfully.</entry>
+  <entry key="COULD_NOT_COMPILE_LATEX_FILE">Could not compile the LaTeX document. Please compile it manually.</entry>
+  <entry key="DELETING_TEMP_FILE">Deleting temporary file %s.</entry>
+  <entry key="ENTER_PATH_TO_PDFLATEX">Please enter a valid path to PDFLaTeX on your system.</entry>
+  <entry key="INVALID_SBML_FILE">File %s is no valid SBML file.</entry>
+  <entry key="INVALID_LATEX_FILE">File %s is no valid LaTeX file.</entry>
+  <entry key="INVALID_SBASE">Only instances of SBMLDocument, Model, or Reaction are acceptable. Received %s.</entry>
+  <entry key="LIMITATIONS">Limitations</entry>
+  <entry key="MISSING_PDFLATEX">Missing path to LaTeX compiler</entry>
+  <entry key="NO_INPUT_GIVEN">No input file given. Program will exit.</entry>
+  <entry key="NO_OUTPUT_GIVEN">No output file given. Program will exit.</entry>
+  <entry key="TIME_IN_SECONDS">Time: %s s</entry>
+  
+</properties>

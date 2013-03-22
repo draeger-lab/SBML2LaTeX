@@ -1,0 +1,29 @@
+
+\begin{thebibliography}{}
+
+\bibitem[Dr\"ager {\em et~al.}(2009)Dr\"ager, Planatscher, Wouamba, Schr\"oder,
+  Hucka, Endler, Golebiewski, M{\"u}ller, and Zell]{Draeger2009b}
+Dr\"ager, A., Planatscher, H., Wouamba, D.~M., Schr\"oder, A., Hucka, M.,
+  Endler, L., Golebiewski, M., M{\"u}ller, W., and Zell, A. (2009).
+\newblock {SBML2\LaTeX: Conversion of SBML files into human-readable reports}.
+%\newblock {\em Bioinformatics\/}, {\bf 25}(11), 1455--1456.
+\newblock {Bioinformatics}, {\bf 25}(11), 1455--1456,
+\href{http://dx.doi.org/10.1093/bioinformatics/btp170}{10.1093/bioinformatics/btp170}.
+
+\bibitem[Dr\"ager {\em et~al.}(2011)Dr\"ager, Rodriguez, Dumousseau, D\"orr,
+  Wrzodek, Le~Nov\`{e}re, Zell, and Hucka]{Draeger2011b}
+Dr\"ager, A., Rodriguez, N., Dumousseau, M., D\"orr, A., Wrzodek, C.,
+  Le~Nov\`{e}re, N., Zell, A., and Hucka, M. (2011).
+\newblock {JSBML: a flexible Java library for working with SBML}.
+%\newblock {\em Bioinformatics\/}, {\bf 27}(15), 2167--2168.
+\newblock {Bioinformatics}, {\bf 27}(15), 2167--2168,
+\href{http://dx.doi.org/10.1093/bioinformatics/btr361}{10.1093/bioinformatics/btr361}.
+
+\bibitem[Shen {\em et~al.}(2010)Shen, Bergmann, and Sauro]{Shen2010}
+Shen, S.~Y., Bergmann, F.~T., and Sauro, H.~M. (2010).
+\newblock {SBML2TikZ: supporting the SBML render extension in \LaTeX}.
+%\newblock {\em Bioinformatics\/}, {\bf 26}(21), 2794--2795.
+\newblock {Bioinformatics}, {\bf 26}(21), 2794--2795,
+\href{http://dx.doi.org/10.1093/bioinformatics/btq512}{10.1093/bioinformatics/btq512}.
+
+\end{thebibliography}

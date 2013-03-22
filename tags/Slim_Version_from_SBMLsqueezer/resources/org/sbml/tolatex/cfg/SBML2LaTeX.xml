@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+  <comment>
+    Default configuration of SBML2LaTeX.
+  </comment>
+  <entry key="LATEX_DIR">user.home</entry>
+  <entry key="LATEX_FONT_SIZE">11</entry>
+  <entry key="LATEX_IDS_IN_TYPEWRITER_FONT">true</entry>
+  <entry key="LATEX_LANDSCAPE">false</entry>
+  <entry key="LATEX_NAMES_IN_EQUATIONS">false</entry>
+  <entry key="LATEX_PAPER_SIZE">a4</entry>
+  <entry key="LATEX_TITLE_PAGE">false</entry>
+ </properties>
+ 

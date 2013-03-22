@@ -1,0 +1,30 @@
+The rccol package for use with LaTeX
+Current Version: 1.2c dated 2005/05/17
+Copyright 2000-2005
+License: LPPL, see rccol.dtx for more details
+Eckhart Guthoehrlein
+e-mail <e_w_g@web.de>
+
+The rccol package introduces a new column specifier 'R' for use within
+the preamble of a LaTeX package. In 'R' columns, numbers will be
+aligned with their corresponding digits, but centered with respect to
+the total column width. Furthermore, numbers can be rounded to any
+desired precision without changing the input.
+
+Please note that there is no further development of rccol.
+Do it yourself according to the license.
+
+Small example:
+\begin{tabular}{R{2}{1}R{3}{1}}
+   \multicolumn{1}{c}{Title of column 1} &
+   \multicolumn{1}{c}{Title of column 2}\tabularnewline
+   10.0 &  20  \tabularnewline
+    1.7 &   1.7\tabularnewline
+   -5   & 133  \tabularnewline
+\end{tabular}
+will roughly look like:
+
+ Title of column 1  Title of column 2
+       10.0                20.0
+        1.7                 1.7
+       -5.0               133.0
