@@ -10,7 +10,7 @@ import java.text.*;
 
 /**
  *  Class representing CSS style definition in program configuration.
- *  @version $Rev: 249 $
+ *  @version $Rev$
  *  @since 0.9.3
  */
 class CSSStyle {

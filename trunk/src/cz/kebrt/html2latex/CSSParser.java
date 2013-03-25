@@ -17,7 +17,7 @@ import de.zbit.util.ResourceManager;
 
 /**
  *  CSS parser.
- *  @version $Rev: 249 $
+ *  @version $Rev$
  *  @since 0.9.3
  */
 public class CSSParser {

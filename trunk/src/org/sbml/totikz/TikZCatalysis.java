@@ -1,6 +1,6 @@
 /*
- * $Id: TikZCatalysis.java 246 2013-03-06 10:53:31Z draeger $
- * $URL: https://rarepos.cs.uni-tuebingen.de/svn/SBML2LaTeX/trunk/src/org/sbml/totikz/TikZCatalysis.java $
+ * $Id$
+ * $URL$
  * ---------------------------------------------------------------------
  * This file is part of SBML2LaTeX, a program that creates
  * human-readable reports for given SBML files.
@@ -32,7 +32,7 @@ import de.zbit.sbml.layout.Catalysis;
  * class that represents a catalysis arc for the TikZ graphical representation
  * 
  * @author Mirjam Gutekunst
- * @version $Rev: 246 $
+ * @version $Rev$
  */
 public class TikZCatalysis extends TikZSBGNArc implements Catalysis<String> {
 

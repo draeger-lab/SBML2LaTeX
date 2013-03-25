@@ -1,11 +1,11 @@
 /*
- * $Id: TikZReversibleConsumption.java 06.03.2013 13:31:56 draeger$
- * $URL: TikZReversibleConsumption.java$
+ * $Id$
+ * $URL$
  * ---------------------------------------------------------------------
  * This file is part of SBML2LaTeX, a program that creates 
  * human-readable reports for given SBML files.
  * 
- * Copyright (C) 2007-2013 by the University of Tuebingen, Germany.
+ * Copyright (C) 2008-2013 by the University of Tuebingen, Germany.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,25 +21,11 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  * ---------------------------------------------------------------------
  */
-package org.sbml.totikz;
-
-import org.sbml.jsbml.ext.layout.CurveSegment;
-
-import de.zbit.sbml.layout.ReversibleConsumption;
-
+ 
 /**
- * @author Andreas Dr&auml;ger
- * @since 1.0
+ * Besides the icons of the program SBML2LaTeX, this package also contains
+ * an image file that is used to include the SBML2LaTeX logo into each generated
+ * report.
  * @version $Rev$
  */
-public class TikZReversibleConsumption extends TikZSBGNArc implements ReversibleConsumption<String> {
-	
-	/* (non-Javadoc)
-	 * @see de.zbit.sbml.layout.SBGNArc#draw(org.sbml.jsbml.ext.layout.CurveSegment, double)
-	 */
-	//@Override
-	public String draw(CurveSegment curveSegment, double lineWidth) {
-		return TikZ.drawFromTo("triangle 60-", "black", curveSegment, lineWidth);
-	}
-	
-}
+package org.sbml.tolatex.gui.img;

@@ -11,7 +11,7 @@ import de.zbit.util.ResourceManager;
 
 /**
  *  Fatal error - leads to program exit.
- *  @version $Rev: 249 $
+ *  @version $Rev$
  *  @since 0.9.3
  */
 class FatalErrorException extends Exception {
@@ -38,7 +38,7 @@ class FatalErrorException extends Exception {
 
 /**
  * Error - not so heavy as {@link FatalErrorException fatal error}.
- * @version $Rev: 249 $
+ * @version $Rev$
  * @since 0.9.3
  */
 class ErrorException extends Exception {
@@ -65,7 +65,7 @@ class ErrorException extends Exception {
 /**
  *  Configuration item (element, entity, CSS property) wasn't found
  *  in the cofiguration.
- *  @version $Rev: 249 $
+ *  @version $Rev$
  *  @since 0.9.3
  */
 class NoItemException extends Exception {

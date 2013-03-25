@@ -1,6 +1,6 @@
 /*
- * $Id: SBML2LaTeX.java 249 2013-03-13 09:23:31Z draeger $
- * $URL: https://rarepos.cs.uni-tuebingen.de/svn/SBML2LaTeX/trunk/src/org/sbml/tolatex/SBML2LaTeX.java $
+ * $Id$
+ * $URL$
  * ---------------------------------------------------------------------
  * This file is part of SBML2LaTeX, a program that creates 
  * human-readable reports for given SBML files.
@@ -71,7 +71,7 @@ import de.zbit.util.prefs.SBProperties;
  * @author Andreas Dr&auml;ger
  * @author Clemens Wrzodek
  * @date December 4, 2007
- * @version $Rev: 249 $
+ * @version $Rev$
  */
 public class SBML2LaTeX extends Launcher implements SBML2LaTeXView {
 	

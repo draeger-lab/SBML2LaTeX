@@ -1,6 +1,6 @@
 /*
  * $Id:  TikZCubicBezier.java 16:13:24 Meike Aichele$
- * $URL: https://rarepos.cs.uni-tuebingen.de/svn/SBML2LaTeX/trunk/src/org/sbml/totikz/TikZCubicBezier.java $
+ * $URL$
  * ---------------------------------------------------------------------
  * This file is part of SBML2LaTeX, a program that creates
  * human-readable reports for given SBML files.
@@ -28,7 +28,7 @@ import org.sbml.jsbml.ext.layout.CubicBezier;
 
 /**
  * @author Meike Aichele
- * @version $Rev: 249 $
+ * @version $Rev$
  */
 public class TikZCubicBezier {
 

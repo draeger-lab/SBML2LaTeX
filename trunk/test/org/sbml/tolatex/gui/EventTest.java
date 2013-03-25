@@ -1,6 +1,6 @@
 /*
- * $Id: EventTest.java 206 2013-01-04 09:50:34Z draeger $
- * $URL: https://rarepos.cs.uni-tuebingen.de/svn/SBML2LaTeX/trunk/test/org/sbml/tolatex/gui/EventTest.java $
+ * $Id$
+ * $URL$
  * ---------------------------------------------------------------------
  * This file is part of SBML2LaTeX, a program that creates 
  * human-readable reports for given SBML files.
@@ -39,7 +39,7 @@ import org.sbml.tolatex.SBML2LaTeX;
 
 /**
  * @author Andreas Dr&auml;ger
- * @version $Rev: 206 $
+ * @version $Rev$
  */
 public class EventTest {
 

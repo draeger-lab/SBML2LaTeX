@@ -7,7 +7,7 @@ package cz.kebrt.html2latex;
 
 /**
  *  Handles events sent from the {@link Parser Parser} class.
- *  @version $Rev: 249 $
+ *  @version $Rev$
  * @since 0.9.3
  */
 public interface IParserHandler {

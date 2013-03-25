@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 /**
  * Handles events sent from the {@link Parser Parser} class.
  * Calls appropriate methods from the {@link Convertor Convertor} class.
- * @version $Rev: 249 $
+ * @version $Rev$
  * @since 0.9.3
  */
 class ParserHandler implements IParserHandler {

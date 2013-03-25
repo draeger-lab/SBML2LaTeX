@@ -43,7 +43,7 @@ import de.zbit.sbml.layout.SBGNArc;
  * 
  * @author Andreas Dr&auml;ger
  * @since 1.0
- * @version $Rev: 253 $
+ * @version $Rev$
  */
 public class TikZ {
 	

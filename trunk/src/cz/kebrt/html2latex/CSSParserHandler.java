@@ -8,7 +8,7 @@ import java.util.*;
 
 /**
  *  Handles events sent from the CSS Parser.
- *  @version $Rev: 249 $
+ *  @version $Rev$
  *  @since 0.9.3
  */
 class CSSParserHandler implements ICSSParserHandler {

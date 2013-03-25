@@ -1,6 +1,6 @@
 /*
  * $Id:  TikZUncertainProcessNode.java 13:55:09 Meike Aichele$
- * $URL: TikZUncertainProcessNode.java $
+ * $URL$
  * ---------------------------------------------------------------------
  * This file is part of SBML2LaTeX, a program that creates
  * human-readable reports for given SBML files.

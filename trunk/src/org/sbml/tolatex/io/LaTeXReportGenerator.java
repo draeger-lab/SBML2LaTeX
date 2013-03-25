@@ -1,6 +1,6 @@
 /*
- * $Id: LaTeXReportGenerator.java 250 2013-03-13 10:04:46Z draeger $
- * $URL: https://rarepos.cs.uni-tuebingen.de/svn/SBML2LaTeX/trunk/src/org/sbml/tolatex/io/LaTeXReportGenerator.java $
+ * $Id$
+ * $URL$
  * ---------------------------------------------------------------------
  * This file is part of SBML2LaTeX, a program that creates 
  * human-readable reports for given SBML files.
@@ -114,7 +114,7 @@ import de.zbit.util.ResourceManager;
  * @author Andreas Dr&auml;ger
  * @author Clemens Wrzodek
  * @date 2010-10-22
- * @version $Rev: 250 $
+ * @version $Rev$
  */
 @SuppressWarnings("deprecation")
 public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {

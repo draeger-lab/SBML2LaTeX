@@ -9,7 +9,7 @@ import java.util.*;
 
 /**
  * Class representing HTML start element.
- * @version $Rev: 249 $
+ * @version $Rev$
  * @since 0.9.3
  */
 class ElementStart extends MyElement {

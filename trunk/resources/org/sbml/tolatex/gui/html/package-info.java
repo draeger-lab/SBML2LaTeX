@@ -1,6 +1,6 @@
 /*
- * $Id: package-info.java 206 2013-01-04 09:50:34Z draeger $
- * $URL: https://rarepos.cs.uni-tuebingen.de/svn/SBML2LaTeX/trunk/resources/org/sbml/tolatex/gui/html/package-info.java $
+ * $Id$
+ * $URL$
  * ---------------------------------------------------------------------
  * This file is part of SBML2LaTeX, a program that creates 
  * human-readable reports for given SBML files.
@@ -24,6 +24,6 @@
  
 /**
  * A collection of web sites that are displayed to the user by the graphical user interface.
- * @version $Rev: 206 $
+ * @version $Rev$
  */
 package org.sbml.tolatex.gui.html;

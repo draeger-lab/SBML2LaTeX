@@ -27,6 +27,6 @@
  * 
  * @author Andreas Dr&auml;ger
  * @since 1.0
- * @version $Rev: 246 $
+ * @version $Rev$
  */
 package org.sbml.tolatex.test;

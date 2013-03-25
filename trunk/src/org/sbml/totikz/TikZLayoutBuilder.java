@@ -1,6 +1,6 @@
 /*
- * $Id: TikZLayoutBuilder.java 249 2013-03-13 09:23:31Z draeger $
- * $URL: https://rarepos.cs.uni-tuebingen.de/svn/SBML2LaTeX/trunk/src/org/sbml/totikz/TikZLayoutBuilder.java $
+ * $Id$
+ * $URL$
  * ---------------------------------------------------------------------
  * This file is part of SBML2LaTeX, a program that creates
  * human-readable reports for given SBML files.
@@ -82,7 +82,7 @@ import de.zbit.util.progressbar.AbstractProgressBar;
  * reaction glyph
  * 
  * @author Mirjam Gutekunst
- * @version $Rev: 249 $
+ * @version $Rev$
  */
 public class TikZLayoutBuilder<W extends Writer> extends AbstractLayoutBuilder<W, String, String> {
 
@@ -506,7 +506,7 @@ public class TikZLayoutBuilder<W extends Writer> extends AbstractLayoutBuilder<W
 	/* (non-Javadoc)
 	 * @see de.zbit.sbml.layout.LayoutFactory#createModulation()
 	 */
-	@Override
+	//@Override
 	public Modulation<String> createModulation() {
 		return new TikZModulation();
 	}
@@ -514,7 +514,7 @@ public class TikZLayoutBuilder<W extends Writer> extends AbstractLayoutBuilder<W
 	/* (non-Javadoc)
 	 * @see de.zbit.sbml.layout.LayoutFactory#createNecessaryStimulation()
 	 */
-	@Override
+	//@Override
 	public NecessaryStimulation<String> createNecessaryStimulation() {
 		return new TikZNecessaryStimulation();
 	}
@@ -522,7 +522,7 @@ public class TikZLayoutBuilder<W extends Writer> extends AbstractLayoutBuilder<W
 	/* (non-Javadoc)
 	 * @see de.zbit.sbml.layout.LayoutFactory#createPerturbingAgent()
 	 */
-	@Override
+	//@Override
 	public PerturbingAgent<String> createPerturbingAgent() {
 		return new TikZPerturbingAgent();
 	}
@@ -530,7 +530,7 @@ public class TikZLayoutBuilder<W extends Writer> extends AbstractLayoutBuilder<W
 	/* (non-Javadoc)
 	 * @see de.zbit.sbml.layout.LayoutFactory#createNucleicAcidFeature()
 	 */
-	@Override
+	//@Override
 	public NucleicAcidFeature<String> createNucleicAcidFeature() {
 		return new TikZNucleicAcidFeature();
 	}
@@ -538,7 +538,7 @@ public class TikZLayoutBuilder<W extends Writer> extends AbstractLayoutBuilder<W
 	/* (non-Javadoc)
 	 * @see de.zbit.sbml.layout.LayoutFactory#createStimulation()
 	 */
-	@Override
+	//@Override
 	public Stimulation<String> createStimulation() {
 		return new TikZStimulation();
 	}
@@ -546,7 +546,7 @@ public class TikZLayoutBuilder<W extends Writer> extends AbstractLayoutBuilder<W
 	/* (non-Javadoc)
 	 * @see de.zbit.sbml.layout.LayoutFactory#createOmittedProcessNode()
 	 */
-	@Override
+	//@Override
 	public OmittedProcessNode<String> createOmittedProcessNode() {
 		return new TikZOmittedProcessNode();
 	}
@@ -554,7 +554,7 @@ public class TikZLayoutBuilder<W extends Writer> extends AbstractLayoutBuilder<W
 	/* (non-Javadoc)
 	 * @see de.zbit.sbml.layout.LayoutFactory#createAssociationNode()
 	 */
-	@Override
+	//@Override
 	public AssociationNode<String> createAssociationNode() {
 		return new TikZAssociationNode();
 	}
@@ -562,7 +562,7 @@ public class TikZLayoutBuilder<W extends Writer> extends AbstractLayoutBuilder<W
 	/* (non-Javadoc)
 	 * @see de.zbit.sbml.layout.LayoutFactory#createDissociationNode()
 	 */
-	@Override
+	//@Override
 	public DissociationNode<String> createDissociationNode() {
 		return new TikZDissociationNode();
 	}
@@ -570,7 +570,7 @@ public class TikZLayoutBuilder<W extends Writer> extends AbstractLayoutBuilder<W
 	/* (non-Javadoc)
 	 * @see de.zbit.sbml.layout.LayoutFactory#createUncertainProcessNode()
 	 */
-	@Override
+	//@Override
 	public UncertainProcessNode<String> createUncertainProcessNode() {
 		return new TikZUncertainProcessNode();
 	}
@@ -578,7 +578,7 @@ public class TikZLayoutBuilder<W extends Writer> extends AbstractLayoutBuilder<W
 	/* (non-Javadoc)
 	 * @see de.zbit.sbml.layout.LayoutFactory#createReversibleConsumption()
 	 */
-	@Override
+	//@Override
 	public ReversibleConsumption<String> createReversibleConsumption() {
 		return new TikZReversibleConsumption();
 	}

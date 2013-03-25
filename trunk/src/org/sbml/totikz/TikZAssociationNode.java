@@ -1,6 +1,6 @@
 /*
  * $Id:  TikZAssociationNode.java 15:44:45 Meike Aichele$
- * $URL: https://rarepos.cs.uni-tuebingen.de/svn/SBML2LaTeX/trunk/src/org/sbml/totikz/TikZAssociationNode.java $
+ * $URL$
  * ---------------------------------------------------------------------
  * This file is part of SBML2LaTeX, a program that creates
  * human-readable reports for given SBML files.
@@ -30,7 +30,7 @@ import de.zbit.sbml.layout.AssociationNode;
 
 /**
  * @author Meike Aichele
- * @version $Rev: 248 $
+ * @version $Rev$
  */
 public class TikZAssociationNode extends AssociationNode<String>{
 
@@ -88,7 +88,7 @@ public class TikZAssociationNode extends AssociationNode<String>{
 	/* (non-Javadoc)
 	 * @see de.zbit.sbml.layout.SBGNReactionNode#draw(double, double, double, double, double, double, double, org.sbml.jsbml.ext.layout.Point)
 	 */
-	@Override
+	//@Override
 	public String draw(double x, double y, double z, double width,
 			double height, double depth, double rotationAngle,
 			Point rotationCenter) {

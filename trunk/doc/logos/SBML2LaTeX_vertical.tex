@@ -1,0 +1,63 @@
+\documentclass[17pt]{article} % ,a4paper,landscape
+\usepackage{times}
+\usepackage[scaled=2]{helvet} 
+\usepackage{emerald}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{rotating}
+% \usepackage[paperheight=1.7cm, paperwidth=7.9cm, left=-0.13cm, right=0cm,
+% bottom=0cm, top=0cm]{geometry}
+% \usepackage[paperheight=1.8cm, paperwidth=8cm, left=-0.13cm, right=0cm,
+% bottom=0cm, top=0cm]{geometry}
+% \usepackage[paperheight=2cm, paperwidth=8.9cm, left=-0.13cm, right=0.1cm,
+% bottom=0cm, top=.2cm]{geometry}
+\usepackage[paperheight=3.4cm, paperwidth=3.79cm, left=-0.13cm, right=-.02cm,
+bottom=-2cm, top=.35cm]{geometry}
+
+\usepackage{eso-pic,graphicx}
+\makeatletter
+\newcommand\BackgroundPicture[3]{%
+  \setlength{\unitlength}{1pt}%
+  \put(0,\strip@pt\paperheight){%
+    \hspace{.2mm}\parbox[t][.45\paperheight]{\paperwidth}{%
+      \vfill
+      %\centering
+      \includegraphics[width=#2,angle=#3]{#1}
+      \vfill
+    }
+  }
+} %
+\makeatother
+\AddToShipoutPicture{\BackgroundPicture{sbml-logo}{\paperwidth}{0}}
+
+%opening
+\title{}
+\author{}
+\pagestyle{empty}
+\renewcommand{\familydefault}{\sfdefault}
+\selectfont
+
+\definecolor{grau}{gray}{0.7}
+\definecolor{waldgruen}{cmyk}{.76, 0, .76, .45}
+\definecolor{gruen}{cmyk}{1, 0, 1, 0}
+\definecolor{sky}{cmyk}{.43, .12, 0, .08}
+\definecolor{blau}{cmyk}{.93, .79, 0, 0}
+\setlength{\fboxrule}{.1cm}
+\setlength{\fboxsep}{.75cm}
+
+\renewcommand{\familydefault}{\sfdefault}
+
+\selectfont
+
+\begin{document}
+\vspace*{.5cm} 
+\begin{Huge}
+\begin{rotate}{-14}
+\raisebox{-.56ex}{
+\textcolor{grau}{\hspace{.5cm}\textbf{2}}}%\ECFJD
+\end{rotate}\\
+\vspace*{1cm}
+\hspace{-1cm}
+\textcolor{blau}{\LaTeX} % .4cm
+\end{Huge}
+\end{document}

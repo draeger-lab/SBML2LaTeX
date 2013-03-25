@@ -30,7 +30,7 @@ import de.zbit.sbml.layout.SBGNArc;
 /**
  * @author Andreas Dr&auml;ger
  * @since 1.0
- * @version $Rev: 245 $
+ * @version $Rev$
  */
 public abstract class TikZSBGNArc implements SBGNArc<String> {
 	
@@ -44,7 +44,7 @@ public abstract class TikZSBGNArc implements SBGNArc<String> {
 	/* (non-Javadoc)
 	 * @see de.zbit.sbml.layout.SBGNArc#draw(org.sbml.jsbml.ext.layout.Curve, double)
 	 */
-	@Override
+	//@Override
 	public String draw(Curve curve, double lineWidth) {
 		return TikZ.draw("black", curve, lineWidth, this);
 	}

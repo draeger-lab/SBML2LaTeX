@@ -1,6 +1,6 @@
 /*
- * $Id: TikZConsumption.java 246 2013-03-06 10:53:31Z draeger $
- * $URL: https://rarepos.cs.uni-tuebingen.de/svn/SBML2LaTeX/trunk/src/org/sbml/totikz/TikZConsumption.java $
+ * $Id$
+ * $URL$
  * ---------------------------------------------------------------------
  * This file is part of SBML2LaTeX, a program that creates
  * human-readable reports for given SBML files.
@@ -32,7 +32,7 @@ import de.zbit.sbml.layout.Consumption;
  * class that represents an consumption arc for the TikZ graphical representation
  * 
  * @author Mirjam Gutekunst
- * @version $Rev: 246 $
+ * @version $Rev$
  */
 public class TikZConsumption extends TikZSBGNArc implements Consumption<String> {
 

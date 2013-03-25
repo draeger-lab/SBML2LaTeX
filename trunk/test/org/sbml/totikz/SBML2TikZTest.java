@@ -1,6 +1,6 @@
 /*
  * $Id:  SBML2TikZTest.java 13:37:59 Meike Aichele$
- * $URL: https://rarepos.cs.uni-tuebingen.de/svn/SBML2LaTeX/trunk/test/org/sbml/totikz/SBML2TikZTest.java $
+ * $URL$
  * ---------------------------------------------------------------------
  * This file is part of SBML2LaTeX, a program that creates
  * human-readable reports for given SBML files.
@@ -31,7 +31,7 @@ import javax.xml.stream.XMLStreamException;
 /**
  * class to test the TikZ-package.
  * @author Meike Aichele
- * @version $Rev: 245 $
+ * @version $Rev$
  */
 public class SBML2TikZTest {
 
