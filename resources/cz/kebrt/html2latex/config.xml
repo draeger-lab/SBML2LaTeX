@@ -4,7 +4,7 @@
 
     $Id$
     $URL$
-    ---------------------------------------------------------------------
+    ============================================================================
     This file is part of SBML2LaTeX, a program that creates 
     human-readable reports for given SBML files.
     
@@ -22,7 +22,7 @@
     
     You should have received a copy of the GNU General Public License
     along with this program. If not, see http://www.gnu.org/licenses/.
-    ---------------------------------------------------------------------
+    ============================================================================
     
     This configuration provides locale-dependent names for labels in
 	a (graphical) user interface.
