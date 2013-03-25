@@ -131,7 +131,7 @@
 		<copy todir="${build.src}" overwrite="yes">
 			<fileset 
   	  	            dir="${resource.dir}"
-  	  	        	includes="org/sbml/tolatex/**, **/*.properties"
+  	  	        	includes="cz/** org/sbml/tolatex/**, **/*.properties"
   	  	            excludes="**/.svn*, **/*~, **/*.tgz, **/*.zip">
 			</fileset>
 		</copy>
@@ -180,6 +180,7 @@
            classpathref="classpath">
 		</javac>
 		<manifest file="${build.dest}/META-INF/MANIFEST.MF">
+			<attribute name="Main-Class" value="org.sbml.tolatex.SBML2LaTeX"/>
 			<section name="${Name}">
 				<attribute name="Specification-Title" value="${Name}"/>
 				<attribute name="Specification-Version" value="${api.version}"/>
@@ -198,7 +199,8 @@
 
 		<copy todir="${build.dest}">
 			<fileset dir="${build.src}" 
-				includes="**/*.png **/*.gif **/*.xsd **/*.tmpl **/data/* **/*.xml **/*.cfg **/*.obo **/*.properties">
+				includes="**/*.png **/*.gif **/*.xsd **/*.tmpl **/data/* **/*.xml **/*.cfg
+					  **/*.obo **/*.properties **/*.pdf **/*.eps **/*.bbl **/*.tex"> <!-- **/*.java **/*.html ?? -->
 			</fileset>
 		</copy>
 		<jar jarfile="${build.dir}/${name}-${version}.jar" basedir="${build.dest}" manifest="${build.dest}/META-INF/MANIFEST.MF"/>
