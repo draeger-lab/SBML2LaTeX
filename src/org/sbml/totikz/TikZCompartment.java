@@ -1,6 +1,6 @@
 /*
  * $Id:  TikZCompartment.java 17:30:34 Meike Aichele$
- * $URL: https://rarepos.cs.uni-tuebingen.de/svn/SBML2LaTeX/trunk/src/org/sbml/totikz/TikZCompartment.java $
+ * $URL$
  * ---------------------------------------------------------------------
  * This file is part of SBML2LaTeX, a program that creates
  * human-readable reports for given SBML files.
@@ -27,7 +27,7 @@ import de.zbit.sbml.layout.Compartment;
 
 /**
  * @author Meike Aichele
- * @version $Rev: 248 $
+ * @version $Rev$
  */
 public class TikZCompartment extends Compartment<String> {
 

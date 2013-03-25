@@ -1,6 +1,6 @@
 /*
- * $Id: TextExport.java 206 2013-01-04 09:50:34Z draeger $
- * $URL: https://rarepos.cs.uni-tuebingen.de/svn/SBML2LaTeX/trunk/src/org/sbml/tolatex/io/TextExport.java $
+ * $Id$
+ * $URL$
  * ---------------------------------------------------------------------
  * This file is part of SBML2LaTeX, a program that creates 
  * human-readable reports for given SBML files.
@@ -45,7 +45,7 @@ import de.zbit.io.filefilter.SBFileFilter;
  * This class writes the differential equations to a plain text file.
  * 
  * @since This was part of SBMLsqueezer 1.0
- * @version $Rev: 206 $
+ * @version $Rev$
  * @author Andreas Dr&auml;ger
  * @author Nadine Hassis
  * @date Aug 1, 2007

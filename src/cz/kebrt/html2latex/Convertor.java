@@ -25,7 +25,7 @@ import de.zbit.util.ResourceManager;
  *  methods. Elements requiring special care during
  *  the conversion are converted by calling special methods like
  *  {@link Convertor#tableRowStart(ElementStart) tableRowStart() }.
- *  @version $Rev: 249 $
+ *  @version $Rev$
  *  @since 0.9.3
  */
 class Convertor {

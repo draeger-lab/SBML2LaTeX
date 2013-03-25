@@ -29,7 +29,7 @@ import java.io.IOException;
 /**
  * @author Andreas Dr&auml;ger
  * @since 1.0
- * @version $Rev: 206 $
+ * @version $Rev$
  */
 public interface SBML2LaTeXView {
 

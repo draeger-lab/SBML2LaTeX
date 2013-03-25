@@ -9,7 +9,7 @@ import java.util.*;
 
 /**
  * Handles events sent from the {@link CSSParser CSSParser} class.
- * @version $Rev: 249 $
+ * @version $Rev$
  * @since 0.9.3
  */
 public interface ICSSParserHandler {

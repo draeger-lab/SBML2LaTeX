@@ -1,6 +1,6 @@
 /*
  * $Id:  TikZNecessaryStimulation.java 13:35:15 Meike Aichele$
- * $URL: https://rarepos.cs.uni-tuebingen.de/svn/SBML2LaTeX/trunk/src/org/sbml/totikz/TikZNecessaryStimulation.java $
+ * $URL$
  * ---------------------------------------------------------------------
  * This file is part of SBML2LaTeX, a program that creates
  * human-readable reports for given SBML files.
@@ -33,14 +33,14 @@ import de.zbit.sbml.layout.SimpleLayoutAlgorithm;
 /**
  * Class to draw a necessary stimulation
  * @author Meike Aichele
- * @version $Rev: 247 $
+ * @version $Rev$
  */
 public class TikZNecessaryStimulation extends TikZSBGNArc implements NecessaryStimulation<String> {
 
 	/* (non-Javadoc)
 	 * @see de.zbit.sbml.layout.SBGNArc#draw(org.sbml.jsbml.ext.layout.CurveSegment, double)
 	 */
-	@Override
+	//@Override
 	public String draw(CurveSegment curveSegment, double lineWidth) {
 		Point startPoint = curveSegment.getStart();
 		Point endPoint = curveSegment.getEnd();

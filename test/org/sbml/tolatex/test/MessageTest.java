@@ -32,7 +32,7 @@ import de.zbit.util.ResourceManager;
 /**
  * @author Andreas Dr&auml;ger
  * @since 1.0
- * @version $Rev: 249 $
+ * @version $Rev$
  */
 public class MessageTest {
 	

@@ -1,6 +1,6 @@
 /*
- * $Id: SBML2TikZ.java 249 2013-03-13 09:23:31Z draeger $
- * $URL: https://rarepos.cs.uni-tuebingen.de/svn/SBML2LaTeX/trunk/src/org/sbml/totikz/SBML2TikZ.java $
+ * $Id$
+ * $URL$
  * ---------------------------------------------------------------------
  * This file is part of SBML2LaTeX, a program that creates 
  * human-readable reports for given SBML files.
@@ -38,7 +38,7 @@ import de.zbit.sbml.layout.LayoutDirector;
  * 
  * @author Mirjam Gutekunst
  * @author Andreas Dr&auml;ger
- * @version $Rev: 249 $
+ * @version $Rev$
  */
 public class SBML2TikZ {
 	

@@ -1,6 +1,6 @@
 /*
  * $Id:  TikZModulation.java 13:34:52 Meike Aichele$
- * $URL: https://rarepos.cs.uni-tuebingen.de/svn/SBML2LaTeX/trunk/src/org/sbml/totikz/TikZModulation.java $
+ * $URL$
  * ---------------------------------------------------------------------
  * This file is part of SBML2LaTeX, a program that creates
  * human-readable reports for given SBML files.
@@ -30,14 +30,14 @@ import de.zbit.sbml.layout.Modulation;
 /**
  * Class to draw a modulation.
  * @author Meike Aichele
- * @version $Rev: 247 $
+ * @version $Rev$
  */
 public class TikZModulation extends TikZSBGNArc implements Modulation<String> {
 
 	/* (non-Javadoc)
 	 * @see de.zbit.sbml.layout.SBGNArc#draw(org.sbml.jsbml.ext.layout.CurveSegment, double)
 	 */
-	@Override
+	//@Override
 	public String draw(CurveSegment curveSegment, double lineWidth) {
 		return TikZ.draw("-open diamond", "black", curveSegment, lineWidth);
 	}

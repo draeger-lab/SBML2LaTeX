@@ -1,6 +1,6 @@
 /*
  * $Id:  TikZOmittedProcessNode.java 13:56:05 Meike Aichele$
- * $URL: TikZOmittedProcessNode.java $
+ * $URL$
  * ---------------------------------------------------------------------
  * This file is part of SBML2LaTeX, a program that creates
  * human-readable reports for given SBML files.

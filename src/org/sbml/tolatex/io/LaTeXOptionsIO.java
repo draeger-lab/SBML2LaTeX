@@ -1,6 +1,6 @@
 /*
- * $Id: LaTeXOptionsIO.java 206 2013-01-04 09:50:34Z draeger $
- * $URL: https://rarepos.cs.uni-tuebingen.de/svn/SBML2LaTeX/trunk/src/org/sbml/tolatex/io/LaTeXOptionsIO.java $
+ * $Id$
+ * $URL$
  * ---------------------------------------------------------------------
  * This file is part of SBML2LaTeX, a program that creates 
  * human-readable reports for given SBML files.
@@ -39,7 +39,7 @@ import de.zbit.util.prefs.Range;
  * 
  * @author Andreas Dr&auml;ger
  * @date 2010-11-10
- * @version $Rev: 206 $
+ * @version $Rev$
  */
 public interface LaTeXOptionsIO extends KeyProvider {
 

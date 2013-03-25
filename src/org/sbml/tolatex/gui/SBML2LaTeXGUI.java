@@ -55,7 +55,7 @@ import de.zbit.util.prefs.SBPreferences;
 /**
  * @author Andreas Dr&auml;ger
  * @since 1.0
- * @version $Rev: 232 $
+ * @version $Rev$
  */
 public class SBML2LaTeXGUI implements SBML2LaTeXView, PropertyChangeListener {
 	
@@ -159,7 +159,7 @@ public class SBML2LaTeXGUI implements SBML2LaTeXView, PropertyChangeListener {
 	/* (non-Javadoc)
 	 * @see java.beans.PropertyChangeListener#propertyChange(java.beans.PropertyChangeEvent)
 	 */
-	@Override
+	//@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		if (evt.getPropertyName().equals(SBML2LaTeXworker.ERROR_CODE)) {
 			System.exit(1);

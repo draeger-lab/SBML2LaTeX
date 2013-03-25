@@ -1,6 +1,6 @@
 /*
- * $Id: LaTeXExportDialog.java 249 2013-03-13 09:23:31Z draeger $
- * $URL: https://rarepos.cs.uni-tuebingen.de/svn/SBML2LaTeX/trunk/src/org/sbml/tolatex/gui/LaTeXExportDialog.java $
+ * $Id$
+ * $URL$
  * ---------------------------------------------------------------------
  * This file is part of SBML2LaTeX, a program that creates 
  * human-readable reports for given SBML files.
@@ -56,7 +56,7 @@ import de.zbit.util.prefs.SBPreferences;
 /**
  * @author Andreas Dr&auml;ger
  * @date 2010-10-20
- * @version $Rev: 249 $
+ * @version $Rev$
  */
 public class LaTeXExportDialog extends JDialog {
 	

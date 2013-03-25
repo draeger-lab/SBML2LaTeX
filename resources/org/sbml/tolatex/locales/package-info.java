@@ -1,6 +1,6 @@
 /*
- * $Id: package-info.java 206 2013-01-04 09:50:34Z draeger $
- * $URL: https://rarepos.cs.uni-tuebingen.de/svn/SBML2LaTeX/trunk/resources/org/sbml/tolatex/locales/package-info.java $
+ * $Id$
+ * $URL$
  * ---------------------------------------------------------------------
  * This file is part of SBML2LaTeX, a program that creates 
  * human-readable reports for given SBML files.
@@ -27,6 +27,6 @@
  * SBML2LaTeX, either in command-line mode or using a graphical user interface.
  * Besides English, there is also a translation for the German language
  * available.
- * @version $Rev: 206 $
+ * @version $Rev$
  */
 package org.sbml.tolatex.locales;

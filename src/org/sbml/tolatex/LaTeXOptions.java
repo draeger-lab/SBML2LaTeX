@@ -1,6 +1,6 @@
 /*
- * $Id: LaTeXOptions.java 249 2013-03-13 09:23:31Z draeger $
- * $URL: https://rarepos.cs.uni-tuebingen.de/svn/SBML2LaTeX/trunk/src/org/sbml/tolatex/LaTeXOptions.java $
+ * $Id$
+ * $URL$
  * ---------------------------------------------------------------------
  * This file is part of SBML2LaTeX, a program that creates 
  * human-readable reports for given SBML files.
@@ -40,7 +40,7 @@ import de.zbit.util.prefs.Range;
  * 
  * @author Andreas Dr&auml;ger
  * @date 2010-10-22
- * @version $Rev: 249 $
+ * @version $Rev$
  */
 public interface LaTeXOptions extends KeyProvider {
   

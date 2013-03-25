@@ -1,6 +1,6 @@
 /*
- * $Id: TikZMacromolecule.java 245 2013-03-04 14:25:26Z draeger $
- * $URL: https://rarepos.cs.uni-tuebingen.de/svn/SBML2LaTeX/trunk/src/org/sbml/totikz/TikZMacromolecule.java $
+ * $Id$
+ * $URL$
  * ---------------------------------------------------------------------
  * This file is part of SBML2LaTeX, a program that creates 
  * human-readable reports for given SBML files.
@@ -30,7 +30,7 @@ import de.zbit.sbml.layout.Macromolecule;
  * class that represents a macromolecule for the TikZ graphical representation
  * 
  * @author Mirjam Gutekunst
- * @version $Rev: 245 $
+ * @version $Rev$
  */
 public class TikZMacromolecule extends Macromolecule<String> {
 	

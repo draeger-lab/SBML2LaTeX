@@ -36,7 +36,7 @@ import de.zbit.gui.GUITools;
 /**
  * @author Andreas Dr&auml;ger
  * @since 1.0
- * @version $Rev: 206 $
+ * @version $Rev$
  */
 public class SBML2LaTeXworker extends SwingWorker<File, Void> {
 

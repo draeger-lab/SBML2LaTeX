@@ -1,6 +1,6 @@
 /*
- * $Id: LaTeX.java 250 2013-03-13 10:04:46Z draeger $
- * $URL: https://rarepos.cs.uni-tuebingen.de/svn/SBML2LaTeX/trunk/src/org/sbml/tolatex/util/LaTeX.java $
+ * $Id$
+ * $URL$
  * ---------------------------------------------------------------------
  * This file is part of SBML2LaTeX, a program that creates 
  * human-readable reports for given SBML files.
@@ -29,7 +29,7 @@ import de.zbit.util.StringUtil;
  * 
  * @author Andreas Dr&auml;ger
  * @date 2009-01-03
- * @version $Rev: 250 $
+ * @version $Rev$
  */
 public class LaTeX extends StringUtil {
 	

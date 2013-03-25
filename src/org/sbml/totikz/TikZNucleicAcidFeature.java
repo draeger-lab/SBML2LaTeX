@@ -1,6 +1,6 @@
 /*
  * $Id:  TikZNucleicAcidFeature.java 17:36:03 Meike Aichele$
- * $URL: https://rarepos.cs.uni-tuebingen.de/svn/SBML2LaTeX/trunk/src/org/sbml/totikz/TikZNucleicAcidFeature.java $
+ * $URL$
  * ---------------------------------------------------------------------
  * This file is part of SBML2LaTeX, a program that creates
  * human-readable reports for given SBML files.
@@ -27,14 +27,14 @@ import de.zbit.sbml.layout.NucleicAcidFeature;
 
 /**
  * @author Meike Aichele
- * @version $Rev: 248 $
+ * @version $Rev$
  */
 public class TikZNucleicAcidFeature extends NucleicAcidFeature<String> {
 
 	/* (non-Javadoc)
 	 * @see de.zbit.sbml.layout.SBGNNode#draw(double, double, double, double, double, double)
 	 */
-	@Override
+	//@Override
 	public String draw(double x, double y, double z, double width,
 			double height, double depth) {
 		String tikZ = "\\filldraw [fill = NucleicAcidFeature!50] (" +

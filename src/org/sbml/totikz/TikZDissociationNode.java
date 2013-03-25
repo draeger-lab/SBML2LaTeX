@@ -1,6 +1,6 @@
 /*
  * $Id:  TikZDissociationNode.java 16:00:16 Meike Aichele$
- * $URL: https://rarepos.cs.uni-tuebingen.de/svn/SBML2LaTeX/trunk/src/org/sbml/totikz/TikZDissociationNode.java $
+ * $URL$
  * ---------------------------------------------------------------------
  * This file is part of SBML2LaTeX, a program that creates
  * human-readable reports for given SBML files.
@@ -30,7 +30,7 @@ import de.zbit.sbml.layout.DissociationNode;
 
 /**
  * @author Meike Aichele
- * @version $Rev: 249 $
+ * @version $Rev$
  */
 public class TikZDissociationNode extends DissociationNode<String>{
 
@@ -92,7 +92,7 @@ public class TikZDissociationNode extends DissociationNode<String>{
 	/* (non-Javadoc)
 	 * @see de.zbit.sbml.layout.SBGNReactionNode#draw(double, double, double, double, double, double, double, org.sbml.jsbml.ext.layout.Point)
 	 */
-	@Override
+	//@Override
 	public String draw(double x, double y, double z, double width,
 			double height, double depth, double rotationAngle,
 			Point rotationCenter) {

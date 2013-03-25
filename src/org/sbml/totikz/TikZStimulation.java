@@ -1,6 +1,6 @@
 /*
  * $Id:  TikZStimulation.java 17:53:29 Meike Aichele$
- * $URL: https://rarepos.cs.uni-tuebingen.de/svn/SBML2LaTeX/trunk/src/org/sbml/totikz/TikZStimulation.java $
+ * $URL$
  * ---------------------------------------------------------------------
  * This file is part of SBML2LaTeX, a program that creates
  * human-readable reports for given SBML files.
@@ -29,14 +29,14 @@ import de.zbit.sbml.layout.Stimulation;
 
 /**
  * @author Meike Aichele
- * @version $Rev: 246 $
+ * @version $Rev$
  */
 public class TikZStimulation extends TikZSBGNArc implements Stimulation<String> {
 
 	/* (non-Javadoc)
 	 * @see de.zbit.sbml.layout.SBGNArc#draw(org.sbml.jsbml.ext.layout.CurveSegment, double)
 	 */
-	@Override
+	//@Override
 	public String draw(CurveSegment curveSegment, double lineWidth) {
 		// TODO triangle must have variable size
 		return TikZ.draw("-open triangle 60", "black", curveSegment, lineWidth);

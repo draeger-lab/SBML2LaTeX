@@ -1,6 +1,6 @@
 /*
- * $Id: SBML2LaTeXTest.java 206 2013-01-04 09:50:34Z draeger $
- * $URL: https://rarepos.cs.uni-tuebingen.de/svn/SBML2LaTeX/trunk/test/org/sbml/tolatex/gui/SBML2LaTeXTest.java $
+ * $Id$
+ * $URL$
  * ---------------------------------------------------------------------
  * This file is part of SBML2LaTeX, a program that creates 
  * human-readable reports for given SBML files.
@@ -42,7 +42,7 @@ import de.zbit.util.prefs.SBPreferences;
  * 
  * @author Andreas Dr&auml;ger
  * @date 2010-11-11
- * @version $Rev: 206 $
+ * @version $Rev$
  */
 public class SBML2LaTeXTest {
   

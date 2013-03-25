@@ -2,8 +2,8 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
   <comment>
-    $Id: UI_de.xml 249 2013-03-13 09:23:31Z draeger $
-    $URL: https://rarepos.cs.uni-tuebingen.de/svn/SBML2LaTeX/trunk/resources/org/sbml/tolatex/locales/UI_de.xml $
+    $Id$
+    $URL$
     ---------------------------------------------------------------------
     This file is part of SBML2LaTeX, a program that creates 
     human-readable reports for given SBML files.
@@ -26,6 +26,8 @@
     
     This configuration provides locale-dependent names for labels in
 	a (graphical) user interface.
+	
+	Version: $Rev$
   </comment>
   
   <!-- IO options -->

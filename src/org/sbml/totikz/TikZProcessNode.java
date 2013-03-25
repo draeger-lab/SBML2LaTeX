@@ -1,6 +1,6 @@
 /*
  * $Id:  TikZProcessNode.java 14:10:09 Meike Aichele$
- * $URL: https://rarepos.cs.uni-tuebingen.de/svn/SBML2LaTeX/trunk/src/org/sbml/totikz/TikZProcessNode.java $
+ * $URL$
  * ---------------------------------------------------------------------
  * This file is part of SBML2LaTeX, a program that creates
  * human-readable reports for given SBML files.
@@ -30,7 +30,7 @@ import de.zbit.sbml.layout.ProcessNode;
 
 /**
  * @author Meike Aichele
- * @version $Rev: 246 $
+ * @version $Rev$
  */
 public class TikZProcessNode extends ProcessNode<String>{
 

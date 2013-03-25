@@ -25,7 +25,7 @@ import de.zbit.util.ResourceManager;
  *  Program configuration.
  *  All of the configuration from the XML configuration file
  *  is stored in this class.
- *  @version $Rev: 249 $
+ *  @version $Rev$
  *  @since 0.9.3
  */
 class Configuration {

@@ -1,6 +1,6 @@
 /*
- * $Id: HTML2LaTeX.java 249 2013-03-13 09:23:31Z draeger $
- * $URL: https://rarepos.cs.uni-tuebingen.de/svn/SBML2LaTeX/trunk/src/cz/kebrt/html2latex/HTML2LaTeX.java $
+ * $Id$
+ * $URL$
  * ---------------------------------------------------------------------
  * This file is part of SBML2LaTeX, a program that creates 
  * human-readable reports for given SBML files.
@@ -33,7 +33,7 @@ import de.zbit.io.OpenFile;
 
 /**
  * Program main class.
- * @version $Rev: 249 $
+ * @version $Rev$
  * @since 0.9.3
  */
 public class HTML2LaTeX {

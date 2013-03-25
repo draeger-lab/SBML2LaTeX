@@ -1,6 +1,6 @@
 /*
- * $Id: SBMLReportGenerator.java 206 2013-01-04 09:50:34Z draeger $
- * $URL: https://rarepos.cs.uni-tuebingen.de/svn/SBML2LaTeX/trunk/src/org/sbml/tolatex/io/SBMLReportGenerator.java $
+ * $Id$
+ * $URL$
  * ---------------------------------------------------------------------
  * This file is part of SBML2LaTeX, a program that creates 
  * human-readable reports for given SBML files.
@@ -35,7 +35,7 @@ import org.sbml.jsbml.SBase;
 /**
  * @author Dieudonn&eacute; Motsou Wouamba
  * @author Andreas Dr&auml;ger
- * @version $Rev: 206 $
+ * @version $Rev$
  */
 public interface SBMLReportGenerator {
 
