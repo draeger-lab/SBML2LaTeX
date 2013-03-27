@@ -31,7 +31,6 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.io.Writer;
-import java.text.ChoiceFormat;
 import java.text.DateFormatSymbols;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
@@ -56,6 +55,7 @@ import org.sbml.jsbml.Compartment;
 import org.sbml.jsbml.CompartmentType;
 import org.sbml.jsbml.Constraint;
 import org.sbml.jsbml.Creator;
+import org.sbml.jsbml.Delay;
 import org.sbml.jsbml.Event;
 import org.sbml.jsbml.FunctionDefinition;
 import org.sbml.jsbml.History;
@@ -1065,8 +1065,9 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 		}
 		if (eventList.size() > 0) {
 			int i, j;
-			ChoiceFormat evtnum = new ChoiceFormat(new double[] {1d, 2d}, bundleContent.getStringArray("GRAMMATICAL_NUMBER_EVENT"));
-			buffer.append(section(evtnum.format(eventList.size()), true));
+			buffer.append(section(MessageFormat.format(
+					bundleContent.getString("GRAMMATICAL_NUMBER_EVENT"), 
+					eventList.size()), true));
 			buffer.append(
 				MessageFormat.format(bundleContent.getString("INTRODUCTION_SUBCOMPONENTS"),
 					MessageFormat.format(bundleContent.getString("NUMERALS"), eventList.size()),
@@ -1079,7 +1080,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 			buffer.append(" to ");
 			buffer.append(texttt(bundleContent.getString("TRUE")));
 			buffer.append(". ");
-			buffer.append(bundleContent.getString("DESCRIPTION_OF_DELAY_FUNCTION"));
+			buffer.append(bundleContent.getString("DELAY_FUNCTION_DESCRIPTION"));
 			buffer.newLine();
 			
 			Event ev;
@@ -1089,46 +1090,32 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 				subsection(ev, i, buffer);
 				buffer.append(descriptionBegin);
 				format(ev, buffer, true);
-				buffer.append(descriptionItem("Trigger", format(ev.getTrigger())));
+				Trigger trigger = ev.getTrigger();
+				buffer.append(descriptionItem(bundleElements.getString(trigger.getElementName()), format(trigger)));
 				if (ev.isSetPriority()) {
-					buffer.append(descriptionItem("Priority", format(ev.getPriority())));
+					Priority priority = ev.getPriority();
+					buffer.append(descriptionItem(bundleElements.getString(priority.getElementName()), format(priority)));
 				}
 				if (ev.isSetDelay()) {
-					buffer.append(descriptionItem("Delay", equation(ev.getDelay()
-							.getMath().toLaTeX())));
+					Delay delay = ev.getDelay();
+					buffer.append(descriptionItem(bundleElements.getString(delay.getElementName()), equation(delay.getMath().toLaTeX())));
 					UnitDefinition ud = ev.getDelay().getDerivedUnitDefinition();
 					if ((ud != null) && (ud.getUnitCount() > 0)) {
-						buffer.append(descriptionItem("Time unit of the delay",
+						buffer.append(descriptionItem(
+							bundleContent.getString("DELAY_FUNCTION_TIME_UNITS"),
 							math(format(ud))));
 					}
 				}
-				String item = "Assignment";
-				if (1 < ev.getEventAssignmentCount()) item += 's';
 				StringBuffer description = new StringBuffer();
 				if (ev.getUseValuesFromTriggerTime()) {
-					description.append("The values of the assinment formula");
-					if (1 < ev.getEventAssignmentCount()) {
-						description.append("s are");
-					} else {
-						description.append(" is");
-					}
-					description.append(" computed at the moment this event fires");
-					if (ev.isSetDelay()) {
-						description.append(", not after the delay");
-					}
-					description.append('.');
+					description.append(MessageFormat.format(
+						bundleContent.getString("EVENT_DOES_USE_VALUES_FROM_TRIGGER_TIME"),
+						ev.getEventAssignmentCount(), ev.isSetDelay() ? 1 : 0));
 				} else {
-					description.append("The formula");
-					if (1 < ev.getEventAssignmentCount()) {
-						description.append('s');
-					}
-					description.append(" in this event's assignment ");
-					description.append(1 < ev.getEventAssignmentCount() ? "are" : "is");
-					description.append(" to be computed");
-					if (ev.isSetDelay()) {
-						description.append(" after the delay,");
-					}
-					description.append(" at the time the event is executed.");
+					description.append(MessageFormat.format(
+							bundleContent.getString("EVENT_DOES_NOT_USE_VALUES_FROM_TRIGGER_TIME"),
+							ev.getEventAssignmentCount(),
+							ev.isSetDelay() ? 1 : 0));
 				}
 				if (ev.getEventAssignmentCount() > 1) {
 					description.append(newLine());
@@ -1167,7 +1154,11 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 					description.append("\\end{align}");
 					description.append(newLine());
 				}
-				buffer.append(descriptionItem(item, description));
+				buffer.append(descriptionItem(
+					MessageFormat.format(
+						bundleContent.getString("GRAMMATICAL_NUMBER_ASSIGNMENT"),
+						ev.getEventAssignmentCount()),
+					description));
 				buffer.append(descriptionEnd);
 			}
 		}
@@ -2352,7 +2343,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 		buffer.append("\\selectlanguage{english}");
 		buffer.newLine();
 		if (0 < model.getFunctionDefinitionCount()) {
-			buffer.append(OpenFile.readFile("../locales/linebreakdef.tex"));
+			buffer.append(OpenFile.readFile("../locales/linebreakdef.sty"));
 		}
 		
 		buffer.append("\\definecolor{royalblue}{cmyk}{.93, .79, 0, 0}");
