@@ -991,9 +991,10 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 					}
 					format(s, buffer, false);
 					if (counter == 0) {
-						buffer.append("This model does not contain any ");
-						buffer.append(isSpecType ? "species" : "compartments");
-						buffer.append(" of this type.");
+						buffer.append(MessageFormat.format(
+								bundleContent.getString("MODEL_DOES_NOT_CONTAIN_ELEMENTS"),
+								isSpecType ? "species" : "compartments"));
+						buffer.append(bundleContent.getString("WHITE_SPACE"));
 					} else {
 						buffer.append(longtableHead("ll", (isSpecType ? "Species"
 								: "Compartments") + " of this type", bundleElements.getString("id"), bundleElements.getString("name")));
@@ -1075,11 +1076,12 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 					bundleElements.getString(eventList.size() == 1 ? eventList.getFirst().getElementName() : eventList.getElementName())
 				)
 			);
-			buffer.append(" Each event is initiated whenever its trigger condition switches from ");
-			buffer.append(texttt(bundleContent.getString("FALSE")));
-			buffer.append(" to ");
-			buffer.append(texttt(bundleContent.getString("TRUE")));
-			buffer.append(". ");
+			buffer.append(bundleContent.getString("WHITE_SPACE"));
+			buffer.append(MessageFormat.format(
+					bundleContent.getString("EVENT_INTRODUCTION"),
+					texttt(bundleContent.getString("FALSE")),
+					texttt(bundleContent.getString("TRUE"))));
+			buffer.append(bundleContent.getString("WHITE_SPACE"));
 			buffer.append(bundleContent.getString("DELAY_FUNCTION_DESCRIPTION"));
 			buffer.newLine();
 			
@@ -1107,16 +1109,11 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 					}
 				}
 				StringBuffer description = new StringBuffer();
-				if (ev.getUseValuesFromTriggerTime()) {
-					description.append(MessageFormat.format(
-						bundleContent.getString("EVENT_DOES_USE_VALUES_FROM_TRIGGER_TIME"),
+				description.append(MessageFormat.format(
+						bundleContent.getString(ev.getUseValuesFromTriggerTime() ? 
+								"EVENT_DOES_USE_VALUES_FROM_TRIGGER_TIME" : 
+								"EVENT_DOES_NOT_USE_VALUES_FROM_TRIGGER_TIME"),
 						ev.getEventAssignmentCount(), ev.isSetDelay() ? 1 : 0));
-				} else {
-					description.append(MessageFormat.format(
-							bundleContent.getString("EVENT_DOES_NOT_USE_VALUES_FROM_TRIGGER_TIME"),
-							ev.getEventAssignmentCount(),
-							ev.isSetDelay() ? 1 : 0));
-				}
 				if (ev.getEventAssignmentCount() > 1) {
 					description.append(newLine());
 					description.append("\\begin{align}");
@@ -1199,7 +1196,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 	 */
 	private String format(Priority priority) throws SBMLException {
 		StringBuilder sb = new StringBuilder();
-		sb.append("This event is ranked with the following weight:");
+		sb.append(bundleContent.getString("PRIORITY_INTRODUCTION"));
 		sb.append(newLine());
 		sb.append(equation(priority.getMath().toLaTeX()));
 		sb.append(newLine());
@@ -1215,32 +1212,21 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 	private String format(Trigger trigger) throws SBMLException {
 		StringBuilder sb = new StringBuilder();
 		if (trigger.isSetInitialValue()) {
-			sb.append("This trigger can");
-			if (trigger.isInitialValue()) {
-				sb.append("not");
-			}
-			sb.append(" fire at the beginning of a simulation");
-			if (trigger.isInitialValue()) {
-				sb.append(", even ");
-			}
-			sb.append("if its condition evaluates to true at time ");
-			sb.append(math("t = 0"));
-			sb.append('.');
+			sb.append(MessageFormat.format(
+				bundleContent.getString("TRIGGER_DESCRIPTION"),
+				trigger.isInitialValue() ? 1 : 0,
+				texttt(bundleContent.getString("TRUE")),
+				math("t = 0")));
 			sb.append(newLine());
 		}
 		if (trigger.isSetPersistent()) {
-			sb.append("If in the time between triggering and finally executing the event, the trigger condition switches back to ");
-			sb.append(texttt(bundleContent.getString("FALSE")));
-			sb.append(" this trigger is ");
-			if (trigger.isPersistent()) {
-				sb.append("not affected and the event is regularly");
-			} else {
-				sb.append("switched off again and the event is not");
-			}
-			sb.append(" executed.");
+			sb.append(MessageFormat.format(
+				bundleContent.getString("TRIGGER_PERSISTENT_DESCRIPTION"),
+				texttt(bundleContent.getString("FALSE")),
+				trigger.isPersistent() ? 1 : 0));
 			sb.append(newLine());
 		}
-		sb.append("The following condition decides whether this trigger may fire:");
+		sb.append(bundleContent.getString("TRIGGER_CONDITION"));
 		sb.append(equation(trigger.getMath().toLaTeX()));
 		sb.append(newLine());
 		return sb.toString();
@@ -1345,7 +1331,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 				buffer.append(descriptionBegin);
 				format(def, buffer, true);
 				if (def.getUnitCount() > 0) {
-					buffer.append(descriptionItem("Definition", math(format(def))));
+					buffer.append(descriptionItem(bundleContent.getString("DEFINITION"), math(format(def))));
 				}
 				buffer.append(descriptionEnd);
 			}
@@ -2465,43 +2451,11 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 				}
 				break;
 			case BIOLOGICAL_QUALIFIER:
-				buffer.append("biological entity ");
-				switch (cv.getBiologicalQualifierType()) {
-					case BQB_ENCODES:
-						buffer.append("encodes");
-						break;
-					case BQB_HAS_PART:
-						buffer.append("has ");
-						buffer.append(resources.size() == 1 ? "a part" : "parts");
-						break;
-					case BQB_HAS_VERSION:
-						buffer.append("has the version");
-						break;
-					case BQB_IS:
-						buffer.append("is");
-						break;
-					case BQB_IS_DESCRIBED_BY:
-						buffer.append("is described by");
-						break;
-					case BQB_IS_ENCODED_BY:
-						buffer.append("is encoded by");
-						break;
-					case BQB_IS_HOMOLOG_TO:
-						buffer.append("is homolog to");
-						break;
-					case BQB_IS_PART_OF:
-						buffer.append("is a part of");
-						break;
-					case BQB_IS_VERSION_OF:
-						buffer.append("is a version of");
-						break;
-					case BQB_OCCURS_IN:
-						buffer.append("occurs in");
-						break;
-					default: // unknown
-						buffer.append("has something to do with");
-						break;
-				}
+				buffer.append(MessageFormat.format(
+					bundleContent.getString(cv.getQualifierType().name()),
+					MessageFormat.format(
+						bundleContent.getString(cv.getBiologicalQualifierType().name()),
+						resources.size())));
 				break;
 			default: // UNKNOWN_QUALIFIER
 				buffer.append("element has something to do with");
