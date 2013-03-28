@@ -29,9 +29,22 @@
   
   <entry key="ALGEBRAIC_RULE_VARIABLE">This rule determines the value of {0} {1}.</entry>
   <entry key="ALGEBRAIC_RULE_OVERDETERMINED_MESSAGE">As this model is over determined, it is not possible to state, which variable is determined by this rule.</entry>
-  <entry key="DERIVED_RATE_EQUATIONS">Derived Rate {0,choice, 0#Equations| 1#Equation| 1&lt;Equations}</entry>
-  <entry key="DELAY_FUNCTION_DESCRIPTION">A delay function postpones the effects  of an event to a later time point. At the time of execution, an event can assign values to species, parameters, or compartments if these are not set to constant.</entry>
+  <entry key="BIOLOGICAL_QUALIFIER">biological entity {0}</entry>
+  <entry key="BQB_ENCODES">encodes</entry>
+  <entry key="BQB_HAS_PART">has {0,choice, 0#parts| 1#a part| 1&lt;parts}</entry>
+  <entry key="BQB_HAS_VERSION">has the version</entry>
+  <entry key="BQB_IS">is</entry>
+  <entry key="BQB_IS_DESCRIBED_BY">is described by</entry>
+  <entry key="BQB_IS_ENCODED_BY">is encoded by</entry>
+  <entry key="BQB_IS_HOMOLOG_TO">is homolog to</entry>
+  <entry key="BQB_IS_PART_OF">is a part of</entry>
+  <entry key="BQB_IS_VERSION_OF">is a version of</entry>
+  <entry key="BQB_OCCURS_IN">occurs in</entry>
+  <entry key="BQM_UNKNOWN">has something to do with</entry>
+  <entry key="DEFINITION">Definition</entry>
+  <entry key="DELAY_FUNCTION_DESCRIPTION">A delay function postpones the effects of an event to a later time point. At the time of execution, an event can assign values to species, parameters, or compartments if these are not set to constant.</entry>
   <entry key="DELAY_FUNCTION_TIME_UNITS">Time unit of the delay</entry>
+  <entry key="DERIVED_RATE_EQUATIONS">Derived Rate {0,choice, 0#Equations| 1#Equation| 1&lt;Equations}</entry>
   <entry key="DOCUMENT_CONSISTENCY_REPORT">Document Consistency Report</entry>
   <entry key="ELEMENT_ANNOTATION">{0} Annotation</entry>
   <entry key="ELEMENT_NOTES">{0} notes</entry>
@@ -40,6 +53,7 @@
   <entry key="ERROR">Error</entry>
   <entry key="EVENT_DOES_USE_VALUES_FROM_TRIGGER_TIME">The values of the assignment {0,choice,0#formulae| 1#formula| 1&lt;formulae} {0,choice,0#are| 1#is| 1&lt;are} computed at the moment this event fires{1,choice,0#.| 1#, not after the delay.}</entry>
   <entry key="EVENT_DOES_NOT_USE_VALUES_FROM_TRIGGER_TIME">The {0,choice,0#formulae| 1#formula| 1&lt;formulae} in this event's assignment {0,choice,0#are| 1#is| 1&lt;are} to be computed {1,choice,0# |1#after the delay, }at the time the event is executed.</entry>
+  <entry key="EVENT_INTRODUCTION">Each event is initiated whenever its trigger condition switches from {0} to {1}.</entry>
   <entry key="FALSE">false</entry>
   <entry key="FATAL">Fatal</entry>
   <entry key="FULL_SBML_VALIDATION_NOT_YET_SUPPORTED">Currently, the Java{0} library {1}, which is used by the documentation tool {2}, does not provide an implementation for full SBML consistency checks. Hence, at this position this report cannot highlight any problems in the SBML document, which does not mean that it is entirely correct. Please visit the website {3} and use the SBML validator there.</entry>
@@ -62,10 +76,12 @@
   <entry key="INTRODUCTION_SECTION_REACTIONS">All reactions are listed in the following table and are subsequently described in detail. If a reaction is affected by one or more modifiers, the {0} identifiers of the modifier species are written above the reaction arrow.</entry>
   <entry key="INTRODUCTION_SUBCOMPONENTS">This is an overview of {0}{1}{2}.</entry>
   <entry key="INVALID_SPECIES_REFERENCE_FOR_REACTION_PARTICIPANT">invalid species reference for {0} {1}</entry>
+  <entry key="MODEL_DOES_NOT_CONTAIN_ELEMENTS">This model does not contain any {0} of this type.</entry>
   <entry key="NAMES_IF_AVAILABLE">names or{0}if not specified{0}the</entry>
   <entry key="NUMERALS">{0,choice, 0#naught| 1#one| 2#two| 3#three| 4#four| 5#five| 6#six| 7#seven| 8#eight| 9#nine| 10#ten| 11#eleven| 12#twelve| 13#thirteen| 14#fourteen| 15#fifteen| 16#sixteen| 17#seventeen| 18#eighteen| 19#nineteen| 20#twenty| 20&lt;{0,number,integer}| 30#thirty| 30&lt;{0,number,integer}| 40#forty| 40&lt;{0,number,integer}| 50#fifty| 50&lt;{0,number,integer}| 60#sixty| 60&lt;{0,number,integer}| 70#seventy| 70&lt;{0,number,integer}| 80#eighty| 80&lt;{0,number,integer}| 90#ninety| 90&lt;{0,number,integer}| 100#one hundred| 100&lt;{0,number,integer}}</entry>
   <entry key="OVERVIEW_TABLE_CAPTION">Overview of all {0}.</entry>
   <entry key="PARTICIPATING_SPECIES">participating species</entry>
+  <entry key="PRIORITY_INTRODUCTION">This event is ranked with the following weight:</entry>
   <entry key="PRODUCED_BY_SBML2LATEX">Produced by {0} version {1} for JSBML</entry>
   <entry key="PRODUCT">product</entry>
   <entry key="PROPERTIES_TABLE_CAPTION">Properties of each {0}.</entry>
@@ -85,10 +101,13 @@
   <entry key="SPECIES_WITH_BOUNDARY_CONDITION_COUNT">The boundary condition of {0} of {3,choice, 0#these| 1#this| 1&lt;these} species is set to {1} so that {2,choice, 0#these| 1#this| 1&lt;these} species'' {4,choice, 1#amount| 1&lt;amounts} cannot be changed by any reaction.</entry>
   <entry key="SUBJECT">SBML Model Report</entry>
   <entry key="SYSTEM">System</entry>
+  <entry key="TRIGGER_DESCRIPTION">This trigger {0,choice, 0#cannot| 1#can} fire at the beginning of a simulation {0,choice, 0#| 1#, even} if its condition evaluates to {1} at time {2}.</entry>
+  <entry key="TRIGGER_PERSISTENT_DESCRIPTION">If in the time between triggering and finally executing the event, the trigger condition switches back to {0} this trigger is {1,choice, 0#switched off again and the event is not| 1#not affected and the event is regularly} executed.</entry>
+  <entry key="TRIGGER_CONDITION">The following condition decides whether this trigger may fire:</entry>
   <entry key="TRUE">true</entry>
   <entry key="UNKNOWN_UNIT">Unknown unit {0}</entry>
   <entry key="WHITE_SPACE"> </entry>
   <entry key="WARNING">Warning</entry>
   <entry key="XML">XML</entry>
-  
+
 </properties>

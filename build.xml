@@ -243,7 +243,7 @@
 	  	depends="init"
 	  	description="Creates a JAR file including all class files and all third-party libraries, but no source files.">
 	  	
-		<!-- Determine the revision number of SysBio -->
+		<!-- Determine the revision number of SBML2LaTeX -->
 		<exec executable="svnversion" outputproperty="revision">
 	      <arg line="-c ${basedir}"/>
 	      <redirector>
