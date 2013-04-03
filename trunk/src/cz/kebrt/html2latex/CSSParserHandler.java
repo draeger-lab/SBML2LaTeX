@@ -28,7 +28,7 @@ class CSSParserHandler implements ICSSParserHandler {
     
     /**
      * Called when a new style is reached in the CSS stylesheet.
-     * Splits up multiple style names (ie. <code>h1, h2, h3 { ... } </code>)
+     * Splits up multiple style names (ie. {@code h1, h2, h3 { ... } })
      * and sets style properties for each of the style names.
      * @param styleName name of the style
      * @param properties map with all the style's properties

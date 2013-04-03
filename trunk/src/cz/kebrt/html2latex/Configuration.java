@@ -325,8 +325,8 @@ class Configuration {
 	
 	
 	/**
-	 *  Finds style for element with specified <code>class</code> attribute
-	 *  @param className element's <code>class</code> attribute
+	 *  Finds style for element with specified {@code class} attribute
+	 *  @param className element's {@code class} attribute
 	 *  @param elementName element name
 	 *  @return CSS style
 	 */
@@ -342,8 +342,8 @@ class Configuration {
 	
 	
 	/**
-	 *  Finds style for element with specified <code>id</code> attribute
-	 *  @param elementId element's <code>id</code> attribute
+	 *  Finds style for element with specified {@code id} attribute
+	 *  @param elementId element's {@code id} attribute
 	 *  @param elementName element name
 	 *  @return CSS style
 	 */
@@ -442,14 +442,14 @@ class Configuration {
  */
 class ElementConfigItem {
 	/** Mapping between start tag and LaTeX command. (ie. &quot;\textbf{&quot;
-        for the <code>b</code> tag). */
+        for the {@code b} tag). */
 	private String _start;
 	/** Mapping between end tag and LaTeX command. (ie. &quot;}&quot;
-        for the <code>b</code> tag). */    
+        for the {@code b} tag). */    
 	private String _end;
-	/** The element's content mustn't be touched. (ie. for <code>pre</code>) */    
+	/** The element's content mustn't be touched. (ie. for {@code pre}) */    
 	private boolean _leaveText = false;
-	/** The element's content will be ignored. (ie. for <code>script</code>) */
+	/** The element's content will be ignored. (ie. for {@code script}) */
 	private boolean _ignoreContent = false;
 	/** The element's CSS style will be ignored. */    
 	private boolean _ignoreStyles = false;
@@ -514,7 +514,7 @@ class ElementConfigItem {
 class CSSPropertyConfigItem {
 	
 	/** Mapping between the CSS property and LaTeX (start command).
-	 *  Example: <code>\texttt{<code> for &quot;monospace&quot; value
+	 *  Example: {@code \texttt{{@code  for &quot;monospace&quot; value
 	 *  of &quot;font-family&quot; property.
 	 */
 	private String _start;

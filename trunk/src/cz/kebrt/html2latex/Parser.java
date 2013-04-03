@@ -33,15 +33,15 @@ public class Parser {
      * to the SAX model used with XML. The list of possible events which
      * are sent to the handler follows.
      * <ul>
-     *  <li>startElement � the start element was reached (ie. <code>&lt;p</code>)</li>
-     *  <li>endElement � the end element was reached (ie. <code>&lt;/p&gt;)</li>
+     *  <li>startElement � the start element was reached (ie. {@code &lt;p})</li>
+     *  <li>endElement � the end element was reached (ie. {@code &lt;/p&gt;)</li>
      *  <li>endDocument � the end of the document was reached</li>
      *  <li>characters � the text content of an element</li>
      *  <li>comment � the comment was reached</li>
      * </ul>
      * @param inputFile input HTML file
-     * @param handler receives events such as startElement (ie. <code>&lt;html)
-     *  &gt;</code>, endElement, ...
+     * @param handler receives events such as startElement (ie. {@code &lt;html)
+     *  &gt;}, endElement, ...
      * @throws FatalErrorException fatal error (ie. input file can't be opened) occurs
      */
     public void parse(File inputFile, ParserHandler handler)
@@ -111,7 +111,7 @@ public class Parser {
 
     /**
      * Reads the input file char by char.
-     *  When the <code>&quot;&lt;&quot;</code> char is reached {@link Parser#readElement()
+     *  When the {@code &quot;&lt;&quot;} char is reached {@link Parser#readElement()
      *  readElement()} is called otherwise {@link Parser#readContent(char)
      *  readContent()} is called.
      * @throws IOException when input error occurs
@@ -133,8 +133,8 @@ public class Parser {
 
     /**
      * Reads elements (tags).
-     * Sends <code>comment</code>, <code>startElement</code> and
-     * <code>endElement</code> events to the handler.
+     * Sends {@code comment}, {@code startElement} and
+     * {@code endElement} events to the handler.
      * @throws IOException when input error occurs
      */
     private void readElement() throws IOException {
@@ -229,7 +229,7 @@ public class Parser {
 
     /**
      * Reads text content of an element.
-     * Sends <code>character</code> event to the handler.
+     * Sends {@code character} event to the handler.
      * @param firstChar first char read in {@link Parser#doParsing doParsing()}
      * method
      * @throws IOException when input error occurs
@@ -253,7 +253,7 @@ public class Parser {
 
 
     /** Checks whether the document is well-formed.
-     *  If not it sends <code>endElement</code> events for the elements which
+     *  If not it sends {@code endElement} events for the elements which
      *  were opened but not correctly closed.
      *  @param element the latest ending element which was reached
     */

@@ -2,8 +2,8 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
   <comment>
-    $Id: SBMLreport.xml 250 2013-03-13 10:04:46Z draeger $
-    $URL: https://rarepos.cs.uni-tuebingen.de/svn/SBML2LaTeX/trunk/resources/org/sbml/tolatex/locales/SBMLreport.xml $
+    $Id$
+    $URL$
     ---------------------------------------------------------------------
     This file is part of SBML2LaTeX, a program that creates 
     human-readable reports for given SBML files.
@@ -24,12 +24,12 @@
     along with this program. If not, see http://www.gnu.org/licenses/.
     ---------------------------------------------------------------------
     
-    Version: $Rev: 250 $
+    Version: $Rev$
   </comment>
   
   <entry key="ALGEBRAIC_RULE_VARIABLE">This rule determines the value of {0} {1}.</entry>
   <entry key="ALGEBRAIC_RULE_OVERDETERMINED_MESSAGE">As this model is over determined, it is not possible to state, which variable is determined by this rule.</entry>
-  <entry key="BIOLOGICAL_QUALIFIER">biological entity {0}</entry>
+  <entry key="BIOLOGICAL_QUALIFIER">This biological entity {0}</entry>
   <entry key="BQB_ENCODES">encodes</entry>
   <entry key="BQB_HAS_PART">has {0,choice, 0#parts| 1#a part| 1&lt;parts}</entry>
   <entry key="BQB_HAS_VERSION">has the version</entry>
@@ -41,6 +41,12 @@
   <entry key="BQB_IS_VERSION_OF">is a version of</entry>
   <entry key="BQB_OCCURS_IN">occurs in</entry>
   <entry key="BQM_UNKNOWN">has something to do with</entry>
+  <entry key="BQM_IS">is</entry>
+  <entry key="BQM_IS_DESCRIBED_BY">is described by</entry>
+  <entry key="BQM_UNKNOWN">has something to do with</entry>
+  <entry key="CONJUGATION_PRESENT_INDICATIVE_3RD_PERSON_OF_BE">{0,choice,0#are| 1#is| 1&lt;are}</entry>
+  <entry key="CONJUNCTION_AND"> and </entry>
+  <entry key="CONTAINS_UNDECLARED_UNITS">contains undeclared units</entry>
   <entry key="DEFINITION">Definition</entry>
   <entry key="DELAY_FUNCTION_DESCRIPTION">A delay function postpones the effects of an event to a later time point. At the time of execution, an event can assign values to species, parameters, or compartments if these are not set to constant.</entry>
   <entry key="DELAY_FUNCTION_TIME_UNITS">Time unit of the delay</entry>
@@ -48,8 +54,10 @@
   <entry key="DOCUMENT_CONSISTENCY_REPORT">Document Consistency Report</entry>
   <entry key="ELEMENT_ANNOTATION">{0} Annotation</entry>
   <entry key="ELEMENT_NOTES">{0} notes</entry>
+  <entry key="ELEMENTS_OF_THIS_TYPE">{0} of this type</entry>
   <entry key="ELEMENT_WITHOUT_IDENTIFIER">{0} without an identifier</entry>
   <entry key="EMPTY_LIST_OF">This list of {0} does not contain any entries.</entry>
+  <entry key="EQUATION">Equation</entry>
   <entry key="ERROR">Error</entry>
   <entry key="EVENT_DOES_USE_VALUES_FROM_TRIGGER_TIME">The values of the assignment {0,choice,0#formulae| 1#formula| 1&lt;formulae} {0,choice,0#are| 1#is| 1&lt;are} computed at the moment this event fires{1,choice,0#.| 1#, not after the delay.}</entry>
   <entry key="EVENT_DOES_NOT_USE_VALUES_FROM_TRIGGER_TIME">The {0,choice,0#formulae| 1#formula| 1&lt;formulae} in this event's assignment {0,choice,0#are| 1#is| 1&lt;are} to be computed {1,choice,0# |1#after the delay, }at the time the event is executed.</entry>
@@ -60,11 +68,15 @@
   <entry key="GENERAL_OVERVIEW">General Overview</entry>
   <entry key="GLOBAL"> global </entry>
   <entry key="GLOSSARY_OF_ONTOLOGY">Glossary of Systems Biology Ontology Terms</entry>
+  <entry key="GRAMMATICAL_NUMBER_ARGUMENTS">{0,choice,0#Arguments| 1#Argument| 1&lt;Arguments}</entry>
   <entry key="GRAMMATICAL_NUMBER_ASSIGNMENT">{0,choice,0#Assignments| 1#Assignment| 1&lt;Assignments}</entry>
+  <entry key="GRAMMATICAL_NUMBER_COMPARTMENTS">{0,choice,0#Compartments| 1#Compartment| 1&lt;Compartments}</entry>
   <entry key="GRAMMATICAL_NUMBER_EVENT">{0,choice,0#Events| 1#Event| 1&lt;Events}</entry>
   <entry key="GRAMMATICAL_NUMBER_ERROR">{0,choice,0#errors| 1#error| 1&lt;errors}</entry>
   <entry key="GRAMMATICAL_NUMBER_MESSAGE">{0,choice,0#messages| 1#message| 1&lt;messages}</entry>
   <entry key="GRAMMATICAL_NUMBER_PROBLEM">{0,choice,0#problems| 1#problem| 1&lt;problems}</entry>
+  <entry key="GRAMMATICAL_NUMBER_SPECIES">{0,choice,0#species| 1#species| 1&lt;species}</entry>
+  <entry key="GRAMMATICAL_NUMBER_UNITS">{0,choice,0#units| 1#unit| 1&lt;units}</entry>
   <entry key="GRAMMATICAL_NUMBER_WARNING">{0,choice,0#Warnings| 1#Warning| 1&lt;Warnings}</entry>
   <entry key="LABELED_ELEMENT">{0} {1}</entry>
   <entry key="INDEFINITE_ARTICLE">a</entry>
@@ -76,11 +88,18 @@
   <entry key="INTRODUCTION_SECTION_REACTIONS">All reactions are listed in the following table and are subsequently described in detail. If a reaction is affected by one or more modifiers, the {0} identifiers of the modifier species are written above the reaction arrow.</entry>
   <entry key="INTRODUCTION_SUBCOMPONENTS">This is an overview of {0}{1}{2}.</entry>
   <entry key="INVALID_SPECIES_REFERENCE_FOR_REACTION_PARTICIPANT">invalid species reference for {0} {1}</entry>
+  <entry key="INVOLVED_IN_EVENTS">Involved in {0,choice,0#events| 1#event| 1&lt;events}</entry>
+  <entry key="MATHEMATICAL_EXPRESSION">Mathematical Expression</entry>
+  <entry key="MATHEMATICAL_FORMULA">Mathematical Formula</entry>
   <entry key="MODEL_DOES_NOT_CONTAIN_ELEMENTS">This model does not contain any {0} of this type.</entry>
+  <entry key="MODEL_QUALIFIER">This model {0}</entry>
   <entry key="NAMES_IF_AVAILABLE">names or{0}if not specified{0}the</entry>
   <entry key="NUMERALS">{0,choice, 0#naught| 1#one| 2#two| 3#three| 4#four| 5#five| 6#six| 7#seven| 8#eight| 9#nine| 10#ten| 11#eleven| 12#twelve| 13#thirteen| 14#fourteen| 15#fifteen| 16#sixteen| 17#seventeen| 18#eighteen| 19#nineteen| 20#twenty| 20&lt;{0,number,integer}| 30#thirty| 30&lt;{0,number,integer}| 40#forty| 40&lt;{0,number,integer}| 50#fifty| 50&lt;{0,number,integer}| 60#sixty| 60&lt;{0,number,integer}| 70#seventy| 70&lt;{0,number,integer}| 80#eighty| 80&lt;{0,number,integer}| 90#ninety| 90&lt;{0,number,integer}| 100#one hundred| 100&lt;{0,number,integer}}</entry>
+  <entry key="NOT_AVAILABLE">not available</entry>
   <entry key="OVERVIEW_TABLE_CAPTION">Overview of all {0}.</entry>
   <entry key="PARTICIPATING_SPECIES">participating species</entry>
+  <entry key="PREDEFINED_UNITS">predefined by SBML and not mentioned in the model.</entry>
+  <entry key="PREDEFINED_UNITS_ALL">All units are </entry>
   <entry key="PRIORITY_INTRODUCTION">This event is ranked with the following weight:</entry>
   <entry key="PRODUCED_BY_SBML2LATEX">Produced by {0} version {1} for JSBML</entry>
   <entry key="PRODUCT">product</entry>
@@ -90,6 +109,8 @@
   <entry key="REACTION_PARTICIPATION_OF_SPECIES">This species takes part in {0} {1,choice,0#reactions| 1#reaction| 1&lt;reactions}</entry>
   <entry key="REACTION_UNITS_CANNOT_BE_VERIFIED">Identifiers for kinetic laws highlighted in {0} cannot be verified to evaluate to units of SBML {1} per {2}. As a result, some SBML interpreters may not be able to verify the consistency of the units on quantities in the model.</entry>
   <entry key="REACTIONS_WITHOUT_OR_WITH_INCORRECT_KINETICS">The identifiers for reactions, which are not defined properly or which are lacking a kinetic equation, are highlighted in {0}.</entry>
+  <entry key="SERIAL_AND">{0,choice,2# and |2&lt;, and }</entry>
+  <entry key="SERIES_SEPARATOR">, </entry>
   <entry key="SBML_COMPONENT_TABLE_DESCRIPTION">All components are described in more detail in the following sections.</entry>
   <entry key="SBML_COMPONENTS_OF_THIS_MODEL">The SBML components in this model.</entry>
   <entry key="SBML_DOCUMENT_ERROR_INTRODUCTION">The given SBML document contains {0} {1,choice,0#issues| 1#issue| 1&lt;issues}, which {1,choice,0#are| 1#is| 1&lt;are} listed in the remainder of this model report. The messages and identification codes shown here are those reported by the {2}.</entry>
@@ -101,10 +122,12 @@
   <entry key="SPECIES_WITH_BOUNDARY_CONDITION_COUNT">The boundary condition of {0} of {3,choice, 0#these| 1#this| 1&lt;these} species is set to {1} so that {2,choice, 0#these| 1#this| 1&lt;these} species'' {4,choice, 1#amount| 1&lt;amounts} cannot be changed by any reaction.</entry>
   <entry key="SUBJECT">SBML Model Report</entry>
   <entry key="SYSTEM">System</entry>
+  <entry key="THE_ELEMENT">The {0}</entry>
   <entry key="TRIGGER_DESCRIPTION">This trigger {0,choice, 0#cannot| 1#can} fire at the beginning of a simulation {0,choice, 0#| 1#, even} if its condition evaluates to {1} at time {2}.</entry>
   <entry key="TRIGGER_PERSISTENT_DESCRIPTION">If in the time between triggering and finally executing the event, the trigger condition switches back to {0} this trigger is {1,choice, 0#switched off again and the event is not| 1#not affected and the event is regularly} executed.</entry>
   <entry key="TRIGGER_CONDITION">The following condition decides whether this trigger may fire:</entry>
   <entry key="TRUE">true</entry>
+  <entry key="UNKNOWN_QUALIFIER">This element has something to do with</entry>
   <entry key="UNKNOWN_UNIT">Unknown unit {0}</entry>
   <entry key="WHITE_SPACE"> </entry>
   <entry key="WARNING">Warning</entry>

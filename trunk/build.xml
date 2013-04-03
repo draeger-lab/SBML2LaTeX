@@ -8,7 +8,10 @@
 	<!-- Initialization target                                               -->
 	<!-- =================================================================== -->
 
-	<target name="init">
+	<target
+	 name="init"
+	 description="Initialization target"
+	>
 		<tstamp>
 			<format property="YEAR" pattern="yyyy"/>
 		</tstamp>
@@ -31,7 +34,7 @@
 		<property name="optimize" value="on"/>
 		<property name="deprecation" value="false"/>
 		<property name="depend" value="true"/>
-		<property name="verbose" value="false"/>
+		<property name="verbose" value="true"/>
 
 		<property name="build.number" value="${DSTAMP}-${TSTAMP}"/>
 		<property name="build.name" value="${version} (build ${build.number})"/>
@@ -72,7 +75,11 @@
 	<!-- =================================================================== -->
 	<!-- Help on usage                                                       -->
 	<!-- =================================================================== -->
-	<target name="usage" depends="init">
+	<target
+	 name="usage"
+	 depends="init"
+	 description="Displays a help message (usage)"
+	>
 		<echo message=""/>
 		<echo message=""/>
 		<echo message=" ${Name} Build file"/>
@@ -95,7 +102,11 @@
 	<!-- =================================================================== -->
 	<!-- Prepares the build directory                                        -->
 	<!-- =================================================================== -->
-	<target name="prepare" depends="init">
+	<target
+	 name="prepare"
+	 depends="init"
+	 description="Prepares the build directory"
+	>
 		<mkdir dir="${build.dir}"/>
 		<echo message="Done"/>
 	</target>
@@ -103,7 +114,11 @@
 	<!-- =================================================================== -->
 	<!-- Prepares the source code                                            -->
 	<!-- =================================================================== -->
-	<target name="prepare-src" depends="prepare">
+	<target
+	 name="prepare-src"
+	 depends="prepare"
+	 description="Prepares the source code"
+	>
 		<!-- create directories -->
 		<mkdir dir="${build.src}"/>
 		<mkdir dir="${build.dest}"/>
@@ -169,7 +184,11 @@
 	<!-- =================================================================== -->
 	<!-- Compiles the source directory                                       -->
 	<!-- =================================================================== -->
-	<target name="compile" depends="prepare-src">
+	<target
+	 name="compile"
+	 depends="prepare-src"
+	 description="Compiles the source directory"
+	>
 		<javac srcdir="${build.src}"
            destdir="${build.dest}"
            debug="${debug}"
@@ -180,13 +199,16 @@
            classpathref="classpath">
 		</javac>
 		<manifest file="${build.dest}/META-INF/MANIFEST.MF">
-			<attribute name="Main-Class" value="org.sbml.tolatex.SBML2LaTeX"/>
-			<section name="${Name}">
-				<attribute name="Specification-Title" value="${Name}"/>
-				<attribute name="Specification-Version" value="${api.version}"/>
-				<attribute name="Implementation-Title" value="${Name}"/>
-				<attribute name="Implementation-Version" value="${version}"/>
-			</section>
+	        <attribute name="Main-Class" value="org.sbml.tolatex.SBML2LaTeX"/>
+	        <attribute name="Built-By" value="${user.name}"/>
+	      	<section name="${Name}">
+	      	  <attribute name="Specification-Title" value="${Name}"/>
+	      	  <attribute name="Specification-Version" value="${build.name}"/>
+	      	  <attribute name="Specification-Vendor" value="Center for Bioinformatics Tuebingen (ZBIT)"/>
+	      	  <attribute name="Implementation-Title" value="${Name}"/>
+	      	  <attribute name="Implementation-Version" value="Revision ${revision} ${TODAY}"/>
+	          <attribute name="Implementation-Vendor" value="University of Tuebingen"/>
+	      	</section>
 		</manifest>
 
 	</target>
@@ -236,61 +258,96 @@
 		</jar>
 	</target>
 	
+	<!-- =================================================================== -->
+	<!-- Determines the current SVN revision number of the project           -->
+	<!-- =================================================================== -->
+	<target
+	   name="svnrevision"
+	   description="Determines the current SVN revions number of SBML2LaTeX and stores it in a variable."
+	>
+	  <exec executable="svnversion" outputproperty="revision">
+	    <arg line="-c ${basedir}"/>
+	    <redirector>
+	      <outputfilterchain>
+	        <tokenfilter>
+	          <replaceregex pattern="[0-9]+\:" replace="" />
+	          <replaceregex pattern="[PM]+" replace="" />
+	        </tokenfilter>
+	      </outputfilterchain>
+	    </redirector>
+	  </exec>
+	  <echo message="Current revision is ${revision}" />
+	</target>
 	
-	
-	  <target
-	  	name="jar_incl-libs"
-	  	depends="init"
-	  	description="Creates a JAR file including all class files and all third-party libraries, but no source files.">
+	<!-- =================================================================== -->
+	<!-- Creates a JAR file including all dependencies, but no source code   -->
+	<!-- =================================================================== -->
+	<target
+	  name="jar_incl-libs"
+	  depends="init, svnrevision, compile"
+	  description="Creates a JAR file including all class files and all third-party libraries, but no source files.">
 	  	
-		<!-- Determine the revision number of SBML2LaTeX -->
-		<exec executable="svnversion" outputproperty="revision">
-	      <arg line="-c ${basedir}"/>
-	      <redirector>
-	        <outputfilterchain>
-	          <tokenfilter>
-	            <replaceregex pattern="[0-9]+\:" replace="" />
-	            <replaceregex pattern="[PM]+" replace="" />
-	          </tokenfilter>
-	        </outputfilterchain>
-	      </redirector>
-	    </exec>
-	  	
-	    <delete file="${appJar}_v${version}_incl-libs.jar"/>
-	    <jar jarfile="${appJar}_v${version}_incl-libs.jar">
-	      <manifest>
-	        <attribute name="Main-Class" value="org.sbml.tolatex.SBML2LaTeX"/>
-	        <attribute name="Built-By" value="${user.name}"/>
-	      	<section name="${Name}">
-	      	  <attribute name="Specification-Title" value="${Name}"/>
-	      	  <attribute name="Specification-Version" value="${build.name}"/>
-	      	  <attribute name="Specification-Vendor" value="Center for Bioinformatics Tuebingen (ZBIT)"/>
-	      	  <attribute name="Implementation-Title" value="${Name}"/>
-	      	  <attribute name="Implementation-Version" value="Revision ${revision} ${TODAY}"/>
-	          <attribute name="Implementation-Vendor" value="University of Tuebingen"/>
-	      	</section>
-	      </manifest>
+	  <delete file="${appJar}_v${version}_incl-libs.jar"/>
+	  <jar
+		 jarfile="${appJar}_v${version}_incl-libs.jar"
+	     manifest="${build.dest}/META-INF/MANIFEST.MF">
 	    	
-	      <!-- SBML2LaTeX Classes -->
-	      <fileset dir="${classes}">
-	    	<exclude name="**/package.html"/>
-	      </fileset>
-	      <fileset dir="${basedir}">
-	        <include name="LICENSE.txt"/>
-	        <include name="README.txt"/>
-	      </fileset>
-	      <fileset dir="${basedir}/licenses">
-	        <include name="AUTHORS.txt"/>
-	      </fileset>
+	   <!-- SBML2LaTeX Classes -->
+	   <fileset dir="${build.dest}">
+	     <exclude name="**/package.html **/package-info.java"/>
+	   </fileset>
+	   <fileset dir="${basedir}">
+	     <include name="LICENSE.txt"/>
+	     <include name="README.txt"/>
+	   </fileset>
+	   <fileset dir="${build.src}">
+	   	  <include name="**/*.xml **.xml **/*.properties **.properties **/*.html **.html **/*.png **.png **/*.eps **.eps **/*.pdf **.pdf **/*.sty **.sty **/*.bbl **.bbl"/>
+	   	  <exclude name="**/*.java **.java"/>
+	   </fileset>
+	   <fileset dir="${basedir}/licenses">
+	     <include name="AUTHORS.txt"/>
+	   </fileset>
 	      
-	      <!-- These libraries are required by most classes -->
-	      <zipfileset excludes="META-INF/*" src="${jars.dir}/SysBio-rev${sysbio.revision}.jar"/>
-	      <zipfileset excludes="META-INF/*" src="${jars.dir}/jsbml-1.0-a1-with-dependencies.jar"/>
-		  <zipfileset excludes="META-INF/*" src="${jars.dir}/quaqua.jar"/>
+	   <!-- These libraries are required by most classes -->
+	   <zipfileset excludes="META-INF/**" src="${jars.dir}/zbit.jar"/>
+	   <zipfileset excludes="META-INF/**" src="${jars.dir}/jsbml-1.0-a1-with-dependencies.jar"/>
+	   <zipfileset excludes="META-INF/**" src="${jars.dir}/quaqua.jar"/>
 
-	    </jar>
+	  </jar>
 	  	
-	  </target>
+	</target>
+	
+	<!-- =================================================================== -->
+	<!-- Creates a minimal JAR file                                          -->
+	<!-- =================================================================== -->
+	<target
+	  name="jar_slim"
+	  depends="init, svnrevision, compile"
+	  description="Creates a minimal JAR file."
+	>
+	  	
+	  <delete file="${appJar}_v${version}.jar"/>
+	  <jar
+		 jarfile="${appJar}_v${version}.jar"
+	     manifest="${build.dest}/META-INF/MANIFEST.MF">
+	    	
+	     <!-- SBML2LaTeX Classes -->
+	     <fileset dir="${build.dest}">
+	       <exclude name="**/package.html **/package-info.class"/>
+	     </fileset>
+	     <fileset dir="${basedir}">
+	       <include name="LICENSE.txt"/>
+	       <include name="README.txt"/>
+	     </fileset>
+	     <fileset dir="${build.src}">
+	   	   <include name="**/*.xml **.xml **/*.properties **.properties **/*.html **.html **/*.png **.png **/*.eps **.eps **/*.pdf **.pdf **/*.sty **.sty **/*.bbl **.bbl"/>
+	       <exclude name="**/*.java **.java"/>
+	     </fileset>
+	     <fileset dir="${basedir}/licenses">
+	       <include name="AUTHORS.txt"/>
+	     </fileset>
+	 </jar>
+   </target>
 	
 
 	<!-- =================================================================== -->

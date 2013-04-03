@@ -44,7 +44,7 @@ class ParserHandler implements IParserHandler {
 	 * Calls {@link Convertor#commonElementStart(ElementStart) commonElementStart()}
 	 * for non-special elements and specials methods for the elements requiring
 	 * special care (ie. {@link Convertor#tableRowStart(ElementStart) tableRowStart()}
-	 * for <code>&lt;table&gt;</table>)
+	 * for {@code &lt;table&gt;</table>)
 	 * @param element start element reached
 	 */
 	public void startElement(ElementStart element) {
@@ -78,7 +78,7 @@ class ParserHandler implements IParserHandler {
 	 * Calls {@link Convertor#commonElementEnd(ElementEnd, ElementStart) commonElementEnd()}
 	 * for non-special elements and specials methods for the elements requiring
 	 * special care (ie. {@link Convertor#tableRowEnd(ElementEnd, ElementStart) tableRowEnd()}
-	 * for <code>&lt;/table&gt;</table>)
+	 * for {@code &lt;/table&gt;</table>)
 	 * @param element end element reached
 	 * @param elementStart corresponding start element
 	 */

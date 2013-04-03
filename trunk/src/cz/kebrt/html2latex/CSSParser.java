@@ -99,7 +99,7 @@ public class CSSParser {
 	/**
 	 * Parses the CSS file.
 	 * It skips CSS comments and reads each style separately.
-	 * When the style is read (ie. <code>".bold { font-weight:bold; } </code>)
+	 * When the style is read (ie. {@code ".bold { font-weight:bold; } })
 	 * {@link CSSParser#parseStyle(String) parseStyle()} method is called.
 	 * @throws IOException input error occurs
 	 */    
