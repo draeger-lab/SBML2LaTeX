@@ -35,7 +35,7 @@ public class LaTeX extends StringUtil {
 	
 	/**
 	 * Requires LaTeX package booktabs. Produces a fancy line at the bottom of a
-	 * table. This variable also includes the <code>\end{longtable}</code> command
+	 * table. This variable also includes the {@code \end{longtable}} command
 	 * and a new line.
 	 */
 	public static final String bottomrule = "\\bottomrule\\end{longtable}"
@@ -455,8 +455,8 @@ public class LaTeX extends StringUtil {
 	}
 	
 	/**
-	 * This method returns a <code>StringBuffer</code> representing a properly
-	 * LaTeX formatted number. However, if the <code>double</code> argument
+	 * This method returns a {@code StringBuffer} representing a properly
+	 * LaTeX formatted number. However, if the {@code double} argument
 	 * contains "Exx" (power of ten), then the returned value starts and ends with
 	 * a dollar symbol.
 	 * 
