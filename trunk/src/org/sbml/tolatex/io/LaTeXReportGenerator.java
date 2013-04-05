@@ -1146,8 +1146,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 					} else {
 						description.append(mathtt(maskSpecialChars(var)));
 					}
-					description
-							.append((ev.getEventAssignmentCount() > 1) ? " =& " : " = ");
+					description.append((ev.getEventAssignmentCount() > 1) ? " =& " : " = ");
 					description.append(ev.getEventAssignment(j).getMath().toLaTeX());
 					if (j < ev.getEventAssignmentCount() - 1) {
 						description.append(lineBreak);
@@ -1255,8 +1254,8 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 		List<String> defaults = new Vector<String>();
 		UnitDefinition def;
 		Model m = listOfUnits.getModel();
-		ListOf<UnitDefinition> lud = new ListOf<UnitDefinition>(m.getLevel(),
-			m.getVersion());
+		ListOf<UnitDefinition> lud = new ListOf<UnitDefinition>(m.getLevel(), m.getVersion());
+		lud.setSBaseListType(UnitDefinition.class);
 		for (int i = 0; i < listOfUnits.size(); i++) {
 			lud.add((UnitDefinition) listOfUnits.get(i).clone());
 		}
@@ -1464,7 +1463,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 			buffer.append(subsection(MessageFormat.format(
 				bundleContent.getString("ELEMENT_ANNOTATION"), 
 				bundleElements.getString(model.getElementName())), false));
-			buffer.append("The following resources provide further information about this model:");
+			buffer.append(bundleContent.getString("MODEL_RESOURCES"));
 			buffer.newLine();
 			buffer.newLine();
 			for (int i = 0; i < model.getCVTermCount(); i++) {
@@ -2376,7 +2375,12 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 		buffer.append("\\hspace{-0.5ex}\\begin{rotate}{-17.5}\\raisebox{-.1ex}{2}");
 		buffer.append("\\end{rotate}\\hspace{1ex}\\LaTeX}}");
 		buffer.newLine();
-		buffer.append("\\cfoot{\\textcolor{gray}{" + MessageFormat.format(bundleContent.getString("PRODUCED_BY_SBML2LATEX"), formatter.sbml2latex(), SBML2LaTeX.VERSION_NUMBER) + "}}");
+		buffer.append("\\cfoot{");
+		buffer.append(formatter.textcolor("gray",
+			MessageFormat.format(
+				bundleContent.getString("PRODUCED_BY_SBML2LATEX"),
+				formatter.sbml2latex(), SBML2LaTeX.VERSION_NUMBER)));
+		buffer.append('}');
 		buffer.newLine();
 		buffer.newLine();
 		buffer.append(formatter.documentSubject(bundleContent.getString("SUBJECT")));
@@ -2721,7 +2725,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 				buffer.newLine();
 				buffer.append(MessageFormat.format(
 					bundleContent.getString("REACTIONS_WITHOUT_OR_WITH_INCORRECT_KINETICS"),
-					"\\textcolor{red}{red}"));
+					formatter.textcolor("red", "red")));
 				buffer.newLine();
 			}
 			if (notSubstancePerTimeUnit) {
@@ -2837,7 +2841,8 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 					}
 				}
 				if (hasInitialAssignment) {
-					buffer.append(descriptionItem("Initial assignment ",
+					buffer.append(descriptionItem(
+						bundleElements.getString("initialAssignment") + bundleContent.getString("WHITE_SPACE"),
 						Integer.toString(i)));
 				}
 				
@@ -3769,17 +3774,21 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 			buffer.append(rl.getMath().toLaTeX());
 			buffer.append(eqEnd);
 		}
-		if (rl.isSetNotes()
-				|| ((rl.getDerivedUnitDefinition().getUnitCount() > 0) && !rl
-						.containsUndeclaredUnits())) {
+		boolean containsUndeclaredUnits = rl.containsUndeclaredUnits();
+		UnitDefinition derivedUnit = rl.getDerivedUnitDefinition();
+		if (rl.isSetNotes() || 
+			((derivedUnit.getUnitCount() > 0) && !containsUndeclaredUnits) ||
+			((rl.getCVTermCount() > 0) && includeMIRIAM)) {
 			buffer.append(descriptionBegin);
-			if ((rl.getDerivedUnitDefinition().getUnitCount() > 0)
-					&& !rl.containsUndeclaredUnits()) {
-				buffer.append(descriptionItem(bundleElements.getString("derivedUnit"),
-					math(format(rl.getDerivedUnitDefinition()))));
+			if ((derivedUnit.getUnitCount() > 0) && !containsUndeclaredUnits) {
+				buffer.append(descriptionItem(
+					bundleElements.getString("derivedUnit"),
+					math(format(derivedUnit))));
 			}
 			if (rl.isSetNotes()) {
-				buffer.append(descriptionItem(bundleElements.getString("notes"), formatHTML(rl.getNotesString())));
+				buffer.append(descriptionItem(
+					bundleElements.getString("notes"),
+					formatHTML(rl.getNotesString())));
 			}
 			if ((rl.getCVTermCount() > 0) && includeMIRIAM) {
 				buffer.append(formatter.labeledItem("Annotation"));

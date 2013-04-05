@@ -93,6 +93,7 @@
   <entry key="MATHEMATICAL_FORMULA">Mathematical Formula</entry>
   <entry key="MODEL_DOES_NOT_CONTAIN_ELEMENTS">This model does not contain any {0} of this type.</entry>
   <entry key="MODEL_QUALIFIER">This model {0}</entry>
+  <entry key="MODEL_RESOURCES">The following resources provide further information about this model:</entry>
   <entry key="NAMES_IF_AVAILABLE">names or{0}if not specified{0}the</entry>
   <entry key="NUMERALS">{0,choice, 0#naught| 1#one| 2#two| 3#three| 4#four| 5#five| 6#six| 7#seven| 8#eight| 9#nine| 10#ten| 11#eleven| 12#twelve| 13#thirteen| 14#fourteen| 15#fifteen| 16#sixteen| 17#seventeen| 18#eighteen| 19#nineteen| 20#twenty| 20&lt;{0,number,integer}| 30#thirty| 30&lt;{0,number,integer}| 40#forty| 40&lt;{0,number,integer}| 50#fifty| 50&lt;{0,number,integer}| 60#sixty| 60&lt;{0,number,integer}| 70#seventy| 70&lt;{0,number,integer}| 80#eighty| 80&lt;{0,number,integer}| 90#ninety| 90&lt;{0,number,integer}| 100#one hundred| 100&lt;{0,number,integer}}</entry>
   <entry key="NOT_AVAILABLE">not available</entry>
