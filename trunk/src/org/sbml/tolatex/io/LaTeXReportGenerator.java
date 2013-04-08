@@ -3295,6 +3295,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 			reactString.append(r.getFast() ? " fast " : " ");
 		}
 		reactString.append("reversible reaction of ");
+		
 		reactString.append(MessageFormat.format(bundleContent.getString("NUMERALS"), r.getReactantCount()));
 		reactString.append(" reactant");
 		if (r.getReactantCount() > 1) {
@@ -3346,11 +3347,12 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 		bw.close();
 		if (arrangeReactionParticipantsInOneTable) {
 			if (hasSBOReactants > 0) {
-				reactString.append("\\item[Reactant");
-				if (hasSBOReactants > 1) {
-					reactString.append('s');
-				}
-				reactString.append(" with SBO annotation] ");
+				reactString.append("\\item[");
+				reactString.append(
+				  MessageFormat.format(bundleContent.getString("ELEMENT_WITH_SBO"),
+				  MessageFormat.format(bundleContent.getString("GRAMMATICAL_NUMBER_REACTANT"),
+				    hasSBOReactants)));
+				reactString.append("] ");
 				for (i = 0; i < r.getReactantCount(); i++) {
 					SpeciesReference reactant = r.getReactant(i);
 					if (r.getReactant(i).isSetSBOTerm()) {
@@ -3366,11 +3368,12 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 				}
 			}
 			if (hasSBOProducts > 0) {
-				reactString.append("\\item[Product");
-				if (hasSBOProducts > 1) {
-					reactString.append('s');
-				}
-				reactString.append(" with SBO annotation] ");
+				reactString.append("\\item[");
+				reactString.append(
+				  MessageFormat.format(bundleContent.getString("ELEMENT_WITH_SBO"),
+				  MessageFormat.format(bundleContent.getString("GRAMMATICAL_NUMBER_PRODUCT"),
+				    hasSBOProducts)));
+				reactString.append("] ");
 				for (i = 0; i < r.getProductCount(); i++) {
 					SpeciesReference product = r.getProduct(i);
 					if (r.getProduct(i).isSetSBOTerm()) {
@@ -3387,11 +3390,12 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 			}
 			if (r.getListOfModifiers().size() > 0) {
 				if (hasSBOModifiers > 0) {
-					reactString.append("\\item[Modifier");
-					if (hasSBOModifiers > 1) {
-						reactString.append('s');
-					}
-					reactString.append(" with SBO annotation] ");
+					reactString.append("\\item[");
+					reactString.append(
+					  MessageFormat.format(bundleContent.getString("ELEMENT_WITH_SBO"),
+					  MessageFormat.format(bundleContent.getString("GRAMMATICAL_NUMBER_MODIFIER"),
+					    hasSBOModifiers)));
+					reactString.append("] ");
 					for (i = 0; i < r.getModifierCount(); i++) {
 						ModifierSpeciesReference m = r.getModifier(i);
 						if (m.isSetSBOTerm()) {
@@ -3426,11 +3430,11 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 			 * One table for the reactants and products
 			 */
 			String headLine = "", head = "", idAndNameColumn;
-			double nameWidth = 3;
-			double idWidth = nameWidth / 2;
-			if (paperSize.equals("letter") || paperSize.equals("a4"))
+			double nameWidth = 3d;
+			double idWidth = nameWidth / 2d;
+			if ((paperSize == PaperSize.letter) || (paperSize == PaperSize.a4)) { 
 				idAndNameColumn = "p{" + idWidth + "cm}p{" + nameWidth + "cm}";
-			else {
+			} else {
 				int columns = 0;
 				if (r.getReactantCount() > 0) {
 					columns += 2;
@@ -3487,7 +3491,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 				cols++;
 			}
 			headLine += lineBreak;
-			String idAndNameColumnDef = bundleElements.getString("id") + '&' + bundleElements.getString("name");;
+			String idAndNameColumnDef = bundleElements.getString("id") + '&' + bundleElements.getString("name");
 			headLine += idAndNameColumnDef;
 			for (i = 1; i < cols; i++) {
 				headLine += '&' + idAndNameColumnDef;
@@ -3605,8 +3609,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 					species = r.getModel().getSpecies(specRef.getSpecies());
 					reactString.append(texttt(maskSpecialChars(specRef.getSpecies())));
 					reactString.append('&');
-					reactString
-							.append(maskSpecialChars(specRef.getName().length() == 0 ? species
+					reactString.append(maskSpecialChars(specRef.getName().length() == 0 ? species
 									.getName() : specRef.getName()));
 					reactString.append('&');
 					if (specRef.isSetSBOTerm()) {
@@ -3648,7 +3651,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 					functionCalls = callsFunctions(kin.getMath());
 				}
 			} else {
-				reactString.append("\\text{no mathematics specified}");
+				reactString.append(formatter.mathText(bundleContent.getString("NO_MATH_SPECIFIED")));
 			}
 			pBuffer = new BufferedWriter(localParameters);
 			if (r.getKineticLaw().getLocalParameterCount() > 0) {
@@ -3658,7 +3661,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 		} else {
 			reactString.append(eqBegin);
 			reactString.append("v_{" + (reactionIndex + 1) + "}=");
-			reactString.append("\\text{not specified}");
+			reactString.append(formatter.mathText(bundleContent.getString("NOT_SPECIFIED")));
 		}
 		reactString.append(newLine());
 		reactString.append(label("v" + Integer.toString(reactionIndex + 1)));
@@ -3997,7 +4000,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 		if (printFullODEsystem) {
 			v.append("\\underbrace{");
 			if ((reaction == null) || !reaction.isSetKineticLaw()) {
-				v.append("\\text{no mathematics specified}");
+				v.append(formatter.mathText(bundleContent.getString("NO_MATH_SPECIFIED")));
 			} else {
 				v.append(reaction.getKineticLaw().getMath().toLaTeX());
 			}
@@ -4049,7 +4052,14 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 	 */
 	private StringBuffer getSize(Compartment c) {
 		StringBuffer value;
-		switch ((int) c.getSpatialDimensions()) {
+		int spatialDim = (int) c.getSpatialDimensions();
+		if (spatialDim != c.getSpatialDimensions()) {
+			logger.warning(MessageFormat.format(
+			  bundleUI.getString("NON_INTEGER_SPATIAL_DIMENSIONS"),
+			  c.isSetName() ? c.getName() : c.getId(),
+			  c.getSpatialDimensions()));
+		}
+		switch (spatialDim) {
 			case 3:
 				value = mathrm("vol");
 				break;
@@ -4111,7 +4121,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 	}
 
 	/**
-	 * This method returns a StringBuffer containing the reaction equation for the
+	 * This method returns a {@link StringBuffer} containing the reaction equation for the
 	 * given reaction. Note that this equation has to be surrounded by a
 	 * 
 	 * <pre>
@@ -4152,12 +4162,11 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 		reactString.append(r.getReversible() ? " <=>" : " ->");
 		if (r.getModifierCount() > 0) {
 			reactString.append("[\\text{");
-			reactString.append(math(getNameOrID(
-				r.getModel().getSpecies(r.getModifier(0).getSpecies()), true)));
+			reactString.append(math(getNameOrID(r.getModifier(0).getSpeciesInstance(), true)));
 			for (i = 1; i < r.getModifierCount(); i++) {
-				reactString.append(",\\;");
-				reactString.append(math(getNameOrID(
-					r.getModel().getSpecies(r.getModifier(i).getSpecies()), true)));
+				reactString.append(",");
+				reactString.append(formatter.smallSpace());
+				reactString.append(math(getNameOrID(r.getModifier(i).getSpeciesInstance(), true)));
 			}
 			reactString.append("}] ");
 		} else {

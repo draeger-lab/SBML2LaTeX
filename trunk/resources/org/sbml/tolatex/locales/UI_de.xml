@@ -130,6 +130,10 @@
   
   <entry key="PDFLATEX_LOCATION_UNKNOWN">Leider kann kein PDF-Bericht erstellt werden, ohne dass der Pfad zum LaTeX-Kompilierer Ihres Rechners bekannt ist. Geben Sie daher bitte an, wo sich dieses Programm befindet.</entry> 
   
+  <!-- LaTeXReportGenerator -->
+  
+  <entry key="UNSUPPORTED_FONT">Nicht unterstützte Schriftart {0}. Es wird stattdessen {1} benutzt.</entry>
+  <entry key="NON_INTEGER_SPATIAL_DIMENSIONS">Das Kompartiment ''{0}'' besitzt die nicht ganzzahlige räumliche Dimension {1,number}. Dieses Programm kann solche Werte nicht korrekt behandeln.</entry>
       
   <!-- SBML2LaTeX -->
 
