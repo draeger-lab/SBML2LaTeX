@@ -138,6 +138,7 @@
   <!-- LaTeXReportGenerator -->
   
   <entry key="UNSUPPORTED_FONT">Unsupported font {0}. Using {1}.</entry>
+  <entry key="NON_INTEGER_SPATIAL_DIMENSIONS">Compartment ''{0}'' has the non-integer spatial dimension {1,number}. I don't know how to deal with this.</entry>
   
   <!-- SBML2LaTeX -->
   

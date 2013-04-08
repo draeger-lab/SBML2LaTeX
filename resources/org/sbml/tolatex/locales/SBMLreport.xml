@@ -56,6 +56,7 @@
   <entry key="ELEMENT_NOTES">{0} notes</entry>
   <entry key="ELEMENTS_OF_THIS_TYPE">{0} of this type</entry>
   <entry key="ELEMENT_WITHOUT_IDENTIFIER">{0} without an identifier</entry>
+  <entry key="ELEMENT_WITH_SBO">{0} with SBO annotation</entry>
   <entry key="EMPTY_LIST_OF">This list of {0} does not contain any entries.</entry>
   <entry key="EQUATION">Equation</entry>
   <entry key="ERROR">Error</entry>
@@ -74,7 +75,10 @@
   <entry key="GRAMMATICAL_NUMBER_EVENT">{0,choice,0#Events| 1#Event| 1&lt;Events}</entry>
   <entry key="GRAMMATICAL_NUMBER_ERROR">{0,choice,0#errors| 1#error| 1&lt;errors}</entry>
   <entry key="GRAMMATICAL_NUMBER_MESSAGE">{0,choice,0#messages| 1#message| 1&lt;messages}</entry>
+  <entry key="GRAMMATICAL_NUMBER_MODIFIER">{0,choice,0#Modifiers| 1#Modifier| 1&lt;Modifiers}</entry>
   <entry key="GRAMMATICAL_NUMBER_PROBLEM">{0,choice,0#problems| 1#problem| 1&lt;problems}</entry>
+  <entry key="GRAMMATICAL_NUMBER_PRODUCT">{0,choice,0#Products| 1#Product| 1&lt;Product}</entry>
+  <entry key="GRAMMATICAL_NUMBER_REACTANT">{0,choice,0#Reactants| 1#Reactant| 1&lt;Reactants}</entry>
   <entry key="GRAMMATICAL_NUMBER_SPECIES">{0,choice,0#species| 1#species| 1&lt;species}</entry>
   <entry key="GRAMMATICAL_NUMBER_UNITS">{0,choice,0#units| 1#unit| 1&lt;units}</entry>
   <entry key="GRAMMATICAL_NUMBER_WARNING">{0,choice,0#Warnings| 1#Warning| 1&lt;Warnings}</entry>
@@ -97,6 +101,8 @@
   <entry key="NAMES_IF_AVAILABLE">names or{0}if not specified{0}the</entry>
   <entry key="NUMERALS">{0,choice, 0#naught| 1#one| 2#two| 3#three| 4#four| 5#five| 6#six| 7#seven| 8#eight| 9#nine| 10#ten| 11#eleven| 12#twelve| 13#thirteen| 14#fourteen| 15#fifteen| 16#sixteen| 17#seventeen| 18#eighteen| 19#nineteen| 20#twenty| 20&lt;{0,number,integer}| 30#thirty| 30&lt;{0,number,integer}| 40#forty| 40&lt;{0,number,integer}| 50#fifty| 50&lt;{0,number,integer}| 60#sixty| 60&lt;{0,number,integer}| 70#seventy| 70&lt;{0,number,integer}| 80#eighty| 80&lt;{0,number,integer}| 90#ninety| 90&lt;{0,number,integer}| 100#one hundred| 100&lt;{0,number,integer}}</entry>
   <entry key="NOT_AVAILABLE">not available</entry>
+  <entry key="NO_MATH_SPECIFIED">no mathematics specified</entry>
+  <entry key="NOT_SPECIFIED">not specified</entry>
   <entry key="OVERVIEW_TABLE_CAPTION">Overview of all {0}.</entry>
   <entry key="PARTICIPATING_SPECIES">participating species</entry>
   <entry key="PREDEFINED_UNITS">predefined by SBML and not mentioned in the model.</entry>
