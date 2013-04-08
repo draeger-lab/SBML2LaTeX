@@ -289,8 +289,17 @@
 	  	
 	  <delete file="${appJar}_v${version}_incl-libs.jar"/>
 	  <jar
+	     compress="true"
+	     filesetmanifest="mergewithoutmain"
+	     index="true"
+	     indexMetaInf="true"
 		 jarfile="${appJar}_v${version}_incl-libs.jar"
-	     manifest="${build.dest}/META-INF/MANIFEST.MF">
+	     level="9"
+	     manifest="${build.dest}/META-INF/MANIFEST.MF"
+	     manifestencoding="utf-8"
+	     strict="warn"
+	     update="true"
+	  >
 	    	
 	   <!-- SBML2LaTeX Classes -->
 	   <fileset dir="${build.dest}">

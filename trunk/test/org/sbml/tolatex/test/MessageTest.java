@@ -74,7 +74,6 @@ public class MessageTest {
 			Integer.valueOf(1), 
 			"\\href{http://sbml.org/Facilities/Validator}{SBML.org online validator}"));
 		
-		
 		System.out.println(MessageFormat.format(
 			"The values of the assignment {0,choice,0#formulae| 1#formula| 1<formulae} {0,choice,0#are| 1#is| 1<are} computed at the moment this event fires{1,choice,0#.| 1#, not after the delay.}",
 			Integer.valueOf(3),
