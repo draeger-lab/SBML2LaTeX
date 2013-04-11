@@ -3999,7 +3999,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 		StringBuffer v = new StringBuffer();
 		if (printFullODEsystem) {
 			v.append("\\underbrace{");
-			if ((reaction == null) || !reaction.isSetKineticLaw()) {
+			if ((reaction == null) || !reaction.isSetKineticLaw() || !reaction.getKineticLaw().isSetMath()) {
 				v.append(formatter.mathText(bundleContent.getString("NO_MATH_SPECIFIED")));
 			} else {
 				v.append(reaction.getKineticLaw().getMath().toLaTeX());
