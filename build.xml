@@ -206,7 +206,7 @@
 	      	  <attribute name="Specification-Version" value="${build.name}"/>
 	      	  <attribute name="Specification-Vendor" value="Center for Bioinformatics Tuebingen (ZBIT)"/>
 	      	  <attribute name="Implementation-Title" value="${Name}"/>
-	      	  <attribute name="Implementation-Version" value="Revision ${revision} ${TODAY}"/>
+	      	  <attribute name="Implementation-Version" value="Revision ${repository.revision} ${TODAY}"/>
 	          <attribute name="Implementation-Vendor" value="University of Tuebingen"/>
 	      	</section>
 		</manifest>
@@ -265,7 +265,7 @@
 	   name="svnrevision"
 	   description="Determines the current SVN revions number of SBML2LaTeX and stores it in a variable."
 	>
-	  <exec executable="svnversion" outputproperty="revision">
+	  <exec executable="svnversion" outputproperty="repository.revision">
 	    <arg line="-c ${basedir}"/>
 	    <redirector>
 	      <outputfilterchain>
@@ -276,7 +276,7 @@
 	      </outputfilterchain>
 	    </redirector>
 	  </exec>
-	  <echo message="Current revision is ${revision}" />
+	  <echo message="Current revision is ${repository.revision}" />
 	</target>
 	
 	<!-- =================================================================== -->
@@ -303,19 +303,18 @@
 	    	
 	   <!-- SBML2LaTeX Classes -->
 	   <fileset dir="${build.dest}">
-	     <exclude name="**/package.html **/package-info.java"/>
+	     <exclude name="**/package.html **/package-info.class"/>
 	   </fileset>
-	   <fileset dir="${basedir}">
-	     <include name="LICENSE.txt"/>
-	     <include name="README.txt"/>
-	   </fileset>
-	   <fileset dir="${build.src}">
-	   	  <include name="**/*.xml **.xml **/*.properties **.properties **/*.html **.html **/*.png **.png **/*.eps **.eps **/*.pdf **.pdf **/*.sty **.sty **/*.bbl **.bbl"/>
-	   	  <exclude name="**/*.java **.java"/>
-	   </fileset>
-	   <fileset dir="${basedir}/licenses">
-	     <include name="AUTHORS.txt"/>
-	   </fileset>
+	   <fileset dir="${basedir}"
+	     includes="LICENSE.txt, README.txt"
+	   />
+	   <fileset dir="${build.src}"
+	   	  includes="**/*.xml **.xml **/*.properties **.properties **/*.html **.html **/*.png **.png **/*.eps **.eps **/*.pdf **.pdf **/*.sty **.sty **/*.bbl **.bbl"
+	   	  excludes="**/*.java **.java"
+	   />
+	   <fileset dir="${basedir}/licenses"
+	     includes="AUTHORS.txt"
+	   />
 	      
 	   <!-- These libraries are required by most classes -->
 	   <zipfileset excludes="META-INF/**" src="${jars.dir}/zbit.jar"/>
@@ -334,167 +333,193 @@
 	  depends="init, svnrevision, compile"
 	  description="Creates a minimal JAR file."
 	>
-	  	
-	  <delete file="${appJar}_v${version}.jar"/>
+	  
 	  <jar
+	  	 compress="true"
+	  	 filesetmanifest="mergewithoutmain"
+	  	 index="true"
+	  	 indexMetaInf="true"
 		 jarfile="${appJar}_v${version}.jar"
-	     manifest="${build.dest}/META-INF/MANIFEST.MF">
-	    	
+	  	 level="9"
+	     manifest="${build.dest}/META-INF/MANIFEST.MF"
+	  	 manifestencoding="utf-8"
+	  	 strict="warn"
+	  	 update="true"
+	  >
 	     <!-- SBML2LaTeX Classes -->
 	     <fileset dir="${build.dest}">
-	       <exclude name="**/package.html **/package-info.class"/>
+	       <exclude name="**/package.html, **/package-info.class"/>
 	     </fileset>
-	     <fileset dir="${basedir}">
-	       <include name="LICENSE.txt"/>
-	       <include name="README.txt"/>
-	     </fileset>
-	     <fileset dir="${build.src}">
-	   	   <include name="**/*.xml **.xml **/*.properties **.properties **/*.html **.html **/*.png **.png **/*.eps **.eps **/*.pdf **.pdf **/*.sty **.sty **/*.bbl **.bbl"/>
-	       <exclude name="**/*.java **.java"/>
-	     </fileset>
-	     <fileset dir="${basedir}/licenses">
-	       <include name="AUTHORS.txt"/>
-	     </fileset>
+	     <fileset
+	     	dir="${basedir}"
+	     	includes="LICENSE.txt, README.txt"
+	     />
+	     <fileset
+	     	dir="${build.src}"
+	  	    includes="**/*.xml, **.xml, **/*.properties, **.properties, **/*.html, **.html, **/*.png, **.png, **/*.eps, **.eps, **/*.pdf, **.pdf, **/*.sty, **.sty, **/*.bbl, **.bbl"
+	  	    excludes="**/*.java, **.java"
+	     />
+	     <fileset
+	     	dir="${basedir}/licenses"
+	        includes="AUTHORS.txt"
+	     />
 	 </jar>
    </target>
 	
 
-	<!-- =================================================================== -->
-	<!-- Creates the API documentation                                       -->
-	<!-- =================================================================== -->
-	<target
-		name="javadoc"
-		description="Creates Javadoc for ${Name}"
-		depends="prepare-src">
-		
-	  	<mkdir dir="${doc}"/>
-	  	<mkdir dir="${doc}/version_${version}"/>
-		
-		<javadoc
-		  sourcepath="${build.src}"
-	      destdir="${doc}/version_${version}"
-		  packagenames="org.*"
-    	  excludepackagenames=""
-		  footer="Generated ${TODAY}"
-		  access="protected"
-		  author="true"
-	      classpathref="classpath"
-		  doctitle="${Name} ${version}"
-		  nodeprecated="false"
-		  nodeprecatedlist="false"
-		  noindex="false"
-		  nonavbar="false"
-		  notree="false"
-		  source="1.5"
-		  splitindex="true"
-		  use="true"
-		  stylesheetfile="${doc}/javadoc-style.css"
-		  overview="${src}/overview.html"
-		  version="true"
-		  maxmemory="96m"
-          windowtitle="${Name} ${version}"
-          breakiterator="yes"
-    	>
-			<link href="http://java.sun.com/j2se/1.5.0/docs/api"/>
-			<link href="http://www.biojava.org/docs/api17"/>
-	    	<link href="http://sbml.org/Special/Software/JSBML/latest-stable/build/apidocs/"/>
-			<tag name="sbml.deprecated" description="Deprecated in SBML since:"/>
-            <tag name="jsbml.note" description="Note"/>
-			<tag name="jsbml.warning"/>
-			<tag name="doc.note" description="Documentation note"/>
-			
-		</javadoc>
+  <!-- =================================================================== -->
+  <!-- Creates the API documentation                                       -->
+  <!-- =================================================================== -->
+  <target
+    name="javadoc"
+    depends="prepare-src, svnrevision"
+    description="Creates Javadoc for ${Name}"
+  >
+    
+    <property name="doc.location"   value="${doc}/version_${version}"/>
+    <property name="icon.file.name" value="ICON_LATEX_48.png"/>
+    
+    <mkdir dir="${doc.location}"/>
+    
+    <javadoc
+      access="protected"
+      author="true"
+      breakiterator="yes"
+      classpathref="classpath"
+      destdir="${doc}/version_${version}"
+      doctitle="${Name} ${version}"
+      excludepackagenames=""
+      footer="Generated at ${TODAY}&lt;br/&gt;Version ${version} Revision ${repository.revision}"
+      header="&lt;img src=&quot;resources/${icon.file.name}&quot;/&gt;"
+      maxmemory="96m"
+      nodeprecated="false"
+      nodeprecatedlist="false"
+      noindex="false"
+      nonavbar="false"
+      notree="false"
+      packagenames="org.*"
+      source="1.5"
+      sourcepath="${build.src}"
+      splitindex="true"
+      stylesheetfile="${doc}/javadoc-style.css"
+      overview="${src}/overview.html"
+      use="true"
+      version="true"
+      windowtitle="${Name} ${version}"
+    >
+      <link href="http://java.sun.com/j2se/1.5.0/docs/api"/>
+      <link href="http://www.biojava.org/docs/api17"/>
+      <link href="http://sbml.org/Special/Software/JSBML/latest-stable/build/apidocs/"/>
+      <tag name="sbml.deprecated" description="Deprecated in SBML since:"/>
+      <tag name="jsbml.note" description="Note"/>
+      <tag name="jsbml.warning"/>
+      <tag name="doc.note" description="Documentation note"/>
+      
+    </javadoc>
 
-	</target>
+    <!--
+      This is a hack: Actually, the header doesn't allow us to place img
+      tags; but we cheat by using HTML codes to hide it :-) This copies the
+      icon to the right folder:
+    -->
+    <property name="icon.file.src" value="${resource.dir}/org/sbml/tolatex/gui/img/${icon.file.name}"/>
+    <property name="icon.file.dest" value="${doc.location}/resources/${icon.file.name}"/>
+    <echo message="Copying file ${icon.file.src} to file ${icon.file.dest}..."/>
+    <copy file="${icon.file.src}" tofile="${icon.file.dest}"/>
+    
+  </target>
 
-	<!-- =================================================================== -->
-	<!-- Creates the javadocs jar package                                      -->
-	<!-- =================================================================== -->
-	<target name="jar-javadoc" depends="javadoc">
+  <!-- =================================================================== -->
+  <!-- Creates the javadocs jar package                                      -->
+  <!-- =================================================================== -->
+  <target
+  	name="jar-javadoc"
+  	depends="javadoc"
+  >
 
-		<jar jarfile="${build.dir}/${name}-${version}-javadoc.jar" basedir="${doc}/version_${version}" />
+    <jar jarfile="${build.dir}/${name}-${version}-javadoc.jar" basedir="${doc}/version_${version}" />
 
-	</target>
+  </target>
 
-	<!-- =================================================================== -->
-	<!-- Creates the distribution                                            -->
-	<!-- =================================================================== -->
-	<target name="dist" depends="prepare-src">
+  <!-- =================================================================== -->
+  <!-- Creates the distribution                                            -->
+  <!-- =================================================================== -->
+  <target name="dist" depends="prepare-src">
 
-		<!-- Creates the standard jar file -->
+    <!-- Creates the standard jar file -->
 
-		<antcall target="clean"/>
+    <antcall target="clean"/>
 
-		<antcall target="jar"/>
-		<antcall target="jar-src"/>
-		<copy todir="${dist.dir}" file="${build.dir}/${name}-${version}-src.jar"/>
+    <antcall target="jar"/>
+    <antcall target="jar-src"/>
+    <copy todir="${dist.dir}" file="${build.dir}/${name}-${version}-src.jar"/>
 
-		<copy todir="${dist.dir}" file="${build.dir}/${name}-${version}.jar"/>
-		<copy todir="${dist.root}" file="${build.dir}/${name}-${version}.jar"/>
+    <copy todir="${dist.dir}" file="${build.dir}/${name}-${version}.jar"/>
+    <copy todir="${dist.root}" file="${build.dir}/${name}-${version}.jar"/>
 
-		<!-- Creates the jar file including all the dependencies -->
+    <!-- Creates the jar file including all the dependencies -->
 
-		<antcall target="bigjar"/>
+    <antcall target="bigjar"/>
 
-		<copy todir="${dist.dir}" file="${build.dir}/${name}-${version}-with-dependencies.jar"/>
-		<copy todir="${dist.root}" file="${build.dir}/${name}-${version}-with-dependencies.jar"/>
+    <copy todir="${dist.dir}" file="${build.dir}/${name}-${version}-with-dependencies.jar"/>
+    <copy todir="${dist.root}" file="${build.dir}/${name}-${version}-with-dependencies.jar"/>
 
-		<!-- Creates and copy the generated javadoc -->
-		<antcall target="jar-javadoc"/>
+    <!-- Creates and copy the generated javadoc -->
+    <antcall target="jar-javadoc"/>
 
-		<copy todir="${dist.dir}/doc/api">
-			<fileset dir="${doc}/version_${version}/" includes="**/*">
-			</fileset>
-		</copy>
-		<copy todir="${dist.dir}" file="${build.dir}/${name}-${version}-javadoc.jar"/>
+    <copy todir="${dist.dir}/doc/api">
+      <fileset dir="${doc}/version_${version}/" includes="**/*">
+      </fileset>
+    </copy>
+    <copy todir="${dist.dir}" file="${build.dir}/${name}-${version}-javadoc.jar"/>
 
-		<!-- Copy the source files -->
-		<copy todir="${dist.dir}/src">
-			<fileset dir="${build.src}/" includes="**/*">
-			</fileset>
-		</copy>
+    <!-- Copy the source files -->
+    <copy todir="${dist.dir}/src">
+      <fileset dir="${build.src}/" includes="**/*">
+      </fileset>
+    </copy>
 
-		<!-- Copy all the dependencies jar files -->
-		<copy todir="${dist.dir}/lib">
-			<fileset dir="${jars.dir}/" includes="*.jar">
-			</fileset>
-		</copy>
+    <!-- Copy all the dependencies jar files -->
+    <copy todir="${dist.dir}/lib">
+      <fileset dir="${jars.dir}/" includes="*.jar">
+      </fileset>
+    </copy>
 
-		<copy todir="${dist.dir}">
-			<fileset dir="${basedir}/" includes="LICENSE.txt NEWS.txt README AUTHORS.txt build.xml">
-			</fileset>
-		</copy>
-		
-		<copy todir="${dist.dir}/licenses">
-			<fileset dir="${basedir}/licenses" includes="**/*">
-			</fileset>
-		</copy>
+    <copy todir="${dist.dir}">
+      <fileset dir="${basedir}/" includes="LICENSE.txt NEWS.txt README AUTHORS.txt build.xml">
+      </fileset>
+    </copy>
+    
+    <copy todir="${dist.dir}/licenses">
+      <fileset dir="${basedir}/licenses" includes="**/*">
+      </fileset>
+    </copy>
 
-		<copy todir="${dist.dir}/doc">
-			<fileset dir="${basedir}/doc" includes="**/*.pdf **/*.jpg **/*.java" excludes="posters/** publications/** templates/**">
+    <copy todir="${dist.dir}/doc">
+      <fileset dir="${basedir}/doc" includes="**/*.pdf **/*.jpg **/*.java" excludes="posters/** publications/** templates/**">
 
-			</fileset>
-		</copy>
+      </fileset>
+    </copy>
 
-		<!-- Creates the archives to be distributed -->
-		<zip basedir="${dist.root}" destfile="${dist.root}/${name}-${version}.zip" includes="${name}-${version}/**"/>
+    <!-- Creates the archives to be distributed -->
+    <zip basedir="${dist.root}" destfile="${dist.root}/${name}-${version}.zip" includes="${name}-${version}/**"/>
 
-		<!-- Not generating a tar.gz a having only a zip file should be enough -->
-		<!-- <tar basedir="${dist.root}" destfile="${dist.root}/${name}-${version}.tar.gz" includes="${name}-${version}/**" compression="gzip"/> -->
+    <!-- Not generating a tar.gz a having only a zip file should be enough -->
+    <!-- <tar basedir="${dist.root}" destfile="${dist.root}/${name}-${version}.tar.gz" includes="${name}-${version}/**" compression="gzip"/> -->
 
-	</target>
+  </target>
 
 
-	<!-- =================================================================== -->
-	<!-- Cleans everything                                                   -->
-	<!-- =================================================================== -->
-	<target name="clean" depends="init">
-		<delete includeEmptyDirs="true" quiet="yes">
-			<fileset dir="${build.dir}" includes="**/*"/>
-		</delete>
-		<delete dir="${dist.root}" includeEmptyDirs="true" quiet="yes">
-		</delete>
-	</target>
+  <!-- =================================================================== -->
+  <!-- Cleans everything                                                   -->
+  <!-- =================================================================== -->
+  <target name="clean" depends="init">
+    <delete includeEmptyDirs="true" quiet="yes">
+      <fileset dir="${build.dir}" includes="**/*"/>
+    </delete>
+    <delete dir="${dist.root}" includeEmptyDirs="true" quiet="yes">
+    </delete>
+  </target>
 
 </project>
 
