@@ -2363,7 +2363,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 		buffer.newLine();
 		buffer.append("\\newcommand{\\no}{\\parbox[c]{1.3em}{\\Large\\Square\\hspace{-.62em}--}}");
 		buffer.newLine();
-		buffer.append("\\newcommand{\\numero}{N\\hspace{-0.075em}\\raisebox{0.25em}{\\relsize{-2}\\b{o}}}");
+		buffer.append("\\newcommand{\\numero}{\\mbox{N\\hspace{-0.075em}\\raisebox{0.25em}{\\relsize{-2}\\b{o}}}}");
 		buffer.newLine();
 		buffer.append("\\newcommand{\\reaction}[1]{");
 		buffer.append("\\begin{equation}\\ce{#1}\\end{equation}}");
