@@ -26,6 +26,7 @@ package org.sbml.totikz;
 
 import org.sbml.jsbml.ext.layout.CubicBezier;
 import org.sbml.jsbml.ext.layout.CurveSegment;
+import org.sbml.jsbml.ext.layout.LineSegment;
 import org.sbml.jsbml.ext.layout.Point;
 
 import de.zbit.sbml.layout.Inhibition;
@@ -42,15 +43,16 @@ public class TikZInhibition extends TikZSBGNArc implements Inhibition<String> {
 	 * @see de.zbit.sbml.layout.SBGNArc#draw(CurveSegment curveSegment)
 	 */
 	public String draw(CurveSegment curveSegment, double lineWidth) {
-		Point startPoint = curveSegment.getStart();
-		Point endPoint = curveSegment.getEnd();
+		LineSegment ls = (LineSegment) curveSegment;
+		Point startPoint = ls.getStart();
+		Point endPoint = ls.getEnd();
 		double startX = startPoint.getX();
 		double startY = startPoint.getY();
 		double endX = endPoint.getX();
 		double endY = endPoint.getY();
 
-		//curveSegment instanceof LineSegment
-		if (!curveSegment.isSetBasePoint1() || !curveSegment.isSetBasePoint2()) {
+		//!curveSegment instanceof CubicBezier
+		if (!(curveSegment instanceof CubicBezier)) {
 			// TODO draw a line instead of a pipe
 			// TODO add the possibility to rotate
 			return TikZ.drawFromTo("-|", "black", lineWidth, startX, startY, endX - 2d, endY);

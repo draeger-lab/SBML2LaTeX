@@ -34,10 +34,12 @@ import org.sbml.jsbml.Reaction;
 import org.sbml.jsbml.Species;
 import org.sbml.jsbml.ext.layout.BoundingBox;
 import org.sbml.jsbml.ext.layout.CompartmentGlyph;
+import org.sbml.jsbml.ext.layout.CubicBezier;
 import org.sbml.jsbml.ext.layout.Curve;
 import org.sbml.jsbml.ext.layout.CurveSegment;
 import org.sbml.jsbml.ext.layout.Dimensions;
 import org.sbml.jsbml.ext.layout.GraphicalObject;
+import org.sbml.jsbml.ext.layout.LineSegment;
 import org.sbml.jsbml.ext.layout.Point;
 import org.sbml.jsbml.ext.layout.Position;
 import org.sbml.jsbml.ext.layout.ReactionGlyph;
@@ -247,7 +249,7 @@ public class TikZLayoutAlgorithm extends SimpleLayoutAlgorithm {
 
 		ListOf<CurveSegment> curveSegmentsList = new ListOf<CurveSegment>(layoutLevel, layoutVersion);
 
-		CurveSegment curveSegment = new CurveSegment();
+		LineSegment curveSegment = new LineSegment();
 		curveSegment.setLevel(layoutLevel);
 		curveSegment.setVersion(layoutVersion);
 
@@ -429,19 +431,20 @@ public class TikZLayoutAlgorithm extends SimpleLayoutAlgorithm {
 			Curve curve = specRefGlyph.getCurve();
 			if (curve.isSetListOfCurveSegments()) {
 				for (CurveSegment curveSegment : curve.getListOfCurveSegments()) {
+					LineSegment ls = (LineSegment) curveSegment;
 					Point startPoint;
 					Point endPoint;
 
 					if (role.equals(SpeciesReferenceRole.PRODUCT)) {
 						// point at reaction glyph
-						startPoint = curveSegment.getStart();
+						startPoint = ls.getStart();
 						// point at species glyph
-						endPoint = curveSegment.getEnd();
+						endPoint = ls.getEnd();
 					} else {
 						// point at reaction glyph
-						startPoint = curveSegment.getEnd();
+						startPoint = ls.getEnd();
 						// point at species glyph
-						endPoint = curveSegment.getStart();
+						endPoint = ls.getStart();
 					}
 
 					RelativePosition relativePosition = getRelativePosition(startPoint, endPoint);
@@ -483,8 +486,9 @@ public class TikZLayoutAlgorithm extends SimpleLayoutAlgorithm {
 		}
 
 		for (CurveSegment curveSegment : curve.getListOfCurveSegments()) {
-			Point startPoint = curveSegment.getStart();
-			Point endPoint = curveSegment.getEnd();
+			LineSegment ls = (LineSegment) curveSegment;
+			Point startPoint = ls.getStart();
+			Point endPoint = ls.getEnd();
 			double startX = startPoint.getX();
 			double startY = startPoint.getY();
 			double startZ = startPoint.getZ();
@@ -492,9 +496,10 @@ public class TikZLayoutAlgorithm extends SimpleLayoutAlgorithm {
 			double endY = endPoint.getY();
 			double endZ = endPoint.getZ();
 
-			if (curveSegment.isSetBasePoint1() && curveSegment.isSetBasePoint2()) {
-				Point basePoint1 = curveSegment.getBasePoint1();
-				Point basePoint2 = curveSegment.getBasePoint2();
+			if (curveSegment instanceof CubicBezier) {
+				CubicBezier cb = (CubicBezier) curveSegment;
+				Point basePoint1 = cb.getBasePoint1();
+				Point basePoint2 = cb.getBasePoint2();
 
 				double maxX = Math.max(startX, endX);
 				maxX = Math.max(maxX, basePoint1.getX());
