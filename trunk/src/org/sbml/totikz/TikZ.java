@@ -140,11 +140,12 @@ public class TikZ {
 	 * @param lineWidth
 	 * @return
 	 */
-	public static String draw(String lineHead, String colorName, CurveSegment curveSegment, double lineWidth) {		
-		if (!curveSegment.isSetBasePoint1() || !curveSegment.isSetBasePoint2()) {
+	public static String draw(String lineHead, String colorName, CurveSegment curveSegment, double lineWidth) {
+		if (!(curveSegment instanceof CubicBezier)) {
+			LineSegment ls = (LineSegment) curveSegment;
 			// curveSegment instanceof LineSegment
-			Point startPoint = curveSegment.getStart();
-			Point endPoint = curveSegment.getEnd();
+			Point startPoint = ls.getStart();
+			Point endPoint = ls.getEnd();
 			double startX = startPoint.getX();
 			double startY = startPoint.getY();
 			double endX = endPoint.getX();
@@ -297,9 +298,10 @@ public class TikZ {
 	 */
 	public static String drawFromTo(String lineHead, String colorName,
 		CurveSegment curveSegment, double lineWidth) {
-		if (!curveSegment.isSetBasePoint1() || !curveSegment.isSetBasePoint2()) {
-			Point startPoint = curveSegment.getStart();
-			Point endPoint = curveSegment.getEnd();
+		if (!(curveSegment instanceof CubicBezier)) {
+			LineSegment ls = (LineSegment) curveSegment;
+			Point startPoint = ls.getStart();
+			Point endPoint = ls.getEnd();
 			double startX = startPoint.getX();
 			double startY = startPoint.getY();
 			double endX = endPoint.getX();

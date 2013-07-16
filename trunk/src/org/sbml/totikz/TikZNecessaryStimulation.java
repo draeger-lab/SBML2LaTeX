@@ -25,6 +25,7 @@ package org.sbml.totikz;
 
 import org.sbml.jsbml.ext.layout.CubicBezier;
 import org.sbml.jsbml.ext.layout.CurveSegment;
+import org.sbml.jsbml.ext.layout.LineSegment;
 import org.sbml.jsbml.ext.layout.Point;
 
 import de.zbit.sbml.layout.NecessaryStimulation;
@@ -42,8 +43,9 @@ public class TikZNecessaryStimulation extends TikZSBGNArc implements NecessarySt
 	 */
 	//@Override
 	public String draw(CurveSegment curveSegment, double lineWidth) {
-		Point startPoint = curveSegment.getStart();
-		Point endPoint = curveSegment.getEnd();
+		LineSegment ls = (LineSegment) curveSegment;
+		Point startPoint = ls.getStart();
+		Point endPoint = ls.getEnd();
 		double startX = startPoint.getX();
 		double startY = startPoint.getY();
 		double endX = endPoint.getX();
@@ -58,8 +60,8 @@ public class TikZNecessaryStimulation extends TikZSBGNArc implements NecessarySt
 		// TODO triangle must have variable size
 		String tikzEnd   = TikZ.drawLine("-open triangle 60", "black", lineWidth, middleX, middleY, endX, endY);
 
-		//curveSegment instanceof LineSegment
-		if (!curveSegment.isSetBasePoint1() || !curveSegment.isSetBasePoint2()) {
+		//curveSegment is not instanceof CubicBezier
+		if (!(curveSegment instanceof CubicBezier)) {
 			return tikzStart + ";\n" + tikzEnd + ";\n";
 			
 		}
