@@ -185,6 +185,42 @@ public class TikZ {
 	
 	/**
 	 * 
+	 * @param cloneMarkerColorName
+	 * @param x
+	 * @param y
+	 * @param width
+	 * @param height
+	 * @return
+	 */
+	public static String drawCloneMarkerEllipse(String cloneMarkerColorName, double x, double y,
+			double width, double height) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("\\begin{scope}\n\\clip (");
+		sb.append((x + width));
+		sb.append("pt,");
+		sb.append((y + height));
+		sb.append("pt) ellipse (");
+		sb.append(width);
+		sb.append("pt and ");
+		sb.append(height);
+		sb.append("pt);\n");
+		sb.append("\\fill[");
+		sb.append(cloneMarkerColorName);
+		sb.append(")] (");
+		sb.append(x);
+		sb.append("pt,");
+		sb.append((y + ((4d / 3d) * height)));
+		sb.append("pt) rectangle (");
+		sb.append((x + (2d * width)));
+		sb.append("pt,");
+		sb.append((y + (2d * height)));
+		sb.append("pt);\n");
+		sb.append("\\end{scope}\n");
+		return sb.toString();
+	}
+
+	/**
+	 * 
 	 * @param colorName
 	 * @param bezier
 	 * @param lineWidth
@@ -194,7 +230,7 @@ public class TikZ {
 		CubicBezier bezier, double lineWidth) {
 		return drawCubicBezier(null, colorName, bezier, lineWidth);
 	}
-
+	
 	/**
 	 * 
 	 * @param colorName
@@ -214,7 +250,7 @@ public class TikZ {
 		double yBase2, double xEnd, double yEnd) {
 		return drawCubicBezier(null, colorName, lineWidth, xStart, yStart, xBase1, yBase1, xBase2, yBase2, xEnd, yEnd);
 	}
-	
+
 	/**
 	 * 
 	 * @param lineHead
@@ -239,7 +275,7 @@ public class TikZ {
 		double endY = end.getY();
 		return drawCubicBezier(lineHead, "black", lineWidth, startX, startY, basePoint1X, basePoint1Y, basePoint2X, basePoint2Y, endX, endY);
 	}
-
+	
 	/**
 	 * 
 	 * @param lineHead
@@ -311,7 +347,7 @@ public class TikZ {
 		}
 		return draw(lineHead, colorName, curveSegment, lineWidth);
 	}
-	
+
 	/**
 	 * 
 	 * @param lineHead
@@ -450,7 +486,7 @@ public class TikZ {
 		sb.append("pt);\n");
 		return sb.toString();
 	}
-
+	
 	/**
 	 * 
 	 * @param colorName
@@ -465,7 +501,7 @@ public class TikZ {
 		double x1, double y1, double x2, double y2) {
 		return drawShapeRectangle(colorName, lineWidth, x1, y1, x2, y2, 0d, null);
 	}
-	
+
 	/**
 	 * 
 	 * @param colorName
@@ -532,7 +568,7 @@ public class TikZ {
 	public static String endTikZPicture() {
 		return "\\end{tikzpicture}\n";
 	}
-
+	
 	/**
 	 * 
 	 * @param fillColorName
@@ -555,6 +591,39 @@ public class TikZ {
 		sb.append(y);
 		sb.append("pt) circle (");
 		sb.append(radius);
+		sb.append("pt);\n");
+		return sb.toString();
+	}
+	
+	/**
+	 * 
+	 * @param fillColorName
+	 * @param lineColorName
+	 * @param lineWidth
+	 * @param x
+	 * @param y
+	 * @param width
+	 * @param height
+	 * @return
+	 */
+	public static String fillShapeEllipse(String fillColorName,
+			String lineColorName, double lineWidth, double x, double y,
+			double width, double height) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("\\filldraw [fill = ");
+		sb.append(fillColorName);
+		sb.append(", line width = ");
+		sb.append(lineWidth);
+		sb.append("pt, draw = ");
+		sb.append(lineColorName);
+		sb.append("] (");
+		sb.append((x + width));
+		sb.append("pt,");
+		sb.append((y + height));
+		sb.append("pt) ellipse (");
+		sb.append(width);
+		sb.append("pt and ");
+		sb.append(height);
 		sb.append("pt);\n");
 		return sb.toString();
 	}
