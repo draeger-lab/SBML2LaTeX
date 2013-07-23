@@ -35,6 +35,8 @@ import de.zbit.sbml.layout.UnspecifiedNode;
  */
 public class TikZUnspecifiedNode extends UnspecifiedNode<String> {
 	
+	private double lineWidth = TikZLayoutBuilder.DEFAULT_LINE_WIDTH;
+	
 	/* (non-Javadoc)
 	 * @see de.zbit.sbml.layout.SBGNNode#draw(double x, double y, double z, double width, double height, double depth)
 	 */
@@ -43,34 +45,11 @@ public class TikZUnspecifiedNode extends UnspecifiedNode<String> {
 		width = width / 2d;
 		height = height / 2d;
 		
-		String ellipse = (x + width)
-						+ "pt,"
-						+ (y + height)
-						+ "pt) ellipse ("
-						+ width
-						+ "pt and "
-						+ height
-						+ "pt);\n";
-		
-		String tikz = "\\filldraw [fill = unspecifiedEntity!50, draw = white] (" + 
-				ellipse;
-		
 		if (isSetCloneMarker()) {
-			tikz = tikz + "\\begin{scope}\n\\clip ("
-						+ ellipse
-						+ "\\fill[black] ("
-						+ x
-						+ "pt,"
-						+ (y + ((4d / 3d) * height))
-						+ "pt) rectangle ("
-						+ (x + (2d * width))
-						+ "pt,"
-						+ (y + (2d * height))
-						+ "pt);\n"
-						+ "\\end{scope}\n";
+			return TikZ.drawCloneMarkerEllipse("black", x, y, width, height);
 		}
 		
-		return tikz;
+		return TikZ.fillShapeEllipse("unspecifiedEntity!50", "white", lineWidth, x, y, width, height);
 	}
 	
 }
