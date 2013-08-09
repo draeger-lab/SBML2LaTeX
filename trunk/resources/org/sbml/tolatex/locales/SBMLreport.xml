@@ -63,6 +63,7 @@
   <entry key="EVENT_DOES_USE_VALUES_FROM_TRIGGER_TIME">The values of the assignment {0,choice,0#formulae| 1#formula| 1&lt;formulae} {0,choice,0#are| 1#is| 1&lt;are} computed at the moment this event fires{1,choice,0#.| 1#, not after the delay.}</entry>
   <entry key="EVENT_DOES_NOT_USE_VALUES_FROM_TRIGGER_TIME">The {0,choice,0#formulae| 1#formula| 1&lt;formulae} in this event's assignment {0,choice,0#are| 1#is| 1&lt;are} to be computed {1,choice,0# |1#after the delay, }at the time the event is executed.</entry>
   <entry key="EVENT_INTRODUCTION">Each event is initiated whenever its trigger condition switches from {0} to {1}.</entry>
+  <entry key="EVENTS_INFLUENCING_SPECIES">Furthermore, {0} {1,choice, 1#event| 1&lt;events} {1,choice, 1#influences| 1&lt;influence} this species' rate of change.</entry>
   <entry key="FALSE">false</entry>
   <entry key="FATAL">Fatal</entry>
   <entry key="FULL_SBML_VALIDATION_NOT_YET_SUPPORTED">Currently, the Java{0} library {1}, which is used by the documentation tool {2}, does not provide an implementation for full SBML consistency checks. Hence, at this position this report cannot highlight any problems in the SBML document, which does not mean that it is entirely correct. Please visit the website {3} and use the SBML validator there.</entry>
@@ -125,6 +126,10 @@
   <entry key="SBML_DOCUMENT_INTRODUCTION">This is a document in SBML Level {0,number,integer} Version {1,number,integer} format.</entry>
   <entry key="SBML_ONLINE_VALIDATOR">SBML.org online validator</entry>
   <entry key="SBO_CONCEPT_OF_MODEL">The SBO concept of this model is {0} {1}. Its SBO term is {2}. See Section{3}{4} for the definition.</entry>
+  <entry key="SPECIES_INFLUENCED_BY_RULES_OR_EVENTS"> the species' quantity{0,choice, 0#.| 1&lt; because this species is on the boundary of the reaction system.}</entry>
+  <entry key="SPECIES_INTERPRETATION">When interpreted as an ordinary differential equation framework, this model implies the following {0,choice, 1#equation| 1&lt;set of equations} for the {1,choice, 0#rates| 1#rate| 1lt;rates} of change of {1,choice, 1#each| 1&lt;the following} species.</entry>
+  <entry key="SPECIES_NOT_INFLUENCED_BY_REACTIONS">, which {0,choice, 1#does| 1&lt;do} not influence its rate of change because this {1,choice, 0#constant | 1# }species is on the boundary of the reaction system:</entry>
+  <entry key="SPECIES_NOT_INVOLVED_IN_REACTIONS">This species does not take part in any reactions. Its quantity does hence not change over time:</entry>
   <entry key="SPECIES_SECTION_ODE_REFERENCE">Section{0}{1} provides further details and the derived rates of change of each species.</entry>
   <entry key="SPECIES_WITH_BOUNDARY_CONDITION_COUNT">The boundary condition of {0} of {3,choice, 0#these| 1#this| 1&lt;these} species is set to {1} so that {2,choice, 0#these| 1#this| 1&lt;these} species'' {4,choice, 1#amount| 1&lt;amounts} cannot be changed by any reaction.</entry>
   <entry key="SUBJECT">SBML Model Report</entry>

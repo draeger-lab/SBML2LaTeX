@@ -2667,9 +2667,9 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 			for (speciesIndex = 0; speciesIndex < model.getSpeciesCount(); speciesIndex++) {
 				speciesIDandIndex.put(model.getSpecies(speciesIndex).getId(),
 					Integer.valueOf(speciesIndex));
-				reactantsReaction[(int) speciesIndex] = new Vector<Integer>();
-				productsReaction[(int) speciesIndex] = new Vector<Integer>();
-				modifiersReaction[(int) speciesIndex] = new Vector<Integer>();
+				reactantsReaction[speciesIndex] = new Vector<Integer>();
+				productsReaction[speciesIndex] = new Vector<Integer>();
+				modifiersReaction[speciesIndex] = new Vector<Integer>();
 			}
 			for (reactionIndex = 0; reactionIndex < reactionList.size(); reactionIndex++) {
 				Reaction r = (Reaction) reactionList.get(reactionIndex);
@@ -2683,19 +2683,19 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 				for (sReferenceIndex = 0; sReferenceIndex < r.getReactantCount(); sReferenceIndex++) {
 					speciesIndex = speciesIDandIndex.get(
 						r.getReactant(sReferenceIndex).getSpecies()).intValue();
-					reactantsReaction[(int) speciesIndex].add(Integer
+					reactantsReaction[speciesIndex].add(Integer
 							.valueOf(reactionIndex + 1));
 				}
 				for (sReferenceIndex = 0; sReferenceIndex < r.getProductCount(); sReferenceIndex++) {
 					speciesIndex = speciesIDandIndex.get(
 						r.getProduct(sReferenceIndex).getSpecies()).intValue();
-					productsReaction[(int) speciesIndex].add(Integer
+					productsReaction[speciesIndex].add(Integer
 							.valueOf(reactionIndex + 1));
 				}
 				for (sReferenceIndex = 0; sReferenceIndex < r.getModifierCount(); sReferenceIndex++) {
 					speciesIndex = speciesIDandIndex.get(
 						r.getModifier(sReferenceIndex).getSpecies()).intValue();
-					modifiersReaction[(int) speciesIndex].add(Integer
+					modifiersReaction[speciesIndex].add(Integer
 							.valueOf(reactionIndex + 1));
 				}
 			}
@@ -2706,19 +2706,9 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 				model.getSpeciesCount()), true));
 			buffer.append(label("sec:DerivedRateEquations"));
 			buffer.newLine();
-			buffer.append("When interpreted as an ordinary differential equation framework, this model implies the following ");
-			if (reactionList.size() == 1) {
-				buffer.append("equation");
-			} else {
-				buffer.append("set of equations");
-			}
-			buffer.append(" for the rate");
-			if (model.getSpeciesCount() > 1) {
-				buffer.append("s of change of each ");
-			} else {
-				buffer.append(" of change of the following ");
-			}
-			buffer.append("species. ");
+			buffer.append(MessageFormat.format(
+				bundleContent.getString("SPECIES_INTERPRETATION"),
+				reactionList.size(), model.getSpeciesCount()));
 			buffer.newLine();
 			
 			if (notExistingKineticLaw) {
@@ -2922,8 +2912,8 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 				StringWriter equation = new StringWriter();
 				BufferedWriter equationBW = new BufferedWriter(equation);
 				ASTNode ast;
-				for (i = 0; i < productsReaction[(int) speciesIndex].size(); i++) {
-					reactionIndex = productsReaction[(int) speciesIndex].get(i);
+				for (i = 0; i < productsReaction[speciesIndex].size(); i++) {
+					reactionIndex = productsReaction[speciesIndex].get(i);
 					Reaction r = model.getReaction(reactionIndex - 1);
 					notSubstancePerTimeUnit = notExistingKineticLaw = false;
 					if (r != null) {
@@ -2959,8 +2949,8 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 					formatVelocity(r, reactionIndex, notSubstancePerTimeUnit,
 						notExistingKineticLaw, equationBW);
 				}
-				for (i = 0; i < reactantsReaction[(int) speciesIndex].size(); i++) {
-					reactionIndex = reactantsReaction[(int) speciesIndex].get(i) - 1;
+				for (i = 0; i < reactantsReaction[speciesIndex].size(); i++) {
+					reactionIndex = reactantsReaction[speciesIndex].get(i) - 1;
 					Reaction r = model.getReaction(reactionIndex);
 					notSubstancePerTimeUnit = notExistingKineticLaw = false;
 					if (r != null) {
@@ -2997,10 +2987,10 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 				}
 				equationBW.close();
 				
-				final int numReactionsInvolved = productsReaction[(int) speciesIndex]
+				final int numReactionsInvolved = productsReaction[speciesIndex]
 						.size()
-						+ modifiersReaction[(int) speciesIndex].size()
-						+ reactantsReaction[(int) speciesIndex].size();
+						+ modifiersReaction[speciesIndex].size()
+						+ reactantsReaction[speciesIndex].size();
 				
 				if (species.getBoundaryCondition()) {
 					if (species.getConstant()) {
@@ -3008,11 +2998,9 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 						if (0 < numReactionsInvolved) {
 							formatReactionsInvolved(model, speciesIndex, reactantsReaction,
 								productsReaction, modifiersReaction, buffer);
-							buffer.append(", which do");
-							if (numReactionsInvolved == 1) {
-								buffer.append("es");
-							}
-							buffer.append(" not influence its rate of change because this constant species is on the boundary of the reaction system:");
+							buffer.append(MessageFormat.format(
+								bundleContent.getString("SPECIES_NOT_INFLUENCED_BY_REACTIONS"),
+								numReactionsInvolved, 0));
 						}
 						buffer.append(eqBegin);
 						buffer.append("\\frac{\\mathrm d}{\\mathrm dt} ");
@@ -3086,18 +3074,12 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 							if (eventsInvolved.size() + rulesInvolved.size() == 1) {
 								buffer.append('s');
 							}
-							buffer.append(" the species' quantity");
-							if (numReactionsInvolved > 0) {
-								buffer.append(" because this species is on the boundary of the reaction system");
-							}
-							buffer.append('.');
+							buffer.append(MessageFormat.format(bundleContent.getString("SPECIES_INFLUENCED_BY_RULES_OR_EVENTS"), numReactionsInvolved));
 						} else {
 							if (numReactionsInvolved > 0) {
-								buffer.append(", which do");
-								if (numReactionsInvolved == 1) {
-									buffer.append("es");
-								}
-								buffer.append(" not influence its rate of change because this species is on the boundary of the reaction system:");
+								buffer.append(MessageFormat.format(
+									bundleContent.getString("SPECIES_NOT_INFLUENCED_BY_REACTIONS"),
+									numReactionsInvolved, 1));
 							}
 							buffer.append(eqBegin);
 							buffer.append("\\frac{\\mathrm d}{\\mathrm dt} ");
@@ -3107,7 +3089,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 						}
 					}
 				} else { // not boundary condition.
-					int numModification = modifiersReaction[(int) speciesIndex].size();
+					int numModification = modifiersReaction[speciesIndex].size();
 					if (species.getConstant()) {
 						// never changes, cannot be reactant or product and no
 						// rules; but can be a modifier of reactions
@@ -3204,7 +3186,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 							buffer.newLine();
 						} else { // not involved in any rules.
 							if (numReactionsInvolved == 0) {
-								buffer.append("This species does not take part in any reactions. Its quantity does hence not change over time:");
+								buffer.append(bundleContent.getString("SPECIES_NOT_INVOLVED_IN_REACTIONS"));
 							} else {
 								formatReactionsInvolved(model, speciesIndex, reactantsReaction,
 									productsReaction, modifiersReaction, buffer);
@@ -3215,22 +3197,14 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 							buffer.append("\\frac{\\mathrm d}{\\mathrm dt} ");
 							buffer.append(getNameOrID(species, true));
 							buffer.append(" = ");
-							buffer.append((equation.getBuffer().length() > 0) ? equation
-									.getBuffer() : "0");
+							buffer.append((equation.getBuffer().length() > 0) ? equation.getBuffer() : "0");
 							buffer.append(eqEnd);
 						}
 						if (eventsInvolved.size() > 0) {
-							buffer.append("Furthermore, ");
-							buffer.append(MessageFormat.format(bundleContent.getString("NUMERALS"), eventsInvolved.size()));
-							buffer.append(" event");
-							if (eventsInvolved.size() > 1) {
-								buffer.append('s');
-							}
-							buffer.append(" influence");
-							if (eventsInvolved.size() == 1) {
-								buffer.append('s');
-							}
-							buffer.append(" this species' rate of change.");
+							buffer.append(MessageFormat.format(
+								bundleContent.getString("EVENTS_INFLUENCING_SPECIES"),
+								MessageFormat.format(bundleContent.getString("NUMERALS"), eventsInvolved.size()),
+								eventsInvolved.size()));
 						}
 					}
 				}
@@ -3943,8 +3917,8 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 				} else {
 					noComma = false;
 				}
-				reactionIndex = modifierReaction[(int) speciesIndex].get(
-					(int) i - numReactants - numProducts).intValue();
+				reactionIndex = modifierReaction[speciesIndex].get(
+					i - numReactants - numProducts).intValue();
 			}
 			reaction = model.getReaction(reactionIndex - 1);
 			if ((0 < i) && (!noComma)) {
@@ -4009,13 +3983,14 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 		v.append("v_{");
 		v.append(Integer.toString(k));
 		v.append('}');
+		// TODO: Set brackets differently!!! HERE MUST BE SOME BUG!
+		if (printFullODEsystem) {
+			v.append('}');
+		}
 		if (notSubstancePerTimeUnit) {
 			v = colorbox("lightgray", math(v));
 		} else if (notExistingKineticLaw) {
 			v = textcolor("red", v);
-		}
-		if (printFullODEsystem) {
-			v.append('}');
 		}
 		equationBW.append(hyperref("v" + Integer.toString(k), v));
 	}

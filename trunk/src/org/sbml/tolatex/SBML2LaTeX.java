@@ -197,10 +197,10 @@ public class SBML2LaTeX extends Launcher implements SBML2LaTeXView {
 				prefsLaTeX.getBoolean(LaTeXOptions.INCLUDE_SECTION_SPECIES_TYPES),
 				prefsLaTeX.getBoolean(LaTeXOptions.INCLUDE_SECTION_UNIT_DEFINITIONS),
 				prefsLaTeX.getBoolean(LaTeXOptions.INCLUDE_SECTION_LAYOUTS));
-		} catch (IOException e) {
+		} catch (IOException exc) {
 			throw new IOException(MessageFormat.format(
 				bundle.getString("CANNOT_WRITE_TO_FILE"),
-				texFile));
+				texFile), exc);
 		}
 		
 		/*
