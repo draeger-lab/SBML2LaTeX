@@ -902,9 +902,11 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 					if ((ud == null) || (ud.getUnitCount() == 0)) {
 						buffer.append(' ');
 					} else if (ud.isVariantOfVolume() && (ud.getUnitCount() == 1)
-							&& (c.getSize() == 1.0) && (ud.getUnit(0).isLitre()))
+							&& (c.getSize() == 1.0) && (ud.getUnit(0).isLitre())) {
 						buffer.append("litre");
-					else buffer.append(math(format(ud)));
+					} else {
+						buffer.append(math(format(ud)));
+					}
 					buffer.append('&');
 					buffer.append(c.getConstant() ? yes : no);
 					buffer.append('&');
@@ -1416,34 +1418,34 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 		buffer.append(formatter.multicolumn(1, Align.center, "Element", false, true) + '&' + formatter.multicolumn(1, Align.center, "Quantity"));
 		buffer.append(lineBreak);
 		buffer.append(midrule);
-		buffer.append("compartment types&");
+		buffer.append(bundleElements.getString("listOfCompartmentTypes") + "&");
 		buffer.append(Integer.toString(model.getCompartmentTypeCount()));
-		buffer.append("&compartments&");
+		buffer.append("&" + bundleElements.getString("listOfCompartments") + "&");
 		buffer.append(Integer.toString(model.getCompartmentCount()));
 		buffer.append(lineBreak);
-		buffer.append("species types&");
+		buffer.append(bundleElements.getString("listOfSpeciesTypes") + "&");
 		buffer.append(Integer.toString(model.getSpeciesTypeCount()));
-		buffer.append("&species&");
+		buffer.append("&" + bundleElements.getString("listOfSpecies") + "&");
 		buffer.append(Integer.toString(model.getSpeciesCount()));
 		buffer.append(lineBreak);
-		buffer.append("events&");
+		buffer.append(bundleElements.getString("listOfEvents") + "&");
 		buffer.append(Integer.toString(model.getEventCount()));
-		buffer.append("&constraints&");
+		buffer.append("&" + bundleElements.getString("listOfConstraints") + "&");
 		buffer.append(Integer.toString(model.getConstraintCount()));
 		buffer.append(lineBreak);
-		buffer.append("reactions&");
+		buffer.append(bundleElements.getString("listOfReactions") + "&");
 		buffer.append(Integer.toString(model.getReactionCount()));
-		buffer.append("&function definitions&");
+		buffer.append("&" + bundleElements.getString("listOfFunctionDefinitions") + "&");
 		buffer.append(Integer.toString(model.getFunctionDefinitionCount()));
 		buffer.append(lineBreak);
-		buffer.append("global parameters&");
+		buffer.append(bundleElements.getString("listOfParameters") + "&");
 		buffer.append(Integer.toString(model.getParameterCount()));
-		buffer.append("&unit definitions&");
+		buffer.append("&" + bundleElements.getString("listOfUnitDefinitions") + "&");
 		buffer.append(Integer.toString(model.getUnitDefinitionCount()));
 		buffer.append(lineBreak);
-		buffer.append("rules&");
+		buffer.append(bundleElements.getString("listOfRules") + "&");
 		buffer.append(Integer.toString(model.getRuleCount()));
-		buffer.append("&initial assignments&");
+		buffer.append("&" + bundleElements.getString("listOfInitialAssignments") + "&");
 		buffer.append(Integer.toString(model.getInitialAssignmentCount()));
 		buffer.append(lineBreak);
 		buffer.append("\\bottomrule\\end{tabular}");
