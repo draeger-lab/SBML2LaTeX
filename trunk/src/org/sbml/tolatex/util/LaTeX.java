@@ -2,7 +2,7 @@
  * $Id$
  * $URL$
  * ---------------------------------------------------------------------
- * This file is part of SBML2LaTeX, a program that creates 
+ * This file is part of SBML2LaTeX, a program that creates
  * human-readable reports for given SBML files.
  * 
  * Copyright (C) 2008-2013 by the University of Tuebingen, Germany.
@@ -219,8 +219,8 @@ public class LaTeX extends StringUtil {
 	 * @return
 	 */
 	public static String getNumbering(int number) {
-		if ((Integer.MIN_VALUE < number) && (number < Integer.MAX_VALUE))
-			switch ((int) number) {
+		if ((Integer.MIN_VALUE < number) && (number < Integer.MAX_VALUE)) {
+			switch (number) {
 				case 1:
 					return "first";
 				case 2:
@@ -238,6 +238,7 @@ public class LaTeX extends StringUtil {
 					}
 					break;
 			}
+		}
 		String numberWord = Long.toString(number);
 		switch (numberWord.charAt(numberWord.length() - 1)) {
 			case '1':
@@ -267,7 +268,9 @@ public class LaTeX extends StringUtil {
 		StringBuffer heading = new StringBuffer(newLine());
 		heading.append("\\");
 		heading.append(kind);
-		if (!numbering) heading.append('*');
+		if (!numbering) {
+			heading.append('*');
+		}
 		heading.append('{');
 		heading.append(title);
 		heading.append('}');
@@ -298,19 +301,21 @@ public class LaTeX extends StringUtil {
 		StringBuffer masked = new StringBuffer();
 		for (int i = 0; i < string.length(); i++) {
 			char atI = string.charAt(i);
-			if (atI == '<')
+			if (atI == '<') {
 				masked.append("$<$");
-			else if (atI == '>')
+			} else if (atI == '>') {
 				masked.append("$>$");
-			else {
+			} else {
 				if ((atI == '_') || (atI == '\\') || (atI == '$') || (atI == '&')
 						|| (atI == '#') || (atI == '{') || (atI == '}') || (atI == '~')
 						|| (atI == '%') || (atI == '^')) {
-					if ((i == 0) || (!hyphen))
+					if ((i == 0) || (!hyphen)) {
 						masked.append('\\');
-					else if (hyphen && (string.charAt(i - 1) != '\\'))
+					} else if (hyphen && (string.charAt(i - 1) != '\\'))
+					 {
 						masked.append("\\-\\"); // masked.append('\\');
 					// } else if ((atI == '[') || (atI == ']')) {
+					}
 				}
 				masked.append(atI);
 			}
@@ -352,7 +357,9 @@ public class LaTeX extends StringUtil {
 	 * @return
 	 */
 	public static StringBuffer root(Object degree, Object value) {
-		if (degree.toString().equals("2")) return sqrt(value);
+		if (degree.toString().equals("2")) {
+			return sqrt(value);
+		}
 		StringBuffer sqrt = new StringBuffer("\\sqrt");
 		sqrt.append('[');
 		sqrt.append(degree);
@@ -387,9 +394,11 @@ public class LaTeX extends StringUtil {
 			usepackage.append('[');
 			boolean first = true;
 			for (String option : options) {
-				if (!first)
+				if (!first) {
 					usepackage.append(',');
-				else first = false;
+				} else {
+					first = false;
+				}
 				usepackage.append(option);
 			}
 			usepackage.append(']');
@@ -469,14 +478,17 @@ public class LaTeX extends StringUtil {
 		if (val.contains("E")) {
 			String split[] = val.split("E");
 			val = "10^{" + format(Double.parseDouble(split[1])) + "}";
-			if (split[0].equals("-1.0"))
+			if (split[0].equals("-1.0")) {
 				val = "-" + val;
-			else if (!split[0].equals("1.0"))
+			} else if (!split[0].equals("1.0")) {
 				val = format(Double.parseDouble(split[0])) + "\\cdot " + val;
+			}
 			sb.append(math(val));
-		} else if (value - ((int) value) == 0)
+		} else if (value - ((int) value) == 0) {
 			sb.append(((int) value));
-		else sb.append(val);
+		} else {
+			sb.append(val);
+		}
 		return sb;
 	}
 	

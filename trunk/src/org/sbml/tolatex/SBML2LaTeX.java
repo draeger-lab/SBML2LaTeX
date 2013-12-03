@@ -2,7 +2,7 @@
  * $Id$
  * $URL$
  * ---------------------------------------------------------------------
- * This file is part of SBML2LaTeX, a program that creates 
+ * This file is part of SBML2LaTeX, a program that creates
  * human-readable reports for given SBML files.
  * 
  * Copyright (C) 2007-2013 by the University of Tuebingen, Germany.
@@ -112,8 +112,8 @@ public class SBML2LaTeX extends Launcher implements SBML2LaTeXView {
 	 * @param infile
 	 * @param outfile
 	 * @param gui
-	 * @throws XMLStreamException 
-	 * @throws IOException 
+	 * @throws XMLStreamException
+	 * @throws IOException
 	 */
 	public static File convert(File infile, File outfile, SBML2LaTeXView gui) throws IOException, XMLStreamException {
 		if (!SBFileFilter.isSBMLFile(infile)) {
@@ -122,7 +122,7 @@ public class SBML2LaTeX extends Launcher implements SBML2LaTeXView {
 				outfile.getAbsolutePath()));
 		}
 		logger.info(MessageFormat.format(
-			bundle.getString("CONVERTING_SBML_FILE_TO_REPORT"), 
+			bundle.getString("CONVERTING_SBML_FILE_TO_REPORT"),
 			infile.getAbsolutePath(),
 			outfile.getAbsolutePath()));
 		SBMLReader reader = new SBMLReader();
@@ -133,7 +133,7 @@ public class SBML2LaTeX extends Launcher implements SBML2LaTeXView {
 	 * 
 	 * @param sbase
 	 * @param outfile
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	public static File convert(SBase sbase, File outfile) throws IOException {
 		return convert(sbase, outfile, new SBML2LaTeX());
@@ -144,7 +144,7 @@ public class SBML2LaTeX extends Launcher implements SBML2LaTeXView {
 	 * @param sbase
 	 * @param outfile
 	 * @param gui
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	public static File convert(SBase sbase, File outfile, SBML2LaTeXView gui) throws IOException {
 		String texFile;
@@ -183,11 +183,11 @@ public class SBML2LaTeX extends Launcher implements SBML2LaTeXView {
 			toLaTeXreport(sbase, new File(texFile), preDefUnits, landscape,
 				nameInEquations, titlePage, idsInTypeWriter, miriam,
 				reactantsOverviewTable, checkConsistency, printFullODEsystem, fontSize,
-				paperSize, fontText, fontHeadings, fontTypeWriter, 
-				prefsLaTeX.getBoolean(LaTeXOptions.INCLUDE_SECTION_COMPARTMENTS), 
-				prefsLaTeX.getBoolean(LaTeXOptions.INCLUDE_SECTION_COMPARTMENT_TYPES), 
+				paperSize, fontText, fontHeadings, fontTypeWriter,
+				prefsLaTeX.getBoolean(LaTeXOptions.INCLUDE_SECTION_COMPARTMENTS),
+				prefsLaTeX.getBoolean(LaTeXOptions.INCLUDE_SECTION_COMPARTMENT_TYPES),
 				prefsLaTeX.getBoolean(LaTeXOptions.INCLUDE_SECTION_CONSTRAINTS),
-				prefsLaTeX.getBoolean(LaTeXOptions.INCLUDE_SECTION_EVENTS), 
+				prefsLaTeX.getBoolean(LaTeXOptions.INCLUDE_SECTION_EVENTS),
 				prefsLaTeX.getBoolean(LaTeXOptions.INCLUDE_SECTION_FUNCTION_DEFINITIONS),
 				prefsLaTeX.getBoolean(LaTeXOptions.INCLUDE_SECTION_INITIAL_ASSIGNMENTS),
 				prefsLaTeX.getBoolean(LaTeXOptions.INCLUDE_SECTION_PARAMETERS),
@@ -292,7 +292,7 @@ public class SBML2LaTeX extends Launcher implements SBML2LaTeXView {
 							- System.currentTimeMillis()) < 86400000)) {
 					// file has been created within the last 24 h = 86400000 ms.
 					logger.info(MessageFormat.format(
-						bundle.getString("DELETING_TEMP_FILE"), 
+						bundle.getString("DELETING_TEMP_FILE"),
 						file.getAbsolutePath()));
 					file.delete();
 				}
@@ -320,19 +320,19 @@ public class SBML2LaTeX extends Launcher implements SBML2LaTeXView {
 	 * @param fontText
 	 * @param fontHeadings
 	 * @param fontTypeWriter
-	 * @param compadrtmentsSection 
-	 * @param compartmentTypesSection 
-	 * @param constraintsSection 
-	 * @param eventsSection 
-	 * @param FunctionDefSection 
-	 * @param initialAssignmentSection 
-	 * @param parameterSection 
-	 * @param reactionsSection 
-	 * @param rulesSection 
-	 * @param speciesSection 
-	 * @param speciesTypesSection 
-	 * @param unitDefSection 
-	 * @param layoutsSection 
+	 * @param compadrtmentsSection
+	 * @param compartmentTypesSection
+	 * @param constraintsSection
+	 * @param eventsSection
+	 * @param FunctionDefSection
+	 * @param initialAssignmentSection
+	 * @param parameterSection
+	 * @param reactionsSection
+	 * @param rulesSection
+	 * @param speciesSection
+	 * @param speciesTypesSection
+	 * @param unitDefSection
+	 * @param layoutsSection
 	 * @return
 	 * @throws IOException
 	 */
@@ -395,6 +395,7 @@ public class SBML2LaTeX extends Launcher implements SBML2LaTeXView {
 		} else if (sbase instanceof Reaction) {
 			buffer.append(export.toLaTeX((Reaction) sbase));
 		} else {
+			buffer.close();
 			throw new IllegalArgumentException(MessageFormat.format(
 				bundle.getString("INVALID_SBASE"),
 				sbase.getClass().getName()));
@@ -566,9 +567,9 @@ public class SBML2LaTeX extends Launcher implements SBML2LaTeXView {
 	 */
 	@Override
 	public List<Class<? extends KeyProvider>> getInteractiveOptions() {
-		List<Class<? extends KeyProvider>> defAndKeys = new ArrayList<Class<? extends KeyProvider>>(1); 
-		defAndKeys.add(LaTeXOptions.class); 
-		return defAndKeys; 
+		List<Class<? extends KeyProvider>> defAndKeys = new ArrayList<Class<? extends KeyProvider>>(1);
+		defAndKeys.add(LaTeXOptions.class);
+		return defAndKeys;
 	}
 
 	/* (non-Javadoc)
@@ -576,11 +577,11 @@ public class SBML2LaTeX extends Launcher implements SBML2LaTeXView {
 	 */
 	@Override
 	public URL getURLlicenseFile() {
-		try { 
-			return new URL("http://www.gnu.org/licenses/gpl.html"); 
-		} catch (MalformedURLException exc) { 
-			return null; 
-		} 
+		try {
+			return new URL("http://www.gnu.org/licenses/gpl.html");
+		} catch (MalformedURLException exc) {
+			return null;
+		}
 	}
 
 	/* (non-Javadoc)
@@ -588,10 +589,10 @@ public class SBML2LaTeX extends Launcher implements SBML2LaTeXView {
 	 */
 	@Override
 	public URL getURLOnlineUpdate() {
-		try { 
-			return new URL("http://www.cogsys.cs.uni-tuebingen.de/software/SBML2LaTeX/downloads/"); 
-		} catch (MalformedURLException exc) { 
-			return null; 
+		try {
+			return new URL("http://www.cogsys.cs.uni-tuebingen.de/software/SBML2LaTeX/downloads/");
+		} catch (MalformedURLException exc) {
+			return null;
 		}
 	}
 
@@ -657,6 +658,7 @@ public class SBML2LaTeX extends Launcher implements SBML2LaTeXView {
 	/* (non-Javadoc)
 	 * @see org.sbml.tolatex.SBML2LaTeXView#displayLimitations()
 	 */
+	@Override
 	public void displayLimitations() {
 		logger.warning(bundle.getString("LATEX_COMPILATION_PROBLEMS"));
 	}
@@ -664,6 +666,7 @@ public class SBML2LaTeX extends Launcher implements SBML2LaTeXView {
 	/* (non-Javadoc)
 	 * @see org.sbml.tolatex.SBML2LaTeXView#displayLaTeXOutput(java.lang.Process, boolean)
 	 */
+	@Override
 	public void displayLaTeXOutput(Process process, boolean firstLaTeXrun) {
 		BufferedReader in = new BufferedReader(new InputStreamReader(process.getInputStream()));
 		String line = null;
@@ -679,6 +682,7 @@ public class SBML2LaTeX extends Launcher implements SBML2LaTeXView {
 	/* (non-Javadoc)
 	 * @see org.sbml.tolatex.SBML2LaTeXView#display(java.io.File)
 	 */
+	@Override
 	public void display(File resultFile) throws IOException {
 		logger.info(MessageFormat.format(bundle.getString("DOCUMENT_SUCCESSFULLY_COMPILED"), resultFile.getAbsolutePath()));
 	}

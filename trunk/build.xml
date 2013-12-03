@@ -265,18 +265,13 @@
 	   name="svnrevision"
 	   description="Determines the current SVN revions number of SBML2LaTeX and stores it in a variable."
 	>
-	  <exec executable="svnversion" outputproperty="repository.revision">
-	    <arg line="-c ${basedir}"/>
-	    <redirector>
-	      <outputfilterchain>
-	        <tokenfilter>
-	          <replaceregex pattern="[0-9]+\:" replace="" />
-	          <replaceregex pattern="[PM]+" replace="" />
-	        </tokenfilter>
-	      </outputfilterchain>
-	    </redirector>
+	  <exec executable="svn" outputproperty="svninfo.xml">
+		<arg line="info --xml"/>
 	  </exec>
-	  <echo message="Current revision is ${repository.revision}" />
+	  <xmlproperty collapseAttributes="true">
+	    <propertyresource name="svninfo.xml"/>
+	  </xmlproperty>
+	  <property name="repository.revision" value="${info.entry.revision}"/>
 	</target>
 	
 	<!-- =================================================================== -->
