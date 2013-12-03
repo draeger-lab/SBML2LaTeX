@@ -42,6 +42,7 @@
   <entry key="BQB_OCCURS_IN">occurs in</entry>
   <entry key="BQM_UNKNOWN">has something to do with</entry>
   <entry key="BQM_IS">is</entry>
+  <entry key="BQM_IS_DERIVED_FROM">is derived from</entry>
   <entry key="BQM_IS_DESCRIBED_BY">is described by</entry>
   <entry key="BQM_UNKNOWN">has something to do with</entry>
   <entry key="CONJUGATION_PRESENT_INDICATIVE_3RD_PERSON_OF_BE">{0,choice,0#are| 1#is| 1&lt;are}</entry>

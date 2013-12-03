@@ -2,7 +2,7 @@
  * $Id$
  * $URL$
  * ---------------------------------------------------------------------
- * This file is part of SBML2LaTeX, a program that creates 
+ * This file is part of SBML2LaTeX, a program that creates
  * human-readable reports for given SBML files.
  * 
  * Copyright (C) 2008-2013 by the University of Tuebingen, Germany.
@@ -77,7 +77,7 @@ public class LaTeXExportDialog extends JDialog {
 		String iconPaths[] = { "ICON_LATEX_16.png", "ICON_LATEX_64.png" };
 		for (String path : iconPaths) {
 			URL u = LaTeXExportDialog.class.getResource("img/" + path);
-		      if (u!=null) {
+		      if (u != null) {
 		        UIManager.put(path.substring(0, path.lastIndexOf('.')), new ImageIcon(u));
 		      }
 		}
@@ -222,10 +222,10 @@ public class LaTeXExportDialog extends JDialog {
 							|| SBFileFilter.isPDFFile(new File(prefsIO.get(LaTeXOptionsIO.REPORT_OUTPUT_FILE)))) {
 						SBPreferences prefs = SBPreferences.getPreferencesFor(LaTeXOptions.class);
 						File compiler = new File(prefs.get(LaTeXOptions.LOAD_LATEX_COMPILER));
-						if (!compiler.exists() || !compiler.canExecute()) { 
+						if (!compiler.exists() || !compiler.canExecute()) {
 						  throw new FileNotFoundException(StringUtil.toHTML(
 										bundle.getString("PDFLATEX_LOCATION_UNKNOWN"),
-										StringUtil.TOOLTIP_LINE_LENGTH)); 
+										StringUtil.TOOLTIP_LINE_LENGTH));
 						}
 					}
 				} catch (FileNotFoundException exc) {

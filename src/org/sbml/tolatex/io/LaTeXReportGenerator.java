@@ -2,7 +2,7 @@
  * $Id$
  * $URL$
  * ---------------------------------------------------------------------
- * This file is part of SBML2LaTeX, a program that creates 
+ * This file is part of SBML2LaTeX, a program that creates
  * human-readable reports for given SBML files.
  * 
  * Copyright (C) 2008-2013 by the University of Tuebingen, Germany.
@@ -583,7 +583,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 	public LaTeXReportGenerator(boolean landscape, boolean typeWriter,
 		short fontSize, PaperSize paperSize, boolean addPredefinedUnits,
 		boolean titlepage, boolean printNameIfAvailable) {
-		this.headTail = true;
+		headTail = true;
 		setLandscape(landscape);
 		setTypewriter(typeWriter);
 		setFontSize(fontSize);
@@ -604,8 +604,8 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 		setIncludeSpeciesTypesSection(true);
 		setIncludeUnitDefinitionsSection(true);
 		setIncludeLayoutSection(true);
-		this.formatter = new LaTeXFormatter();
-		this.formatter.setUsingTypewriterFont(typeWriter);
+		formatter = new LaTeXFormatter();
+		formatter.setUsingTypewriterFont(typeWriter);
 	}
 	
 	/**
@@ -665,10 +665,11 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 	/* (non-Javadoc)
 	 * @see org.jcell2.client.io.DisplaySBML#format(org.sbml.libsbml.ListOf, java.lang.String, java.io.BufferedWriter, boolean)
 	 */
+	@Override
 	public void format(ListOf<? extends SBase> list, BufferedWriter buffer,
 		boolean section) throws IOException, SBMLException {
-		if (list.isEmpty()) { 
-			return; 
+		if (list.isEmpty()) {
+			return;
 		}
 		int i;
 		Model model = list.getModel();
@@ -741,7 +742,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 			}
 			
 			if (compartments) {
-				buffer.append(longtableHead("lllC{2cm}llcl", 
+				buffer.append(longtableHead("lllC{2cm}llcl",
 					MessageFormat.format(
 						bundleContent.getString("PROPERTIES_TABLE_CAPTION"),
 						bundleElements.getString(first.getElementName())),
@@ -823,12 +824,15 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 			/*
 			 * Iterate over all elements in the list and format them appropriately
 			 */
+			boolean isRule = false;
 			for (i = 0; i < list.size(); i++) {
 				SBase s = list.get(i);
 				if (section && !(compartments || species || reactions || parameters)) {
+					isRule = s instanceof Rule;
+					name = isRule ? bundleElements.getString("rule") : bundleElements.getString(s.getElementName());
 					buffer.append(subsection(firstLetterUpperCase(name) + ' ' + (i + 1),
 						true));
-					if (s instanceof Rule) {
+					if (isRule) {
 						buffer.newLine();
 						buffer.append(label("rule" + i));
 					}
@@ -896,9 +900,11 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 					buffer.append(format(c.getSize()));
 					buffer.append('&');
 					UnitDefinition ud;
-					if (c.isSetUnits())
+					if (c.isSetUnits()) {
 						ud = c.getModel().getUnitDefinition(c.getUnits());
-					else ud = c.getDerivedUnitDefinition();
+					} else {
+						ud = c.getDerivedUnitDefinition();
+					}
 					if ((ud == null) || (ud.getUnitCount() == 0)) {
 						buffer.append(' ');
 					} else if (ud.isVariantOfVolume() && (ud.getUnitCount() == 1)
@@ -980,17 +986,19 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 								counter++;
 							}
 						}
-					} else for (j = 0; j < s.getModel().getCompartmentCount(); j++) {
-						Compartment c = s.getModel().getCompartment(j);
-						if (c.isSetCompartmentType()
-								&& c.getCompartmentType().equals(nsb.getId())) {
-							sb.append(texttt(maskSpecialChars(c.getId())));
-							sb.append('&');
-							if (c.isSetName()) {
-								sb.append(maskSpecialChars(c.getName()));
+					} else {
+						for (j = 0; j < s.getModel().getCompartmentCount(); j++) {
+							Compartment c = s.getModel().getCompartment(j);
+							if (c.isSetCompartmentType()
+									&& c.getCompartmentType().equals(nsb.getId())) {
+								sb.append(texttt(maskSpecialChars(c.getId())));
+								sb.append('&');
+								if (c.isSetName()) {
+									sb.append(maskSpecialChars(c.getName()));
+								}
+								sb.append(lineBreak);
+								counter++;
 							}
-							sb.append(lineBreak);
-							counter++;
 						}
 					}
 					format(s, buffer, false);
@@ -1003,10 +1011,10 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 						buffer.append(longtableHead("ll",
 							MessageFormat.format(
 									bundleContent.getString("ELEMENTS_OF_THIS_TYPE"),
-									MessageFormat.format(isSpecType ? 
-											"GRAMMATICAL_NUMBER_SPECIES" : 
+									MessageFormat.format(isSpecType ?
+											"GRAMMATICAL_NUMBER_SPECIES" :
 											"GRAMMATICAL_NUMBER_COMPARTMENTS", counter)
-							), 
+							),
 							bundleElements.getString("id"), bundleElements.getString("name")));
 						buffer.append(sb);
 						buffer.append(bottomrule);
@@ -1077,7 +1085,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 		if (eventList.size() > 0) {
 			int i, j;
 			buffer.append(section(MessageFormat.format(
-					bundleContent.getString("GRAMMATICAL_NUMBER_EVENT"), 
+					bundleContent.getString("GRAMMATICAL_NUMBER_EVENT"),
 					eventList.size()), true));
 			buffer.append(
 				MessageFormat.format(bundleContent.getString("INTRODUCTION_SUBCOMPONENTS"),
@@ -1098,7 +1106,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 			Event ev;
 			String var;
 			for (i = 0; i < eventList.size(); i++) {
-				ev = (Event) eventList.get(i);
+				ev = eventList.get(i);
 				subsection(ev, i, buffer);
 				buffer.append(descriptionBegin);
 				format(ev, buffer, true);
@@ -1120,8 +1128,8 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 				}
 				StringBuffer description = new StringBuffer();
 				description.append(MessageFormat.format(
-						bundleContent.getString(ev.getUseValuesFromTriggerTime() ? 
-								"EVENT_DOES_USE_VALUES_FROM_TRIGGER_TIME" : 
+						bundleContent.getString(ev.getUseValuesFromTriggerTime() ?
+								"EVENT_DOES_USE_VALUES_FROM_TRIGGER_TIME" :
 								"EVENT_DOES_NOT_USE_VALUES_FROM_TRIGGER_TIME"),
 						ev.getEventAssignmentCount(), ev.isSetDelay() ? 1 : 0));
 				if (ev.getEventAssignmentCount() > 1) {
@@ -1178,7 +1186,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 	 * 
 	 * @param nsb
 	 * @param buffer
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	private void subsection(NamedSBase nsb, int index, Writer buffer) throws IOException {
 		String elementName = nsb.getElementName();
@@ -1327,7 +1335,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 				buffer.append(bundleContent.getString("PREDEFINED_UNITS"));
 			}
 			for (int i = 0; i < lud.size(); i++) {
-				def = (UnitDefinition) lud.get(i);
+				def = lud.get(i);
 				subsection(def, i, buffer);
 				buffer.append(descriptionBegin);
 				format(def, buffer, true);
@@ -1367,6 +1375,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 	/* (non-Javadoc)
 	 * @see org.jcell.client.io.DisplaySBML#format(org.sbml.libsbml.Model, java.io.BufferedWriter)
 	 */
+	@Override
 	public void format(Model model, BufferedWriter buffer) throws IOException,
 		SBMLException {
 		if (headTail) {
@@ -1455,7 +1464,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 		
 		if (model.isSetNotes()) {
 			buffer.append(subsection(MessageFormat.format(
-				bundleContent.getString("ELEMENT_NOTES"), 
+				bundleContent.getString("ELEMENT_NOTES"),
 				bundleElements.getString(model.getElementName())), false));
 			buffer.append(formatHTML(model.getNotesString()));
 			buffer.newLine();
@@ -1463,7 +1472,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 		
 		if ((model.getCVTermCount() > 0) && (includeMIRIAM)) {
 			buffer.append(subsection(MessageFormat.format(
-				bundleContent.getString("ELEMENT_ANNOTATION"), 
+				bundleContent.getString("ELEMENT_ANNOTATION"),
 				bundleElements.getString(model.getElementName())), false));
 			buffer.append(bundleContent.getString("MODEL_RESOURCES"));
 			buffer.newLine();
@@ -1524,7 +1533,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
     		LayoutAlgorithm layoutAlgorithm = new TikZLayoutAlgorithm();
     		for (int i = 0; i < layoutPlugin.getLayoutCount(); i++) {
     			buffer.append("\\begin{figure}\n\\centering\n");
-    			Layout layout = layoutPlugin.getLayout(i); 
+    			Layout layout = layoutPlugin.getLayout(i);
     			director = new LayoutDirector<BufferedWriter>(
     					layout,
     					new TikZLayoutBuilder<BufferedWriter>(buffer, false),
@@ -1559,8 +1568,8 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 	 */
 	private void formatHistory(SBase sbase, BufferedWriter buffer)
 		throws IOException {
-		if (!sbase.isSetHistory()) { 
-			return; 
+		if (!sbase.isSetHistory()) {
+			return;
 		}
 		History history = sbase.getHistory();
 		if ((history.getCreatorCount() > 0) || (history.isSetCreatedDate())) {
@@ -1602,6 +1611,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 	/* (non-Javadoc)
 	 * @see org.jcell.client.io.DisplaySBML#format(org.sbml.libsbml.SBMLDocument, java.io.BufferedWriter)
 	 */
+	@Override
 	public void format(SBMLDocument doc, BufferedWriter buffer)
 		throws IOException, SBMLException {
 		/*
@@ -1888,8 +1898,9 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 	 *        Other values are set to the default of 11.
 	 */
 	public void setFontSize(short fontSize) {
-		if ((fontSize < 8) || (fontSize == 13) || (17 < fontSize))
+		if ((fontSize < 8) || (fontSize == 13) || (17 < fontSize)) {
 			this.fontSize = 11;
+		}
 		this.fontSize = fontSize;
 	}
 	
@@ -2121,7 +2132,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 					));
 				} else {
 					buffer.append(MessageFormat.format(
-						bundleContent.getString("SBML_DOCUMENT_ERROR_INTRODUCTION"), 
+						bundleContent.getString("SBML_DOCUMENT_ERROR_INTRODUCTION"),
 						MessageFormat.format(bundleContent.getString("NUMERALS"), doc.getErrorCount()),
 						doc.getErrorCount(),
 						href("http://sbml.org/Facilities/Validator", bundleContent.getString("SBML_ONLINE_VALIDATOR"))));
@@ -2381,7 +2392,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 		buffer.append(formatter.textcolor("gray",
 			MessageFormat.format(
 				bundleContent.getString("PRODUCED_BY_SBML2LATEX"),
-				formatter.sbml2latex(), SBML2LaTeX.VERSION_NUMBER)));
+				formatter.sbml2latex() + "{}", SBML2LaTeX.VERSION_NUMBER)));
 		buffer.append('}');
 		buffer.newLine();
 		buffer.newLine();
@@ -2428,14 +2439,20 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 	 */
 	private StringBuffer equation(StringBuffer formula, StringBuffer... formulae) {
 		StringBuffer equation = new StringBuffer();
-		if (formula.length() == 0) return equation;
-		if (formula.charAt(0) != '$') equation.append(eqBegin);
+		if (formula.length() == 0) {
+			return equation;
+		}
+		if (formula.charAt(0) != '$') {
+			equation.append(eqBegin);
+		}
 		equation.append(formula);
-		for (StringBuffer f : formulae)
+		for (StringBuffer f : formulae) {
 			equation.append(f);
+		}
 		if ((formula.charAt(formula.length() - 1) != '$')
-				&& (equation.charAt(equation.length() - 1) != '$'))
+				&& (equation.charAt(equation.length() - 1) != '$')) {
 			equation.append(eqEnd);
+		}
 		return equation;
 	}
 	
@@ -2621,7 +2638,9 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 				} else {
 					buffer.append(format(c.getSize()));
 				}
-			} else buffer.append("size given in");
+			} else {
+				buffer.append("size given in");
+			}
 			String unitDef = format(c.getDerivedUnitDefinition()).toString();
 			if (unitDef.equals("\\mathrm{l}")) {
 				unitDef = "litre";
@@ -2643,7 +2662,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 			}
 			buffer.append('.');
 			buffer.newLine();
-			format((SBase) c, buffer, false);
+			format(c, buffer, false);
 		}
 	}
 	
@@ -2727,19 +2746,18 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 					colorbox("lightgray", "gray"),
 					texttt("substance"),
 					texttt("time")));
-				buffer.append("Please check if ");
+				buffer.append(" Please check if ");
 				buffer.newLine();
 				buffer.append("\\begin{itemize}");
 				buffer.newLine();
 				buffer.append("\\item parameters without a unit definition are involved or");
 				buffer.newLine();
-				buffer.append("\\item volume correction is necessary because the ");
-				buffer.append(texttt("has\\-Only\\-Substance\\-Units"));
-				buffer.append(" flag may be set to ");
-				buffer.append(texttt(bundleContent.getString("FALSE")));
-				buffer.append(bundleContent.getString("CONJUNCTION_AND"));
-				buffer.append(texttt("spacial\\-Di\\-men\\-si\\-ons"));
-				buffer.append("$> 0$ for certain species.");
+				buffer.append(MessageFormat.format(
+					"\\item volume correction is necessary because the {0} flag may be set to {1}{2}{3} $> 0$ for certain species.",
+					texttt("has\\-Only\\-Substance\\-Units"),
+					texttt(bundleContent.getString("FALSE")),
+					bundleContent.getString("CONJUNCTION_AND"),
+					texttt("spacial\\-Di\\-men\\-si\\-ons")));
 				buffer.newLine();
 				buffer.append("\\end{itemize}");
 				buffer.newLine();
@@ -3408,7 +3426,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 			String headLine = "", head = "", idAndNameColumn;
 			double nameWidth = 3d;
 			double idWidth = nameWidth / 2d;
-			if ((paperSize == PaperSize.letter) || (paperSize == PaperSize.a4)) { 
+			if ((paperSize == PaperSize.letter) || (paperSize == PaperSize.a4)) {
 				idAndNameColumn = "p{" + idWidth + "cm}p{" + nameWidth + "cm}";
 			} else {
 				int columns = 0;
@@ -3506,6 +3524,8 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 						 * reactString.append('&'); reactString.append(s.isSetSBOTerm() ?
 						 * SBO.sboNumberString(s .getSBOTerm()) : " ");
 						 */
+					} else {
+						reactString.append('&');
 					}
 					if (r.getProductCount() > 0) {
 						reactString.append('&');
@@ -3664,16 +3684,15 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 	 */
 	private void format(Rule rl, BufferedWriter buffer) throws IOException,
 		SBMLException {
-		buffer.append("Rule ");
+		buffer.append("This rule");
 		if (rl.isSetSBOTerm()) {
 			buffer.append(" has the SBO reference ");
 			buffer.append(SBO.sboNumberString(rl.getSBOTerm()));
 			sboTerms.add(Integer.valueOf(rl.getSBOTerm()));
 			buffer.append(" and");
 		}
-		buffer.append(" is a");
 		if (rl.isAlgebraic()) {
-			buffer.append("n algebraic rule");
+			buffer.append(" is an algebraic rule");
 			buffer.append(equation(new StringBuffer(rl.getMath().toLaTeX()), new StringBuffer("\\equiv 0")));
 			buffer.newLine();
 			Variable variable;
@@ -3688,7 +3707,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 				buffer.append(bundleContent.getString("ALGEBRAIC_RULE_OVERDETERMINED_MESSAGE"));
 			}
 		} else if (rl.isAssignment()) {
-			buffer.append("n assignment rule for ");
+			buffer.append(" is an assignment rule for ");
 			Model model = rl.getModel();
 			String id = ((Assignment) rl).getVariable();
 			if (model.getSpecies(id) != null) {
@@ -3721,7 +3740,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 			buffer.append(rl.getMath().toLaTeX());
 			buffer.append(eqEnd);
 		} else {
-			buffer.append(" rate rule for ");
+			buffer.append(" is a rate rule for ");
 			boolean hasOnlySubstanceUnits = false;
 			if (rl.getModel().getSpecies(((Assignment) rl).getVariable()) != null) {
 				buffer.append("species ");
@@ -3755,7 +3774,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 		}
 		boolean containsUndeclaredUnits = rl.containsUndeclaredUnits();
 		UnitDefinition derivedUnit = rl.getDerivedUnitDefinition();
-		if (rl.isSetNotes() || 
+		if (rl.isSetNotes() ||
 			((derivedUnit.getUnitCount() > 0) && !containsUndeclaredUnits) ||
 			((rl.getCVTermCount() > 0) && includeMIRIAM)) {
 			buffer.append(descriptionBegin);
@@ -3845,7 +3864,9 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 					if ((typewriter) && (i < closing)) {
 						m.append(texttt(message.substring(i, closing + 1)));
 						i = closing;
-					} else m.append("$<$");
+					} else {
+						m.append("$<$");
+					}
 					break;
 				case '>':
 					m.append("$>$");
@@ -3853,7 +3874,9 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 				default:
 					if ((c == '_') || (c == '\\') || (c == '$') || (c == '&')
 							|| (c == '#') || (c == '{') || (c == '}') || (c == '~')
-							|| (c == '%')) m.append('\\');
+							|| (c == '%')) {
+						m.append('\\');
+					}
 					m.append(c);
 					break;
 			}
@@ -4016,8 +4039,8 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 	private StringBuffer getNameOrID(NamedSBase sbase, boolean mathMode) {
 		boolean isName = printNameIfAvailable && sbase.isSetName();
 		String name = maskSpecialChars(isName ? sbase.getName() : sbase.getId());
-		if (!isName) { 
-			return mathMode ? mathtt(name) : texttt(name); 
+		if (!isName) {
+			return mathMode ? mathtt(name) : texttt(name);
 		}
 		return mathMode ? mathrm(name) : new StringBuffer(name);
 	}
@@ -4126,8 +4149,11 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 							bundleContent.getString("REACTANT"),
 							MessageFormat.format(bundleContent.getString("NUMERALS"), i + 1)))));
 				} else {
-					reactString.append(formatStoichiometry(r.getReactant(i)));
-					reactString.append(' ');
+					StringBuffer stoich = formatStoichiometry(r.getReactant(i));
+					reactString.append(stoich);
+					if (stoich.length() > 0) {
+						reactString.append("\\,");
+					}
 					reactString.append(math(getNameOrID(
 						r.getModel().getSpecies(r.getReactant(i).getSpecies()), true)));
 				}
@@ -4147,7 +4173,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 			}
 			reactString.append("}] ");
 		} else {
-			reactString.append(' ');
+			reactString.append(" ");
 		}
 		if (r.getProductCount() == 0) {
 			reactString.append(math(formatter.emptySet()));
@@ -4159,12 +4185,17 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 							bundleContent.getString("PRODUCT"),
 							MessageFormat.format(bundleContent.getString("NUMERALS"), i + 1)))));
 				} else {
-					reactString.append(formatStoichiometry(r.getProduct(i)));
-					reactString.append(' ');
+					StringBuffer stoich = formatStoichiometry(r.getProduct(i));
+					reactString.append(stoich);
+					if (stoich.length() > 0) {
+						reactString.append("\\,");
+					}
 					reactString.append(math(getNameOrID(
 						r.getModel().getSpecies(r.getProduct(i).getSpecies()), true)));
 				}
-				if (i < r.getProductCount() - 1) reactString.append(" + ");
+				if (i < r.getProductCount() - 1) {
+					reactString.append(" + ");
+				}
 			}
 		}
 		return reactString;
@@ -4218,8 +4249,8 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
 	 * @throws SBMLException
 	 */
 	public void toLaTeX(Model model, File file) throws IOException, SBMLException {
-		if (!SBFileFilter.isTeXFile(file)) { 
-		  throw new IOException(MessageFormat.format(bundleUI.getString("INVALID_LATEX_FILE"), file)); 
+		if (!SBFileFilter.isTeXFile(file)) {
+		  throw new IOException(MessageFormat.format(bundleUI.getString("INVALID_LATEX_FILE"), file));
 		}
 		BufferedWriter bw = new BufferedWriter(new FileWriter(file));
 		format(model, bw);

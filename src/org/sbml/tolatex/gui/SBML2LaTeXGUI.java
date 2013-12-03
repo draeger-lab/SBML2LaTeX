@@ -2,7 +2,7 @@
  * $Id: SBML2LaTeXGUI.java 24.05.2012 13:50:12 draeger$
  * $URL: SBML2LaTeXGUI.java$
  * ---------------------------------------------------------------------
- * This file is part of SBML2LaTeX, a program that creates 
+ * This file is part of SBML2LaTeX, a program that creates
  * human-readable reports for given SBML files.
  * 
  * Copyright (C) 2007-2013 by the University of Tuebingen, Germany.
@@ -39,6 +39,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.UIManager;
+import javax.swing.WindowConstants;
 
 import org.sbml.jsbml.SBMLDocument;
 import org.sbml.jsbml.SBase;
@@ -78,7 +79,7 @@ public class SBML2LaTeXGUI implements SBML2LaTeXView, PropertyChangeListener {
 		listOfIcons.add(((ImageIcon) UIManager.getIcon("ICON_LATEX_64")).getImage());
 		f.setIconImages(listOfIcons);
 		f.pack();
-		f.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		f.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		f.setLocationRelativeTo(null);
 		
 		if (LaTeXExportDialog.showDialog(f)) {
@@ -87,7 +88,7 @@ public class SBML2LaTeXGUI implements SBML2LaTeXView, PropertyChangeListener {
 			try {
 				SBMLReadingTask reader = new SBMLReadingTask(
 					sbmlInputFile,
-					null, 
+					null,
 					EventHandler.create(PropertyChangeListener.class, this, "convert", "newValue"));
 				reader.execute();
 			} catch (Throwable exc) {
@@ -123,10 +124,10 @@ public class SBML2LaTeXGUI implements SBML2LaTeXView, PropertyChangeListener {
 	/* (non-Javadoc)
 	 * @see org.sbml.tolatex.SBML2LaTeXView#display(java.io.File)
 	 */
+	@Override
 	public void display(File resultFile) throws IOException {
 		if (resultFile != null) {
 			// Open standard file viewer
-			// TODO: Java 1.6 only!
 			Desktop.getDesktop().open(resultFile);
 			System.exit(0);
 		}
@@ -135,6 +136,7 @@ public class SBML2LaTeXGUI implements SBML2LaTeXView, PropertyChangeListener {
 	/* (non-Javadoc)
 	 * @see org.sbml.tolatex.SBML2LaTeXView#displayLaTeXOutput(java.lang.Process, boolean)
 	 */
+	@Override
 	public void displayLaTeXOutput(Process process, boolean firstLaTeXrun) {
 		GUITools.showProcessOutputInTextArea(process, f, firstLaTeXrun);
 	}
@@ -142,8 +144,13 @@ public class SBML2LaTeXGUI implements SBML2LaTeXView, PropertyChangeListener {
 	/* (non-Javadoc)
 	 * @see org.sbml.tolatex.SBML2LaTeXView#displayLimitations()
 	 */
+	@Override
 	public void displayLimitations() {
 		Runnable displayLimitations = new Runnable() {
+			/* (non-Javadoc)
+			 * @see java.lang.Runnable#run()
+			 */
+			@Override
 			public void run() {
 				JBrowserPane pane = new JBrowserPane(
 					SBML2LaTeX.class.getResource("gui/html/limitations.html"));
@@ -160,6 +167,7 @@ public class SBML2LaTeXGUI implements SBML2LaTeXView, PropertyChangeListener {
 	 * @see java.beans.PropertyChangeListener#propertyChange(java.beans.PropertyChangeEvent)
 	 */
 	//@Override
+	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		if (evt.getPropertyName().equals(SBML2LaTeXworker.ERROR_CODE)) {
 			System.exit(1);
