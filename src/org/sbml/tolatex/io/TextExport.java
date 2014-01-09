@@ -2,10 +2,10 @@
  * $Id$
  * $URL$
  * ---------------------------------------------------------------------
- * This file is part of SBML2LaTeX, a program that creates 
+ * This file is part of SBML2LaTeX, a program that creates
  * human-readable reports for given SBML files.
  * 
- * Copyright (C) 2008-2013 by the University of Tuebingen, Germany.
+ * Copyright (C) 2008-2014 by the University of Tuebingen, Germany.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,6 +28,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+
+import javax.xml.stream.XMLStreamException;
 
 import org.sbml.jsbml.Event;
 import org.sbml.jsbml.ListOf;
@@ -73,19 +75,21 @@ public class TextExport implements SBMLReportGenerator {
 	 * @param model
 	 * @param file
 	 * @throws IOException
-	 * @throws SBMLException 
+	 * @throws SBMLException
+	 * @throws XMLStreamException
 	 */
 	public TextExport(Model model, File file)
-			throws IOException, SBMLException {
+			throws IOException, SBMLException, XMLStreamException {
 		if ((new SBFileFilter(SBFileFilter.FileType.TEXT_FILES)).accept(file)) {
 			writeTextFile(model, file);
 		} else if ((new SBFileFilter(SBFileFilter.FileType.TeX_FILES))
 				.accept(file)) {
 			LaTeXReportGenerator export = new LaTeXReportGenerator();
 			export.toLaTeX(model, file);
-		} else
+		} else {
 			throw new IllegalArgumentException("file type of " + file.getName()
 					+ " not supported.");
+		}
 	}
 
 	/**
@@ -101,7 +105,7 @@ public class TextExport implements SBMLReportGenerator {
 		writer.newLine();
 	}
 
-	
+
 
 	public void format(ListOf<Event> events, BufferedWriter buffer)
 			throws IOException {
@@ -109,23 +113,25 @@ public class TextExport implements SBMLReportGenerator {
 
 	}
 
+	@Override
 	public void format(Model model, BufferedWriter buffer) throws IOException {
 		// TODO Auto-generated method stub
 	}
 
+	@Override
 	public void format(SBMLDocument doc, BufferedWriter buffer)
 			throws IOException {
 		// TODO Auto-generated method stub
 	}
-  
-  /**
-   * This method writes the ordinary differential equation system into a plain
-   * text file. Note that the file extension does not matter.
-   * 
-   * @param file
-   * @param klg
-   * @throws IOException
-   */
+
+	/**
+	 * This method writes the ordinary differential equation system into a plain
+	 * text file. Note that the file extension does not matter.
+	 * 
+	 * @param file
+	 * @param klg
+	 * @throws IOException
+	 */
 	@SuppressWarnings("deprecation")
 	public final void writeTextFile(Model model, File file) throws IOException {
 		int i;
@@ -145,10 +151,11 @@ public class TextExport implements SBMLReportGenerator {
 			out.append("Kinetic: v_");
 			out.append(r.getId());
 			out.append(" = ");
-			if (r.isSetKineticLaw())
+			if (r.isSetKineticLaw()) {
 				out.append(r.getKineticLaw().getMath().toString());
-			else
+			} else {
 				out.append("undefined");
+			}
 			out.newLine();
 		}
 		out.newLine();
@@ -166,11 +173,12 @@ public class TextExport implements SBMLReportGenerator {
 						} else if (reactant.getStoichiometry() != 1d) {
 							String stoich = Double.toString(reactant
 									.getStoichiometry());
-							if (stoich.endsWith(".0"))
+							if (stoich.endsWith(".0")) {
 								ode.append(stoich.substring(0,
 										stoich.length() - 2));
-							else
+							} else {
 								ode.append(stoich);
+							}
 							ode.append(' ');
 						}
 						ode.append("v_");
@@ -179,8 +187,9 @@ public class TextExport implements SBMLReportGenerator {
 				}
 				for (SpeciesReference product : r.getListOfProducts()) {
 					if (product.getSpecies().equals(s.getId())) {
-						if (ode.length() > 0)
+						if (ode.length() > 0) {
 							ode.append('+');
+						}
 						if (product.isSetStoichiometryMath()) {
 							ode.append(product.getStoichiometryMath().getMath()
 									.toString());
@@ -188,11 +197,12 @@ public class TextExport implements SBMLReportGenerator {
 						} else if (product.getStoichiometry() != 1d) {
 							String stoich = Double.toString(product
 									.getStoichiometry());
-							if (stoich.endsWith(".0"))
+							if (stoich.endsWith(".0")) {
 								ode.append(stoich.substring(0,
 										stoich.length() - 2));
-							else
+							} else {
 								ode.append(stoich);
+							}
 							ode.append(' ');
 						}
 						ode.append("v_");
@@ -212,36 +222,40 @@ public class TextExport implements SBMLReportGenerator {
 	 * (non-Javadoc)
 	 * @see org.sbml.tolatex.io.SBMLReportGenerator#format(org.sbml.jsbml.ListOf, java.io.BufferedWriter, boolean)
 	 */
+	@Override
 	public void format(ListOf<? extends SBase> list, BufferedWriter buffer,
-	    boolean section) throws IOException, SBMLException {
-	    // TODO Auto-generated method stub
+			boolean section) throws IOException, SBMLException {
+		// TODO Auto-generated method stub
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * @see org.sbml.tolatex.io.SBMLReportGenerator#section(java.lang.String, boolean)
 	 */
+	@Override
 	public StringBuffer section(String title, boolean numbering) {
-	    // TODO Auto-generated method stub
-	    return null;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * @see org.sbml.tolatex.io.SBMLReportGenerator#subsection(java.lang.String, boolean)
 	 */
+	@Override
 	public StringBuffer subsection(String title, boolean numbering) {
-	    // TODO Auto-generated method stub
-	    return null;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * @see org.sbml.tolatex.io.SBMLReportGenerator#subsubsection(java.lang.String, boolean)
 	 */
+	@Override
 	public StringBuffer subsubsection(String title, boolean numbering) {
-	    // TODO Auto-generated method stub
-	    return null;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
