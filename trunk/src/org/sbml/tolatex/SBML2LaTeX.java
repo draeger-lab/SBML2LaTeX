@@ -5,7 +5,7 @@
  * This file is part of SBML2LaTeX, a program that creates
  * human-readable reports for given SBML files.
  * 
- * Copyright (C) 2007-2013 by the University of Tuebingen, Germany.
+ * Copyright (C) 2007-2014 by the University of Tuebingen, Germany.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -44,6 +44,7 @@ import javax.xml.stream.XMLStreamException;
 import org.sbml.jsbml.Model;
 import org.sbml.jsbml.Reaction;
 import org.sbml.jsbml.SBMLDocument;
+import org.sbml.jsbml.SBMLException;
 import org.sbml.jsbml.SBase;
 import org.sbml.jsbml.xml.stax.SBMLReader;
 import org.sbml.tolatex.LaTeXOptions.PaperSize;
@@ -74,17 +75,17 @@ import de.zbit.util.prefs.SBProperties;
  * @version $Rev$
  */
 public class SBML2LaTeX extends Launcher implements SBML2LaTeXView {
-	
+
 	/**
 	 * A {@link Logger} for this class.
 	 */
 	private static final transient Logger logger = Logger.getLogger(SBML2LaTeX.class.getName());
-	
+
 	/**
 	 * Localization support.
 	 */
 	private static final transient ResourceBundle bundle = ResourceManager.getBundle("org.sbml.tolatex.locales.UI");
-	
+
 	/**
 	 * Generated serial version identifier.
 	 */
@@ -106,7 +107,7 @@ public class SBML2LaTeX extends Launcher implements SBML2LaTeXView {
 	public static File convert(File infile, File outfile) throws IOException, XMLStreamException {
 		return convert(infile, outfile, new SBML2LaTeX());
 	}
-	
+
 	/**
 	 * 
 	 * @param infile
@@ -118,49 +119,53 @@ public class SBML2LaTeX extends Launcher implements SBML2LaTeXView {
 	public static File convert(File infile, File outfile, SBML2LaTeXView gui) throws IOException, XMLStreamException {
 		if (!SBFileFilter.isSBMLFile(infile)) {
 			throw new IOException(MessageFormat.format(
-				bundle.getString("INVALID_SBML_FILE"),
-				outfile.getAbsolutePath()));
+					bundle.getString("INVALID_SBML_FILE"),
+					outfile.getAbsolutePath()));
 		}
 		logger.info(MessageFormat.format(
-			bundle.getString("CONVERTING_SBML_FILE_TO_REPORT"),
-			infile.getAbsolutePath(),
-			outfile.getAbsolutePath()));
+				bundle.getString("CONVERTING_SBML_FILE_TO_REPORT"),
+				infile.getAbsolutePath(),
+				outfile.getAbsolutePath()));
 		SBMLReader reader = new SBMLReader();
 		return convert(reader.readSBML(infile.getAbsolutePath()), outfile, gui);
 	}
-	
+
 	/**
 	 * 
 	 * @param sbase
 	 * @param outfile
 	 * @throws IOException
+	 * @throws XMLStreamException
+	 * @throws SBMLException
 	 */
-	public static File convert(SBase sbase, File outfile) throws IOException {
+	public static File convert(SBase sbase, File outfile) throws IOException, SBMLException, XMLStreamException {
 		return convert(sbase, outfile, new SBML2LaTeX());
 	}
-	
+
 	/**
 	 * 
 	 * @param sbase
 	 * @param outfile
 	 * @param gui
 	 * @throws IOException
+	 * @throws XMLStreamException
+	 * @throws SBMLException
 	 */
-	public static File convert(SBase sbase, File outfile, SBML2LaTeXView gui) throws IOException {
+	public static File convert(SBase sbase, File outfile, SBML2LaTeXView gui) throws IOException, SBMLException, XMLStreamException {
 		String texFile;
 		if (SBFileFilter.isPDFFile(outfile)) {
 			// Get the path and simply change extension
 			texFile = outfile.getAbsolutePath();
 			texFile = texFile.substring(0, texFile.lastIndexOf('.')) + ".tex";
-			
+
 		} else if (SBFileFilter.createTeXFileFilter().accept(outfile)) {
 			texFile = outfile.getAbsolutePath();
 		} else {
 			throw new IOException(MessageFormat.format(
-				bundle.getString("INVALID_LATEX_FILE"),
-				outfile.getAbsolutePath()));
+					bundle.getString("INVALID_LATEX_FILE"),
+					outfile.getAbsolutePath()));
 		}
-		
+
 		SBPreferences prefsLaTeX = SBPreferences.getPreferencesFor(LaTeXOptions.class);
 		boolean preDefUnits = prefsLaTeX.getBoolean(LaTeXOptions.SHOW_PREDEFINED_UNITS);
 		boolean landscape = prefsLaTeX.getBoolean(LaTeXOptions.LANDSCAPE);
@@ -178,31 +183,31 @@ public class SBML2LaTeX extends Launcher implements SBML2LaTeXView {
 		String fontTypeWriter = prefsLaTeX.get(LaTeXOptions.FONT_TYPEWRITER);
 		//String logoFile = prefsLaTeX.get(LaTeXOptions.LOGO_INPUT_FILE);
 		File latexCompiler = prefsLaTeX.getFile(LaTeXOptions.LOAD_LATEX_COMPILER);
-		
+
 		try {
 			toLaTeXreport(sbase, new File(texFile), preDefUnits, landscape,
-				nameInEquations, titlePage, idsInTypeWriter, miriam,
-				reactantsOverviewTable, checkConsistency, printFullODEsystem, fontSize,
-				paperSize, fontText, fontHeadings, fontTypeWriter,
-				prefsLaTeX.getBoolean(LaTeXOptions.INCLUDE_SECTION_COMPARTMENTS),
-				prefsLaTeX.getBoolean(LaTeXOptions.INCLUDE_SECTION_COMPARTMENT_TYPES),
-				prefsLaTeX.getBoolean(LaTeXOptions.INCLUDE_SECTION_CONSTRAINTS),
-				prefsLaTeX.getBoolean(LaTeXOptions.INCLUDE_SECTION_EVENTS),
-				prefsLaTeX.getBoolean(LaTeXOptions.INCLUDE_SECTION_FUNCTION_DEFINITIONS),
-				prefsLaTeX.getBoolean(LaTeXOptions.INCLUDE_SECTION_INITIAL_ASSIGNMENTS),
-				prefsLaTeX.getBoolean(LaTeXOptions.INCLUDE_SECTION_PARAMETERS),
-				prefsLaTeX.getBoolean(LaTeXOptions.INCLUDE_SECTION_REACTIONS),
-				prefsLaTeX.getBoolean(LaTeXOptions.INCLUDE_SECTION_RULES),
-				prefsLaTeX.getBoolean(LaTeXOptions.INCLUDE_SECTION_SPECIES),
-				prefsLaTeX.getBoolean(LaTeXOptions.INCLUDE_SECTION_SPECIES_TYPES),
-				prefsLaTeX.getBoolean(LaTeXOptions.INCLUDE_SECTION_UNIT_DEFINITIONS),
-				prefsLaTeX.getBoolean(LaTeXOptions.INCLUDE_SECTION_LAYOUTS));
+					nameInEquations, titlePage, idsInTypeWriter, miriam,
+					reactantsOverviewTable, checkConsistency, printFullODEsystem, fontSize,
+					paperSize, fontText, fontHeadings, fontTypeWriter,
+					prefsLaTeX.getBoolean(LaTeXOptions.INCLUDE_SECTION_COMPARTMENTS),
+					prefsLaTeX.getBoolean(LaTeXOptions.INCLUDE_SECTION_COMPARTMENT_TYPES),
+					prefsLaTeX.getBoolean(LaTeXOptions.INCLUDE_SECTION_CONSTRAINTS),
+					prefsLaTeX.getBoolean(LaTeXOptions.INCLUDE_SECTION_EVENTS),
+					prefsLaTeX.getBoolean(LaTeXOptions.INCLUDE_SECTION_FUNCTION_DEFINITIONS),
+					prefsLaTeX.getBoolean(LaTeXOptions.INCLUDE_SECTION_INITIAL_ASSIGNMENTS),
+					prefsLaTeX.getBoolean(LaTeXOptions.INCLUDE_SECTION_PARAMETERS),
+					prefsLaTeX.getBoolean(LaTeXOptions.INCLUDE_SECTION_REACTIONS),
+					prefsLaTeX.getBoolean(LaTeXOptions.INCLUDE_SECTION_RULES),
+					prefsLaTeX.getBoolean(LaTeXOptions.INCLUDE_SECTION_SPECIES),
+					prefsLaTeX.getBoolean(LaTeXOptions.INCLUDE_SECTION_SPECIES_TYPES),
+					prefsLaTeX.getBoolean(LaTeXOptions.INCLUDE_SECTION_UNIT_DEFINITIONS),
+					prefsLaTeX.getBoolean(LaTeXOptions.INCLUDE_SECTION_LAYOUTS));
 		} catch (IOException exc) {
 			throw new IOException(MessageFormat.format(
-				bundle.getString("CANNOT_WRITE_TO_FILE"),
-				texFile), exc);
+					bundle.getString("CANNOT_WRITE_TO_FILE"),
+					texFile), exc);
 		}
-		
+
 		/*
 		 * Create a PDF file directly
 		 */
@@ -217,7 +222,7 @@ public class SBML2LaTeX extends Launcher implements SBML2LaTeXView {
 					throw new NullPointerException(bundle.getString("ENTER_PATH_TO_PDFLATEX"));
 				}
 			}
-			
+
 			if (latexCommand != null ) {
 				// compile
 				try {
@@ -227,14 +232,14 @@ public class SBML2LaTeX extends Launcher implements SBML2LaTeXView {
 				}
 			}
 		}
-		
+
 		if (prefsLaTeX.getBoolean(LaTeXOptions.CLEAN_WORKSPACE)) {
 			cleanUp(outfile);
 		}
-		
+
 		return outfile;
 	}
-	
+
 	/**
 	 * 
 	 * @param latexCommand
@@ -246,15 +251,15 @@ public class SBML2LaTeX extends Launcher implements SBML2LaTeXView {
 	 */
 	public static File toPDFreport(String latexCommand, File texFile, SBML2LaTeXView gui) throws IOException, InterruptedException {
 		gui.displayLimitations();
-		
+
 		// Execute latex two times to ensure correct compilation
 		for (int i = 0; i < 2; i++) {
 			ProcessBuilder builder = new ProcessBuilder(
-				latexCommand, "-interaction", "nonstopmode", texFile.getAbsolutePath());
+					latexCommand, "-interaction", "nonstopmode", texFile.getAbsolutePath());
 			builder.redirectErrorStream(true);
 			builder.directory(new File(texFile.getParent()));
 			Process p = builder.start();
-			
+
 			// Show the process output in the view.
 			gui.displayLaTeXOutput(p, i == 0);
 			p.waitFor();
@@ -262,7 +267,7 @@ public class SBML2LaTeX extends Launcher implements SBML2LaTeXView {
 				throw new IOException(MessageFormat.format(bundle.getString("COULD_NOT_COMPILE_FILE"), texFile));
 			}
 		}
-		
+
 		// move PDF file
 		File pdfFile = new File(texFile.getAbsolutePath().replace(".tex", ".pdf"));
 
@@ -289,11 +294,11 @@ public class SBML2LaTeX extends Launcher implements SBML2LaTeXView {
 			try {
 				if (file.exists() && file.canWrite() && file.isFile()
 						&& (Math.abs(file.lastModified()
-							- System.currentTimeMillis()) < 86400000)) {
+								- System.currentTimeMillis()) < 86400000)) {
 					// file has been created within the last 24 h = 86400000 ms.
 					logger.info(MessageFormat.format(
-						bundle.getString("DELETING_TEMP_FILE"),
-						file.getAbsolutePath()));
+							bundle.getString("DELETING_TEMP_FILE"),
+							file.getAbsolutePath()));
 					file.delete();
 				}
 			} catch (Throwable exc) {
@@ -335,20 +340,22 @@ public class SBML2LaTeX extends Launcher implements SBML2LaTeXView {
 	 * @param layoutsSection
 	 * @return
 	 * @throws IOException
+	 * @throws XMLStreamException
+	 * @throws SBMLException
 	 */
 	public static File toLaTeXreport(SBase sbase, File texFile,
-		boolean preDefUnits, boolean landscape, boolean nameInEquations,
-		boolean titlePage, boolean idsInTypeWriter, boolean miriam,
-		boolean reactantsOverviewTable, boolean checkConsistency,
-		boolean printFullODEsystem, short fontSize, PaperSize paperSize,
-		String fontText, String fontHeadings, String fontTypeWriter,
-		boolean compadrtmentsSection, boolean compartmentTypesSection,
-		boolean constraintsSection, boolean eventsSection,
-		boolean FunctionDefSection, boolean initialAssignmentSection,
-		boolean parameterSection, boolean reactionsSection, boolean rulesSection,
-		boolean speciesSection, boolean speciesTypesSection, boolean unitDefSection, boolean layoutsSection)
-		throws IOException {
-		
+			boolean preDefUnits, boolean landscape, boolean nameInEquations,
+			boolean titlePage, boolean idsInTypeWriter, boolean miriam,
+			boolean reactantsOverviewTable, boolean checkConsistency,
+			boolean printFullODEsystem, short fontSize, PaperSize paperSize,
+			String fontText, String fontHeadings, String fontTypeWriter,
+			boolean compadrtmentsSection, boolean compartmentTypesSection,
+			boolean constraintsSection, boolean eventsSection,
+			boolean FunctionDefSection, boolean initialAssignmentSection,
+			boolean parameterSection, boolean reactionsSection, boolean rulesSection,
+			boolean speciesSection, boolean speciesTypesSection, boolean unitDefSection, boolean layoutsSection)
+					throws IOException, SBMLException, XMLStreamException {
+
 		// Copy the logo-image
 		File logoFile = new File(Utils.ensureSlash(texFile.getParent()) + "SBML2LaTeX.pdf");
 		FileTools.copyStream(SBML2LaTeX.class.getResourceAsStream("gui/img/SBML2LaTeX.pdf"), logoFile);
@@ -356,7 +363,7 @@ public class SBML2LaTeX extends Launcher implements SBML2LaTeXView {
 		if (File.separatorChar == '\\') {
 			logoFileString = logoFileString.replace(File.separatorChar, '/');
 		}
-		
+
 		long time = System.currentTimeMillis();
 		LaTeXReportGenerator export = new LaTeXReportGenerator();
 		export.setShowPredefinedUnitDeclarations(preDefUnits);
@@ -397,13 +404,13 @@ public class SBML2LaTeX extends Launcher implements SBML2LaTeXView {
 		} else {
 			buffer.close();
 			throw new IllegalArgumentException(MessageFormat.format(
-				bundle.getString("INVALID_SBASE"),
-				sbase.getClass().getName()));
+					bundle.getString("INVALID_SBASE"),
+					sbase.getClass().getName()));
 		}
 		buffer.close();
 		logger.info(MessageFormat.format(bundle.getString("TIME_IN_SECONDS"),
-			(System.currentTimeMillis() - time)/1000));
-		
+				(System.currentTimeMillis() - time)/1000));
+
 		return texFile;
 	}
 
@@ -413,11 +420,13 @@ public class SBML2LaTeX extends Launcher implements SBML2LaTeXView {
 	 * @param outfile
 	 * @return
 	 * @throws IOException
+	 * @throws XMLStreamException
+	 * @throws SBMLException
 	 */
-	public static File convert(SBase sbase, String outfile) throws IOException {
+	public static File convert(SBase sbase, String outfile) throws IOException, SBMLException, XMLStreamException {
 		return convert(sbase, outfile, new SBML2LaTeX());
 	}
-	
+
 	/**
 	 * 
 	 * @param sbase
@@ -425,11 +434,13 @@ public class SBML2LaTeX extends Launcher implements SBML2LaTeXView {
 	 * @param gui
 	 * @return
 	 * @throws IOException
+	 * @throws XMLStreamException
+	 * @throws SBMLException
 	 */
-	public static File convert(SBase sbase, String outfile, SBML2LaTeXView gui) throws IOException {
+	public static File convert(SBase sbase, String outfile, SBML2LaTeXView gui) throws IOException, SBMLException, XMLStreamException {
 		return convert(sbase, new File(outfile), gui);
 	}
-	
+
 	/**
 	 * 
 	 * @param infile
@@ -441,7 +452,7 @@ public class SBML2LaTeX extends Launcher implements SBML2LaTeXView {
 	public static File convert(String infile, String outfile) throws IOException, XMLStreamException {
 		return convert(infile, outfile, new SBML2LaTeX());
 	}
-	
+
 	/**
 	 * 
 	 * @param infile
@@ -454,7 +465,7 @@ public class SBML2LaTeX extends Launcher implements SBML2LaTeXView {
 	public static File convert(String infile, String outfile, SBML2LaTeXView gui) throws IOException, XMLStreamException {
 		return convert(new File(infile), new File(outfile), gui);
 	}
-	
+
 	/**
 	 * This function tries to locate the latex executable within the current
 	 * operating system.
@@ -467,16 +478,16 @@ public class SBML2LaTeX extends Launcher implements SBML2LaTeXView {
 		Runtime run = Runtime.getRuntime();
 		String executable = null;
 		String executableName = "pdflatex";
-		
+
 		logger.info(bundle.getString("SEARCHING_FOR_LATEX_COMPILER"));
-		
+
 		if (!isWindows) {
 			// Search with Linux/Unix command "which"
 			try {
 				Process pr = run.exec("which " + executableName);
 				pr.waitFor();
 				pr.getOutputStream();
-				
+
 				// read the child process' output
 				InputStreamReader r = new InputStreamReader(pr.getInputStream());
 				BufferedReader in = new BufferedReader(r);
@@ -487,7 +498,7 @@ public class SBML2LaTeX extends Launcher implements SBML2LaTeXView {
 			} catch (Throwable e) {
 			}
 		}
-		
+
 		// On Windows systems or if Linux/Unix which failed
 		if (executable == null) {
 			try {
@@ -495,7 +506,7 @@ public class SBML2LaTeX extends Launcher implements SBML2LaTeXView {
 				// path environment variable on most systems).
 				Process pr = run.exec(executableName + " -version");
 				pr.waitFor();
-				
+
 				// If not found, an error is thrown.
 				if (pr.exitValue() == 0) {
 					executable = executableName;
@@ -503,10 +514,10 @@ public class SBML2LaTeX extends Launcher implements SBML2LaTeXView {
 			} catch(Throwable e) {
 			}
 		}
-		
+
 		return executable;
 	}
-	
+
 	/**
 	 * 
 	 * @param args
@@ -514,14 +525,14 @@ public class SBML2LaTeX extends Launcher implements SBML2LaTeXView {
 	public static void main(String[] args) {
 		new SBML2LaTeX(args);
 	}
-	
+
 	/**
 	 * 
 	 */
 	public SBML2LaTeX() {
 		super();
 	}
-	
+
 	/**
 	 * 
 	 * @param args
@@ -670,7 +681,7 @@ public class SBML2LaTeX extends Launcher implements SBML2LaTeXView {
 	public void displayLaTeXOutput(Process process, boolean firstLaTeXrun) {
 		BufferedReader in = new BufferedReader(new InputStreamReader(process.getInputStream()));
 		String line = null;
-    try {
+		try {
 			while ((line = in.readLine()) != null) {
 				System.out.println(line);
 			}
@@ -686,5 +697,5 @@ public class SBML2LaTeX extends Launcher implements SBML2LaTeXView {
 	public void display(File resultFile) throws IOException {
 		logger.info(MessageFormat.format(bundle.getString("DOCUMENT_SUCCESSFULLY_COMPILED"), resultFile.getAbsolutePath()));
 	}
-	
+
 }

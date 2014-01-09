@@ -1,6 +1,6 @@
       Licensing and Distribution Terms for SBML2LaTeX
 
-Copyright (c) 2011-2013 by The University of Tuebingen, Germany
+Copyright (c) 2011-2014 by The University of Tuebingen, Germany
 
 SBML2LaTeX is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published 

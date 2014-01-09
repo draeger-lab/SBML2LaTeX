@@ -2,10 +2,10 @@
  * $Id$
  * $URL$
  * ---------------------------------------------------------------------
- * This file is part of SBML2LaTeX, a program that creates 
+ * This file is part of SBML2LaTeX, a program that creates
  * human-readable reports for given SBML files.
  * 
- * Copyright (C) 2008-2013 by the University of Tuebingen, Germany.
+ * Copyright (C) 2008-2014 by the University of Tuebingen, Germany.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,6 +26,8 @@ package org.sbml.tolatex.io;
 import java.io.BufferedWriter;
 import java.io.IOException;
 
+import javax.xml.stream.XMLStreamException;
+
 import org.sbml.jsbml.ListOf;
 import org.sbml.jsbml.Model;
 import org.sbml.jsbml.SBMLDocument;
@@ -43,18 +45,20 @@ public interface SBMLReportGenerator {
 	 * @param doc
 	 * @param buffer
 	 * @throws IOException
-	 * @throws SBMLException 
+	 * @throws SBMLException
+	 * @throws XMLStreamException
 	 */
 	public void format(SBMLDocument doc, BufferedWriter buffer)
-			throws IOException, SBMLException;
+			throws IOException, SBMLException, XMLStreamException;
 
 	/**
 	 * @param model
 	 * @param buffer
 	 * @throws IOException
-	 * @throws SBMLException 
+	 * @throws SBMLException
+	 * @throws XMLStreamException
 	 */
-	public void format(Model model, BufferedWriter buffer) throws IOException, SBMLException;
+	public void format(Model model, BufferedWriter buffer) throws IOException, SBMLException, XMLStreamException;
 
 	/**
 	 * @param list
@@ -62,7 +66,7 @@ public interface SBMLReportGenerator {
 	 * @param buffer
 	 * @param section
 	 * @throws IOException
-	 * @throws SBMLException 
+	 * @throws SBMLException
 	 */
 	public void format(ListOf<? extends SBase> list, BufferedWriter buffer,
 			boolean section) throws IOException, SBMLException;
