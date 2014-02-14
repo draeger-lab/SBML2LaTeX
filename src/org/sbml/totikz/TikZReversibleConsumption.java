@@ -2,7 +2,7 @@
  * $Id: TikZReversibleConsumption.java 06.03.2013 13:31:56 draeger$
  * $URL: TikZReversibleConsumption.java$
  * ---------------------------------------------------------------------
- * This file is part of SBML2LaTeX, a program that creates 
+ * This file is part of SBML2LaTeX, a program that creates
  * human-readable reports for given SBML files.
  * 
  * Copyright (C) 2007-2014 by the University of Tuebingen, Germany.
@@ -33,13 +33,13 @@ import de.zbit.sbml.layout.ReversibleConsumption;
  * @version $Rev$
  */
 public class TikZReversibleConsumption extends TikZSBGNArc implements ReversibleConsumption<String> {
-	
-	/* (non-Javadoc)
-	 * @see de.zbit.sbml.layout.SBGNArc#draw(org.sbml.jsbml.ext.layout.CurveSegment, double)
-	 */
-	//@Override
-	public String draw(CurveSegment curveSegment, double lineWidth) {
-		return TikZ.drawFromTo("triangle 60-", "black", curveSegment, lineWidth);
-	}
-	
+  
+  /* (non-Javadoc)
+   * @see de.zbit.sbml.layout.SBGNArc#draw(org.sbml.jsbml.ext.layout.CurveSegment, double)
+   */
+  @Override
+  public String draw(CurveSegment curveSegment, double lineWidth) {
+    return TikZ.drawFromTo("triangle 60-", "black", curveSegment, lineWidth);
+  }
+  
 }

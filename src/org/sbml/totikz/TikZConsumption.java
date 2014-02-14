@@ -21,7 +21,6 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  * ---------------------------------------------------------------------
  */
-
 package org.sbml.totikz;
 
 import org.sbml.jsbml.ext.layout.CurveSegment;
@@ -32,15 +31,17 @@ import de.zbit.sbml.layout.Consumption;
  * class that represents an consumption arc for the TikZ graphical representation
  * 
  * @author Mirjam Gutekunst
+ * @since 1.0
  * @version $Rev$
  */
 public class TikZConsumption extends TikZSBGNArc implements Consumption<String> {
-
-	/* (non-Javadoc)
-	 * @see de.zbit.sbml.layout.SBGNArc#draw(CurveSegment curveSegment)
-	 */
-	public String draw(CurveSegment curveSegment, double lineWidth) {
-		return TikZ.draw("black", curveSegment, lineWidth);
-	}
-
+  
+  /* (non-Javadoc)
+   * @see de.zbit.sbml.layout.SBGNArc#draw(CurveSegment curveSegment)
+   */
+  @Override
+  public String draw(CurveSegment curveSegment, double lineWidth) {
+    return TikZ.draw("black", curveSegment, lineWidth);
+  }
+  
 }

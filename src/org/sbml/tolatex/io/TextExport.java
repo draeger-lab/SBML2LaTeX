@@ -53,209 +53,209 @@ import de.zbit.io.filefilter.SBFileFilter;
  * @date Aug 1, 2007
  */
 public class TextExport implements SBMLReportGenerator {
-
-	/**
-	 * <p>
-	 * Default constructor.
-	 * </p>
-	 */
-	public TextExport() {
-		super();
-	}
-
-	/**
-	 * <p>
-	 * This constructor analyzes the given file. If it ends with "*.txt", a
-	 * plain text file will be generated, which contains the ordinary equation
-	 * system. If the file ends with "*.tex", the system will be written into a
-	 * LaTeX file. Upper and lower cases for the file ending are ignored. In all
-	 * other cases, nothing will happen.
-	 * </p>
-	 * 
-	 * @param model
-	 * @param file
-	 * @throws IOException
-	 * @throws SBMLException
-	 * @throws XMLStreamException
-	 */
-	public TextExport(Model model, File file)
-			throws IOException, SBMLException, XMLStreamException {
-		if ((new SBFileFilter(SBFileFilter.FileType.TEXT_FILES)).accept(file)) {
-			writeTextFile(model, file);
-		} else if ((new SBFileFilter(SBFileFilter.FileType.TeX_FILES))
-				.accept(file)) {
-			LaTeXReportGenerator export = new LaTeXReportGenerator();
-			export.toLaTeX(model, file);
-		} else {
-			throw new IllegalArgumentException("file type of " + file.getName()
-					+ " not supported.");
-		}
-	}
-
-	/**
-	 * This method appends one line to the given writer.
-	 * 
-	 * @param str
-	 * @param writer
-	 * @throws IOException
-	 */
-	private final void append(String str, BufferedWriter writer)
-			throws IOException {
-		writer.write(str);
-		writer.newLine();
-	}
-
-
-
-	public void format(ListOf<Event> events, BufferedWriter buffer)
-			throws IOException {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void format(Model model, BufferedWriter buffer) throws IOException {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void format(SBMLDocument doc, BufferedWriter buffer)
-			throws IOException {
-		// TODO Auto-generated method stub
-	}
-
-	/**
-	 * This method writes the ordinary differential equation system into a plain
-	 * text file. Note that the file extension does not matter.
-	 * 
-	 * @param file
-	 * @param klg
-	 * @throws IOException
-	 */
-	@SuppressWarnings("deprecation")
-	public final void writeTextFile(Model model, File file) throws IOException {
-		int i;
-		BufferedWriter out = new BufferedWriter(new OutputStreamWriter(
-				new FileOutputStream(file.getPath())));
-		append("SBMLsqueezer generated model report file", out);
-		append("----------------------------------------", out);
-		for (i = 0; i < model.getReactionCount(); i++) {
-			Reaction r = model.getReaction(i);
-			out.append("Reaction: ");
-			out.append(r.getId());
-			if (r.isSetName()) {
-				out.append(", ");
-				out.append(r.getName());
-			}
-			out.newLine();
-			out.append("Kinetic: v_");
-			out.append(r.getId());
-			out.append(" = ");
-			if (r.isSetKineticLaw()) {
-				out.append(r.getKineticLaw().getMath().toString());
-			} else {
-				out.append("undefined");
-			}
-			out.newLine();
-		}
-		out.newLine();
-		for (i = 0; i < model.getSpeciesCount(); i++) {
-			Species s = model.getSpecies(i);
-			StringBuffer ode = new StringBuffer();
-			for (Reaction r : model.getListOfReactions()) {
-				for (SpeciesReference reactant : r.getListOfReactants()) {
-					if (reactant.getSpecies().equals(s.getId())) {
-						ode.append('-');
-						if (reactant.isSetStoichiometryMath()) {
-							ode.append(reactant.getStoichiometryMath()
-									.getMath().toString());
-							ode.append(' ');
-						} else if (reactant.getStoichiometry() != 1d) {
-							String stoich = Double.toString(reactant
-									.getStoichiometry());
-							if (stoich.endsWith(".0")) {
-								ode.append(stoich.substring(0,
-										stoich.length() - 2));
-							} else {
-								ode.append(stoich);
-							}
-							ode.append(' ');
-						}
-						ode.append("v_");
-						ode.append(r.getId());
-					}
-				}
-				for (SpeciesReference product : r.getListOfProducts()) {
-					if (product.getSpecies().equals(s.getId())) {
-						if (ode.length() > 0) {
-							ode.append('+');
-						}
-						if (product.isSetStoichiometryMath()) {
-							ode.append(product.getStoichiometryMath().getMath()
-									.toString());
-							ode.append(' ');
-						} else if (product.getStoichiometry() != 1d) {
-							String stoich = Double.toString(product
-									.getStoichiometry());
-							if (stoich.endsWith(".0")) {
-								ode.append(stoich.substring(0,
-										stoich.length() - 2));
-							} else {
-								ode.append(stoich);
-							}
-							ode.append(' ');
-						}
-						ode.append("v_");
-						ode.append(r.getId());
-					}
-				}
-			}
-			String toWrite = "Species: " + s.getId() + " ODE: d[" + s.getId()
-					+ "]/dt = " + ode.toString();
-			append(toWrite, out);
-			append(" ", out);
-		}
-		out.close();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see org.sbml.tolatex.io.SBMLReportGenerator#format(org.sbml.jsbml.ListOf, java.io.BufferedWriter, boolean)
-	 */
-	@Override
-	public void format(ListOf<? extends SBase> list, BufferedWriter buffer,
-			boolean section) throws IOException, SBMLException {
-		// TODO Auto-generated method stub
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see org.sbml.tolatex.io.SBMLReportGenerator#section(java.lang.String, boolean)
-	 */
-	@Override
-	public StringBuffer section(String title, boolean numbering) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see org.sbml.tolatex.io.SBMLReportGenerator#subsection(java.lang.String, boolean)
-	 */
-	@Override
-	public StringBuffer subsection(String title, boolean numbering) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see org.sbml.tolatex.io.SBMLReportGenerator#subsubsection(java.lang.String, boolean)
-	 */
-	@Override
-	public StringBuffer subsubsection(String title, boolean numbering) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+  
+  /**
+   * <p>
+   * Default constructor.
+   * </p>
+   */
+  public TextExport() {
+    super();
+  }
+  
+  /**
+   * <p>
+   * This constructor analyzes the given file. If it ends with "*.txt", a
+   * plain text file will be generated, which contains the ordinary equation
+   * system. If the file ends with "*.tex", the system will be written into a
+   * LaTeX file. Upper and lower cases for the file ending are ignored. In all
+   * other cases, nothing will happen.
+   * </p>
+   * 
+   * @param model
+   * @param file
+   * @throws IOException
+   * @throws SBMLException
+   * @throws XMLStreamException
+   */
+  public TextExport(Model model, File file)
+      throws IOException, SBMLException, XMLStreamException {
+    if ((new SBFileFilter(SBFileFilter.FileType.TEXT_FILES)).accept(file)) {
+      writeTextFile(model, file);
+    } else if ((new SBFileFilter(SBFileFilter.FileType.TeX_FILES))
+        .accept(file)) {
+      LaTeXReportGenerator export = new LaTeXReportGenerator();
+      export.toLaTeX(model, file);
+    } else {
+      throw new IllegalArgumentException("file type of " + file.getName()
+        + " not supported.");
+    }
+  }
+  
+  /**
+   * This method appends one line to the given writer.
+   * 
+   * @param str
+   * @param writer
+   * @throws IOException
+   */
+  private final void append(String str, BufferedWriter writer)
+      throws IOException {
+    writer.write(str);
+    writer.newLine();
+  }
+  
+  
+  
+  public void format(ListOf<Event> events, BufferedWriter buffer)
+      throws IOException {
+    // TODO Auto-generated method stub
+    
+  }
+  
+  @Override
+  public void format(Model model, BufferedWriter buffer) throws IOException {
+    // TODO Auto-generated method stub
+  }
+  
+  @Override
+  public void format(SBMLDocument doc, BufferedWriter buffer)
+      throws IOException {
+    // TODO Auto-generated method stub
+  }
+  
+  /**
+   * This method writes the ordinary differential equation system into a plain
+   * text file. Note that the file extension does not matter.
+   * 
+   * @param file
+   * @param klg
+   * @throws IOException
+   */
+  @SuppressWarnings("deprecation")
+  public final void writeTextFile(Model model, File file) throws IOException {
+    int i;
+    BufferedWriter out = new BufferedWriter(new OutputStreamWriter(
+      new FileOutputStream(file.getPath())));
+    append("SBMLsqueezer generated model report file", out);
+    append("----------------------------------------", out);
+    for (i = 0; i < model.getReactionCount(); i++) {
+      Reaction r = model.getReaction(i);
+      out.append("Reaction: ");
+      out.append(r.getId());
+      if (r.isSetName()) {
+        out.append(", ");
+        out.append(r.getName());
+      }
+      out.newLine();
+      out.append("Kinetic: v_");
+      out.append(r.getId());
+      out.append(" = ");
+      if (r.isSetKineticLaw()) {
+        out.append(r.getKineticLaw().getMath().toString());
+      } else {
+        out.append("undefined");
+      }
+      out.newLine();
+    }
+    out.newLine();
+    for (i = 0; i < model.getSpeciesCount(); i++) {
+      Species s = model.getSpecies(i);
+      StringBuffer ode = new StringBuffer();
+      for (Reaction r : model.getListOfReactions()) {
+        for (SpeciesReference reactant : r.getListOfReactants()) {
+          if (reactant.getSpecies().equals(s.getId())) {
+            ode.append('-');
+            if (reactant.isSetStoichiometryMath()) {
+              ode.append(reactant.getStoichiometryMath()
+                .getMath().toString());
+              ode.append(' ');
+            } else if (reactant.getStoichiometry() != 1d) {
+              String stoich = Double.toString(reactant
+                .getStoichiometry());
+              if (stoich.endsWith(".0")) {
+                ode.append(stoich.substring(0,
+                  stoich.length() - 2));
+              } else {
+                ode.append(stoich);
+              }
+              ode.append(' ');
+            }
+            ode.append("v_");
+            ode.append(r.getId());
+          }
+        }
+        for (SpeciesReference product : r.getListOfProducts()) {
+          if (product.getSpecies().equals(s.getId())) {
+            if (ode.length() > 0) {
+              ode.append('+');
+            }
+            if (product.isSetStoichiometryMath()) {
+              ode.append(product.getStoichiometryMath().getMath()
+                .toString());
+              ode.append(' ');
+            } else if (product.getStoichiometry() != 1d) {
+              String stoich = Double.toString(product
+                .getStoichiometry());
+              if (stoich.endsWith(".0")) {
+                ode.append(stoich.substring(0,
+                  stoich.length() - 2));
+              } else {
+                ode.append(stoich);
+              }
+              ode.append(' ');
+            }
+            ode.append("v_");
+            ode.append(r.getId());
+          }
+        }
+      }
+      String toWrite = "Species: " + s.getId() + " ODE: d[" + s.getId()
+          + "]/dt = " + ode.toString();
+      append(toWrite, out);
+      append(" ", out);
+    }
+    out.close();
+  }
+  
+  /*
+   * (non-Javadoc)
+   * @see org.sbml.tolatex.io.SBMLReportGenerator#format(org.sbml.jsbml.ListOf, java.io.BufferedWriter, boolean)
+   */
+  @Override
+  public void format(ListOf<? extends SBase> list, BufferedWriter buffer,
+    boolean section) throws IOException, SBMLException {
+    // TODO Auto-generated method stub
+  }
+  
+  /*
+   * (non-Javadoc)
+   * @see org.sbml.tolatex.io.SBMLReportGenerator#section(java.lang.String, boolean)
+   */
+  @Override
+  public StringBuffer section(String title, boolean numbering) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+  
+  /*
+   * (non-Javadoc)
+   * @see org.sbml.tolatex.io.SBMLReportGenerator#subsection(java.lang.String, boolean)
+   */
+  @Override
+  public StringBuffer subsection(String title, boolean numbering) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+  
+  /*
+   * (non-Javadoc)
+   * @see org.sbml.tolatex.io.SBMLReportGenerator#subsubsection(java.lang.String, boolean)
+   */
+  @Override
+  public StringBuffer subsubsection(String title, boolean numbering) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+  
 }

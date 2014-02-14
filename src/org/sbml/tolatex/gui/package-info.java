@@ -2,7 +2,7 @@
  * $Id$
  * $URL$
  * ---------------------------------------------------------------------
- * This file is part of SBML2LaTeX, a program that creates 
+ * This file is part of SBML2LaTeX, a program that creates
  * human-readable reports for given SBML files.
  * 
  * Copyright (C) 2008-2014 by the University of Tuebingen, Germany.
@@ -24,5 +24,7 @@
 
 /**
  * Some basic elements for a simple graphical user interface.
+ * 
+ * @version $Rev$
  */
 package org.sbml.tolatex.gui;

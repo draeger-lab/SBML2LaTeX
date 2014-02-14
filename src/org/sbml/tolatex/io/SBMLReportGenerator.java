@@ -40,60 +40,60 @@ import org.sbml.jsbml.SBase;
  * @version $Rev$
  */
 public interface SBMLReportGenerator {
-
-	/**
-	 * @param doc
-	 * @param buffer
-	 * @throws IOException
-	 * @throws SBMLException
-	 * @throws XMLStreamException
-	 */
-	public void format(SBMLDocument doc, BufferedWriter buffer)
-			throws IOException, SBMLException, XMLStreamException;
-
-	/**
-	 * @param model
-	 * @param buffer
-	 * @throws IOException
-	 * @throws SBMLException
-	 * @throws XMLStreamException
-	 */
-	public void format(Model model, BufferedWriter buffer) throws IOException, SBMLException, XMLStreamException;
-
-	/**
-	 * @param list
-	 * @param name
-	 * @param buffer
-	 * @param section
-	 * @throws IOException
-	 * @throws SBMLException
-	 */
-	public void format(ListOf<? extends SBase> list, BufferedWriter buffer,
-			boolean section) throws IOException, SBMLException;
-
-	/**
-	 * Creates a heading for a subsubsection
-	 * 
-	 * @param title
-	 *            The title of the subsubsection
-	 * @param numbering
-	 *            If true the subsubsection will be numbered otherwise not.
-	 * @return
-	 */
-	public StringBuffer subsubsection(String title, boolean numbering);
-
-	/**
-	 * @param title
-	 * @param numbering
-	 * @return
-	 */
-	public StringBuffer subsection(String title, boolean numbering);
-
-	/**
-	 * @param title
-	 * @param numbering
-	 * @return
-	 */
-	public StringBuffer section(String title, boolean numbering);
-
+  
+  /**
+   * @param doc
+   * @param buffer
+   * @throws IOException
+   * @throws SBMLException
+   * @throws XMLStreamException
+   */
+  public void format(SBMLDocument doc, BufferedWriter buffer)
+      throws IOException, SBMLException, XMLStreamException;
+  
+  /**
+   * @param model
+   * @param buffer
+   * @throws IOException
+   * @throws SBMLException
+   * @throws XMLStreamException
+   */
+  public void format(Model model, BufferedWriter buffer) throws IOException, SBMLException, XMLStreamException;
+  
+  /**
+   * @param list
+   * @param name
+   * @param buffer
+   * @param section
+   * @throws IOException
+   * @throws SBMLException
+   */
+  public void format(ListOf<? extends SBase> list, BufferedWriter buffer,
+    boolean section) throws IOException, SBMLException;
+  
+  /**
+   * Creates a heading for a subsubsection
+   * 
+   * @param title
+   *            The title of the subsubsection
+   * @param numbering
+   *            If true the subsubsection will be numbered otherwise not.
+   * @return
+   */
+  public StringBuffer subsubsection(String title, boolean numbering);
+  
+  /**
+   * @param title
+   * @param numbering
+   * @return
+   */
+  public StringBuffer subsection(String title, boolean numbering);
+  
+  /**
+   * @param title
+   * @param numbering
+   * @return
+   */
+  public StringBuffer section(String title, boolean numbering);
+  
 }

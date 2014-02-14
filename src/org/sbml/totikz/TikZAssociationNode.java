@@ -30,70 +30,72 @@ import de.zbit.sbml.layout.AssociationNode;
 
 /**
  * @author Meike Aichele
+ * @since 1.0
  * @version $Rev$
  */
 public class TikZAssociationNode extends AssociationNode<String>{
-
-	private double lineWidth = TikZLayoutBuilder.DEFAULT_LINE_WIDTH;
-	
-	/* (non-Javadoc)
-	 * @see de.zbit.sbml.layout.AssociationNode#draw(double, double, double, double, double, double)
-	 */
-	@Override
-	public String draw(double x, double y, double z, double width,
-			double height, double depth) {
-		double radius = (width/2d);
-		return TikZ.fillShapeCircle("black", x, y, radius, lineWidth);
-	}
-	
-	/* (non-Javadoc)
-	 * @see de.zbit.sbml.layout.AssociationNode#drawLineSegment(org.sbml.jsbml.ext.layout.LineSegment, double, org.sbml.jsbml.ext.layout.Point)
-	 */
-	@Override
-	public String drawLineSegment(LineSegment segment,
-			double rotationAngle, Point rotationCenter) {
-		String lineSegment = null;
-
-		Point start = segment.getStart();
-		double x1 = start.getX();
-		double y1 = start.getY();
-		Point end = segment.getEnd();
-		double x2 = end.getX();
-		double y2 = end.getY();
-
-		if ((rotationAngle % 180) == 0) {
-			lineSegment = TikZ.drawLine("black", lineWidth, x1, y1, x2, y2);
-		} else {
-			lineSegment = TikZ.drawLine("black", lineWidth, x1, y1, x2, y2, rotationAngle, rotationCenter);
-		}
-		return lineSegment;
-	}
-
-	/* (non-Javadoc)
-	 * @see de.zbit.sbml.layout.AssociationNode#getLineWidth()
-	 */
-	@Override
-	public double getLineWidth() {
-		return lineWidth;
-	}
-
-	/* (non-Javadoc)
-	 * @see de.zbit.sbml.layout.AssociationNode#setLineWidth(double)
-	 */
-	@Override
-	public void setLineWidth(double lineWidth) {
-		this.lineWidth = lineWidth;
-	}
-
-	/* (non-Javadoc)
-	 * @see de.zbit.sbml.layout.SBGNReactionNode#draw(double, double, double, double, double, double, double, org.sbml.jsbml.ext.layout.Point)
-	 */
-	//@Override
-	public String draw(double x, double y, double z, double width,
-			double height, double depth, double rotationAngle,
-			Point rotationCenter) {
-		// an association node is round so you don't have to remind the rotation
-		return draw(x, y, z, width, height, depth);
-	}
-
+  
+  private double lineWidth = TikZLayoutBuilder.DEFAULT_LINE_WIDTH;
+  
+  /* (non-Javadoc)
+   * @see de.zbit.sbml.layout.AssociationNode#draw(double, double, double, double, double, double)
+   */
+  @Override
+  public String draw(double x, double y, double z, double width,
+    double height, double depth) {
+    double radius = (width/2d);
+    return TikZ.fillShapeCircle("black", x, y, radius, lineWidth);
+  }
+  
+  /* (non-Javadoc)
+   * @see de.zbit.sbml.layout.AssociationNode#drawLineSegment(org.sbml.jsbml.ext.layout.LineSegment, double, org.sbml.jsbml.ext.layout.Point)
+   */
+  @Override
+  public String drawLineSegment(LineSegment segment,
+    double rotationAngle, Point rotationCenter) {
+    String lineSegment = null;
+    
+    Point start = segment.getStart();
+    double x1 = start.getX();
+    double y1 = start.getY();
+    Point end = segment.getEnd();
+    double x2 = end.getX();
+    double y2 = end.getY();
+    
+    if ((rotationAngle % 180) == 0) {
+      lineSegment = TikZ.drawLine("black", lineWidth, x1, y1, x2, y2);
+    } else {
+      lineSegment = TikZ.drawLine("black", lineWidth, x1, y1, x2, y2, rotationAngle, rotationCenter);
+    }
+    return lineSegment;
+  }
+  
+  /* (non-Javadoc)
+   * @see de.zbit.sbml.layout.AssociationNode#getLineWidth()
+   */
+  @Override
+  public double getLineWidth() {
+    return lineWidth;
+  }
+  
+  /* (non-Javadoc)
+   * @see de.zbit.sbml.layout.AssociationNode#setLineWidth(double)
+   */
+  @Override
+  public void setLineWidth(double lineWidth) {
+    this.lineWidth = lineWidth;
+  }
+  
+  /* (non-Javadoc)
+   * @see de.zbit.sbml.layout.SBGNReactionNode#draw(double, double, double, double, double, double, double, org.sbml.jsbml.ext.layout.Point)
+   */
+  //@Override
+  @Override
+  public String draw(double x, double y, double z, double width,
+    double height, double depth, double rotationAngle,
+    Point rotationCenter) {
+    // an association node is round so you don't have to remind the rotation
+    return draw(x, y, z, width, height, depth);
+  }
+  
 }

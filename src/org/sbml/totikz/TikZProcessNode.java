@@ -30,62 +30,65 @@ import de.zbit.sbml.layout.ProcessNode;
 
 /**
  * @author Meike Aichele
+ * @since 1.0
  * @version $Rev$
  */
 public class TikZProcessNode extends ProcessNode<String>{
-
-	private double lineWidth = TikZLayoutBuilder.DEFAULT_LINE_WIDTH;
-
-	/* (non-Javadoc)
-	 * @see de.zbit.sbml.layout.SBGNNode#draw(double, double, double, double, double, double)
-	 */
-	public String draw(double x, double y, double z, double width,
-			double height, double depth) {
-		String processNodeCode = "\\draw [color = black, line width = " + lineWidth + "pt] ("
-		+ (x - (width/2d))
-		+ "pt,"
-		+ (y - height)
-		+ "pt) rectangle ("
-		+ (x + (width/2d))
-		+ "pt,"
-		+ (y + height)
-		+ "pt);\n";
-		return processNodeCode;
-	}
-
-	/* (non-Javadoc)
-	 * @see de.zbit.sbml.layout.ProcessNode#draw(double, double, double, double, double, double, double, org.sbml.jsbml.ext.layout.Point)
-	 */
-	public String draw(double x, double y, double z, double width, 
-			double height, double depth, double rotationAngle, Point rotationCenter) {
-		return TikZ.drawShapeRectangle("black", lineWidth, x - width / 2d, y - height, x + width / 2d, y + height, rotationAngle, rotationCenter);
-	}
-
-	/* (non-Javadoc)
-	 * @see de.zbit.sbml.layout.ProcessNode#drawLineSegments()
-	 */
-	@Override
-	public String drawLineSegment(LineSegment lineSegment, double rotationAngle, Point rotationCenter) {
-		if ((rotationAngle % 180) == 0) {
-			return TikZ.draw("black", lineSegment, lineWidth);
-		}
-		return TikZ.draw("black", lineSegment, lineWidth, rotationAngle, rotationCenter);
-	}
-
-	/* (non-Javadoc)
-	 * @see de.zbit.sbml.layout.ProcessNode#getLineWidth()
-	 */
-	@Override
-	public double getLineWidth() {
-		return lineWidth;
-	}
-
-	/* (non-Javadoc)
-	 * @see de.zbit.sbml.layout.ProcessNode#setLineWidth(double)
-	 */
-	@Override
-	public void setLineWidth(double lineWidth) {
-		this.lineWidth = lineWidth;
-	}
-
+  
+  private double lineWidth = TikZLayoutBuilder.DEFAULT_LINE_WIDTH;
+  
+  /* (non-Javadoc)
+   * @see de.zbit.sbml.layout.SBGNNode#draw(double, double, double, double, double, double)
+   */
+  @Override
+  public String draw(double x, double y, double z, double width,
+    double height, double depth) {
+    String processNodeCode = "\\draw [color = black, line width = " + lineWidth + "pt] ("
+        + (x - (width/2d))
+        + "pt,"
+        + (y - height)
+        + "pt) rectangle ("
+        + (x + (width/2d))
+        + "pt,"
+        + (y + height)
+        + "pt);\n";
+    return processNodeCode;
+  }
+  
+  /* (non-Javadoc)
+   * @see de.zbit.sbml.layout.ProcessNode#draw(double, double, double, double, double, double, double, org.sbml.jsbml.ext.layout.Point)
+   */
+  @Override
+  public String draw(double x, double y, double z, double width,
+    double height, double depth, double rotationAngle, Point rotationCenter) {
+    return TikZ.drawShapeRectangle("black", lineWidth, x - width / 2d, y - height, x + width / 2d, y + height, rotationAngle, rotationCenter);
+  }
+  
+  /* (non-Javadoc)
+   * @see de.zbit.sbml.layout.ProcessNode#drawLineSegments()
+   */
+  @Override
+  public String drawLineSegment(LineSegment lineSegment, double rotationAngle, Point rotationCenter) {
+    if ((rotationAngle % 180) == 0) {
+      return TikZ.draw("black", lineSegment, lineWidth);
+    }
+    return TikZ.draw("black", lineSegment, lineWidth, rotationAngle, rotationCenter);
+  }
+  
+  /* (non-Javadoc)
+   * @see de.zbit.sbml.layout.ProcessNode#getLineWidth()
+   */
+  @Override
+  public double getLineWidth() {
+    return lineWidth;
+  }
+  
+  /* (non-Javadoc)
+   * @see de.zbit.sbml.layout.ProcessNode#setLineWidth(double)
+   */
+  @Override
+  public void setLineWidth(double lineWidth) {
+    this.lineWidth = lineWidth;
+  }
+  
 }

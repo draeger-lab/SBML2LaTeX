@@ -29,17 +29,18 @@ import de.zbit.sbml.layout.Stimulation;
 
 /**
  * @author Meike Aichele
+ * @since 1.0
  * @version $Rev$
  */
 public class TikZStimulation extends TikZSBGNArc implements Stimulation<String> {
-
-	/* (non-Javadoc)
-	 * @see de.zbit.sbml.layout.SBGNArc#draw(org.sbml.jsbml.ext.layout.CurveSegment, double)
-	 */
-	//@Override
-	public String draw(CurveSegment curveSegment, double lineWidth) {
-		// TODO triangle must have variable size
-		return TikZ.draw("-open triangle 60", "black", curveSegment, lineWidth);
-	}
-
+  
+  /* (non-Javadoc)
+   * @see de.zbit.sbml.layout.SBGNArc#draw(org.sbml.jsbml.ext.layout.CurveSegment, double)
+   */
+  @Override
+  public String draw(CurveSegment curveSegment, double lineWidth) {
+    // TODO triangle must have variable size
+    return TikZ.draw("-open triangle 60", "black", curveSegment, lineWidth);
+  }
+  
 }

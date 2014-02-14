@@ -2,7 +2,7 @@
  * $Id$
  * $URL$
  * ---------------------------------------------------------------------
- * This file is part of SBML2LaTeX, a program that creates 
+ * This file is part of SBML2LaTeX, a program that creates
  * human-readable reports for given SBML files.
  * 
  * Copyright (C) 2008-2014 by the University of Tuebingen, Germany.
@@ -37,47 +37,47 @@ import de.zbit.io.OpenFile;
  * @since 0.9.3
  */
 public class HTML2LaTeX {
-
-	/** Configuration file. */
-	private static String _configFile = "config.xml";
-	/** File with CSS. */
-	private static String _cssFile = "";
-
-	public HTML2LaTeX(BufferedReader br, BufferedWriter bw) throws IOException {
-		try {
-			Parser parser = new Parser();
-			parser.parse(br, new ParserHandler(bw));
-		} catch (FatalErrorException exc) {
-			throw new IOException(exc);
-		}
-	}
-
-	/**
-	 * Returns name of the file with CSS.
-	 * 
-	 * @return name of the file with CSS
-	 * @throws URISyntaxException 
-	 */
-	public static File getCSSFile() throws URISyntaxException {
-		return OpenFile.searchFile(_cssFile);
-	}
-
-	/**
-	 * Returns name of the file with configuration.
-	 * 
-	 * @return name of the file with configuration
-	 * @throws URISyntaxException 
-	 */
-	public static File getConfigFile() throws URISyntaxException {
-		return OpenFile.searchFile(_configFile);
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	public static boolean isSetCSSFile() {
-		return (_cssFile != null) && !_cssFile.equals("");
-	}
-
+  
+  /** Configuration file. */
+  private static String _configFile = "config.xml";
+  /** File with CSS. */
+  private static String _cssFile = "";
+  
+  public HTML2LaTeX(BufferedReader br, BufferedWriter bw) throws IOException {
+    try {
+      Parser parser = new Parser();
+      parser.parse(br, new ParserHandler(bw));
+    } catch (FatalErrorException exc) {
+      throw new IOException(exc);
+    }
+  }
+  
+  /**
+   * Returns name of the file with CSS.
+   * 
+   * @return name of the file with CSS
+   * @throws URISyntaxException
+   */
+  public static File getCSSFile() throws URISyntaxException {
+    return OpenFile.searchFile(_cssFile);
+  }
+  
+  /**
+   * Returns name of the file with configuration.
+   * 
+   * @return name of the file with configuration
+   * @throws URISyntaxException
+   */
+  public static File getConfigFile() throws URISyntaxException {
+    return OpenFile.searchFile(_configFile);
+  }
+  
+  /**
+   * 
+   * @return
+   */
+  public static boolean isSetCSSFile() {
+    return (_cssFile != null) && !_cssFile.equals("");
+  }
+  
 }

@@ -25,32 +25,32 @@ package org.sbml.totikz;
 
 import org.sbml.jsbml.ext.layout.CubicBezier;
 
-
 /**
  * @author Meike Aichele
+ * @since 1.0
  * @version $Rev$
  */
 public class TikZCubicBezier {
-
-	/**
-	 * Method creates the TikZ-Code for a {@link CubicBezier}.
-	 * @param cubicBezier
-	 * @param lineWidth
-	 * @return
-	 */
-	public String draw(CubicBezier cubicBezier, double lineWidth) {
-		return TikZ.drawCubicBezier("black", cubicBezier, lineWidth);
-	}
-
-	/**
-	 * Method creates the TikZ-Code for a {@link CubicBezier} without a given line
-	 * width.
-	 * 
-	 * @param cubicBezier
-	 * @return
-	 */
-	public String draw(CubicBezier cubicBezier) {
-		return draw(cubicBezier, TikZLayoutBuilder.DEFAULT_LINE_WIDTH);		
-	}
-
+  
+  /**
+   * Method creates the TikZ-Code for a {@link CubicBezier}.
+   * @param cubicBezier
+   * @param lineWidth
+   * @return
+   */
+  public String draw(CubicBezier cubicBezier, double lineWidth) {
+    return TikZ.drawCubicBezier("black", cubicBezier, lineWidth);
+  }
+  
+  /**
+   * Method creates the TikZ-Code for a {@link CubicBezier} without a given line
+   * width.
+   * 
+   * @param cubicBezier
+   * @return
+   */
+  public String draw(CubicBezier cubicBezier) {
+    return draw(cubicBezier, TikZLayoutBuilder.DEFAULT_LINE_WIDTH);
+  }
+  
 }

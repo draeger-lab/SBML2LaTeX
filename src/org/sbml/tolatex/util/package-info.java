@@ -2,7 +2,7 @@
  * $Id$
  * $URL$
  * ---------------------------------------------------------------------
- * This file is part of SBML2LaTeX, a program that creates 
+ * This file is part of SBML2LaTeX, a program that creates
  * human-readable reports for given SBML files.
  * 
  * Copyright (C) 2008-2014 by the University of Tuebingen, Germany.
@@ -23,6 +23,9 @@
  */
 
 /**
- * Provides specialized helper classes for String operations on LaTeX source code.
+ * Provides specialized helper classes for String operations on LaTeX source
+ * code.
+ * 
+ * @version $Rev$
  */
 package org.sbml.tolatex.util;

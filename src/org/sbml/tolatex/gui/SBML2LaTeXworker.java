@@ -2,7 +2,7 @@
  * $Id: SBML2LaTeXworker.java 24.05.2012 16:08:12 draeger$
  * $URL: SBML2LaTeXworker.java$
  * ---------------------------------------------------------------------
- * This file is part of SBML2LaTeX, a program that creates 
+ * This file is part of SBML2LaTeX, a program that creates
  * human-readable reports for given SBML files.
  * 
  * Copyright (C) 2007-2014 by the University of Tuebingen, Germany.
@@ -39,42 +39,42 @@ import de.zbit.gui.GUITools;
  * @version $Rev$
  */
 public class SBML2LaTeXworker extends SwingWorker<File, Void> {
-
-	private SBase sbase;
-	private SBML2LaTeXView view;
-	private File outFile;
-	public static final String ERROR_CODE = "org.sbml.tolatex.gui.SBML2LaTeXworker.error";
-
-	/**
-	 * 
-	 */
-	public SBML2LaTeXworker(SBase sbase, File outFile, SBML2LaTeXView view) {
-		super();
-		this.sbase = sbase;
-		this.outFile = outFile;
-		this.view = view;
-	}
-	
-	/* (non-Javadoc)
-	 * @see javax.swing.SwingWorker#doInBackground()
-	 */
-	@Override
-	protected File doInBackground() throws Exception {
-		return SBML2LaTeX.convert(sbase, outFile, view);
-	}
-
-	/* (non-Javadoc)
-	 * @see javax.swing.SwingWorker#done()
-	 */
-	@Override
-	protected void done() {
-		try {
-			File result = get();
-			view.display(result);
-		} catch (Exception exc) {
-			GUITools.showErrorMessage(null, exc);
-			firePropertyChange(ERROR_CODE , null, null);
-		}
-	}
-	
+  
+  private SBase sbase;
+  private SBML2LaTeXView view;
+  private File outFile;
+  public static final String ERROR_CODE = "org.sbml.tolatex.gui.SBML2LaTeXworker.error";
+  
+  /**
+   * 
+   */
+  public SBML2LaTeXworker(SBase sbase, File outFile, SBML2LaTeXView view) {
+    super();
+    this.sbase = sbase;
+    this.outFile = outFile;
+    this.view = view;
+  }
+  
+  /* (non-Javadoc)
+   * @see javax.swing.SwingWorker#doInBackground()
+   */
+  @Override
+  protected File doInBackground() throws Exception {
+    return SBML2LaTeX.convert(sbase, outFile, view);
+  }
+  
+  /* (non-Javadoc)
+   * @see javax.swing.SwingWorker#done()
+   */
+  @Override
+  protected void done() {
+    try {
+      File result = get();
+      view.display(result);
+    } catch (Exception exc) {
+      GUITools.showErrorMessage(null, exc);
+      firePropertyChange(ERROR_CODE , null, null);
+    }
+  }
+  
 }

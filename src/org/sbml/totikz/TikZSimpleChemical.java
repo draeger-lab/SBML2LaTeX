@@ -2,7 +2,7 @@
  * $Id$
  * $URL$
  * ---------------------------------------------------------------------
- * This file is part of SBML2LaTeX, a program that creates 
+ * This file is part of SBML2LaTeX, a program that creates
  * human-readable reports for given SBML files.
  * 
  * Copyright (C) 2008-2014 by the University of Tuebingen, Germany.
@@ -31,45 +31,47 @@ import de.zbit.sbml.layout.SimpleChemical;
  * representation
  * 
  * @author Mirjam Gutekunst
+ * @since 1.0
  * @version $Rev$
  */
 public class TikZSimpleChemical extends SimpleChemical<String> {
-	
-	/* (non-Javadoc)
-	 * @see de.zbit.sbml.layout.SBGNNode#draw(double x, double y, double z, double width, double height, double depth)
-	 */
-	public String draw(double x, double y, double z, double width, double height, double depth) {
-		
-		width = width / 2d;
-		height = height / 2d;
-		
-		String circle = (x + width)
-						+ "pt,"
-						+ (y + height)
-						+ "pt) circle ("
-						+ height
-						+ "pt);\n";
-		
-		String tikz = "\\filldraw [fill = simpleChemical!50, line width = " + 
-				TikZLayoutBuilder.DEFAULT_LINE_WIDTH + "pt, draw = simpleChemical] (" + 
-				circle;
-		
-		if (isSetCloneMarker()) {
-			tikz = tikz + "\\begin{scope}\n\\clip ("
-						+ circle
-						+ "\\fill[black] ("
-						+ x
-						+ "pt,"
-						+ (y + ((4d / 3d) * height))
-						+ "pt) rectangle ("
-						+ (x + (2d * width))
-						+ "pt,"
-						+ (y + (2d * height))
-						+ "pt);\n"
-						+ "\\end{scope}\n";
-		}
-		
-		return tikz;		
-	}
-	
+  
+  /* (non-Javadoc)
+   * @see de.zbit.sbml.layout.SBGNNode#draw(double x, double y, double z, double width, double height, double depth)
+   */
+  @Override
+  public String draw(double x, double y, double z, double width, double height, double depth) {
+    
+    width = width / 2d;
+    height = height / 2d;
+    
+    String circle = (x + width)
+        + "pt,"
+        + (y + height)
+        + "pt) circle ("
+        + height
+        + "pt);\n";
+    
+    String tikz = "\\filldraw [fill = simpleChemical!50, line width = " +
+        TikZLayoutBuilder.DEFAULT_LINE_WIDTH + "pt, draw = simpleChemical] (" +
+        circle;
+    
+    if (isSetCloneMarker()) {
+      tikz = tikz + "\\begin{scope}\n\\clip ("
+          + circle
+          + "\\fill[black] ("
+          + x
+          + "pt,"
+          + (y + ((4d / 3d) * height))
+          + "pt) rectangle ("
+          + (x + (2d * width))
+          + "pt,"
+          + (y + (2d * height))
+          + "pt);\n"
+          + "\\end{scope}\n";
+    }
+    
+    return tikz;
+  }
+  
 }

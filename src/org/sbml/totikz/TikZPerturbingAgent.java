@@ -27,25 +27,26 @@ import de.zbit.sbml.layout.PerturbingAgent;
 
 /**
  * @author Meike Aichele
+ * @since 1.0
  * @version $Rev$
  */
 public class TikZPerturbingAgent extends PerturbingAgent<String>{
-
-	/* (non-Javadoc)
-	 * @see de.zbit.sbml.layout.SBGNNode#draw(double, double, double, double, double, double)
-	 */
-	//@Override
-	public String draw(double x, double y, double z, double width,
-			double height, double depth) {
-		String tikZ = "\\filldraw [fill = PerturbingAgent!50] (" + 
-			(x - (width / 6)) + "pt," + y + "pt) -- (" +
-			(x + width + (width / 6)) + "pt," + y + "pt) -- (" +
-			(x + width) + "pt," + (y + (height / 2)) + "pt) -- (" +
-			(x + width + (width / 6)) + "pt," + (y + height)  + "pt) -- (" + 
-			(x - (width / 6)) + "pt," + (y + height)  + "pt) -- (" + 
-			x + "pt," + (y + (height / 2))  + "pt) -- (" + 
-			(x - (width / 6)) + "pt," + y + "pt);";
-		return tikZ;
-	}
-
+  
+  /* (non-Javadoc)
+   * @see de.zbit.sbml.layout.SBGNNode#draw(double, double, double, double, double, double)
+   */
+  @Override
+  public String draw(double x, double y, double z, double width,
+    double height, double depth) {
+    String tikZ = "\\filldraw [fill = PerturbingAgent!50] (" +
+        (x - (width / 6)) + "pt," + y + "pt) -- (" +
+        (x + width + (width / 6)) + "pt," + y + "pt) -- (" +
+        (x + width) + "pt," + (y + (height / 2)) + "pt) -- (" +
+        (x + width + (width / 6)) + "pt," + (y + height)  + "pt) -- (" +
+        (x - (width / 6)) + "pt," + (y + height)  + "pt) -- (" +
+        x + "pt," + (y + (height / 2))  + "pt) -- (" +
+        (x - (width / 6)) + "pt," + y + "pt);";
+    return tikZ;
+  }
+  
 }

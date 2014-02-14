@@ -33,90 +33,92 @@ import de.zbit.sbml.layout.SimpleLayoutAlgorithm;
 
 /**
  * Class to draw a necessary stimulation
+ * 
  * @author Meike Aichele
+ * @since 1.0
  * @version $Rev$
  */
 public class TikZNecessaryStimulation extends TikZSBGNArc implements NecessaryStimulation<String> {
-
-	/* (non-Javadoc)
-	 * @see de.zbit.sbml.layout.SBGNArc#draw(org.sbml.jsbml.ext.layout.CurveSegment, double)
-	 */
-	//@Override
-	public String draw(CurveSegment curveSegment, double lineWidth) {
-		LineSegment ls = (LineSegment) curveSegment;
-		Point startPoint = ls.getStart();
-		Point endPoint = ls.getEnd();
-		double startX = startPoint.getX();
-		double startY = startPoint.getY();
-		double endX = endPoint.getX();
-		double endY = endPoint.getY();
-
-		Point middlePoint = calculateArrow(startPoint, endPoint);
-
-		double middleX = middlePoint.getX();
-		double middleY = middlePoint.getY();
-
-		String tikzStart = TikZ.drawLine("-|", "black", lineWidth, startX, startY, middleX, middleY);
-		// TODO triangle must have variable size
-		String tikzEnd   = TikZ.drawLine("-open triangle 60", "black", lineWidth, middleX, middleY, endX, endY);
-
-		//curveSegment is not instanceof CubicBezier
-		if (!(curveSegment instanceof CubicBezier)) {
-			return tikzStart + ";\n" + tikzEnd + ";\n";
-			
-		}
-
-		//curveSegment instanceof CubicBezier
-		CubicBezier bezier = (CubicBezier) curveSegment;
-		Point basePoint1 = bezier.getBasePoint1();
-		Point basePoint2 = bezier.getBasePoint2();
-		double basePoint1X = basePoint1.getX();
-		double basePoint1Y = basePoint1.getY();
-		double basePoint2X = basePoint2.getX();
-		double basePoint2Y = basePoint2.getY();
-		
-		return tikzStart
-				+ ".. controls ("
-				+ basePoint1X
-				+ "pt,"
-				+ basePoint1Y
-				+ "pt) and ("
-				+ basePoint2X
-				+ "pt,"
-				+ basePoint2Y
-				+ "pt) .. "
-				+ tikzEnd;
-
-	}
-
-	/**
-	 * 
-	 */
-	private Point calculateArrow(Point startPoint, Point endPoint) {
-		double angle = SimpleLayoutAlgorithm.calculateRotationAngle(startPoint, endPoint);
-		double c = 12d;
-		double b = Math.abs(Math.cos(Math.toRadians(angle)) * c);
-		double a = Math.abs(Math.sin(Math.toRadians(angle)) * c);
-
-		Point dockingPoint = new Point();
-		if ((angle >= 0) && (angle < 90)) {
-			dockingPoint.setX(endPoint.getX() - b);
-			dockingPoint.setY(endPoint.getY() - a);
-			dockingPoint.setZ(endPoint.getZ());
-		} else if ((angle >= 90) && (angle < 180)) {
-			dockingPoint.setX(endPoint.getX() + a);
-			dockingPoint.setY(endPoint.getY() - b);
-			dockingPoint.setZ(endPoint.getZ());
-		} else if ((angle >= 180) && (angle < 270)) {
-			dockingPoint.setX(endPoint.getX() + b);
-			dockingPoint.setY(endPoint.getY() + a);
-			dockingPoint.setZ(endPoint.getZ());
-		} else {
-			dockingPoint.setX(endPoint.getX() - a);
-			dockingPoint.setY(endPoint.getY() + b);
-			dockingPoint.setZ(endPoint.getZ());
-		}
-		return dockingPoint;
-	}
-
+  
+  /* (non-Javadoc)
+   * @see de.zbit.sbml.layout.SBGNArc#draw(org.sbml.jsbml.ext.layout.CurveSegment, double)
+   */
+  @Override
+  public String draw(CurveSegment curveSegment, double lineWidth) {
+    LineSegment ls = (LineSegment) curveSegment;
+    Point startPoint = ls.getStart();
+    Point endPoint = ls.getEnd();
+    double startX = startPoint.getX();
+    double startY = startPoint.getY();
+    double endX = endPoint.getX();
+    double endY = endPoint.getY();
+    
+    Point middlePoint = calculateArrow(startPoint, endPoint);
+    
+    double middleX = middlePoint.getX();
+    double middleY = middlePoint.getY();
+    
+    String tikzStart = TikZ.drawLine("-|", "black", lineWidth, startX, startY, middleX, middleY);
+    // TODO triangle must have variable size
+    String tikzEnd   = TikZ.drawLine("-open triangle 60", "black", lineWidth, middleX, middleY, endX, endY);
+    
+    //curveSegment is not instanceof CubicBezier
+    if (!(curveSegment instanceof CubicBezier)) {
+      return tikzStart + ";\n" + tikzEnd + ";\n";
+      
+    }
+    
+    //curveSegment instanceof CubicBezier
+    CubicBezier bezier = (CubicBezier) curveSegment;
+    Point basePoint1 = bezier.getBasePoint1();
+    Point basePoint2 = bezier.getBasePoint2();
+    double basePoint1X = basePoint1.getX();
+    double basePoint1Y = basePoint1.getY();
+    double basePoint2X = basePoint2.getX();
+    double basePoint2Y = basePoint2.getY();
+    
+    return tikzStart
+        + ".. controls ("
+        + basePoint1X
+        + "pt,"
+        + basePoint1Y
+        + "pt) and ("
+        + basePoint2X
+        + "pt,"
+        + basePoint2Y
+        + "pt) .. "
+        + tikzEnd;
+    
+  }
+  
+  /**
+   * 
+   */
+  private Point calculateArrow(Point startPoint, Point endPoint) {
+    double angle = SimpleLayoutAlgorithm.calculateRotationAngle(startPoint, endPoint);
+    double c = 12d;
+    double b = Math.abs(Math.cos(Math.toRadians(angle)) * c);
+    double a = Math.abs(Math.sin(Math.toRadians(angle)) * c);
+    
+    Point dockingPoint = new Point();
+    if ((angle >= 0) && (angle < 90)) {
+      dockingPoint.setX(endPoint.getX() - b);
+      dockingPoint.setY(endPoint.getY() - a);
+      dockingPoint.setZ(endPoint.getZ());
+    } else if ((angle >= 90) && (angle < 180)) {
+      dockingPoint.setX(endPoint.getX() + a);
+      dockingPoint.setY(endPoint.getY() - b);
+      dockingPoint.setZ(endPoint.getZ());
+    } else if ((angle >= 180) && (angle < 270)) {
+      dockingPoint.setX(endPoint.getX() + b);
+      dockingPoint.setY(endPoint.getY() + a);
+      dockingPoint.setZ(endPoint.getZ());
+    } else {
+      dockingPoint.setX(endPoint.getX() - a);
+      dockingPoint.setY(endPoint.getY() + b);
+      dockingPoint.setZ(endPoint.getZ());
+    }
+    return dockingPoint;
+  }
+  
 }

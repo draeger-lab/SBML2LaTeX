@@ -1,10 +1,9 @@
 /*
  * ICSSParserHandler.java
  */
-
 package cz.kebrt.html2latex;
 
-import java.util.*;
+import java.util.HashMap;
 
 
 /**
@@ -13,12 +12,12 @@ import java.util.*;
  * @since 0.9.3
  */
 public interface ICSSParserHandler {
-	
-	/**
-	 * Called when a new style is reached in the CSS stylesheet.
-	 * @param styleName name of the style
-	 * @param properties map with all the style's properties
-	 */
-	public void newStyle(String styleName, HashMap<String, String> properties);
-	
+  
+  /**
+   * Called when a new style is reached in the CSS stylesheet.
+   * @param styleName name of the style
+   * @param properties map with all the style's properties
+   */
+  public void newStyle(String styleName, HashMap<String, String> properties);
+  
 }

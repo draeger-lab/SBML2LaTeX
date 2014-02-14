@@ -30,120 +30,123 @@ import de.zbit.sbml.layout.OmittedProcessNode;
 
 /**
  * @author Meike Aichele
+ * @since 1.0
  * @version $Rev$
  */
 public class TikZOmittedProcessNode extends OmittedProcessNode<String> {
-
-	private double lineWidth = TikZLayoutBuilder.DEFAULT_LINE_WIDTH;
-
-	/* (non-Javadoc)
-	 * @see de.zbit.sbml.layout.SBGNNode#draw(double, double, double, double, double, double)
-	 */
-	public String draw(double x, double y, double z, double width,
-			double height, double depth) {
-		String omittedProcessNodeCode = TikZ.drawShapeRectangle("black", lineWidth, x - width / 2d, y - height / 2d, x + width / 2d, y + height / 2d)
-		// draw label
-		+ "\\draw (" 
-		+ x
-		+ "pt,"
-		+ y
-		+ "pt) node [anchor = center] {" 
-		+ "$\\backprime\\backprime$}; \n";
-		return omittedProcessNodeCode;
-	}
-
-	/* (non-Javadoc)
-	 * @see de.zbit.sbml.layout.ProcessNode#draw(double, double, double, double, double, double, double, org.sbml.jsbml.ext.layout.Point)
-	 */
-	public String draw(double x, double y, double z, double width, 
-			double height, double depth, double rotationAngle, Point rotationCenter) {
-		
-		String omittedProcessCode = "\\draw [color = black, line width = " + lineWidth + "pt, rotate around = {"
-		+ rotationAngle
-		+ " : ("
-		+ rotationCenter.getX()
-		+ "pt, "
-		+ rotationCenter.getY()
-		+ "pt)}] ("
-		+ (x - (width/2d))
-		+ "pt,"
-		+ (y - (height/2d))
-		+ "pt) rectangle ("
-		+ (x + (width/2d))
-		+ "pt,"
-		+ (y + (height/2d))
-		+ "pt);\n";
-		
-		// draw label
-		omittedProcessCode += "\\draw (" 
-						+ x
-						+ "pt,"
-						+ y
-						+ "pt) node [anchor = center, rotate = " 
-						+ rotationAngle%90 
-						+ "] {" 
-						+ "$\\backprime\\backprime$}; \n";
-		return omittedProcessCode;
-	}
-
-	/* (non-Javadoc)
-	 * @see de.zbit.sbml.layout.ProcessNode#drawLineSegments()
-	 */
-	@Override
-	public String drawLineSegment(LineSegment segment, double rotationAngle, Point rotationCenter) {
-		String lineSegment = null;
-
-		Point start = segment.getStart();
-		double x1 = start.getX();
-		double y1 = start.getY();
-		Point end = segment.getEnd();
-		double x2 = end.getX();
-		double y2 = end.getY();
-
-		if ((rotationAngle % 180) == 0) {
-			lineSegment = "\\draw [color = black, line width = " + lineWidth + "pt] ("
-			+ x1
-			+ "pt,"
-			+ y1
-			+ "pt) -- ("
-			+ x2
-			+ "pt,"
-			+ y2
-			+ "pt);\n";
-		} else {
-			lineSegment = "\\draw [color = black, line width = " + lineWidth + "pt, rotate around = {"
-			+ rotationAngle
-			+ " : ("
-			+ rotationCenter.getX()
-			+ "pt, "
-			+ rotationCenter.getY()
-			+ "pt)}] ("
-			+ x1
-			+ "pt,"
-			+ y1
-			+ "pt) -- ("
-			+ x2
-			+ "pt,"
-			+ y2
-			+ "pt);\n";
-		}
-		return lineSegment;
-	}
-
-	/* (non-Javadoc)
-	 * @see de.zbit.sbml.layout.ProcessNode#getLineWidth()
-	 */
-	@Override
-	public double getLineWidth() {
-		return lineWidth;
-	}
-
-	/* (non-Javadoc)
-	 * @see de.zbit.sbml.layout.ProcessNode#setLineWidth(double)
-	 */
-	@Override
-	public void setLineWidth(double lineWidth) {
-		this.lineWidth = lineWidth;
-	}
-
+  
+  private double lineWidth = TikZLayoutBuilder.DEFAULT_LINE_WIDTH;
+  
+  /* (non-Javadoc)
+   * @see de.zbit.sbml.layout.SBGNNode#draw(double, double, double, double, double, double)
+   */
+  @Override
+  public String draw(double x, double y, double z, double width,
+    double height, double depth) {
+    String omittedProcessNodeCode = TikZ.drawShapeRectangle("black", lineWidth, x - width / 2d, y - height / 2d, x + width / 2d, y + height / 2d)
+        // draw label
+        + "\\draw ("
+        + x
+        + "pt,"
+        + y
+        + "pt) node [anchor = center] {"
+        + "$\\backprime\\backprime$}; \n";
+    return omittedProcessNodeCode;
+  }
+  
+  /* (non-Javadoc)
+   * @see de.zbit.sbml.layout.ProcessNode#draw(double, double, double, double, double, double, double, org.sbml.jsbml.ext.layout.Point)
+   */
+  @Override
+  public String draw(double x, double y, double z, double width,
+    double height, double depth, double rotationAngle, Point rotationCenter) {
+    
+    String omittedProcessCode = "\\draw [color = black, line width = " + lineWidth + "pt, rotate around = {"
+        + rotationAngle
+        + " : ("
+        + rotationCenter.getX()
+        + "pt, "
+        + rotationCenter.getY()
+        + "pt)}] ("
+        + (x - (width/2d))
+        + "pt,"
+        + (y - (height/2d))
+        + "pt) rectangle ("
+        + (x + (width/2d))
+        + "pt,"
+        + (y + (height/2d))
+        + "pt);\n";
+    
+    // draw label
+    omittedProcessCode += "\\draw ("
+        + x
+        + "pt,"
+        + y
+        + "pt) node [anchor = center, rotate = "
+        + rotationAngle%90
+        + "] {"
+        + "$\\backprime\\backprime$}; \n";
+    return omittedProcessCode;
+  }
+  
+  /* (non-Javadoc)
+   * @see de.zbit.sbml.layout.ProcessNode#drawLineSegments()
+   */
+  @Override
+  public String drawLineSegment(LineSegment segment, double rotationAngle, Point rotationCenter) {
+    String lineSegment = null;
+    
+    Point start = segment.getStart();
+    double x1 = start.getX();
+    double y1 = start.getY();
+    Point end = segment.getEnd();
+    double x2 = end.getX();
+    double y2 = end.getY();
+    
+    if ((rotationAngle % 180) == 0) {
+      lineSegment = "\\draw [color = black, line width = " + lineWidth + "pt] ("
+          + x1
+          + "pt,"
+          + y1
+          + "pt) -- ("
+          + x2
+          + "pt,"
+          + y2
+          + "pt);\n";
+    } else {
+      lineSegment = "\\draw [color = black, line width = " + lineWidth + "pt, rotate around = {"
+          + rotationAngle
+          + " : ("
+          + rotationCenter.getX()
+          + "pt, "
+          + rotationCenter.getY()
+          + "pt)}] ("
+          + x1
+          + "pt,"
+          + y1
+          + "pt) -- ("
+          + x2
+          + "pt,"
+          + y2
+          + "pt);\n";
+    }
+    return lineSegment;
+  }
+  
+  /* (non-Javadoc)
+   * @see de.zbit.sbml.layout.ProcessNode#getLineWidth()
+   */
+  @Override
+  public double getLineWidth() {
+    return lineWidth;
+  }
+  
+  /* (non-Javadoc)
+   * @see de.zbit.sbml.layout.ProcessNode#setLineWidth(double)
+   */
+  @Override
+  public void setLineWidth(double lineWidth) {
+    this.lineWidth = lineWidth;
+  }
+  
 }
