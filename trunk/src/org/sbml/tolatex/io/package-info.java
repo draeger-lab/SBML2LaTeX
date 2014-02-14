@@ -2,7 +2,7 @@
  * $Id$
  * $URL$
  * ---------------------------------------------------------------------
- * This file is part of SBML2LaTeX, a program that creates 
+ * This file is part of SBML2LaTeX, a program that creates
  * human-readable reports for given SBML files.
  * 
  * Copyright (C) 2008-2014 by the University of Tuebingen, Germany.
@@ -25,5 +25,7 @@
 /**
  * This package contains all necessary classes for writing LaTeX files and for
  * parsing MIRIAM files.
+ * 
+ * @version $Rev$
  */
 package org.sbml.tolatex.io;

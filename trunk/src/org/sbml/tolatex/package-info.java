@@ -2,7 +2,7 @@
  * $Id$
  * $URL$
  * ---------------------------------------------------------------------
- * This file is part of SBML2LaTeX, a program that creates 
+ * This file is part of SBML2LaTeX, a program that creates
  * human-readable reports for given SBML files.
  * 
  * Copyright (C) 2008-2014 by the University of Tuebingen, Germany.
@@ -29,5 +29,7 @@
  * converter SBML2LaTeX. The class SBMLconverter provides access to the main
  * functions whereas SBML2LaTeX already requires elements defined by libSBML.
  * The whole package depends on libSBML 3.3.1 or later.
+ * 
+ * @version $Rev$
  */
 package org.sbml.tolatex;

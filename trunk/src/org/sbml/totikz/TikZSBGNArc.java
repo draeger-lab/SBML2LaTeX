@@ -2,7 +2,7 @@
  * $Id: TikZSBGNArc.java 04.03.2013 15:18:04 draeger$
  * $URL: TikZSBGNArc.java$
  * ---------------------------------------------------------------------
- * This file is part of SBML2LaTeX, a program that creates 
+ * This file is part of SBML2LaTeX, a program that creates
  * human-readable reports for given SBML files.
  * 
  * Copyright (C) 2007-2014 by the University of Tuebingen, Germany.
@@ -33,20 +33,21 @@ import de.zbit.sbml.layout.SBGNArc;
  * @version $Rev$
  */
 public abstract class TikZSBGNArc implements SBGNArc<String> {
-	
-	/* (non-Javadoc)
-	 * @see de.zbit.sbml.layout.SBGNArc#draw(org.sbml.jsbml.ext.layout.Curve)
-	 */
-	public String draw(Curve curve) {
-		return draw(curve, TikZLayoutBuilder.DEFAULT_LINE_WIDTH);
-	}
-
-	/* (non-Javadoc)
-	 * @see de.zbit.sbml.layout.SBGNArc#draw(org.sbml.jsbml.ext.layout.Curve, double)
-	 */
-	//@Override
-	public String draw(Curve curve, double lineWidth) {
-		return TikZ.draw("black", curve, lineWidth, this);
-	}
-	
+  
+  /* (non-Javadoc)
+   * @see de.zbit.sbml.layout.SBGNArc#draw(org.sbml.jsbml.ext.layout.Curve)
+   */
+  @Override
+  public String draw(Curve curve) {
+    return draw(curve, TikZLayoutBuilder.DEFAULT_LINE_WIDTH);
+  }
+  
+  /* (non-Javadoc)
+   * @see de.zbit.sbml.layout.SBGNArc#draw(org.sbml.jsbml.ext.layout.Curve, double)
+   */
+  @Override
+  public String draw(Curve curve, double lineWidth) {
+    return TikZ.draw("black", curve, lineWidth, this);
+  }
+  
 }

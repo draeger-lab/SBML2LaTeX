@@ -29,17 +29,19 @@ import de.zbit.sbml.layout.Modulation;
 
 /**
  * Class to draw a modulation.
+ * 
  * @author Meike Aichele
+ * @since 1.0
  * @version $Rev$
  */
 public class TikZModulation extends TikZSBGNArc implements Modulation<String> {
-
-	/* (non-Javadoc)
-	 * @see de.zbit.sbml.layout.SBGNArc#draw(org.sbml.jsbml.ext.layout.CurveSegment, double)
-	 */
-	//@Override
-	public String draw(CurveSegment curveSegment, double lineWidth) {
-		return TikZ.draw("-open diamond", "black", curveSegment, lineWidth);
-	}
-
+  
+  /* (non-Javadoc)
+   * @see de.zbit.sbml.layout.SBGNArc#draw(org.sbml.jsbml.ext.layout.CurveSegment, double)
+   */
+  @Override
+  public String draw(CurveSegment curveSegment, double lineWidth) {
+    return TikZ.draw("-open diamond", "black", curveSegment, lineWidth);
+  }
+  
 }

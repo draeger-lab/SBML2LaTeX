@@ -2,7 +2,7 @@
  * $Id$
  * $URL$
  * ---------------------------------------------------------------------
- * This file is part of SBML2LaTeX, a program that creates 
+ * This file is part of SBML2LaTeX, a program that creates
  * human-readable reports for given SBML files.
  * 
  * Copyright (C) 2008-2014 by the University of Tuebingen, Germany.
@@ -25,6 +25,8 @@
 /**
  * This package provides classes that facilitate the translation from SBML with
  * Layout extension to LaTeX with TikZ for visualization of pathways.
+ * 
+ * @since 1.0
+ * @version $Rev$
  */
-
 package org.sbml.totikz;

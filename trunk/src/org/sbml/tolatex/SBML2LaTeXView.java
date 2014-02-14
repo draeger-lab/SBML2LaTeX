@@ -2,7 +2,7 @@
  * $Id: SBML2LaTeXView.java 24.05.2012 13:44:24 draeger$
  * $URL: SBML2LaTeXView.java$
  * ---------------------------------------------------------------------
- * This file is part of SBML2LaTeX, a program that creates 
+ * This file is part of SBML2LaTeX, a program that creates
  * human-readable reports for given SBML files.
  * 
  * Copyright (C) 2007-2014 by the University of Tuebingen, Germany.
@@ -32,24 +32,24 @@ import java.io.IOException;
  * @version $Rev$
  */
 public interface SBML2LaTeXView {
-
-	/**
-	 * 
-	 */
-	public void displayLimitations();
-
-	/**
-	 * 
-	 * @param process
-	 * @param firstLaTeXrun
-	 */
-	public void displayLaTeXOutput(Process process, boolean firstLaTeXrun);
-
-	/**
-	 * 
-	 * @param pdfFile
-	 * @throws IOException 
-	 */
-	public void display(File resultFile) throws IOException;
-	
+  
+  /**
+   * 
+   */
+  public void displayLimitations();
+  
+  /**
+   * 
+   * @param process
+   * @param firstLaTeXrun
+   */
+  public void displayLaTeXOutput(Process process, boolean firstLaTeXrun);
+  
+  /**
+   * 
+   * @param pdfFile
+   * @throws IOException
+   */
+  public void display(File resultFile) throws IOException;
+  
 }

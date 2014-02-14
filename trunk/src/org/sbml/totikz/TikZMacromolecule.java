@@ -2,7 +2,7 @@
  * $Id$
  * $URL$
  * ---------------------------------------------------------------------
- * This file is part of SBML2LaTeX, a program that creates 
+ * This file is part of SBML2LaTeX, a program that creates
  * human-readable reports for given SBML files.
  * 
  * Copyright (C) 2008-2014 by the University of Tuebingen, Germany.
@@ -21,7 +21,6 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  * ---------------------------------------------------------------------
  */
-
 package org.sbml.totikz;
 
 import de.zbit.sbml.layout.Macromolecule;
@@ -30,49 +29,51 @@ import de.zbit.sbml.layout.Macromolecule;
  * class that represents a macromolecule for the TikZ graphical representation
  * 
  * @author Mirjam Gutekunst
+ * @since 1.0
  * @version $Rev$
  */
 public class TikZMacromolecule extends Macromolecule<String> {
-	
-	/* (non-Javadoc)
-	 * @see de.zbit.sbml.layout.SBGNNode#draw(double x, double y, double z, double width, double height, double depth)
-	 */
-	public String draw(double x, double y, double z, double width, double height, double depth) {
-		
-		String rectangle = x
-						+ "pt,"
-						+ y
-						+ "pt) rectangle ("
-						+ (x + width)
-						+ "pt,"
-						+ (y + height)
-						+ "pt);\n";
-		
-		double roundedCorner = height * 0.1d;
-		
-		String tikz = "\\filldraw [draw = black, fill = macromolecule!50, line width = " 
-				+ TikZLayoutBuilder.DEFAULT_LINE_WIDTH + "pt, rounded corners = "
-						+ roundedCorner + "pt] ("
-						+ rectangle;
-		
-		if (isSetCloneMarker()) {
-			tikz = tikz + "\\begin{scope}\n\\clip [rounded corners ="
-						+ roundedCorner
-						+ "pt] ("
-						+ rectangle
-						+ "\\fill[black] ("
-						+ x
-						+ "pt,"
-						+ (y + ((2d / 3d) * height))
-						+ "pt) rectangle ("
-						+ (x + width)
-						+ "pt,"
-						+ (y + height)
-						+ "pt);\n"
-						+ "\\end{scope}\n";
-		}
-		
-		return tikz;
-	}
-	
+  
+  /* (non-Javadoc)
+   * @see de.zbit.sbml.layout.SBGNNode#draw(double x, double y, double z, double width, double height, double depth)
+   */
+  @Override
+  public String draw(double x, double y, double z, double width, double height, double depth) {
+    
+    String rectangle = x
+        + "pt,"
+        + y
+        + "pt) rectangle ("
+        + (x + width)
+        + "pt,"
+        + (y + height)
+        + "pt);\n";
+    
+    double roundedCorner = height * 0.1d;
+    
+    String tikz = "\\filldraw [draw = black, fill = macromolecule!50, line width = "
+        + TikZLayoutBuilder.DEFAULT_LINE_WIDTH + "pt, rounded corners = "
+        + roundedCorner + "pt] ("
+        + rectangle;
+    
+    if (isSetCloneMarker()) {
+      tikz = tikz + "\\begin{scope}\n\\clip [rounded corners ="
+          + roundedCorner
+          + "pt] ("
+          + rectangle
+          + "\\fill[black] ("
+          + x
+          + "pt,"
+          + (y + ((2d / 3d) * height))
+          + "pt) rectangle ("
+          + (x + width)
+          + "pt,"
+          + (y + height)
+          + "pt);\n"
+          + "\\end{scope}\n";
+    }
+    
+    return tikz;
+  }
+  
 }

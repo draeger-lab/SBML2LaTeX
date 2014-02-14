@@ -1,13 +1,15 @@
 	       SBML2LaTeX NEWS -- History of user-visible changes
 
 ======================================================================
-Version 1.0 (2013-xx-xx)
+Version 1.0 (2014-xx-xx)
 ======================================================================
 
 New Features:
 
 - Cleanup also removes the SBML2LaTeX.pdf logo file if this has been
   created by the program.
+  
+- Moved to Java version 1.6 and new version of JSBML.
 
 TODO: set latex directory option invisible!
 

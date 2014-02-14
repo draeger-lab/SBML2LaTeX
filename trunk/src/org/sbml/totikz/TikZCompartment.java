@@ -27,18 +27,20 @@ import de.zbit.sbml.layout.Compartment;
 
 /**
  * @author Meike Aichele
+ * @since 1.0
  * @version $Rev$
  */
 public class TikZCompartment extends Compartment<String> {
-
-	/* (non-Javadoc)
-	 * @see de.zbit.sbml.layout.SBGNNode#draw(double, double, double, double, double, double)
-	 */
-	public String draw(double x, double y, double z, double width,
-			double height, double depth) {
-		double offset = 9d, rounded = 10d, lineWidth = TikZLayoutBuilder.DEFAULT_LINE_WIDTH;
-		return TikZ.fillShapeRectangle("compartment!50", "compartment", lineWidth, x, y, width, height, rounded)
-				+ TikZ.fillShapeRectangle("white", "compartment", lineWidth, x + offset, y + offset, width - 2 * offset, height - 2 * offset, .75d * rounded);
-	}
-
+  
+  /* (non-Javadoc)
+   * @see de.zbit.sbml.layout.SBGNNode#draw(double, double, double, double, double, double)
+   */
+  @Override
+  public String draw(double x, double y, double z, double width,
+    double height, double depth) {
+    double offset = 9d, rounded = 10d, lineWidth = TikZLayoutBuilder.DEFAULT_LINE_WIDTH;
+    return TikZ.fillShapeRectangle("compartment!50", "compartment", lineWidth, x, y, width, height, rounded)
+        + TikZ.fillShapeRectangle("white", "compartment", lineWidth, x + offset, y + offset, width - 2 * offset, height - 2 * offset, .75d * rounded);
+  }
+  
 }

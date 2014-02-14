@@ -2,7 +2,7 @@
  * $Id$
  * $URL$
  * ---------------------------------------------------------------------
- * This file is part of SBML2LaTeX, a program that creates 
+ * This file is part of SBML2LaTeX, a program that creates
  * human-readable reports for given SBML files.
  * 
  * Copyright (C) 2008-2014 by the University of Tuebingen, Germany.
@@ -21,7 +21,6 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  * ---------------------------------------------------------------------
  */
-
 package org.sbml.totikz;
 
 import de.zbit.sbml.layout.SourceSink;
@@ -31,31 +30,33 @@ import de.zbit.sbml.layout.SourceSink;
  * representation (empty set sign)
  * 
  * @author Mirjam Gutekunst
+ * @since 1.0
  * @version $Rev$
  */
 public class TikZSourceSink extends SourceSink<String> {
-	
-	/* (non-Javadoc)
-	 * @see de.zbit.sbml.layout.SBGNNode#draw(double x, double y, double z, double width, double height, double depth)
-	 */
-	public String draw(double x, double y, double z, double width, double height, double depth) {
-		
-		width = width / 2d;
-		height = height / 2d;
-		
-		String tikz = "\\filldraw [fill = sourceSink!50, line width = " + 
-				TikZLayoutBuilder.DEFAULT_LINE_WIDTH + "pt, draw = black] ("
-				+ (x + width)
-				+ "pt,"
-				+ (y + height)
-				+ "pt) ellipse ( "
-				+ width
-				+ "pt and "
-				+ height
-				+ "pt);\n";
-		
-		return tikz + TikZ.drawLine("black", TikZLayoutBuilder.DEFAULT_LINE_WIDTH, 
-			x, y + 2d * height, x + 2d * width, y);		
-	}
-	
+  
+  /* (non-Javadoc)
+   * @see de.zbit.sbml.layout.SBGNNode#draw(double x, double y, double z, double width, double height, double depth)
+   */
+  @Override
+  public String draw(double x, double y, double z, double width, double height, double depth) {
+    
+    width = width / 2d;
+    height = height / 2d;
+    
+    String tikz = "\\filldraw [fill = sourceSink!50, line width = " +
+        TikZLayoutBuilder.DEFAULT_LINE_WIDTH + "pt, draw = black] ("
+        + (x + width)
+        + "pt,"
+        + (y + height)
+        + "pt) ellipse ( "
+        + width
+        + "pt and "
+        + height
+        + "pt);\n";
+    
+    return tikz + TikZ.drawLine("black", TikZLayoutBuilder.DEFAULT_LINE_WIDTH,
+      x, y + 2d * height, x + 2d * width, y);
+  }
+  
 }

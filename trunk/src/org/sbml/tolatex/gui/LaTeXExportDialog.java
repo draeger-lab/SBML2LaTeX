@@ -59,205 +59,205 @@ import de.zbit.util.prefs.SBPreferences;
  * @version $Rev$
  */
 public class LaTeXExportDialog extends JDialog {
-	
-	/**
-	 * Generated serial version identifier
-	 */
-	private static final long serialVersionUID = -408657221271532557L;
-	
-	/**
-	 * Support for localization.
-	 */
-	private static final transient ResourceBundle bundle = ResourceManager.getBundle("org.sbml.tolatex.locales.UI");
-	
-	/**
-	 * Loads the required icons for SBML2LaTeX into the {@link UIManager}.
-	 */
-	public static void initImages() {
-		String iconPaths[] = { "ICON_LATEX_16.png", "ICON_LATEX_64.png" };
-		for (String path : iconPaths) {
-			URL u = LaTeXExportDialog.class.getResource("img/" + path);
-		      if (u != null) {
-		        UIManager.put(path.substring(0, path.lastIndexOf('.')), new ImageIcon(u));
-		      }
-		}
-	}
-	
-	/**
-	 * 
-	 */
-	public LaTeXExportDialog() {
-		this((JFrame) null, null);
-	}
-	
-	/**
-	 * @param owner
-	 */
-	public LaTeXExportDialog(Dialog owner) {
-		this(owner, null);
-	}
-	
-	/**
-	 * @param owner
-	 * @param properties
-	 * @param sbase
-	 */
-	public LaTeXExportDialog(Dialog owner, SBase sbase) {
-		super(owner, "SBML2LaTeX", true);
-	}
-	
-	/**
-	 * @param owner
-	 */
-	public LaTeXExportDialog(Frame owner) {
-		this(owner, null);
-	}
-	
-	/**
-	 * This constructor allows us to store the given model or the given reaction
-	 * in a text file. This can be a LaTeX or another format.
-	 * 
-	 * @param owner
-	 * @param sbase
-	 *        allowed are a reaction or a model instance.
-	 */
-	public LaTeXExportDialog(Frame owner, SBase sbase) {
-		super(owner, "SBML2LaTeX", true);
-	}
-	
-	/**
-	 * @return true if user clicked on OK button, false otherwise.
-	 * @throws IOException
-	 */
-	public boolean showExportDialog() throws IOException {
-		return showExportDialog(null);
-	}
-	
-	/**
-	 * 
-	 */
-	private PreferencesPanel exportPanel;
-	
-	/**
-	 * @param sbase
-	 * @return true if user clicked on OK button, false otherwise.
-	 * @throws IOException
-	 */
-	public boolean showExportDialog(SBase sbase) throws IOException {
-		return showExportDialog(sbase, null);
-	}
-	
-	/**
-	 * @param sbase
-	 * @param targetFile
-	 * @return
-	 * @throws IOException
-	 */
-	@SuppressWarnings("unchecked")
+  
+  /**
+   * Generated serial version identifier
+   */
+  private static final long serialVersionUID = -408657221271532557L;
+  
+  /**
+   * Support for localization.
+   */
+  private static final transient ResourceBundle bundle = ResourceManager.getBundle("org.sbml.tolatex.locales.UI");
+  
+  /**
+   * Loads the required icons for SBML2LaTeX into the {@link UIManager}.
+   */
+  public static void initImages() {
+    String iconPaths[] = { "ICON_LATEX_16.png", "ICON_LATEX_64.png" };
+    for (String path : iconPaths) {
+      URL u = LaTeXExportDialog.class.getResource("img/" + path);
+      if (u != null) {
+        UIManager.put(path.substring(0, path.lastIndexOf('.')), new ImageIcon(u));
+      }
+    }
+  }
+  
+  /**
+   * 
+   */
+  public LaTeXExportDialog() {
+    this((JFrame) null, null);
+  }
+  
+  /**
+   * @param owner
+   */
+  public LaTeXExportDialog(Dialog owner) {
+    this(owner, null);
+  }
+  
+  /**
+   * @param owner
+   * @param properties
+   * @param sbase
+   */
+  public LaTeXExportDialog(Dialog owner, SBase sbase) {
+    super(owner, "SBML2LaTeX", true);
+  }
+  
+  /**
+   * @param owner
+   */
+  public LaTeXExportDialog(Frame owner) {
+    this(owner, null);
+  }
+  
+  /**
+   * This constructor allows us to store the given model or the given reaction
+   * in a text file. This can be a LaTeX or another format.
+   * 
+   * @param owner
+   * @param sbase
+   *        allowed are a reaction or a model instance.
+   */
+  public LaTeXExportDialog(Frame owner, SBase sbase) {
+    super(owner, "SBML2LaTeX", true);
+  }
+  
+  /**
+   * @return true if user clicked on OK button, false otherwise.
+   * @throws IOException
+   */
+  public boolean showExportDialog() throws IOException {
+    return showExportDialog(null);
+  }
+  
+  /**
+   * 
+   */
+  private PreferencesPanel exportPanel;
+  
+  /**
+   * @param sbase
+   * @return true if user clicked on OK button, false otherwise.
+   * @throws IOException
+   */
+  public boolean showExportDialog(SBase sbase) throws IOException {
+    return showExportDialog(sbase, null);
+  }
+  
+  /**
+   * @param sbase
+   * @param targetFile
+   * @return
+   * @throws IOException
+   */
+  @SuppressWarnings("unchecked")
   public boolean showExportDialog(SBase sbase, File targetFile)
-		throws IOException {
+      throws IOException {
     exportPanel = new PreferencesPanelForKeyProviders(LaTeXOptionsIO.class,
       LaTeXOptions.class);
     // TODO: Localize
-		String title = "LaTeX export";
-		if (sbase != null) {
-			if (sbase instanceof NamedSBase) {
-				NamedSBase nsb = (NamedSBase) sbase;
-				title += " for " + (nsb.isSetName() ? nsb.getName() : nsb.getId());
-			}
-		}
-		return JOptionPane.showConfirmDialog(this, exportPanel, title,
-			JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, UIManager
-					.getIcon("ICON_LATEX_64")) == JOptionPane.OK_OPTION;
-	}
-	
-	/**
-	 * @param owner
-	 * @return
-	 */
-	public static boolean showDialog(Window owner) {
-		return showDialog(owner, null);
-	}
-	
-	/**
-	 * @param owner
-	 * @param sbase
-	 * @return
-	 */
-	public static boolean showDialog(Window owner, SBase sbase) {
-		return showDialog(owner, sbase, null);
-	}
-	
-	/**
-	 * @param owner
-	 * @param sbase
-	 * @param targetFile
-	 *        can be null
-	 * @return
-	 */
-	public static boolean showDialog(Window owner, SBase sbase, File targetFile) {
-		LaTeXExportDialog dialog;
-		if (owner instanceof Frame) {
-			dialog = new LaTeXExportDialog((Frame) owner);
-		} else if (owner instanceof Dialog) {
-			dialog = new LaTeXExportDialog((Dialog) owner);
-		} else {
-			dialog = new LaTeXExportDialog((Frame) null);
-		}
-		boolean accept = false;
-		try {
-			accept = dialog.showExportDialog(sbase, targetFile);
-			if (accept) {
-				try {
-					PreferencesPanel expPanel = dialog.exportPanel;
-					expPanel.persist();
-					SBPreferences prefsIO = SBPreferences.getPreferencesFor(LaTeXOptionsIO.class);
-					if (sbase == null) {
-						SBPreferences prefsGUI = SBPreferences.getPreferencesFor(GUIOptions.class);
-						prefsGUI.put(GUIOptions.OPEN_DIR, (new File(prefsIO
-								.get(LaTeXOptionsIO.SBML_INPUT_FILE)).getParent()));
-						prefsGUI.flush();
-					}
-					if (((targetFile != null) && (SBFileFilter.isPDFFile(targetFile)))
-							|| SBFileFilter.isPDFFile(new File(prefsIO.get(LaTeXOptionsIO.REPORT_OUTPUT_FILE)))) {
-						SBPreferences prefs = SBPreferences.getPreferencesFor(LaTeXOptions.class);
-						File compiler = new File(prefs.get(LaTeXOptions.LOAD_LATEX_COMPILER));
-						if (!compiler.exists() || !compiler.canExecute()) {
-						  throw new FileNotFoundException(StringUtil.toHTML(
-										bundle.getString("PDFLATEX_LOCATION_UNKNOWN"),
-										StringUtil.TOOLTIP_LINE_LENGTH));
-						}
-					}
-				} catch (FileNotFoundException exc) {
-					GUITools.showErrorMessage(dialog, exc);
-					dialog.dispose();
-					return showDialog(owner, sbase);
-				} catch (BackingStoreException exc) {
-					GUITools.showErrorMessage(dialog, exc);
-					dialog.dispose();
-					return showDialog(owner, sbase);
-				}
-			}
-		} catch (IOException exc) {
-			GUITools.showErrorMessage(dialog, exc);
-		}
-		return accept;
-	}
-	
-	/**
-	 * @return
-	 */
-	public static boolean showDialog() {
-		return showDialog(null, null);
-	}
-	
-	/**
-	 * 
-	 * @param sbase
-	 * @return
-	 */
-	public static boolean showDialog(SBase sbase) {
-		return showDialog(null, sbase);
-	}
-	
+    String title = "LaTeX export";
+    if (sbase != null) {
+      if (sbase instanceof NamedSBase) {
+        NamedSBase nsb = (NamedSBase) sbase;
+        title += " for " + (nsb.isSetName() ? nsb.getName() : nsb.getId());
+      }
+    }
+    return JOptionPane.showConfirmDialog(this, exportPanel, title,
+      JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, UIManager
+      .getIcon("ICON_LATEX_64")) == JOptionPane.OK_OPTION;
+  }
+  
+  /**
+   * @param owner
+   * @return
+   */
+  public static boolean showDialog(Window owner) {
+    return showDialog(owner, null);
+  }
+  
+  /**
+   * @param owner
+   * @param sbase
+   * @return
+   */
+  public static boolean showDialog(Window owner, SBase sbase) {
+    return showDialog(owner, sbase, null);
+  }
+  
+  /**
+   * @param owner
+   * @param sbase
+   * @param targetFile
+   *        can be null
+   * @return
+   */
+  public static boolean showDialog(Window owner, SBase sbase, File targetFile) {
+    LaTeXExportDialog dialog;
+    if (owner instanceof Frame) {
+      dialog = new LaTeXExportDialog((Frame) owner);
+    } else if (owner instanceof Dialog) {
+      dialog = new LaTeXExportDialog((Dialog) owner);
+    } else {
+      dialog = new LaTeXExportDialog((Frame) null);
+    }
+    boolean accept = false;
+    try {
+      accept = dialog.showExportDialog(sbase, targetFile);
+      if (accept) {
+        try {
+          PreferencesPanel expPanel = dialog.exportPanel;
+          expPanel.persist();
+          SBPreferences prefsIO = SBPreferences.getPreferencesFor(LaTeXOptionsIO.class);
+          if (sbase == null) {
+            SBPreferences prefsGUI = SBPreferences.getPreferencesFor(GUIOptions.class);
+            prefsGUI.put(GUIOptions.OPEN_DIR, (new File(prefsIO
+              .get(LaTeXOptionsIO.SBML_INPUT_FILE)).getParent()));
+            prefsGUI.flush();
+          }
+          if (((targetFile != null) && (SBFileFilter.isPDFFile(targetFile)))
+              || SBFileFilter.isPDFFile(new File(prefsIO.get(LaTeXOptionsIO.REPORT_OUTPUT_FILE)))) {
+            SBPreferences prefs = SBPreferences.getPreferencesFor(LaTeXOptions.class);
+            File compiler = new File(prefs.get(LaTeXOptions.LOAD_LATEX_COMPILER));
+            if (!compiler.exists() || !compiler.canExecute()) {
+              throw new FileNotFoundException(StringUtil.toHTML(
+                bundle.getString("PDFLATEX_LOCATION_UNKNOWN"),
+                StringUtil.TOOLTIP_LINE_LENGTH));
+            }
+          }
+        } catch (FileNotFoundException exc) {
+          GUITools.showErrorMessage(dialog, exc);
+          dialog.dispose();
+          return showDialog(owner, sbase);
+        } catch (BackingStoreException exc) {
+          GUITools.showErrorMessage(dialog, exc);
+          dialog.dispose();
+          return showDialog(owner, sbase);
+        }
+      }
+    } catch (IOException exc) {
+      GUITools.showErrorMessage(dialog, exc);
+    }
+    return accept;
+  }
+  
+  /**
+   * @return
+   */
+  public static boolean showDialog() {
+    return showDialog(null, null);
+  }
+  
+  /**
+   * 
+   * @param sbase
+   * @return
+   */
+  public static boolean showDialog(SBase sbase) {
+    return showDialog(null, sbase);
+  }
+  
 }

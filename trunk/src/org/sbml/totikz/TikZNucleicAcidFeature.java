@@ -27,29 +27,30 @@ import de.zbit.sbml.layout.NucleicAcidFeature;
 
 /**
  * @author Meike Aichele
+ * @since 1.0
  * @version $Rev$
  */
 public class TikZNucleicAcidFeature extends NucleicAcidFeature<String> {
-
-	/* (non-Javadoc)
-	 * @see de.zbit.sbml.layout.SBGNNode#draw(double, double, double, double, double, double)
-	 */
-	//@Override
-	public String draw(double x, double y, double z, double width,
-			double height, double depth) {
-		String tikZ = "\\filldraw [fill = NucleicAcidFeature!50] (" +
-			x + "pt," + 
-			y + "pt) -- (" + 
-			x + "pt," + 
-			y  + "pt){[rounded corners] -- (" + 
-			x + "pt," + 
-			(y + height) + "pt) -- (" + 
-			(x + width) + "pt," + 
-			(y + height)  + "pt)} -- (" + 
-			(x + width) + "pt," + 
-			y  + "pt) -- (" + 
-			x + "pt," + y + "pt);\n";
-		return tikZ;
-	}
-
+  
+  /* (non-Javadoc)
+   * @see de.zbit.sbml.layout.SBGNNode#draw(double, double, double, double, double, double)
+   */
+  @Override
+  public String draw(double x, double y, double z, double width,
+    double height, double depth) {
+    String tikZ = "\\filldraw [fill = NucleicAcidFeature!50] (" +
+        x + "pt," +
+        y + "pt) -- (" +
+        x + "pt," +
+        y  + "pt){[rounded corners] -- (" +
+        x + "pt," +
+        (y + height) + "pt) -- (" +
+        (x + width) + "pt," +
+        (y + height)  + "pt)} -- (" +
+        (x + width) + "pt," +
+        y  + "pt) -- (" +
+        x + "pt," + y + "pt);\n";
+    return tikZ;
+  }
+  
 }

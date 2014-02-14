@@ -2,7 +2,7 @@
  * $Id$
  * $URL$
  * ---------------------------------------------------------------------
- * This file is part of SBML2LaTeX, a program that creates 
+ * This file is part of SBML2LaTeX, a program that creates
  * human-readable reports for given SBML files.
  * 
  * Copyright (C) 2008-2014 by the University of Tuebingen, Germany.
@@ -42,39 +42,39 @@ import de.zbit.util.prefs.Range;
  * @version $Rev$
  */
 public interface LaTeXOptionsIO extends KeyProvider {
-
+  
   /**
    * 
    */
   static final ResourceBundle resources = ResourceManager
       .getBundle("org.sbml.tolatex.locales.UI");
   
-	/**
-	 * The SBML file to be opened
-	 */
+  /**
+   * The SBML file to be opened
+   */
   public static final Option<File> SBML_INPUT_FILE = new Option<File>(
-    "SBML_INPUT_FILE", File.class, resources, new Range<File>(File.class,
-      SBFileFilter.createSBMLFileFilter()), new File(System
-        .getProperty("user.dir")));
-	
-	/**
-	 * The file where to save the generated LaTeX report. The standard way is to
-	 * let SBML2LaTeX generate a TeX file, which the user can then compile to a
-	 * different format, or from which parts can be easily extracted to support
-	 * scientific writing. Additionally, SBML2LaTeX may be used to directly
-	 * generate a PDF file if the LaTeX compiler pdfLaTeX is specified.
-	 */
+      "SBML_INPUT_FILE", File.class, resources, new Range<File>(File.class,
+          SBFileFilter.createSBMLFileFilter()), new File(System
+            .getProperty("user.dir")));
+  
+  /**
+   * The file where to save the generated LaTeX report. The standard way is to
+   * let SBML2LaTeX generate a TeX file, which the user can then compile to a
+   * different format, or from which parts can be easily extracted to support
+   * scientific writing. Additionally, SBML2LaTeX may be used to directly
+   * generate a PDF file if the LaTeX compiler pdfLaTeX is specified.
+   */
   public static final Option<File> REPORT_OUTPUT_FILE = new Option<File>(
-    "REPORT_OUTPUT_FILE", File.class, resources, new Range<File>(File.class,
-      new MultipleFileFilter("Report files (*.tex, *.pdf)", SBFileFilter
-          .createTeXFileFilter(), SBFileFilter.createPDFFileFilter())),
-    new File(System.getProperty("user.dir")));
-	
-	/**
-	 * 
-	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+      "REPORT_OUTPUT_FILE", File.class, resources, new Range<File>(File.class,
+          new MultipleFileFilter("Report files (*.tex, *.pdf)", SBFileFilter
+            .createTeXFileFilter(), SBFileFilter.createPDFFileFilter())),
+            new File(System.getProperty("user.dir")));
+  
+  /**
+   * 
+   */
+  @SuppressWarnings({ "unchecked", "rawtypes" })
   public static final OptionGroup<?> INPUT_AND_OUTPUT_FILES = new OptionGroup(
     "INPUT_AND_OUTPUT_FILES", resources, SBML_INPUT_FILE, REPORT_OUTPUT_FILE);
-
+  
 }

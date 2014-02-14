@@ -2,7 +2,7 @@
  * $Id$
  * $URL$
  * ---------------------------------------------------------------------
- * This file is part of SBML2LaTeX, a program that creates 
+ * This file is part of SBML2LaTeX, a program that creates
  * human-readable reports for given SBML files.
  * 
  * Copyright (C) 2008-2014 by the University of Tuebingen, Germany.
@@ -21,7 +21,6 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  * ---------------------------------------------------------------------
  */
-
 package org.sbml.totikz;
 
 import de.zbit.sbml.layout.UnspecifiedNode;
@@ -31,25 +30,27 @@ import de.zbit.sbml.layout.UnspecifiedNode;
  * representation
  * 
  * @author Mirjam Gutekunst
+ * @since 1.0
  * @version $Rev$
  */
 public class TikZUnspecifiedNode extends UnspecifiedNode<String> {
-	
-	private double lineWidth = TikZLayoutBuilder.DEFAULT_LINE_WIDTH;
-	
-	/* (non-Javadoc)
-	 * @see de.zbit.sbml.layout.SBGNNode#draw(double x, double y, double z, double width, double height, double depth)
-	 */
-	public String draw(double x, double y, double z, double width, double height, double depth) {
-		
-		width = width / 2d;
-		height = height / 2d;
-		
-		if (isSetCloneMarker()) {
-			return TikZ.drawCloneMarkerEllipse("black", x, y, width, height);
-		}
-		
-		return TikZ.fillShapeEllipse("unspecifiedEntity!50", "white", lineWidth, x, y, width, height);
-	}
-	
+  
+  private double lineWidth = TikZLayoutBuilder.DEFAULT_LINE_WIDTH;
+  
+  /* (non-Javadoc)
+   * @see de.zbit.sbml.layout.SBGNNode#draw(double x, double y, double z, double width, double height, double depth)
+   */
+  @Override
+  public String draw(double x, double y, double z, double width, double height, double depth) {
+    
+    width = width / 2d;
+    height = height / 2d;
+    
+    if (isSetCloneMarker()) {
+      return TikZ.drawCloneMarkerEllipse("black", x, y, width, height);
+    }
+    
+    return TikZ.fillShapeEllipse("unspecifiedEntity!50", "white", lineWidth, x, y, width, height);
+  }
+  
 }
