@@ -2,7 +2,6 @@
 <!-- $Id: build.xml 252 2013-03-14 11:00:48Z draeger $ -->
 
 <project default ="usage" basedir=".">	
-
 	
 	<!-- =================================================================== -->
 	<!-- Initialization target                                               -->
@@ -194,20 +193,20 @@
            debug="${debug}"
            optimize="${optimize}"
            verbose="${verbose}"
-           source="1.5"
-           target="1.5"
+           source="1.6"
+           target="1.6"
            classpathref="classpath">
 		</javac>
 		<manifest file="${build.dest}/META-INF/MANIFEST.MF">
 	        <attribute name="Main-Class" value="org.sbml.tolatex.SBML2LaTeX"/>
 	        <attribute name="Built-By" value="${user.name}"/>
 	      	<section name="${Name}">
-	      	  <attribute name="Specification-Title" value="${Name}"/>
-	      	  <attribute name="Specification-Version" value="${build.name}"/>
-	      	  <attribute name="Specification-Vendor" value="Center for Bioinformatics Tuebingen (ZBIT)"/>
-	      	  <attribute name="Implementation-Title" value="${Name}"/>
+	      	  <attribute name="Specification-Title"    value="${Name}"/>
+	      	  <attribute name="Specification-Version"  value="${build.name}"/>
+	      	  <attribute name="Specification-Vendor"   value="Center for Bioinformatics Tuebingen (ZBIT)"/>
+	      	  <attribute name="Implementation-Title"   value="${Name}"/>
 	      	  <attribute name="Implementation-Version" value="Revision ${repository.revision} ${TODAY}"/>
-	          <attribute name="Implementation-Vendor" value="University of Tuebingen"/>
+	          <attribute name="Implementation-Vendor"  value="University of Tuebingen"/>
 	      	</section>
 		</manifest>
 
@@ -288,7 +287,7 @@
 	     filesetmanifest="mergewithoutmain"
 	     index="true"
 	     indexMetaInf="true"
-		 jarfile="${appJar}_v${version}_incl-libs.jar"
+		 jarfile="${appJar}-${version}/${name}_v${version}_incl-libs.jar"
 	     level="9"
 	     manifest="${build.dest}/META-INF/MANIFEST.MF"
 	     manifestencoding="utf-8"
@@ -334,7 +333,7 @@
 	  	 filesetmanifest="mergewithoutmain"
 	  	 index="true"
 	  	 indexMetaInf="true"
-		 jarfile="${appJar}_v${version}.jar"
+		 jarfile="${appJar}-${version}/${name}_v${version}_slim.jar"
 	  	 level="9"
 	     manifest="${build.dest}/META-INF/MANIFEST.MF"
 	  	 manifestencoding="utf-8"
@@ -342,9 +341,10 @@
 	  	 update="true"
 	  >
 	     <!-- SBML2LaTeX Classes -->
-	     <fileset dir="${build.dest}">
-	       <exclude name="**/package.html, **/package-info.class"/>
-	     </fileset>
+	     <fileset
+	  	    dir="${build.dest}"
+	     	excludes="**/package.html, **/package-info.class, package-info.class"
+	     />
 	     <fileset
 	     	dir="${basedir}"
 	     	includes="LICENSE.txt, README.txt"
@@ -352,7 +352,7 @@
 	     <fileset
 	     	dir="${build.src}"
 	  	    includes="**/*.xml, **.xml, **/*.properties, **.properties, **/*.html, **.html, **/*.png, **.png, **/*.eps, **.eps, **/*.pdf, **.pdf, **/*.sty, **.sty, **/*.bbl, **.bbl"
-	  	    excludes="**/*.java, **.java"
+	  	    excludes="**/*.java, **.java, overview.html, **/package.html"
 	     />
 	     <fileset
 	     	dir="${basedir}/licenses"
@@ -393,7 +393,7 @@
       nonavbar="false"
       notree="false"
       packagenames="org.*"
-      source="1.5"
+      source="1.6"
       sourcepath="${build.src}"
       splitindex="true"
       stylesheetfile="${doc}/javadoc-style.css"
@@ -439,7 +439,11 @@
   <!-- =================================================================== -->
   <!-- Creates the distribution                                            -->
   <!-- =================================================================== -->
-  <target name="dist" depends="prepare-src">
+  <target
+	name="dist"
+  	depends="prepare-src"
+  	description="Creates the distribution"
+  >
 
     <!-- Creates the standard jar file -->
 
