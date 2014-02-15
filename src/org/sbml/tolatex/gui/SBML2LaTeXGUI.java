@@ -26,6 +26,7 @@ package org.sbml.tolatex.gui;
 import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Image;
+import java.awt.Window;
 import java.beans.EventHandler;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -61,16 +62,21 @@ import de.zbit.util.prefs.SBPreferences;
 public class SBML2LaTeXGUI implements SBML2LaTeXView, PropertyChangeListener {
   
   /**
-   * 
+   * Default parent
    */
   private JFrame f;
   
   /**
    * 
-   * @param sbmlInputFile
    */
-  public SBML2LaTeXGUI(File sbmlInputFile) {
+  private boolean exitUponCompletion;
+  
+  /**
+   * 
+   */
+  public SBML2LaTeXGUI() {
     super();
+    exitUponCompletion = true;
     LaTeXExportDialog.initImages();
     
     f = new JFrame("SBML2LaTeX");
@@ -81,7 +87,39 @@ public class SBML2LaTeXGUI implements SBML2LaTeXView, PropertyChangeListener {
     f.pack();
     f.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
     f.setLocationRelativeTo(null);
-    
+  }
+  
+  /**
+   * 
+   * @param sbase
+   */
+  public SBML2LaTeXGUI(SBase sbase) {
+    this(null, sbase);
+  }
+  
+  /**
+   * 
+   * @param parent can be {@code null}
+   * @param sbase
+   */
+  public SBML2LaTeXGUI(Window parent, SBase sbase) {
+    this();
+    exitUponCompletion = false;
+    if (LaTeXExportDialog.showDialog(parent, sbase)) {
+      try {
+        convert(sbase);
+      } catch (Throwable exc) {
+        GUITools.showErrorMessage(null, exc);
+      }
+    }
+  }
+  
+  /**
+   * 
+   * @param sbmlInputFile
+   */
+  public SBML2LaTeXGUI(File sbmlInputFile) {
+    this();
     if (LaTeXExportDialog.showDialog(f)) {
       SBPreferences prefs = SBPreferences.getPreferencesFor(LaTeXOptionsIO.class);
       sbmlInputFile = prefs.getFile(LaTeXOptionsIO.SBML_INPUT_FILE);
@@ -93,10 +131,14 @@ public class SBML2LaTeXGUI implements SBML2LaTeXView, PropertyChangeListener {
         reader.execute();
       } catch (Throwable exc) {
         GUITools.showErrorMessage(null, exc);
-        System.exit(1);
+        if (exitUponCompletion) {
+          System.exit(1);
+        }
       }
     } else {
-      System.exit(0);
+      if (exitUponCompletion) {
+        System.exit(0);
+      }
     }
   }
   
@@ -108,7 +150,9 @@ public class SBML2LaTeXGUI implements SBML2LaTeXView, PropertyChangeListener {
   public void convert(Object sbase) {
     if (sbase == null) {
       // reading must have been canceled.
-      System.exit(0);
+      if (exitUponCompletion) {
+        System.exit(0);
+      }
     }
     if (sbase instanceof OpenedFile<?>) {
       sbase = ((OpenedFile<SBMLDocument>) sbase).getDocument();
@@ -129,7 +173,9 @@ public class SBML2LaTeXGUI implements SBML2LaTeXView, PropertyChangeListener {
     if (resultFile != null) {
       // Open standard file viewer
       Desktop.getDesktop().open(resultFile);
-      System.exit(0);
+      if (exitUponCompletion) {
+        System.exit(0);
+      }
     }
   }
   
@@ -170,7 +216,9 @@ public class SBML2LaTeXGUI implements SBML2LaTeXView, PropertyChangeListener {
   @Override
   public void propertyChange(PropertyChangeEvent evt) {
     if (evt.getPropertyName().equals(SBML2LaTeXworker.ERROR_CODE)) {
-      System.exit(1);
+      if (exitUponCompletion) {
+        System.exit(1);
+      }
     }
   }
   

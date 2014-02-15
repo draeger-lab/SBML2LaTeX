@@ -33,7 +33,7 @@
   <entry key="NO_SUCH_CONFIG_ITEM">Cannot find specified configuration item "{0}".</entry>
   <entry key="FATAL_ERROR">Fatal error: {0}</entry>
   <entry key="ERROR">Error: {0}</entry>
-  <entry key="CANNOT_FIND_CSS_FILE">Cannot read the CSS file {0}.</entry>
+  <entry key="CANNOT_FIND_CSS_FILE">Cannot read the CSS file.</entry>
   <entry key="CANNOT_LOAD_CONFIGURATION">Cannot load configuration: {0}</entry>
   <entry key="CANNOT_CLOSE_OUTPUT_FILE">Cannot close the output file: {0}.</entry>
   <entry key="CANNOT_OPEN_OUTPUT_FILE">Cannot open the output file: {0}.</entry>

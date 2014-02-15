@@ -30,7 +30,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.ResourceBundle;
+import java.util.Set;
 import java.util.prefs.BackingStoreException;
 
 import javax.swing.ImageIcon;
@@ -156,15 +159,27 @@ public class LaTeXExportDialog extends JDialog {
   @SuppressWarnings("unchecked")
   public boolean showExportDialog(SBase sbase, File targetFile)
       throws IOException {
-    exportPanel = new PreferencesPanelForKeyProviders(LaTeXOptionsIO.class,
-      LaTeXOptions.class);
     // TODO: Localize
     String title = "LaTeX export";
+    Set<String> ignoreSet = new HashSet<String>();
     if (sbase != null) {
       if (sbase instanceof NamedSBase) {
         NamedSBase nsb = (NamedSBase) sbase;
         title += " for " + (nsb.isSetName() ? nsb.getName() : nsb.getId());
       }
+      ignoreSet.add(LaTeXOptionsIO.SBML_INPUT_FILE.toString());
+    }
+    if (targetFile != null) {
+      ignoreSet.add(LaTeXOptionsIO.REPORT_OUTPUT_FILE.toString());
+    }
+    if (ignoreSet.isEmpty()) {
+      exportPanel = new PreferencesPanelForKeyProviders(
+        LaTeXOptionsIO.class, LaTeXOptions.class);
+    } else {
+      exportPanel = new PreferencesPanelForKeyProviders(
+        title,
+        Arrays.asList(LaTeXOptionsIO.class, LaTeXOptions.class),
+        ignoreSet);
     }
     return JOptionPane.showConfirmDialog(this, exportPanel, title,
       JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, UIManager

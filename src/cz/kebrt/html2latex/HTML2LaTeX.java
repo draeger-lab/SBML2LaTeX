@@ -25,11 +25,9 @@ package cz.kebrt.html2latex;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URISyntaxException;
-
-import de.zbit.io.OpenFile;
 
 /**
  * Program main class.
@@ -58,8 +56,8 @@ public class HTML2LaTeX {
    * @return name of the file with CSS
    * @throws URISyntaxException
    */
-  public static File getCSSFile() throws URISyntaxException {
-    return OpenFile.searchFile(_cssFile);
+  public static InputStream getCSSFile() throws URISyntaxException {
+    return HTML2LaTeX.class.getResourceAsStream(_cssFile);
   }
   
   /**
@@ -68,8 +66,8 @@ public class HTML2LaTeX {
    * @return name of the file with configuration
    * @throws URISyntaxException
    */
-  public static File getConfigFile() throws URISyntaxException {
-    return OpenFile.searchFile(_configFile);
+  public static InputStream getConfiguration() throws URISyntaxException {
+    return HTML2LaTeX.class.getResourceAsStream(_configFile);
   }
   
   /**

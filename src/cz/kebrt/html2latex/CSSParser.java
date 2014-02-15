@@ -5,9 +5,10 @@ package cz.kebrt.html2latex;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
-import java.text.MessageFormat;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
@@ -32,20 +33,20 @@ public class CSSParser {
   private static final ResourceBundle bundle = ResourceManager.getBundle("cz.kebrt.html2latex.messages");
   
   /** Input file. */
-  private File _file;
+  private InputStream _stream;
   /** Input file. */
-  private FileReader _fr;
+  private Reader _sr;
   /** Input file. */
   private BufferedReader _reader;
   /** Handler which receives events from the parser. */
   private ICSSParserHandler _handler;
   
   /** Parser the CSS file and sends events to the handler.
-   *  @param f CSS file
+   *  @param stream CSS file stream
    *  @param handler handler receiving events
    */
-  public void parse(File f, ICSSParserHandler handler) {
-    _file = f;
+  public void parse(InputStream stream, ICSSParserHandler handler) {
+    _stream = stream;
     _handler = handler;
     
     try {
@@ -54,7 +55,7 @@ public class CSSParser {
       try {
         doParsing();
       } catch (IOException e) {
-        logger.warning(MessageFormat.format(bundle.getString("CANNOT_FIND_CSS_FILE"), _file.getName()));
+        logger.warning(bundle.getString("CANNOT_FIND_CSS_FILE"));
       }
       
       destroy();
@@ -70,12 +71,8 @@ public class CSSParser {
    *  @throws ErrorException when the file can't be opened
    */
   private void init() throws ErrorException {
-    try {
-      _fr = new FileReader(_file);
-      _reader = new BufferedReader(_fr);
-    } catch (IOException e) {
-      logger.warning(MessageFormat.format(bundle.getString("CANNOT_FIND_CSS_FILE"), _file.getName()));
-    }
+    _sr = new InputStreamReader(_stream);
+    _reader = new BufferedReader(_sr);
   }
   
   
@@ -85,11 +82,11 @@ public class CSSParser {
    *  @throws ErrorException when the file can't be closed
    */
   private void destroy() throws ErrorException {
-    if (_fr != null) {
+    if (_sr != null) {
       try {
-        _fr.close();
+        _sr.close();
       } catch (IOException e) {
-        logger.warning(MessageFormat.format(bundle.getString("CANNOT_FIND_CSS_FILE"), _file.getName()));
+        logger.warning(bundle.getString("CANNOT_FIND_CSS_FILE"));
       }
     }
   }
