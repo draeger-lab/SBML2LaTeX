@@ -3,7 +3,7 @@
  */
 package cz.kebrt.html2latex;
 
-import java.io.File;
+import java.io.InputStream;
 import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -88,7 +88,7 @@ class Configuration {
     try {
       DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
       DocumentBuilder builder = factory.newDocumentBuilder();
-      Document document = builder.parse(HTML2LaTeX.getConfigFile());
+      Document document = builder.parse(HTML2LaTeX.getConfiguration());
       Element root = document.getDocumentElement();
       loadElementsConfiguration(root);
       loadLinksConfiguration(root);
@@ -235,7 +235,7 @@ class Configuration {
    *  Loads user style sheet.
    *  @param f CSS file
    */
-  private void loadStyleSheet(File f) {
+  private void loadStyleSheet(InputStream f) {
     CSSParser parser = new CSSParser();
     parser.parse(f, new CSSParserHandler(this));
     for (Iterator<Map.Entry<String, CSSStyle>> iterator = _styles.entrySet().iterator(); iterator.hasNext();) {

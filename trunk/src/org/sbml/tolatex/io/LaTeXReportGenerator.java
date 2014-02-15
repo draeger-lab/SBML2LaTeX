@@ -97,6 +97,7 @@ import org.sbml.jsbml.util.SBMLtools;
 import org.sbml.jsbml.util.StringTools;
 import org.sbml.jsbml.util.filters.NameFilter;
 import org.sbml.jsbml.validator.OverdeterminationValidator;
+import org.sbml.jsbml.xml.XMLNode;
 import org.sbml.tolatex.LaTeXOptions.PaperSize;
 import org.sbml.tolatex.SBML2LaTeX;
 import org.sbml.tolatex.util.LaTeX;
@@ -206,23 +207,28 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
    * @return
    * @throws IOException
    */
-  private static StringBuffer formatHTML(String notes) throws IOException {
+  private static StringBuffer formatHTML(XMLNode node) throws IOException {
     StringWriter st = new StringWriter();
-    int start = notes.indexOf('>') + 1, end = notes.indexOf("</notes") - 1;
-    notes = notes.substring(start, end);
-    BufferedWriter bw = new BufferedWriter(st);
-    BufferedReader br = new BufferedReader(new StringReader(notes));
-    new HTML2LaTeX(br, bw);
-    br.close();
-    bw.close();
     StringBuffer sb = st.getBuffer();
-    int index = sb.indexOf("\\begin{document}");
-    if (index > -1) {
-      sb.delete(0, index + 16);
-    }
-    index = sb.indexOf("\\end{document}");
-    if (index > -1) {
-      sb.delete(index, sb.length());
+    if (node != null) {
+      String notes = SBMLtools.toXML(node);
+      if (notes.startsWith("<notes") && notes.endsWith("</notes>")) {
+        int start = notes.indexOf('>') + 1, end = notes.indexOf("</notes") - 1;
+        notes = notes.substring(start, end);
+      }
+      BufferedWriter bw = new BufferedWriter(st);
+      BufferedReader br = new BufferedReader(new StringReader(notes));
+      new HTML2LaTeX(br, bw);
+      br.close();
+      bw.close();
+      int index = sb.indexOf("\\begin{document}");
+      if (index > -1) {
+        sb.delete(0, index + 16);
+      }
+      index = sb.indexOf("\\end{document}");
+      if (index > -1) {
+        sb.delete(index, sb.length());
+      }
     }
     return sb;
   }
@@ -960,7 +966,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
           buffer.append(descriptionBegin);
           format(c, buffer, true);
           buffer.append(descriptionItem(bundleElements.getString("message"),
-            formatHTML(SBMLtools.toXML(c.getMessage())).toString()));
+            formatHTML(c.getMessage()).toString()));
           buffer.append(descriptionItem(bundleContent.getString("EQUATION"),
             equation(new StringBuffer(c.getMath().toLaTeX()))));
           buffer.append(descriptionEnd);
@@ -1470,7 +1476,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
       buffer.append(subsection(MessageFormat.format(
         bundleContent.getString("ELEMENT_NOTES"),
         bundleElements.getString(model.getElementName())), false));
-      buffer.append(formatHTML(model.getNotesString()));
+      buffer.append(formatHTML(model.getNotes()));
       buffer.newLine();
     }
     
@@ -3790,7 +3796,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
       if (rl.isSetNotes()) {
         buffer.append(descriptionItem(
           bundleElements.getString("notes"),
-          formatHTML(SBMLtools.toXML(rl.getNotes()))));
+          formatHTML(rl.getNotes())));
       }
       if ((rl.getCVTermCount() > 0) && includeMIRIAM) {
         buffer.append(formatter.labeledItem("Annotation"));
@@ -3836,7 +3842,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
       }
       if (sBase.isSetNotes()) {
         buffer.append(descriptionItem(bundleElements.getString("notes"),
-          formatHTML(SBMLtools.toXML(sBase.getNotes())).toString()));
+          formatHTML(sBase.getNotes()).toString()));
       }
       if ((sBase.getCVTermCount() > 0) && includeMIRIAM) {
         StringWriter description = new StringWriter();
