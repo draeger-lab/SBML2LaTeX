@@ -145,7 +145,7 @@
 		<copy todir="${build.src}" overwrite="yes">
 			<fileset 
   	  	            dir="${resource.dir}"
-  	  	        	includes="cz/** org/sbml/tolatex/**, **/*.properties"
+  	  	        	includes="cz/** org/sbml/tolatex/**, **/*.properties, **/*.xml"
   	  	            excludes="**/.svn*, **/*~, **/*.tgz, **/*.zip">
 			</fileset>
 		</copy>

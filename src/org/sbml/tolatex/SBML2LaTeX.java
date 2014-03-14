@@ -655,7 +655,7 @@ public class SBML2LaTeX extends Launcher implements SBML2LaTeXView {
         GUITools.showErrorMessage(null, exc);
       }
     }
-    new SBML2LaTeXGUI();
+    new SBML2LaTeXGUI((File) null);
   }
   
   /* (non-Javadoc)
