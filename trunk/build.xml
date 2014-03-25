@@ -311,9 +311,9 @@
 	   />
 	      
 	   <!-- These libraries are required by most classes -->
-	   <zipfileset excludes="META-INF/**" src="${jars.dir}/zbit.jar"/>
-	   <zipfileset excludes="META-INF/**" src="${jars.dir}/jsbml-1.0-a1-with-dependencies.jar"/>
-	   <zipfileset excludes="META-INF/**" src="${jars.dir}/quaqua.jar"/>
+	   <zipfileset excludes="META-INF/**, COPYING.txt, licenses/COPYING.txt, overview.html, AUTHORS.txt" src="${jars.dir}/zbit.jar"/>
+	   <zipfileset excludes="META-INF/INDEX.LIST META-INF/MANIFEST.MF, COPYING.txt, package.html, package-info.class, licenses/**, overview.html, AUTHORS.txt" src="${jars.dir}/jsbml-1.0-b1-incl-libs.jar"/>
+	   <zipfileset excludes="META-INF/**, COPYING.txt, licenses/COPYING.txt, overview.html, AUTHORS.txt" src="${jars.dir}/quaqua-filechooser-only.jar"/>
 
 	  </jar>
 	  	
@@ -371,8 +371,9 @@
     description="Creates Javadoc for ${Name}"
   >
     
-    <property name="doc.location"   value="${doc}/version_${version}"/>
-    <property name="icon.file.name" value="ICON_LATEX_48.png"/>
+    <property name="doc.location"     value="${doc}/version_${version}"/>
+    <property name="icon.file.name"   value="ICON_LATEX_48.png"/>
+  	<property name="banner.file.name" value="SBML2LaTeX.svg"/>
     
     <mkdir dir="${doc.location}"/>
     
@@ -382,22 +383,22 @@
       breakiterator="yes"
       classpathref="classpath"
       destdir="${doc}/version_${version}"
-      doctitle="${Name} ${version}"
+      doctitle="&lt;img src=&quot;resources/${banner.file.name}&quot; title=&quot;${Name} version ${version}&quot; alt=&quot;${Name} version ${version}&quot;/&gt;"
       excludepackagenames=""
       footer="Generated at ${TODAY}&lt;br/&gt;Version ${version} Revision ${repository.revision}"
-      header="&lt;img src=&quot;resources/${icon.file.name}&quot;/&gt;"
+      header="&lt;img src=&quot;resources/${icon.file.name}&quot; title=&quot;${Name}&quot; alt=&quot;${Name}&quot;/&gt;"
       maxmemory="96m"
       nodeprecated="false"
       nodeprecatedlist="false"
       noindex="false"
       nonavbar="false"
       notree="false"
+      overview="${src.dir}/overview.html"
       packagenames="org.*"
       source="1.6"
       sourcepath="${build.src}"
       splitindex="true"
       stylesheetfile="${doc}/javadoc-style.css"
-      overview="${src}/overview.html"
       use="true"
       version="true"
       windowtitle="${Name} ${version}"
@@ -417,6 +418,11 @@
       tags; but we cheat by using HTML codes to hide it :-) This copies the
       icon to the right folder:
     -->
+  	<property name="banner.file.src"  value="${basedir}/doc/logos/${banner.file.name}"/>
+  	<property name="banner.file.dest" value="${doc.location}/resources/${banner.file.name}"/>
+  	<echo message="Copying file ${banner.file.src} to file ${banner.file.dest}..."/>
+  	<copy file="${banner.file.src}" tofile="${banner.file.dest}"/>
+  	
     <property name="icon.file.src" value="${resource.dir}/org/sbml/tolatex/gui/img/${icon.file.name}"/>
     <property name="icon.file.dest" value="${doc.location}/resources/${icon.file.name}"/>
     <echo message="Copying file ${icon.file.src} to file ${icon.file.dest}..."/>
@@ -512,7 +518,11 @@
   <!-- =================================================================== -->
   <!-- Cleans everything                                                   -->
   <!-- =================================================================== -->
-  <target name="clean" depends="init">
+  <target
+  	name="clean"
+  	description="Cleans everything"
+  	depends="init"
+  >
     <delete includeEmptyDirs="true" quiet="yes">
       <fileset dir="${build.dir}" includes="**/*"/>
     </delete>

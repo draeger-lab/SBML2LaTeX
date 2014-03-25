@@ -1,20 +1,26 @@
+% File-encoding: UTF-8
+
 			      ------------------
 			      SBML2LaTeX Authors
 			      ------------------
 
          -- Core developers --
 
-         Andreas Dräger, University of Tuebingen, Germany
+         Andreas Dräger, University of California, San Diego, La Jolla, USA
          
+  		 -- Contributors --
+  		 
+  		 Nicolas Rodriguez,  The Babraham Institute, Cambridge, UK
 
-  			    -- Contributors --
-
-         Johannes Eichner, University of Tuebingen, Germany
-         Clemens Wrzodek, University of Tuebingen, Germany
+         -- Principal investigators --
+         
          Andreas Zell, University of Tuebingen, Germany
+         Nicolas Le Novère, The Babraham Institute, Cambridge, UK
          
          -- Alumni --
 
+         Johannes Eichner, University of Tuebingen, Germany
+         Clemens Wrzodek, University of Tuebingen, Germany
          Mirjam Gutekunst, University of Tuebingen, Germany
          Meike Aichele, University of Tuebingen, Germany
          Sebastian Nagel, University of Tuebingen, Germany
