@@ -23,6 +23,8 @@
  */
 package org.sbml.tolatex;
 
+import static de.zbit.util.Utils.getMessage;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -302,7 +304,7 @@ public class SBML2LaTeX extends Launcher implements SBML2LaTeXView {
           file.delete();
         }
       } catch (Throwable exc) {
-        logger.log(Level.WARNING, exc.getLocalizedMessage(), exc);
+        logger.log(Level.WARNING, getMessage(exc), exc);
       }
     }
   }
@@ -686,7 +688,7 @@ public class SBML2LaTeX extends Launcher implements SBML2LaTeXView {
         System.out.println(line);
       }
     } catch (IOException exc) {
-      logger.log(Level.SEVERE, exc.getLocalizedMessage(), exc);
+      logger.log(Level.SEVERE, getMessage(exc), exc);
     }
   }
   
