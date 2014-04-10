@@ -16,6 +16,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import de.zbit.util.ResourceManager;
@@ -119,9 +120,10 @@ class Configuration {
       String ignoreStyles = e.getAttribute("ignoreStyle");
       
       NodeList nl2 = e.getElementsByTagName("start");
-      String elementStart = nl2.item(0).getTextContent();
+      Node node = nl2.item(0);
+      String elementStart = node.getTextContent();
       nl2 = e.getElementsByTagName("end");
-      String elementEnd = nl2.item(0).getTextContent();
+      String elementEnd = node.getTextContent();
       
       _elements.put(elementName, new ElementConfigItem(
         replaceSpecialStrings(elementStart),

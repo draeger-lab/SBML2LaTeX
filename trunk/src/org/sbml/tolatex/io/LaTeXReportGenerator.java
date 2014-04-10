@@ -89,6 +89,9 @@ import org.sbml.jsbml.Trigger;
 import org.sbml.jsbml.Unit;
 import org.sbml.jsbml.UnitDefinition;
 import org.sbml.jsbml.Variable;
+import org.sbml.jsbml.ext.SBasePlugin;
+import org.sbml.jsbml.ext.fbc.FBCConstants;
+import org.sbml.jsbml.ext.fbc.FBCSpeciesPlugin;
 import org.sbml.jsbml.ext.layout.Layout;
 import org.sbml.jsbml.ext.layout.LayoutConstants;
 import org.sbml.jsbml.ext.layout.LayoutModelPlugin;
@@ -113,6 +116,7 @@ import de.zbit.sbml.layout.LayoutDirector;
 import de.zbit.text.LaTeXFormatter;
 import de.zbit.text.TableColumn.Align;
 import de.zbit.util.ResourceManager;
+import de.zbit.util.Utils;
 
 /**
  * This class generates LaTeX reports for given SBML files.
@@ -218,9 +222,15 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
       }
       BufferedWriter bw = new BufferedWriter(st);
       BufferedReader br = new BufferedReader(new StringReader(notes));
-      new HTML2LaTeX(br, bw);
-      br.close();
-      bw.close();
+      try {
+        new HTML2LaTeX(br, bw);
+      } catch (Throwable t) {
+        logger.warning(Utils.getMessage(t));
+        t.printStackTrace();
+      } finally {
+        br.close();
+        bw.close();
+      }
       int index = sb.indexOf("\\begin{document}");
       if (index > -1) {
         sb.delete(0, index + 16);
@@ -871,8 +881,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
               if ((ud = p.getModel().getUnitDefinition(p.getUnits())) != null) {
                 buffer.append(math(format(ud)));
               } else if (Unit.isPredefined(p.getUnits(), p.getLevel())) {
-                Unit u = new Unit(p.getLevel(), p.getVersion());
-                u.setKind(Unit.Kind.valueOf(p.getUnits()));
+                Unit u = new Unit(1d, 0, Unit.Kind.valueOf(p.getUnits()), 1d, p.getLevel(), p.getVersion());
                 buffer.append(math(format(u)));
               } else {
                 buffer.append(texttt(maskSpecialChars(p.getUnits())));
@@ -2790,8 +2799,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
               ud = new UnitDefinition(species.getLevel(), species.getVersion());
               if (Unit.isUnitKind(species.getSubstanceUnits(),
                 species.getLevel(), species.getVersion())) {
-                Unit u = new Unit(species.getLevel(), species.getVersion());
-                u.setKind(Unit.Kind.valueOf(species.getSubstanceUnits()));
+                Unit u = new Unit(1d, 0, Unit.Kind.valueOf(species.getSubstanceUnits()), 1d, species.getLevel(), species.getVersion());
                 ud.addUnit(u);
               }
               // else: something's wrong.
@@ -2823,10 +2831,35 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
           }
           buffer.append(descriptionItem("Initial amount", math(text)));
         }
-        if (species.isSetCharge()) {
-          buffer.append(descriptionItem("Charge",
-            Integer.toString(species.getCharge())));
+        
+        boolean isSetCharge = false;
+        int charge = 0;
+        String formula = null;
+        
+        SBasePlugin sbPlug = species.getPlugin(FBCConstants.getNamespaceURI(species.getLevel(), species.getVersion()));
+        if (sbPlug != null) {
+          FBCSpeciesPlugin fbcSpecies = (FBCSpeciesPlugin) sbPlug;
+          if (fbcSpecies.isSetCharge()) {
+            isSetCharge = true;
+            charge = fbcSpecies.getCharge();
+          }
+          if (fbcSpecies.isSetChemicalFormula()) {
+            formula = fbcSpecies.getChemicalFormula();
+          }
         }
+        
+        if (species.isSetCharge()) {
+          charge = species.getCharge();
+        }
+        if (isSetCharge) {
+          buffer.append(descriptionItem("Charge",
+            Integer.toString(charge)));
+        }
+        if (formula != null) {
+          buffer.append(descriptionItem("Chemical formula",
+            "\\ce{" + formula + "}"));
+        }
+        
         if (species.isSetSpeciesType()) {
           SpeciesType type = model.getSpeciesType(species.getSpeciesType());
           StringBuffer text = new StringBuffer(
@@ -4223,8 +4256,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
    */
   private StringBuffer unitTest(String kind, Model model) {
     if (Unit.isUnitKind(kind, model.getLevel(), model.getVersion())) {
-      Unit u = new Unit(model.getLevel(), model.getVersion());
-      u.setKind(Unit.Kind.valueOf(kind));
+      Unit u = new Unit(1d, 0, Unit.Kind.valueOf(kind), 1d, model.getLevel(), model.getVersion());
       return format(u);
     } else if (Unit.isPredefined(kind.toLowerCase(), model.getLevel())) {
       return format(UnitDefinition.getPredefinedUnit(kind.toLowerCase(),
