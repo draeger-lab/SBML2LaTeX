@@ -46,8 +46,6 @@ import org.sbml.jsbml.ext.layout.SpeciesReferenceGlyph;
 import org.sbml.jsbml.ext.layout.SpeciesReferenceRole;
 import org.sbml.jsbml.ext.layout.TextGlyph;
 
-import com.sun.tools.javac.util.Position;
-
 import de.zbit.sbml.layout.LayoutDirector;
 import de.zbit.sbml.layout.SimpleLayoutAlgorithm;
 
