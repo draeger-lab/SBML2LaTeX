@@ -33,6 +33,7 @@
   <entry key="BQB_ENCODES">encodes</entry>
   <entry key="BQB_HAS_PART">has {0,choice, 0#parts| 1#a part| 1&lt;parts}</entry>
   <entry key="BQB_HAS_PROPERTY">has property</entry>
+  <entry key="BQB_HAS_TAXON">has taxon</entry>
   <entry key="BQB_HAS_VERSION">has the version</entry>
   <entry key="BQB_IS">is</entry>
   <entry key="BQB_IS_DESCRIBED_BY">is described by</entry>
