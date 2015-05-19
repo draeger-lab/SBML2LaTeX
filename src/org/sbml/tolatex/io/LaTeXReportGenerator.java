@@ -82,7 +82,6 @@ import org.sbml.jsbml.SBase;
 import org.sbml.jsbml.Species;
 import org.sbml.jsbml.SpeciesReference;
 import org.sbml.jsbml.SpeciesType;
-import org.sbml.jsbml.StoichiometryMath;
 import org.sbml.jsbml.Symbol;
 import org.sbml.jsbml.Trigger;
 import org.sbml.jsbml.Unit;
@@ -90,6 +89,7 @@ import org.sbml.jsbml.UnitDefinition;
 import org.sbml.jsbml.Variable;
 import org.sbml.jsbml.ext.SBasePlugin;
 import org.sbml.jsbml.ext.fbc.FBCConstants;
+import org.sbml.jsbml.ext.fbc.FBCReactionPlugin;
 import org.sbml.jsbml.ext.fbc.FBCSpeciesPlugin;
 import org.sbml.jsbml.ext.layout.Layout;
 import org.sbml.jsbml.ext.layout.LayoutConstants;
@@ -3352,6 +3352,18 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
       }
     }
     reactString.append('.');
+
+    FBCReactionPlugin rPlugin = (FBCReactionPlugin) r.getExtension(FBCConstants.shortLabel);
+    if (rPlugin != null) {
+      reactString.append(LaTeX.descriptionBegin);
+      reactString.append("\\item[Lower flux bound] ");
+      reactString.append(rPlugin.isSetLowerFluxBound() ? texttt(rPlugin.getLowerFluxBound()) : "undefined");
+      reactString.append("\\item[Upper flux bound] ");
+      reactString.append(rPlugin.isSetUpperFluxBound() ? texttt(rPlugin.getUpperFluxBound()) : "undefined");
+      reactString.append("\\item[Gene-protein association] ");
+      reactString.append(rPlugin.isSetGeneProteinAssociation() ? rPlugin.getGeneProteinAssociation().toString() : "undefined");
+      reactString.append(LaTeX.descriptionEnd);
+    }
 
     int hasSBOReactants = 0, hasSBOProducts = 0, hasSBOModifiers = 0;
     boolean onlyItems = false;
