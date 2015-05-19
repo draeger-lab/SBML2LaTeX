@@ -35,12 +35,18 @@ import java.net.URISyntaxException;
  * @since 0.9.3
  */
 public class HTML2LaTeX {
-  
+
   /** Configuration file. */
   private static String _configFile = "config.xml";
   /** File with CSS. */
   private static String _cssFile = "";
-  
+
+  /**
+   * 
+   * @param br
+   * @param bw
+   * @throws IOException
+   */
   public HTML2LaTeX(BufferedReader br, BufferedWriter bw) throws IOException {
     try {
       Parser parser = new Parser();
@@ -49,7 +55,7 @@ public class HTML2LaTeX {
       throw new IOException(exc);
     }
   }
-  
+
   /**
    * Returns name of the file with CSS.
    * 
@@ -59,7 +65,7 @@ public class HTML2LaTeX {
   public static InputStream getCSSFile() throws URISyntaxException {
     return HTML2LaTeX.class.getResourceAsStream(_cssFile);
   }
-  
+
   /**
    * Returns name of the file with configuration.
    * 
@@ -69,7 +75,7 @@ public class HTML2LaTeX {
   public static InputStream getConfiguration() throws URISyntaxException {
     return HTML2LaTeX.class.getResourceAsStream(_configFile);
   }
-  
+
   /**
    * 
    * @return
@@ -77,5 +83,5 @@ public class HTML2LaTeX {
   public static boolean isSetCSSFile() {
     return (_cssFile != null) && !_cssFile.equals("");
   }
-  
+
 }
