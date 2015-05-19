@@ -41,7 +41,7 @@ import de.zbit.sbml.layout.LayoutDirector;
  * @version $Rev$
  */
 public class SBML2TikZ {
-  
+
   /**
    * Method to run the methods for drawing the SBMLDocument in TikZ with a flux file. For the reactions in the flux file
    * the edges will be drawn thicker in correlation to the given flux values.
@@ -55,12 +55,18 @@ public class SBML2TikZ {
     LayoutDirector<BufferedWriter> director = new LayoutDirector<BufferedWriter>(inputFile, createTikZLayoutBuilder(outputFile), new TikZLayoutAlgorithm(), fluxesFile);
     director.run();
   }
-  
+
+  /**
+   * 
+   * @param outputFile
+   * @return
+   * @throws IOException
+   */
   private TikZLayoutBuilder<BufferedWriter> createTikZLayoutBuilder(File outputFile) throws IOException {
     BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile));
     return new TikZLayoutBuilder<BufferedWriter>(writer);
   }
-  
+
   /**
    * Method to run the methods for drawing the SBMLDocument in TikZ without considering the fluxes.
    * @param inputFile
@@ -72,7 +78,7 @@ public class SBML2TikZ {
     LayoutDirector<BufferedWriter> director = new LayoutDirector<BufferedWriter>(inputFile, createTikZLayoutBuilder(outputFile), new TikZLayoutAlgorithm());
     director.run();
   }
-  
+
   /**
    * Method to run the methods for drawing the SBMLDocument in TikZ without considering the fluxes
    * but choosing a layout number.
@@ -87,5 +93,5 @@ public class SBML2TikZ {
     director.setLayoutIndex(Layoutnumber);
     director.run();
   }
-  
+
 }

@@ -44,7 +44,15 @@ import de.zbit.sbml.layout.SBGNArc;
  * @version $Rev$
  */
 public class TikZ {
-  
+
+  /**
+   * This class follows the singleton pattern and should therefore not be
+   * instanciated.
+   */
+  private TikZ() {
+    super();
+  }
+
   /**
    * 
    * @param width
@@ -63,7 +71,7 @@ public class TikZ {
     sb.append("\\textwidth]\n");
     return sb.toString();
   }
-  
+
   /**
    * 
    * @param colorName
@@ -86,7 +94,7 @@ public class TikZ {
     }
     return tikZString.toString();
   }
-  
+
   /**
    * draws a line without an arrow
    * @param colorName
@@ -97,7 +105,7 @@ public class TikZ {
   public static String draw(String colorName, CurveSegment curveSegment, double lineWidth) {
     return draw(null, colorName, curveSegment, lineWidth);
   }
-  
+
   /**
    * 
    * @param colorName
@@ -109,7 +117,7 @@ public class TikZ {
     double lineWidth) {
     return draw(colorName, lineSegment, lineWidth, 0d, null);
   }
-  
+
   /**
    * 
    * @param colorName
@@ -129,7 +137,7 @@ public class TikZ {
     double y2 = end.getY();
     return drawLine("black", lineWidth, x1, y1, x2, y2, rotationAngle, rotationCenter);
   }
-  
+
   /**
    * 
    * @param lineHead
@@ -150,12 +158,12 @@ public class TikZ {
       double endY = endPoint.getY();
       return drawLine(lineHead, colorName, lineWidth, startX, startY, endX, endY);
     }
-    
+
     //curveSegment instanceof CubicBezier
     CubicBezier bezier = (CubicBezier) curveSegment;
     return drawCubicBezier("-open diamond", "black", bezier, lineWidth);
   }
-  
+
   /**
    * 
    * @param colorName
@@ -180,7 +188,7 @@ public class TikZ {
     sb.append("pt);\n");
     return sb.toString();
   }
-  
+
   /**
    * 
    * @param cloneMarkerColorName
@@ -216,7 +224,7 @@ public class TikZ {
     sb.append("\\end{scope}\n");
     return sb.toString();
   }
-  
+
   /**
    * 
    * @param colorName
@@ -228,7 +236,7 @@ public class TikZ {
     CubicBezier bezier, double lineWidth) {
     return drawCubicBezier(null, colorName, bezier, lineWidth);
   }
-  
+
   /**
    * 
    * @param colorName
@@ -248,7 +256,7 @@ public class TikZ {
     double yBase2, double xEnd, double yEnd) {
     return drawCubicBezier(null, colorName, lineWidth, xStart, yStart, xBase1, yBase1, xBase2, yBase2, xEnd, yEnd);
   }
-  
+
   /**
    * 
    * @param lineHead
@@ -273,7 +281,7 @@ public class TikZ {
     double endY = end.getY();
     return drawCubicBezier(lineHead, "black", lineWidth, startX, startY, basePoint1X, basePoint1Y, basePoint2X, basePoint2Y, endX, endY);
   }
-  
+
   /**
    * 
    * @param lineHead
@@ -321,7 +329,7 @@ public class TikZ {
     sb.append("pt);\n");
     return sb.toString();
   }
-  
+
   /**
    * 
    * @param lineHead
@@ -340,12 +348,12 @@ public class TikZ {
       double startY = startPoint.getY();
       double endX = endPoint.getX();
       double endY = endPoint.getY();
-      
+
       return drawFromTo(lineHead, colorName, lineWidth, startX, startY, endX, endY);
     }
     return draw(lineHead, colorName, curveSegment, lineWidth);
   }
-  
+
   /**
    * 
    * @param lineHead
@@ -361,7 +369,7 @@ public class TikZ {
     double startX, double startY, double endX, double endY) {
     return drawLine(lineHead, colorName, lineWidth, startX, startY, "to", endX, endY, 0d, null);
   }
-  
+
   /**
    * Draws a line with the given parameters from start (X, Y) to end (X, Y).
    * 
@@ -376,7 +384,7 @@ public class TikZ {
   public static String drawLine(String colorName, double lineWidth, double startX, double startY, double endX, double endY) {
     return drawLine(null, colorName, lineWidth, startX, startY, endX, endY);
   }
-  
+
   /**
    * 
    * @param colorName
@@ -393,7 +401,7 @@ public class TikZ {
     double startY, double endX, double endY, double rotationAngle, Point rotationCenter) {
     return drawLine(null, colorName, lineWidth, startX, startY, endX, endY, rotationAngle, rotationCenter);
   }
-  
+
   /**
    * 
    * @param lineHead
@@ -408,7 +416,7 @@ public class TikZ {
   public static String drawLine(String lineHead, String colorName, double lineWidth, double startX, double startY, double endX, double endY) {
     return drawLine(lineHead, colorName, lineWidth, startX, startY, endX, endY, 0d, null);
   }
-  
+
   /**
    * 
    * @param lineHead
@@ -426,7 +434,7 @@ public class TikZ {
     double startY, double endX, double endY, double rotationAngle, Point rotationCenter) {
     return drawLine(lineHead, colorName, lineWidth, startX, startY, "--", endX, endY, rotationAngle, rotationCenter);
   }
-  
+
   /**
    * 
    * @param lineHead
@@ -484,7 +492,7 @@ public class TikZ {
     sb.append("pt);\n");
     return sb.toString();
   }
-  
+
   /**
    * 
    * @param colorName
@@ -499,7 +507,7 @@ public class TikZ {
     double x1, double y1, double x2, double y2) {
     return drawShapeRectangle(colorName, lineWidth, x1, y1, x2, y2, 0d, null);
   }
-  
+
   /**
    * 
    * @param colorName
@@ -537,7 +545,7 @@ public class TikZ {
     sb.append("pt);\n");
     return sb.toString();
   }
-  
+
   /**
    * 
    * @param x
@@ -549,16 +557,21 @@ public class TikZ {
    */
   public static String drawText(double x, double y, String orientation, String fontFamily,
     String text) {
-    return "\\draw ("
-        + x
-        + "pt,"
-        + y
-        + "pt) node [" + orientation + "] {"
-        + "\\fontfamily{" + fontFamily + "}\\selectfont "
-        + text
-        + "};\n";
+    StringBuilder sb = new StringBuilder();
+    sb.append("\\draw (");
+    sb.append(x);
+    sb.append("pt,");
+    sb.append(y);
+    sb.append("pt) node [");
+    sb.append(orientation);
+    sb.append("] {\\fontfamily{");
+    sb.append(fontFamily);
+    sb.append("}\\selectfont ");
+    sb.append(text);
+    sb.append("};\n");
+    return sb.toString();
   }
-  
+
   /**
    * 
    * @return
@@ -566,7 +579,7 @@ public class TikZ {
   public static String endTikZPicture() {
     return "\\end{tikzpicture}\n";
   }
-  
+
   /**
    * 
    * @param fillColorName
@@ -592,7 +605,7 @@ public class TikZ {
     sb.append("pt);\n");
     return sb.toString();
   }
-  
+
   /**
    * 
    * @param fillColorName
@@ -625,7 +638,7 @@ public class TikZ {
     sb.append("pt);\n");
     return sb.toString();
   }
-  
+
   /**
    * 
    * @param fillColorName
@@ -661,7 +674,7 @@ public class TikZ {
     sb.append("pt);\n");
     return sb.toString();
   }
-  
+
   /**
    * 
    * @param options
@@ -679,5 +692,5 @@ public class TikZ {
     sb.append("}\n");
     return sb.toString();
   }
-  
+
 }

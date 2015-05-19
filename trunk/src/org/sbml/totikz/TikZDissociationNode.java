@@ -34,9 +34,9 @@ import de.zbit.sbml.layout.DissociationNode;
  * @version $Rev$
  */
 public class TikZDissociationNode extends DissociationNode<String>{
-  
+
   private double lineWidth = TikZLayoutBuilder.DEFAULT_LINE_WIDTH;
-  
+
   /* (non-Javadoc)
    * @see de.zbit.sbml.layout.DissociationNode#draw(double, double, double, double, double, double)
    */
@@ -44,14 +44,14 @@ public class TikZDissociationNode extends DissociationNode<String>{
   public String draw(double x, double y, double z, double width,
     double height, double depth) {
     double radius = (width/2d);
-    
+
     // draw a circle
     String nodeCode = TikZ.drawCircle("black", lineWidth, x, y, radius);
     // draw a smaller circle inside
     nodeCode += TikZ.drawCircle("black", lineWidth, x, y, radius/2);
     return nodeCode;
   }
-  
+
   /* (non-Javadoc)
    * @see de.zbit.sbml.layout.DissociationNode#drawLineSegment(org.sbml.jsbml.ext.layout.LineSegment, double, org.sbml.jsbml.ext.layout.Point)
    */
@@ -59,14 +59,14 @@ public class TikZDissociationNode extends DissociationNode<String>{
   public String drawLineSegment(LineSegment segment,
     double rotationAngle, Point rotationCenter) {
     String lineSegment = null;
-    
+
     Point start = segment.getStart();
     double x1 = start.getX();
     double y1 = start.getY();
     Point end = segment.getEnd();
     double x2 = end.getX();
     double y2 = end.getY();
-    
+
     if ((rotationAngle % 180) == 0) {
       lineSegment = TikZ.drawLine("black", lineWidth, x1, y1, x2, y2);
     } else {
@@ -74,7 +74,7 @@ public class TikZDissociationNode extends DissociationNode<String>{
     }
     return lineSegment;
   }
-  
+
   /* (non-Javadoc)
    * @see de.zbit.sbml.layout.DissociationNode#getLineWidth()
    */
@@ -82,7 +82,7 @@ public class TikZDissociationNode extends DissociationNode<String>{
   public double getLineWidth() {
     return lineWidth;
   }
-  
+
   /* (non-Javadoc)
    * @see de.zbit.sbml.layout.DissociationNode#setLineWidth(double)
    */
@@ -90,11 +90,10 @@ public class TikZDissociationNode extends DissociationNode<String>{
   public void setLineWidth(double lineWidth) {
     this.lineWidth = lineWidth;
   }
-  
+
   /* (non-Javadoc)
    * @see de.zbit.sbml.layout.SBGNReactionNode#draw(double, double, double, double, double, double, double, org.sbml.jsbml.ext.layout.Point)
    */
-  //@Override
   @Override
   public String draw(double x, double y, double z, double width,
     double height, double depth, double rotationAngle,
@@ -102,5 +101,5 @@ public class TikZDissociationNode extends DissociationNode<String>{
     // a dissociation node is round so you don't have to remind the rotation
     return draw(x, y, z, width, height, depth);
   }
-  
+
 }

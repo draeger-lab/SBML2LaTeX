@@ -15,15 +15,15 @@ import java.util.logging.Logger;
  * @since 0.9.3
  */
 class ParserHandler implements IParserHandler {
-  
+
   /**
    * A {@link Logger} for this class.
    */
   private static final Logger logger = Logger.getLogger(ParserHandler.class.getName());
-  
+
   /** Convertor. */
   private Convertor _conv;
-  
+
   /**
    * Cstr.
    * @param outputFile output LaTeX file
@@ -32,12 +32,17 @@ class ParserHandler implements IParserHandler {
   ParserHandler(File outputFile) throws FatalErrorException {
     _conv = new Convertor(outputFile);
   }
-  
+
+  /**
+   * 
+   * @param bw
+   * @throws FatalErrorException
+   */
   ParserHandler(BufferedWriter bw) throws FatalErrorException {
     _conv = new Convertor(bw);
   }
-  
-  
+
+
   /**
    * Called when a start element is reached in the input document.
    * Calls {@link Convertor#commonElementStart(ElementStart) commonElementStart()}
@@ -50,7 +55,7 @@ class ParserHandler implements IParserHandler {
   public void startElement(ElementStart element) {
     try {
       String name = element.getElementName();
-      
+
       if (name.equals("a")) {
         _conv.anchorStart(element);
       } else if (name.equals("tr")) {
@@ -72,7 +77,7 @@ class ParserHandler implements IParserHandler {
       } else {
         _conv.commonElementStart(element);
       }
-      
+
       _conv.cssStyleStart(element);
     } catch (IOException e) {
       logger.warning("Can't write into output file");
@@ -80,10 +85,10 @@ class ParserHandler implements IParserHandler {
       logger.warning(e.toString());
       //e.printStackTrace();
     }
-    
+
   }
-  
-  
+
+
   /**
    * Called when an end element is reached in the input document.
    * Calls {@link Convertor#commonElementEnd(ElementEnd, ElementStart) commonElementEnd()}
@@ -97,9 +102,9 @@ class ParserHandler implements IParserHandler {
   public void endElement(ElementEnd element, ElementStart elementStart) {
     try {
       String name = element.getElementName();
-      
+
       _conv.cssStyleEnd(elementStart);
-      
+
       if (name.equals("a")) {
         _conv.anchorEnd(element, elementStart);
       } else if (name.equals("tr")) {
@@ -117,15 +122,15 @@ class ParserHandler implements IParserHandler {
       } else {
         _conv.commonElementEnd(element, elementStart);
       }
-      
+
     } catch (IOException e) {
       logger.warning("Can't write into output file.");
     } catch (NoItemException e) {
       logger.warning(e.getMessage());
     }
   }
-  
-  
+
+
   /**
    * Called when the text content of an element is read.
    * Calls {@link Convertor#characters(String) characters()} method
@@ -140,8 +145,8 @@ class ParserHandler implements IParserHandler {
       logger.warning("Can't write into output file.");
     }
   }
-  
-  
+
+
   /**
    * Called when the comment is reached in input document.
    * Calls {@link Convertor#comment(String) comment()} method
@@ -156,8 +161,8 @@ class ParserHandler implements IParserHandler {
       logger.warning("Can't write into output file.");
     }
   }
-  
-  
+
+
   /**
    * Called when the whole input document is read.
    * Calls {@link Convertor#destroy() destroy()} method
@@ -167,5 +172,5 @@ class ParserHandler implements IParserHandler {
   public void endDocument() {
     _conv.destroy();
   }
-  
+
 }

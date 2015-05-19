@@ -16,7 +16,7 @@ import java.util.Stack;
  * @since 0.9.3
  */
 public class Parser {
-  
+
   /** Input file. */
   private File _file;
   /** Input file. */
@@ -25,10 +25,10 @@ public class Parser {
   private BufferedReader _reader;
   /** Handler which receives events from the parser. */
   private ParserHandler _handler;
-  
+
   /** Stack containing all opened and still non-closed elements. */
   private Stack<ElementStart> _openElements = new Stack<ElementStart>();
-  
+
   /**
    * Parses the HTML file and converts it using the particular handler.
    * The file is processed char by char and a couple of events are
@@ -52,7 +52,7 @@ public class Parser {
     _handler = handler;
     _file = inputFile;
     init();
-    
+
     try {
       doParsing();
     } catch (IOException e) {
@@ -60,11 +60,17 @@ public class Parser {
       destroy();
       throw new FatalErrorException("Can't read the input file: " + _file.getName());
     }
-    
+
     _handler.endDocument();
     destroy();
   }
-  
+
+  /**
+   * 
+   * @param br
+   * @param handler
+   * @throws FatalErrorException
+   */
   public void parse(BufferedReader br, ParserHandler handler) throws FatalErrorException {
     _handler = handler;
     _file = null;
@@ -73,10 +79,14 @@ public class Parser {
     try {
       doParsing();
     } catch (IOException e) {
+      //      _handler.endDocument();
+      //      destroy();
       throw new FatalErrorException("InputStream error.");
     }
+    //    _handler.endDocument();
+    //    destroy();
   }
-  
+
   /**
    * Opens the input file specified in the
    * {@link Parser#parse(File, ParserHandler) parse()} method.
@@ -90,7 +100,7 @@ public class Parser {
       throw new FatalErrorException("Can't open the input file: " + _file.getName());
     }
   }
-  
+
   /**
    * Closes the input input file specified in the
    * {@link Parser#parse(File inputFile, ParserHandler handler) parse()} method.
@@ -111,7 +121,7 @@ public class Parser {
       }
     }
   }
-  
+
   /**
    * Reads the input file char by char.
    *  When the {@code &quot;&lt;&quot;} char is reached {@link Parser#readElement()
@@ -124,7 +134,7 @@ public class Parser {
     char ch;
     while ((c = _reader.read()) != -1) {
       ch = (char) c;
-      
+
       if (ch == '<') {
         readElement();
       } else {
@@ -132,8 +142,8 @@ public class Parser {
       }
     }
   }
-  
-  
+
+
   /**
    * Reads elements (tags).
    * Sends {@code comment}, {@code startElement} and
@@ -144,7 +154,7 @@ public class Parser {
     int c;
     char ch;
     String str = "";
-    
+
     while ((c = _reader.read()) != -1) {
       ch = (char) c;
       // i'm at the end of the element
@@ -161,7 +171,7 @@ public class Parser {
           str += ch;
           continue;
         }
-        
+
         // parse the element (get the attributes)
         MyElement element = parseElement(str);
         if (element instanceof ElementStart) {
@@ -182,11 +192,11 @@ public class Parser {
         }
         return;
       }
-      
+
       str += ch;
     }
   }
-  
+
   /** Parses element.
    *  Stores element attributes in {@link ElementStart ElementStart} object
    *  if it's a start element.
@@ -199,23 +209,23 @@ public class Parser {
   private MyElement parseElement(String elementString) {
     String elementName = "";
     HashMap<String, String> attributes = new HashMap<String, String>(3);
-    
+
     // remove ending "/" from empty element
     if (elementString.endsWith("/")) {
       elementString = elementString.substring(0, elementString.length()-1);
     }
-    
+
     String[] aux = elementString.split("\\s+", 2);
-    
+
     if (aux.length != 0) {
       elementName = aux[0];
-      
+
       // it's the end element (starts with "/")
       if ((elementName.length() > 1) && (elementName.charAt(0) == '/')) {
         String name = elementName.substring(1, elementName.length()).toLowerCase();
         return new ElementEnd(name);
       }
-      
+
       // get all attributes
       if (aux.length == 2) {
         String[] attr = aux[1].split("('\\s+)|(\"\\s+)");
@@ -228,11 +238,11 @@ public class Parser {
         }
       }
     }
-    
+
     // it's the start element
     return new ElementStart(elementName.toLowerCase(), attributes);
   }
-  
+
   /**
    * Reads text content of an element.
    * Sends {@code character} event to the handler.
@@ -244,7 +254,7 @@ public class Parser {
     int c;
     char ch;
     String str = ""; str += firstChar;
-    
+
     while ((c = _reader.read()) != -1) {
       ch = (char) c;
       if (ch == '<') {
@@ -252,12 +262,12 @@ public class Parser {
         readElement();
         return;
       }
-      
+
       str += ch;
     }
   }
-  
-  
+
+
   /** Checks whether the document is well-formed.
    *  If not it sends {@code endElement} events for the elements which
    *  were opened but not correctly closed.
@@ -268,14 +278,14 @@ public class Parser {
     if (_openElements.empty()) {
       return;
     }
-    
+
     // document well-formed
     if (_openElements.peek().getElementName().equals(element.getElementName())) {
-      
+
       _handler.endElement(element, _openElements.pop());
       return;
     }
-    
+
     // document non-well-formed
     // try to find the correspoding start element of the end element in the stack
     // and close all non-closed elements; if not found ignore it
@@ -290,5 +300,5 @@ public class Parser {
       }
     }
   }
-  
+
 }

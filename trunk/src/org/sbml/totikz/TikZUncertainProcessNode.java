@@ -34,84 +34,47 @@ import de.zbit.sbml.layout.UncertainProcessNode;
  * @version $Rev$
  */
 public class TikZUncertainProcessNode extends UncertainProcessNode<String> {
-  
+
   private double lineWidth = TikZLayoutBuilder.DEFAULT_LINE_WIDTH;
-  
+
   /* (non-Javadoc)
    * @see de.zbit.sbml.layout.SBGNNode#draw(double, double, double, double, double, double)
    */
   @Override
   public String draw(double x, double y, double z, double width,
     double height, double depth) {
-    String uncertainProcessNodeCode = "\\draw [color = black, line width = " + lineWidth + "pt] ("
-        + (x - (width/2d))
-        + "pt,"
-        + (y - (height/2d))
-        + "pt) rectangle ("
-        + (x + (width/2d))
-        + "pt,"
-        + (y + (height/2d))
-        + "pt);\n"
-        // draw label
-        + "\\draw ("
-        + x
-        + "pt,"
-        + y
-        + "pt) node "
-        + "[anchor = center] {\\fontfamily{phv}\\selectfont ?}; \n"
-        ;
-    return uncertainProcessNodeCode;
+    StringBuilder sb = new StringBuilder();
+    sb.append(TikZ.drawShapeRectangle("black", lineWidth, x - width/2d, y - height/2d, x + width/2d, y + height/2d));
+    sb.append(TikZ.drawText(x, y, "anchor = center", "phv", "?"));
+    return sb.toString();
   }
-  
+
   /* (non-Javadoc)
    * @see de.zbit.sbml.layout.ProcessNode#draw(double, double, double, double, double, double, double, org.sbml.jsbml.ext.layout.Point)
    */
   @Override
   public String draw(double x, double y, double z, double width,
     double height, double depth, double rotationAngle, Point rotationCenter) {
-    
-    String uncertainProcessCode = "\\draw [color = black, line width = " + lineWidth + "pt, rotate around = {"
-        + rotationAngle
-        + " : ("
-        + rotationCenter.getX()
-        + "pt, "
-        + rotationCenter.getY()
-        + "pt)}] ("
-        + (x - (width/2d))
-        + "pt,"
-        + (y - (height/2d))
-        + "pt) rectangle ("
-        + (x + (width/2d))
-        + "pt,"
-        + (y + (height/2d))
-        + "pt);\n"
-        // draw label
-        + "\\draw ("
-        + x
-        + "pt,"
-        + y
-        + "pt) node "
-        + "[anchor = center, rotate = "
-        + (rotationAngle % 90)
-        +"] {\\fontfamily{phv}\\selectfont ?}; \n"
-        ;
-    return uncertainProcessCode;
+    StringBuilder sb = new StringBuilder();
+    sb.append(TikZ.drawShapeRectangle("black", lineWidth, x - width/2d, y - height/2d, x + width/2d, y + height/2d, rotationAngle, rotationCenter));
+    sb.append(TikZ.drawText(x, y, "anchor = center, rotate = " + (rotationAngle % 90), "phv", "?"));
+    return sb.toString();
   }
-  
+
   /* (non-Javadoc)
    * @see de.zbit.sbml.layout.ProcessNode#drawLineSegments()
    */
   @Override
   public String drawLineSegment(LineSegment segment, double rotationAngle, Point rotationCenter) {
     String lineSegment = null;
-    
+
     Point start = segment.getStart();
     double x1 = start.getX();
     double y1 = start.getY();
     Point end = segment.getEnd();
     double x2 = end.getX();
     double y2 = end.getY();
-    
+
     if ((rotationAngle % 180) == 0) {
       lineSegment = TikZ.drawLine("black", lineWidth, x1, y1, x2, y2);
     } else {
@@ -119,7 +82,7 @@ public class TikZUncertainProcessNode extends UncertainProcessNode<String> {
     }
     return lineSegment;
   }
-  
+
   /* (non-Javadoc)
    * @see de.zbit.sbml.layout.ProcessNode#getLineWidth()
    */
@@ -127,7 +90,7 @@ public class TikZUncertainProcessNode extends UncertainProcessNode<String> {
   public double getLineWidth() {
     return lineWidth;
   }
-  
+
   /* (non-Javadoc)
    * @see de.zbit.sbml.layout.ProcessNode#setLineWidth(double)
    */
@@ -135,5 +98,5 @@ public class TikZUncertainProcessNode extends UncertainProcessNode<String> {
   public void setLineWidth(double lineWidth) {
     this.lineWidth = lineWidth;
   }
-  
+
 }
