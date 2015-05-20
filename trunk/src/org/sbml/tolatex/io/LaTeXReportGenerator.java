@@ -221,7 +221,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
         notes = notes.substring(start, end);
       }
       BufferedWriter bw = new BufferedWriter(st);
-      BufferedReader br = new BufferedReader(new StringReader(notes));
+      BufferedReader br = new BufferedReader(new StringReader(notes.replace("html:", "")));
       try {
         new HTML2LaTeX(br, bw);
       } catch (Throwable t) {
@@ -234,6 +234,17 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
       int index = sb.indexOf("\\begin{document}");
       if (index > -1) {
         sb.delete(0, index + 16);
+      } else {
+        index = sb.lastIndexOf("usepackage");
+        if (index > -1) {
+          sb.delete(0, index);
+          index = sb.indexOf("\n");
+          if (index > -1) {
+            sb.delete(0, index);
+          }
+        } else {
+          return new StringBuffer();
+        }
       }
       index = sb.indexOf("\\end{document}");
       if (index > -1) {
@@ -915,7 +926,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
           buffer.append(StringTools.toString(Locale.ENGLISH,
             c.getSpatialDimensions()));
           buffer.append('&');
-          buffer.append(format(c.getSize()));
+          buffer.append(math(format(c.getSize())));
           buffer.append('&');
           UnitDefinition ud;
           if (c.isSetUnits()) {
@@ -926,7 +937,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
           if ((ud == null) || (ud.getUnitCount() == 0)) {
             buffer.append(' ');
           } else if (ud.isVariantOfVolume() && (ud.getUnitCount() == 1)
-              && (c.getSize() == 1.0) && (ud.getUnit(0).isLitre())) {
+              && (c.getSize() == 1d) && (ud.getUnit(0).isLitre())) {
             buffer.append("litre");
           } else {
             buffer.append(math(format(ud)));
@@ -2655,7 +2666,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
         if (c.getSize() - (c.getSize()) == 0) {
           buffer.append(MessageFormat.format(bundleContent.getString("NUMERALS"), (int) c.getSize()));
         } else {
-          buffer.append(format(c.getSize()));
+          buffer.append(math(format(c.getSize())));
         }
       } else {
         buffer.append("size given in");
