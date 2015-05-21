@@ -12,10 +12,10 @@ import java.util.HashMap;
  * @since 0.9.3
  */
 class ElementStart extends MyElement {
-  
+
   /** Map containing all element's attributtes with their values. */
   private HashMap<String, String> _attributes;
-  
+
   /**
    * Cstr.
    * @param element element's name
@@ -25,7 +25,7 @@ class ElementStart extends MyElement {
     _element = element;
     _attributes = attributes;
   }
-  
+
   /**
    * Returns element's attributes.
    * @return element's attributes
@@ -33,7 +33,7 @@ class ElementStart extends MyElement {
   HashMap<String, String> getAttributes() {
     return _attributes;
   }
-  
+
   /* (non-Javadoc)
    * @see java.lang.Object#toString()
    */
@@ -41,7 +41,7 @@ class ElementStart extends MyElement {
   public String toString() {
     return "<" + getElementName() + " " + getAttributes().toString().substring(1).replace("}", "") + ">";
   }
-  
+
 }
 
 
@@ -49,7 +49,7 @@ class ElementStart extends MyElement {
  *  Class representing HTML end element.
  */
 class ElementEnd extends MyElement {
-  
+
   /**
    * Cstr.
    * @param element element's name
@@ -57,7 +57,7 @@ class ElementEnd extends MyElement {
   ElementEnd(String element) {
     _element = element;
   }
-  
+
   /* (non-Javadoc)
    * @see java.lang.Object#toString()
    */
@@ -65,7 +65,7 @@ class ElementEnd extends MyElement {
   public String toString() {
     return "</" + getElementName() + ">";
   }
-  
+
 }
 
 
@@ -75,7 +75,7 @@ class ElementEnd extends MyElement {
 abstract class MyElement {
   /** Element's name */
   protected String _element;
-  
+
   /**
    * Returns element's name.
    * @return element's name
@@ -83,6 +83,20 @@ abstract class MyElement {
   String getElementName() {
     return _element;
   }
+
+  /* (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
+  @Override
+  public String toString() {
+    StringBuilder builder = new StringBuilder();
+    builder.append(getClass().getSimpleName());
+    builder.append(" [element=");
+    builder.append(_element);
+    builder.append("]");
+    return builder.toString();
+  }
+
 }
 
 

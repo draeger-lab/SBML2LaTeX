@@ -163,7 +163,7 @@
         <end>@NL\end{quotation}</end>
     </element>
     <element name='br'>
-        <start>@NL\\</start>
+        <start>@NL~\\</start>
         <end></end>
     </element>
     <element name='button'>
@@ -240,28 +240,28 @@
         <end></end>
     </element>
     <element name='h1'>
-        <start>@NL@NL\section{</start>
+        <start>@NL@NL\section*{</start>
         <end>}</end>
     </element>
     <element name='h2'>
-        <start>@NL@NL\subsection{</start>
+        <start>@NL@NL\subsection*{</start>
         <end>}</end>
     </element>
     <element name='h3'>
-        <start>@NL@NL\subsubsection{</start>
+        <start>@NL@NL\subsubsection*{</start>
         <end>}</end>
     </element>
     <element name='h4'>
-        <start>@NL@NL\paragraph{</start>
+        <start>@NL@NL\paragraph*{</start>
         <end>}</end>
     </element>
     <element name='h5'>
-        <start>@NL@NL\subparagraph{</start>
+        <start>@NL@NL\subparagraph*{</start>
         <end>}</end>
     </element>
     <!-- subsubsub -->
     <element name='h6'>
-        <start>@NL@NL\subparagraph{</start>
+        <start>@NL@NL\subparagraph*{</start>
         <end>}</end>
     </element>
     <element name='head'>

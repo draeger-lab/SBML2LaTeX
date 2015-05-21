@@ -1493,10 +1493,13 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
     buffer.append(lineBreak);
 
     if (model.isSetNotes()) {
-      buffer.append(subsection(MessageFormat.format(
+      buffer.append("\\begin{tcolorbox}[title=");
+      buffer.append(MessageFormat.format(
         bundleContent.getString("ELEMENT_NOTES"),
-        bundleElements.getString(model.getElementName())), false));
+        bundleElements.getString(model.getElementName())));
+      buffer.append(", enhanced, breakable]");
       buffer.append(formatHTML(model.getNotes()));
+      buffer.append("\\end{tcolorbox}");
       buffer.newLine();
     }
 
@@ -2364,6 +2367,8 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
     if (fontTypewriter.equals("courier")) {
       buffer.append(usepackage(fontTypewriter));
     }
+    buffer.append(usepackage("bclogo", "tikz"));
+    buffer.append(usepackage("tcolorbox", "skins", "breakable", "xparse"));
     String[] packages = new String[] { "[english]{babel}", "[english]{rccol}",
       "[version=3]{mhchem}", "{relsize}", "{pifont}", "{textcomp}",
       "{longtable}", "{tabularx}", "{booktabs}", "{amsmath}", "{amsfonts}",
@@ -2374,6 +2379,8 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
       buffer.append(packages[i]);
       buffer.newLine();
     }
+
+    buffer.append("\\tcbset{boxrule=0pt,boxsep=0pt,arc=2mm,toptitle=3mm,top=3mm,left=7mm,right=1mm,pad at break=2mm, colframe=blue!2!white,interior hidden, coltitle=black,fonttitle=\\bfseries\\large,drop fuzzy shadow southeast=gray, overlay unbroken and first={\\node[inner sep=0pt] (logo) at ([xshift=4mm,yshift=-5mm]frame.north west) {\\bccrayon}; \\draw[lightgray,line width=3.5pt] (logo) -- ([xshift=4mm,yshift=1.5mm]frame.south west);  }, overlay middle and last={\\draw[lightgray,line width=3.5pt] ([xshift=4mm,yshift=-1.5mm]frame.north west) -- ([xshift=4mm,yshift=1.5mm]frame.south west); }}");
 
     if (includeLayoutSection) {
       // TODO: More general way to include extension package declarations required!
@@ -3147,7 +3154,9 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
               if (eventsInvolved.size() + rulesInvolved.size() == 1) {
                 buffer.append('s');
               }
-              buffer.append(MessageFormat.format(bundleContent.getString("SPECIES_INFLUENCED_BY_RULES_OR_EVENTS"), numReactionsInvolved));
+              buffer.append(MessageFormat.format(
+                bundleContent.getString("SPECIES_INFLUENCED_BY_RULES_OR_EVENTS"),
+                numReactionsInvolved));
             } else {
               if (numReactionsInvolved > 0) {
                 buffer.append(MessageFormat.format(
