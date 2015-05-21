@@ -514,6 +514,29 @@ class ElementConfigItem {
    * @return true if the element's CSS styles are ignored
    */
   public boolean ignoreStyles() { return _ignoreStyles; }
+
+
+  /* (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
+  @Override
+  public String toString() {
+    StringBuilder builder = new StringBuilder();
+    builder.append(getClass().getSimpleName());
+    builder.append(" [_start=");
+    builder.append(_start);
+    builder.append(", end=");
+    builder.append(_end);
+    builder.append(", leaveText=");
+    builder.append(_leaveText);
+    builder.append(", ignoreContent=");
+    builder.append(_ignoreContent);
+    builder.append(", ignoreStyles=");
+    builder.append(_ignoreStyles);
+    builder.append("]");
+    return builder.toString();
+  }
+
 }
 
 
