@@ -2667,22 +2667,25 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
       if (!c.getConstant()) {
         buffer.append("not ");
       }
-      buffer.append("constant ");
+      String unitDef = "";
+      UnitDefinition unit = c.getDerivedUnitDefinition();
+      buffer.append("constant size");
       if (c.isSetSize()) {
-        buffer.append("size of ");
+        buffer.append(" of ");
         if (c.getSize() - (c.getSize()) == 0) {
           buffer.append(MessageFormat.format(bundleContent.getString("NUMERALS"), (int) c.getSize()));
         } else {
           buffer.append(math(format(c.getSize())));
         }
-      } else {
-        buffer.append("size given in");
-      }
-      String unitDef = format(c.getDerivedUnitDefinition()).toString();
-      if (unitDef.equals("\\mathrm{l}")) {
-        unitDef = "litre";
-      } else {
-        unitDef = math(unitDef).toString();
+      } else if (unit != null) {
+        buffer.append(" given in ");
+
+        unitDef = format(unit).toString();
+        if (unitDef.equals("\\mathrm{l}")) {
+          unitDef = "litre";
+        } else {
+          unitDef = math(unitDef).toString();
+        }
       }
       buffer.append("\\,");
       buffer.append(unitDef);
