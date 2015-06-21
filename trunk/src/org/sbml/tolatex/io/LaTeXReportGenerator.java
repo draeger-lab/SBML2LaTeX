@@ -2672,7 +2672,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
       buffer.append("constant size");
       if (c.isSetSize()) {
         buffer.append(" of ");
-        if (c.getSize() - (c.getSize()) == 0) {
+        if (c.getSize() - ((int) c.getSize()) == 0) {
           buffer.append(MessageFormat.format(bundleContent.getString("NUMERALS"), (int) c.getSize()));
         } else {
           buffer.append(math(format(c.getSize())));
