@@ -3384,7 +3384,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
       reactString.append("\\item[Upper flux bound] ");
       reactString.append(rPlugin.isSetUpperFluxBound() ? texttt(rPlugin.getUpperFluxBound()) : "undefined");
       reactString.append("\\item[Gene-protein association] ");
-      reactString.append(rPlugin.isSetGeneProteinAssociation() ? rPlugin.getGeneProteinAssociation().toString() : "undefined");
+      reactString.append(rPlugin.isSetGeneProductAssociation() ? rPlugin.getGeneProductAssociation().toString() : "undefined");
       reactString.append(LaTeX.descriptionEnd);
     }
 
