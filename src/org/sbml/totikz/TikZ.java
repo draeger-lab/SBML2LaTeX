@@ -127,7 +127,7 @@ public class TikZ {
    * @param rotationCenter
    * @return
    */
-  public static String draw(String colorName, LineSegment lineSegment,
+  public static String draw(String colorName, CurveSegment lineSegment,
     double lineWidth, double rotationAngle, Point rotationCenter) {
     Point start = lineSegment.getStart();
     Point end = lineSegment.getEnd();
