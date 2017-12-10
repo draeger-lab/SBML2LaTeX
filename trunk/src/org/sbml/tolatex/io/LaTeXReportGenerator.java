@@ -776,25 +776,25 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
           MessageFormat.format(
             bundleContent.getString("PROPERTIES_TABLE_CAPTION"),
             bundleElements.getString(first.getElementName())),
-            bundleElements.getString("id"), bundleElements.getString("name"),
-            "SBO",
-            bundleElements.getString("spatialDimensions"),
-            bundleElements.getString("size"),
-            bundleElements.getString("unit"),
-            bundleElements.getString("constant"),
-            bundleElements.getString("outside")));
+          bundleElements.getString("id"), bundleElements.getString("name"),
+          "SBO",
+          bundleElements.getString("spatialDimensions"),
+          bundleElements.getString("size"),
+          bundleElements.getString("unit"),
+          bundleElements.getString("constant"),
+          bundleElements.getString("outside")));
       } else if (species) {
         buffer.append(longtableHead(
           paperSize.equals("letter") || paperSize.equals("executive") ? "p{3.5cm}p{6cm}p{4.5cm}p{2.5cm}C{1.5cm}C{1.5cm}" : "p{3.5cm}p{6.5cm}p{5cm}p{3cm}C{1.5cm}C{1.5cm}",
             MessageFormat.format(
               bundleContent.getString("PROPERTIES_TABLE_CAPTION"),
               bundleElements.getString(first.getElementName())),
-              bundleElements.getString("id"),
-              bundleElements.getString("name"),
-              bundleElements.getString("compartment"),
-              bundleElements.getString("derivedUnit"),
-              bundleElements.getString("constant"),
-              bundleElements.getString("boundaryCondition")));
+            bundleElements.getString("id"),
+            bundleElements.getString("name"),
+            bundleElements.getString("compartment"),
+            bundleElements.getString("derivedUnit"),
+            bundleElements.getString("constant"),
+            bundleElements.getString("boundaryCondition")));
       } else if (reactions) {
         buffer.append(MessageFormat.format(
           bundleContent.getString("INTRODUCTION_SECTION_REACTIONS"),
@@ -805,10 +805,10 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
           MessageFormat.format(
             bundleContent.getString("OVERVIEW_TABLE_CAPTION"),
             bundleElements.getString(list.getElementName())),
-            formatter.numero(),
-            bundleElements.getString("id"),
-            bundleElements.getString("name"),
-            bundleContent.getString("REACTION_EQUATION"),
+          formatter.numero(),
+          bundleElements.getString("id"),
+          bundleElements.getString("name"),
+          bundleContent.getString("REACTION_EQUATION"),
             "SBO"));
       } else if (parameters) {
         // TODO
@@ -843,12 +843,12 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
           MessageFormat.format(
             bundleContent.getString("PROPERTIES_TABLE_CAPTION"),
             bundleElements.getString(first.getElementName())),
-            formatter.multicolumn(1, Align.left, bundleElements.getString("id")),
-            bundleElements.getString("name"),
-            "SBO",
-            formatter.multicolumn(1, Align.center, bundleElements.getString("value")),
-            bundleElements.getString("unit"),
-            formatter.multicolumn(1, Align.center, bundleElements.getString("constant"))));
+          formatter.multicolumn(1, Align.left, bundleElements.getString("id")),
+          bundleElements.getString("name"),
+          "SBO",
+          formatter.multicolumn(1, Align.center, bundleElements.getString("value")),
+          bundleElements.getString("unit"),
+          formatter.multicolumn(1, Align.center, bundleElements.getString("constant"))));
       }
 
       /*
@@ -1044,7 +1044,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
                   "GRAMMATICAL_NUMBER_SPECIES" :
                     "GRAMMATICAL_NUMBER_COMPARTMENTS", counter)
                   ),
-                  bundleElements.getString("id"), bundleElements.getString("name")));
+              bundleElements.getString("id"), bundleElements.getString("name")));
             buffer.append(sb);
             buffer.append(bottomrule);
           }
@@ -1160,7 +1160,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
           bundleContent.getString(ev.getUseValuesFromTriggerTime() ?
             "EVENT_DOES_USE_VALUES_FROM_TRIGGER_TIME" :
               "EVENT_DOES_NOT_USE_VALUES_FROM_TRIGGER_TIME"),
-              ev.getEventAssignmentCount(), ev.isSetDelay() ? 1 : 0));
+          ev.getEventAssignmentCount(), ev.isSetDelay() ? 1 : 0));
         if (ev.getEventAssignmentCount() > 1) {
           description.append(newLine());
           description.append("\\begin{align}");
@@ -1201,7 +1201,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
           MessageFormat.format(
             bundleContent.getString("GRAMMATICAL_NUMBER_ASSIGNMENT"),
             ev.getEventAssignmentCount()),
-            description));
+          description));
         buffer.append(descriptionEnd);
       }
     }
@@ -1311,7 +1311,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
       if (lud.firstHit(new NameFilter("volume")) == null) {
         def = m.getPredefinedUnitDefinition("volume");
         def.setNotes(notesStartString + "Litre" + notes + def.getId()
-          + "</tt>." + notesEndString);
+        + "</tt>." + notesEndString);
         lud.append(def);
         defaults.add(def.getId());
       }
@@ -1319,7 +1319,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
           && (lud.getLevel() > 1)) {
         def = m.getPredefinedUnitDefinition("area");
         def.setNotes(notesStartString + "Square metre" + notes + def.getId()
-          + "</tt> since SBML Level 2 Version 1." + notesEndString);
+        + "</tt> since SBML Level 2 Version 1." + notesEndString);
         lud.append(def);
         defaults.add(def.getId());
       }
@@ -1327,14 +1327,14 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
           && (lud.getLevel() > 1)) {
         def = m.getPredefinedUnitDefinition("length");
         def.setNotes(notesStartString + "Metre" + notes + def.getId()
-          + "</tt> since SBML Level 2 Version 1." + notesEndString);
+        + "</tt> since SBML Level 2 Version 1." + notesEndString);
         lud.append(def);
         defaults.add(def.getId());
       }
       if (lud.firstHit(new NameFilter("time")) == null) {
         def = m.getPredefinedUnitDefinition("time");
         def.setNotes(notesStartString + "Second" + notes + def.getId()
-          + "</tt>." + notesEndString);
+        + "</tt>." + notesEndString);
         lud.append(def);
         defaults.add(def.getId());
       }
@@ -1762,10 +1762,12 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
    */
   public StringBuffer format(UnitDefinition def) {
     StringBuffer buffer = new StringBuffer();
-    for (int j = 0; j < def.getUnitCount(); j++) {
-      buffer.append(format(def.getUnit(j)));
-      if (j < def.getListOfUnits().size() - 1) {
-        buffer.append("\\cdot ");
+    if (def != null) {
+      for (int j = 0; j < def.getUnitCount(); j++) {
+        buffer.append(format(def.getUnit(j)));
+        if (j < def.getListOfUnits().size() - 1) {
+          buffer.append("\\cdot ");
+        }
       }
     }
     return buffer;
@@ -2190,7 +2192,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
               MessageFormat.format(bundleContent.getString("LABELED_ELEMENT"), bundleContent
                 .getString("INTERNAL"), MessageFormat.format(
                   bundleContent.getString("GRAMMATICAL_NUMBER_PROBLEM"), internal.size())),
-                  buffer, bundleContent.getString("ERROR"));
+              buffer, bundleContent.getString("ERROR"));
           }
           if (errors.size() > 0) {
             problemMessage(
@@ -2199,7 +2201,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
               MessageFormat.format(bundleContent.getString("LABELED_ELEMENT"), bundleContent
                 .getString("ERROR"), MessageFormat.format(
                   bundleContent.getString("GRAMMATICAL_NUMBER_MESSAGE"), errors.size())),
-                  buffer, bundleContent.getString("ERROR"));
+              buffer, bundleContent.getString("ERROR"));
           }
           if (infos.size() > 0) {
             problemMessage(
@@ -2210,7 +2212,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
                 bundleContent.getString("INFORMATION"),
                 MessageFormat.format(
                   bundleContent.getString("GRAMMATICAL_NUMBER_MESSAGE"), infos.size())),
-                  buffer, bundleContent.getString("INFORMATION"));
+              buffer, bundleContent.getString("INFORMATION"));
           }
           if (warnings.size() > 0) {
             problemMessage(warnings, doc, MessageFormat.format(
@@ -4176,7 +4178,7 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
     buffer.append(MessageFormat.format(bundleContent
       .getString("SBML_DOCUMENT_PROBLEM_DESCRIPTION"), MessageFormat.format(
         bundleContent.getString("NUMERALS"), listOfErrorIndices.size()), title
-        .startsWith("XML") ? title : firstLetterLowerCase(title)));
+      .startsWith("XML") ? title : firstLetterLowerCase(title)));
     buffer.newLine();
     buffer.append(descriptionBegin);
     Integer[] errors = listOfErrorIndices.toArray(new Integer[0]);

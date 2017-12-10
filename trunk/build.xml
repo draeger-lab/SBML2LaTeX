@@ -264,13 +264,13 @@
 	   name="svnrevision"
 	   description="Determines the current SVN revions number of SBML2LaTeX and stores it in a variable."
 	>
-	  <exec executable="svn" outputproperty="svninfo.xml">
-		<arg line="info --xml"/>
+	  <!--<exec executable="svn" outputproperty="svninfo.xml">
+		<arg line="info ++xml"/>
 	  </exec>
 	  <xmlproperty collapseAttributes="true">
 	    <propertyresource name="svninfo.xml"/>
-	  </xmlproperty>
-	  <property name="repository.revision" value="${info.entry.revision}"/>
+	  </xmlproperty>-->
+	  <property name="repository.revision" value="43"/> <!--${info.entry.revision}"-->
 	</target>
 	
 	<!-- =================================================================== -->
@@ -312,7 +312,7 @@
 	      
 	   <!-- These libraries are required by most classes -->
 	   <zipfileset excludes="META-INF/**, COPYING.txt, licenses/COPYING.txt, overview.html, AUTHORS.txt" src="${jars.dir}/zbit.jar"/>
-	   <zipfileset excludes="META-INF/INDEX.LIST META-INF/MANIFEST.MF, COPYING.txt, package.html, package-info.class, licenses/**, overview.html, AUTHORS.txt" src="${jars.dir}/jsbml-1.0-b1-incl-libs.jar"/>
+	   <zipfileset excludes="META-INF/INDEX.LIST META-INF/MANIFEST.MF, COPYING.txt, package.html, package-info.class, licenses/**, overview.html, AUTHORS.txt" src="${jars.dir}/jsbml-1.2-incl-libs.jar"/>
 	   <zipfileset excludes="META-INF/**, COPYING.txt, licenses/COPYING.txt, overview.html, AUTHORS.txt" src="${jars.dir}/quaqua-filechooser-only.jar"/>
 
 	  </jar>

@@ -62,17 +62,17 @@ import de.zbit.util.prefs.SBPreferences;
  * @version $Rev$
  */
 public class LaTeXExportDialog extends JDialog {
-  
+
   /**
    * Generated serial version identifier
    */
   private static final long serialVersionUID = -408657221271532557L;
-  
+
   /**
    * Support for localization.
    */
   private static final transient ResourceBundle bundle = ResourceManager.getBundle("org.sbml.tolatex.locales.UI");
-  
+
   /**
    * Loads the required icons for SBML2LaTeX into the {@link UIManager}.
    */
@@ -85,21 +85,21 @@ public class LaTeXExportDialog extends JDialog {
       }
     }
   }
-  
+
   /**
    * 
    */
   public LaTeXExportDialog() {
     this((JFrame) null, null);
   }
-  
+
   /**
    * @param owner
    */
   public LaTeXExportDialog(Dialog owner) {
     this(owner, null);
   }
-  
+
   /**
    * @param owner
    * @param properties
@@ -108,14 +108,14 @@ public class LaTeXExportDialog extends JDialog {
   public LaTeXExportDialog(Dialog owner, SBase sbase) {
     super(owner, "SBML2LaTeX", true);
   }
-  
+
   /**
    * @param owner
    */
   public LaTeXExportDialog(Frame owner) {
     this(owner, null);
   }
-  
+
   /**
    * This constructor allows us to store the given model or the given reaction
    * in a text file. This can be a LaTeX or another format.
@@ -127,7 +127,7 @@ public class LaTeXExportDialog extends JDialog {
   public LaTeXExportDialog(Frame owner, SBase sbase) {
     super(owner, "SBML2LaTeX", true);
   }
-  
+
   /**
    * @return true if user clicked on OK button, false otherwise.
    * @throws IOException
@@ -135,12 +135,12 @@ public class LaTeXExportDialog extends JDialog {
   public boolean showExportDialog() throws IOException {
     return showExportDialog(null);
   }
-  
+
   /**
    * 
    */
   private PreferencesPanel exportPanel;
-  
+
   /**
    * @param sbase
    * @return true if user clicked on OK button, false otherwise.
@@ -149,7 +149,7 @@ public class LaTeXExportDialog extends JDialog {
   public boolean showExportDialog(SBase sbase) throws IOException {
     return showExportDialog(sbase, null);
   }
-  
+
   /**
    * @param sbase
    * @param targetFile
@@ -185,7 +185,7 @@ public class LaTeXExportDialog extends JDialog {
       JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, UIManager
       .getIcon("ICON_LATEX_64")) == JOptionPane.OK_OPTION;
   }
-  
+
   /**
    * @param owner
    * @return
@@ -193,7 +193,7 @@ public class LaTeXExportDialog extends JDialog {
   public static boolean showDialog(Window owner) {
     return showDialog(owner, null);
   }
-  
+
   /**
    * @param owner
    * @param sbase
@@ -202,7 +202,7 @@ public class LaTeXExportDialog extends JDialog {
   public static boolean showDialog(Window owner, SBase sbase) {
     return showDialog(owner, sbase, null);
   }
-  
+
   /**
    * @param owner
    * @param sbase
@@ -238,9 +238,7 @@ public class LaTeXExportDialog extends JDialog {
             SBPreferences prefs = SBPreferences.getPreferencesFor(LaTeXOptions.class);
             File compiler = new File(prefs.get(LaTeXOptions.LOAD_LATEX_COMPILER));
             if (!compiler.exists() || !compiler.canExecute()) {
-              throw new FileNotFoundException(StringUtil.toHTML(
-                bundle.getString("PDFLATEX_LOCATION_UNKNOWN"),
-                StringUtil.TOOLTIP_LINE_LENGTH));
+              throw new FileNotFoundException(bundle.getString("PDFLATEX_LOCATION_UNKNOWN"));
             }
           }
         } catch (FileNotFoundException exc) {
@@ -258,14 +256,14 @@ public class LaTeXExportDialog extends JDialog {
     }
     return accept;
   }
-  
+
   /**
    * @return
    */
   public static boolean showDialog() {
     return showDialog(null, null);
   }
-  
+
   /**
    * 
    * @param sbase
@@ -274,5 +272,5 @@ public class LaTeXExportDialog extends JDialog {
   public static boolean showDialog(SBase sbase) {
     return showDialog(null, sbase);
   }
-  
+
 }
