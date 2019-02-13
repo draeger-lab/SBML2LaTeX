@@ -36,3 +36,17 @@ Older versions of SBML2LATEX include software developed by the JDOM Project (htt
 ## Funding
 
 This project was funded by the Federal Ministry of Education and Research (Germany, Bundesministerium für Bildung und Forschung, BMBF) in the projects National Genome Research Network (Nationales Genomforschungsnetz, NGFN-Plus), HepatoSys “Kompetenznetzwerk Systembiologie des Hepatozyten”, and the Virtual Liver Network and supported by the Center for Bioinformatics Tuebingen (Zentrum für Bioinformatik Tübingen, ZBIT). The German federal state Baden-Württenberg funded the Tübinger Bioinformatik-Grid project that enabled us to provide the convenient SBML2LATEX web service.
+
+## Installation & Usage
+SBML2LATEX is build with ant. The available build targets are
+* `ant compile`: compiles the source code
+* `ant jar`: generates the SBML2LaTeX.jar file
+* `ant bigjar`: generates the SBML2LaTeX-with-dependencies.jar file
+* `ant javadoc`: generates the API documentation
+* `ant clean`: cleans up the directory
+
+To build and run SBML2LATEX use:
+```
+ant bigjar
+java -jar build/SBML2LaTeX-1.0-with-dependencies.jar 
+```
