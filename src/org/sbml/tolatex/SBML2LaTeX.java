@@ -360,7 +360,7 @@ public class SBML2LaTeX extends Launcher implements SBML2LaTeXView {
 
     // Copy the logo-image
     File logoFile = new File(Utils.ensureSlash(texFile.getParent()) + "SBML2LaTeX.pdf");
-    FileTools.copyStream(SBML2LaTeX.class.getResourceAsStream("gui/img/SBML2LaTeX.pdf"), logoFile);
+    FileTools.copyStream(SBML2LaTeX.class.getResourceAsStream("/org/sbml/tolatex/gui/img/SBML2LaTeX.pdf"), logoFile);
     String logoFileString = logoFile.getAbsolutePath();
     if (File.separatorChar == '\\') {
       logoFileString = logoFileString.replace(File.separatorChar, '/');
