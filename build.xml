@@ -247,7 +247,7 @@
 		<copy todir="${build.dest}">
 			<fileset
             dir="${build.src}"
-            includes="**/*.png **/*.gif **/*.xsd **/*.tmpl **/data/* **/*.xml **/*.cfg **/*.obo **/*.properties **/*.java" >
+            includes="**/*.png **/*.pdf **/*.gif **/*.xsd **/*.tmpl **/data/* **/*.xml **/*.cfg **/*.obo **/*.properties **/*.java" >
 			</fileset>
 		</copy>
 		<jar jarfile="${build.dir}/${name}-${version}-with-dependencies.jar"
@@ -312,7 +312,7 @@
 	      
 	   <!-- These libraries are required by most classes -->
 	   <zipfileset excludes="META-INF/**, COPYING.txt, licenses/COPYING.txt, overview.html, AUTHORS.txt" src="${jars.dir}/zbit.jar"/>
-	   <zipfileset excludes="META-INF/INDEX.LIST META-INF/MANIFEST.MF, COPYING.txt, package.html, package-info.class, licenses/**, overview.html, AUTHORS.txt" src="${jars.dir}/jsbml-1.2-incl-libs.jar"/>
+	   <zipfileset excludes="META-INF/INDEX.LIST META-INF/MANIFEST.MF, COPYING.txt, package.html, package-info.class, licenses/**, overview.html, AUTHORS.txt" src="${jars.dir}/jsbml-1.4-with-dependencies.jar"/>
 	   <zipfileset excludes="META-INF/**, COPYING.txt, licenses/COPYING.txt, overview.html, AUTHORS.txt" src="${jars.dir}/quaqua-filechooser-only.jar"/>
 
 	  </jar>

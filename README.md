@@ -50,3 +50,4 @@ To build and run SBML2LATEX use:
 ant bigjar
 java -jar build/SBML2LaTeX-1.0-with-dependencies.jar 
 ```
+The latex interpreter must be set to the location of `pdflatex`.
