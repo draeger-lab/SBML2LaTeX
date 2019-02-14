@@ -3350,10 +3350,14 @@ public class LaTeXReportGenerator extends LaTeX implements SBMLReportGenerator {
     StringWriter reactString = new StringWriter();
     subsection(r, reactionIndex, reactString);
     reactString.append("This is a");
+    boolean fast = false;
+    if (r.isSetFast()){
+      fast = r.getFast();
+    }
     if (!r.getReversible()) {
-      reactString.append(r.getFast() ? " fast ir" : "n ir");
+      reactString.append(fast ? " fast ir" : "n ir");
     } else {
-      reactString.append(r.getFast() ? " fast " : " ");
+      reactString.append(fast ? " fast " : " ");
     }
     reactString.append("reversible reaction of ");
 
